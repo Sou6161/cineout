@@ -21,3 +21,26 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+
+
+ const getNowshowingdata = async () => {
+        const data = await fetch("https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1", API_OPTIONS)
+        const json = await data.json();
+        const d = json.results
+        console.log(d);
+
+
+
+        useEffect(() => {
+        getNowshowingdata();
+    }, [])
+
+    }
+
+
+    d.map((item, index) => {
+            let imageUrl = `https://image.tmdb.org/t/p/original/${item.backdrop_path}`;
+            return <img key={index} src={imageUrl} alt="no image " />;
+        })

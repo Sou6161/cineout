@@ -5,7 +5,7 @@ import Rightheader from './Rightheader'
 
 const Header = () => {
   return (
-    <div className=' flex justify-between p-5 text-xl font-semibold '>
+    <div className=' flex items-center justify-between p-2 text-xl font-semibold bg-zinc-500 overflow-hidden '>
     <Leftheader/>
     <Midheader/>
     <Rightheader/>
@@ -13,4 +13,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default Header;

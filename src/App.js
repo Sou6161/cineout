@@ -1,18 +1,17 @@
-import Header from "./components/Header";
-
+import React from 'react'
+import Header from "./components/Header"
+import Maincontainer from "./components/Maincontainer"
 
 const App = () => {
   return (
-  //eslint-disable-next-line
-  // <div className=" flex justify-between ">
-  <div className="">
-    <Header/>
+    <div>
 
+      
+      <Header/>
+      <Maincontainer/>
+      
     </div>
   )
-  
-    
-  
 }
 
-export default App;
+export default App
