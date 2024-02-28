@@ -1,16 +1,10 @@
+// App.js
 import React from 'react'
-import Header from "./components/Header"
-import Maincontainer from "./components/Maincontainer"
+import Routes from './components/Routes'
 
 const App = () => {
   return (
-    <div>
-
-      
-      <Header/>
-      <Maincontainer/>
-      
-    </div>
+    <Routes/>
   )
 }
 
