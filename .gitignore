@@ -44,3 +44,37 @@ yarn-error.log*
             let imageUrl = `https://image.tmdb.org/t/p/original/${item.backdrop_path}`;
             return <img key={index} src={imageUrl} alt="no image " />;
         })
+
+
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+    <App />
+  
+)
+
+
+
+import { getAuth} from "firebase/auth";
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBBo1RFhloi4V0CZNfAL7cLVvnm-BrEAhM",
+  authDomain: "netflix-react-86e2d.firebaseapp.com",
+  projectId: "netflix-react-86e2d",
+  storageBucket: "netflix-react-86e2d.appspot.com",
+  messagingSenderId: "399801070362",
+  appId: "1:399801070362:web:3cb6de195331fc4b56b2a3",
+  measurementId: "G-DHZKT7QWSY"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+
+export const auth = getAuth();
