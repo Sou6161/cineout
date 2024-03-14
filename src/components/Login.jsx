@@ -1,10 +1,16 @@
 import React, { useRef, useState } from 'react'
 import { checkvaliddata } from "../constants/Validate"
+import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
+
+import { auth } from '../constants/Firebase';
+import { useNavigate } from 'react-router-dom';
+
 
 const Login = () => {
 
   const [Issigninform, setIssigninform] = useState(true)
   const [errormessage, seterrormessage] = useState(null)
+  const navigate = useNavigate()
 
 
 
@@ -16,10 +22,41 @@ const Login = () => {
 
   const handlebuttonclick = () => {
     //  validate the form data
-    
+
     const message = checkvaliddata(email.current.value, password.current.value)
     seterrormessage(message)
+    if (message) return
 
+    if (!Issigninform) {
+      createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+        .then((userCredential) => {
+          // Signed up 
+          const user = userCredential.user;
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          seterrormessage(errorCode+ "---" +errorMessage)
+        });
+    }
+
+    else {
+      signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        navigate("/")
+        // ...
+      })
+      .catch((error) => {   
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        seterrormessage(errorCode+ "---" +errorMessage)
+        
+
+      })
+    }
 
 
 
@@ -41,7 +78,7 @@ const Login = () => {
 
         {!Issigninform && (
           <input
-ref={fullname}
+            ref={fullname}
             type="text"
             placeholder="Full Name"
             className=" p-3 m-2 w-full font-semibold bg-slate-800 rounded-md hover:bg-gray-700 " />

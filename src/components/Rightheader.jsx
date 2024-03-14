@@ -9,14 +9,14 @@ const Rightheader = () => {
 
     return (
 
-        <div className=' text-white flex items-center justify-around '>
+        <div className='  flex items-center justify-around '>
 
             <div className="links flex gap-10  mr-[100px] font-['Ubuntu-Medium'] ">
                 {["LANG", "SIGN UP", "PRO VERSION"].map((item, index) =>{ return(<Link key={index}>{item}</Link>)})}
 
             </div>
 
-            <div className=' mr-10 text-3xl "'>
+            <div className=' mr-10 text-3xl cursor-pointer'>
                 <RiMenuFoldLine />
 
             </div>

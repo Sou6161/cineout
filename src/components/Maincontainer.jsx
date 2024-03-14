@@ -7,6 +7,8 @@ import Nowshowingdata from './Nowshowingdata'
 import Upcomingdata from './Upcomingdata'
 import { addUpcomingdata } from '../Reduxstore/Upcomingslice'
 import Upcomingseriesdata from './Upcomingseriesdata'
+import Secondcontainer from './Secondcontainer'
+import { addUpcomingseriesdata } from '../Reduxstore/UpcomingseriesSlice'
 
 
 
@@ -15,20 +17,19 @@ const Maincontainer = () => {
 
     const nowshowingdispatch = useDispatch()
     const upcomingdispatch = useDispatch()
-    // const upcomingseriesdispatch = useDispatch()
+    const upcomingseriesdispatch = useDispatch()
     const [finaldata, setfinaldata] = useState(null)
     const [finalupcomingdata, setfinalupcomingdata] = useState(null)
-    // const [finalupcomingseries, setfinalupcomingseries] = useState(null)
-   
+    const [finalupcomingseries, setfinalupcomingseries] = useState(null)
+
 
 
 
     const getNowshowingdata = async () => {
 
         const data = await fetch(
-            "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1",
+            "https://api.themoviedb.org/3/trending/all/day?language=en-US",
             API_OPTIONS
-
         );
         const json = await data.json()
         const finaldata = json.results
@@ -44,33 +45,39 @@ const Maincontainer = () => {
         const upcomingjson = json.results
         upcomingdispatch(addUpcomingdata(upcomingjson))
         setfinalupcomingdata(upcomingjson)
+        
 
     }
 
-    // const getupcomingseries = async () => {
-    //     const data = await fetch(`https://api.themoviedb.org/3/trending/${category2}/day?language=en-US`, API_OPTIONS)
-    //     const json = await data.json();
-    //     const upcomingseriesjson = json.results
-    //     // upcomingseriesdispatch(addUpcomingdata(upcomingjson))
-    //     setfinalupcomingseries(upcomingseriesjson)
+    const getupcomingseries = async () => {
+        const data = await fetch(`https://api.themoviedb.org/3/trending/tv/day?language=en-US`, API_OPTIONS)
+        const json = await data.json();
+        const finaljson = json.results
+        upcomingseriesdispatch(addUpcomingseriesdata(finaljson))
+        setfinalupcomingseries(finaljson)
+        
 
-    // }
+
+
+    }
 
 
     useEffect(() => {
-        !finaldata && getNowshowingdata();
-        !finalupcomingdata && getUpcomingdata();
+        !finaldata && getNowshowingdata()
+        !finalupcomingdata && getUpcomingdata()
+        !finalupcomingseries && getupcomingseries()
     }, []);
 
-    
 
+   
 
     return finaldata && finalupcomingdata ? (
         <div className=' overflow-hidden overflow-x-hidden'>
 
             <Nowshowingdata nowfinal={finaldata} />
-            <Upcomingdata nowupcomingfinal={finalupcomingdata}/>
-            <Upcomingseriesdata/>
+            <Upcomingdata nowupcomingfinal={finalupcomingdata} />
+            <Upcomingseriesdata nowupcomingseries={finalupcomingseries} />
+            <Secondcontainer />
 
 
 

@@ -2,7 +2,7 @@ import React from 'react'
 
 const Midheader = () => {
   return (
-    <div className='text-white '>
+    <div className='text-black '>
       
       Midheader
 
