@@ -20,6 +20,8 @@ export const Watchprovidersslice = createSlice({
         addwhattowatchmoviesdata:[],
         addwhattowatchseriesdata:[],
         addNowshowingdata:[],
+        addtopratedmoviesdata:[],
+        addtopratedseriesdata:[],
     },
     reducers: {
         addPrimevideodata: (state, actions) => {
@@ -64,7 +66,13 @@ export const Watchprovidersslice = createSlice({
         addairingtodaydata:(state, actions) => {
             state.airingtodayshowit = actions.payload
         },
+        addtopratedmoviesdata:(state, actions) => {
+            state.topratedmovieshowit = actions.payload
+        },
+        addtopratedseriesdata:(state, actions) => {
+            state.topratedseriesshowit = actions.payload
+        },
     }
 })
 export default Watchprovidersslice.reducer;
-export const { addPrimevideodata, addnetflixdata, addappletvdata, addhuludata, addmaxdata, addpeacockdata, addfreeveedata, addparamountdata, addamcdata, addstarzdata, addshowtimedata,addwhattowatchmoviesdata,addwhattowatchseriesdata,addairingtodaydata } = Watchprovidersslice.actions;
+export const { addPrimevideodata, addnetflixdata, addappletvdata, addhuludata, addmaxdata, addpeacockdata, addfreeveedata, addparamountdata, addamcdata, addstarzdata, addshowtimedata,addwhattowatchmoviesdata,addwhattowatchseriesdata,addairingtodaydata ,addtopratedseriesdata,addtopratedmoviesdata} = Watchprovidersslice.actions;

@@ -74,13 +74,17 @@ const Secondcontainer = () => {
     }
 
     return (
-        <><>
-            <Fanfavourites finalfanwatch={fanwatch} />
-        </><>
+        <>
+
+            <div>
+                <Fanfavourites finalfanwatch={fanwatch} />
+            </div>
+
+            <>
 
                 <div className=' px-5 text-3xl leading-relaxed text-gray-900 dark:text-yellow-300 bg-black font-thin'>See <span className=' text-red-600 font-bold'>What</span> That <span className=' text-sky-300 font-bold'>Excites</span> You</div>
                 <div className=' px-5 py-4 bg-black'>
-                    <button className='text-white bg-blue-400 dark:bg-blue-500 rounded-lg text-[16px] font-bold px-3 py-2 text-center mr-3' onClick={() => handleProviderClick('Prime Video')}> <img className=' w-[1.3vw] rounded-lg justify-center inline mr-1 ' src="https://i.pinimg.com/474x/f5/de/23/f5de23352bd2620c5a1b2e193e6c8f20.jpg" alt="" />PRIME VIDEO</button>
+                    <button className='text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2' onClick={() => handleProviderClick('Prime Video')}> <img className=' w-[1.3vw] rounded-lg justify-center inline mr-1 ' src="https://i.pinimg.com/474x/f5/de/23/f5de23352bd2620c5a1b2e193e6c8f20.jpg" alt="" />PRIME VIDEO</button>
                     <button className='text-white bg-blue-400 dark:bg-red-700 font-bold rounded-lg text-[16px] px-3 py-2 text-center mr-3' onClick={() => handleProviderClick('Netflix')}> <img className=' w-[1.2vw] rounded-xl justify-center inline-block mr-1' src="https://www.underconsideration.com/brandnew/archives/netflix_app_icon.jpg" alt="" />NETFLIX</button>
                     <button className='text-white bg-blue-400 dark:bg-yellow-500 rounded-lg text-[16px] font-bold px-3 py-2 text-center mr-3' onClick={() => handleProviderClick('Apple TV+')}> <img className='w-[1.3vw] rounded-xl justify-center inline-block mr-1' src="https://logowik.com/content/uploads/images/apple-tv1519.jpg" alt="" />APPLE TV+</button>
                     <button className='text-white bg-blue-400 dark:bg-green-500 rounded-lg text-[16px] font-bold px-3 py-2 text-center mr-3' onClick={() => handleProviderClick('Hulu')}> <img className='w-[1.3vw] rounded-xl justify-center inline-block mr-1' src="https://i.pinimg.com/474x/8c/d1/10/8cd11044810e9c8d6e2fc2597a2c68a0.jpg" alt="" />HULU</button>

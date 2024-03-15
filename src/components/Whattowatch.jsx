@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { addairingtodaydata, addwhattowatchmoviesdata, addwhattowatchseriesdata } from '../Reduxstore/Watchprovidersslice';
 import Whattowatchmovies from './Whattowatchmovies';
 import Whattowatchseries from './Whattowatchseries';
+import Discovermoviesfan from './Discovermoviesfan';
 
 
 const Whattowatch = () => {
@@ -11,6 +12,8 @@ const Whattowatch = () => {
   const [whattowatchmovies, setwhattowatchmovies] = useState(null)
   const [whattowatchseries, setwhattowatchseries] = useState(null)
   const [airingtoday, setairingtoday] = useState(null)
+  const [topratedmovies, settopratedmovies] = useState(null)
+  const [topratedseries, settopratedseries] = useState(null)
   const dispatchwatchmovies = useDispatch()
   const dispatchwatchseries = useDispatch()
   // const dispatchairingtoday = useDispatch()
@@ -44,7 +47,7 @@ const Whattowatch = () => {
 
   const getairingtodaydata = async () => {
     const data = await fetch(
-      "https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=1",
+      "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=2&sort_by=popularity.desc",
       API_OPTIONS
     );
     const jsonairingtoday = await data.json()
@@ -52,7 +55,31 @@ const Whattowatch = () => {
     // dispatchairingtoday(addairingtodaydata(finalairingdata))
     let airingdata = finalairingdata[(Math.random() * finalairingdata.length).toFixed()];
     setairingtoday(airingdata)
-  
+
+  }
+
+
+  const gettopratedmoviedata = async()=>{
+    const data = await fetch(
+      "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
+      API_OPTIONS
+    );
+    const jsontoprated = await data.json()
+    const finaltoprateddata = jsontoprated.results
+    // dispatchairingtoday(addairingtodaydata(finalairingdata))
+    settopratedmovies(finaltoprateddata)
+
+  }
+  const gettopratedseriesdata = async()=>{
+    const data = await fetch(
+      "https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1",
+      API_OPTIONS
+    );
+    const jsontoprated = await data.json()
+    const finaltoprateddata = jsontoprated.results
+    // dispatchairingtoday(addairingtodaydata(finalairingdata))
+    settopratedseries(finaltoprateddata)
+
   }
 
 
@@ -60,18 +87,23 @@ const Whattowatch = () => {
     !whattowatchmovies && getwhattowatchmovies();
     !whattowatchseries && getwhattowatchseries();
     !airingtoday && getairingtodaydata();
+    !topratedmovies && gettopratedmoviedata();
+    !topratedseries && gettopratedseriesdata();
   }, [])
 
   useEffect(() => {
-     airingtoday && console.log(airingtoday);
-  }, [airingtoday]);
-  
-  
+    topratedmovies && console.log(topratedmovies);
+    topratedseries && console.log(topratedseries);
+
+  }, [topratedmovies,topratedseries]);
+
+
 
 
   return whattowatchmovies && whattowatchseries && airingtoday ? (
     <div>
-      <Whattowatchmovies finalwatchmovies={whattowatchmovies} finalairingtoday={airingtoday} />
+      <Discovermoviesfan finalairingtoday={airingtoday}/>
+      <Whattowatchmovies finalwatchmovies={whattowatchmovies}  />
       <Whattowatchseries finalwatchseries={whattowatchseries} />
     </div>
   ) : <h1 className=' text-white'>loading</h1>
