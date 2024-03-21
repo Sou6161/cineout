@@ -9,6 +9,7 @@ import { addUpcomingdata } from '../Reduxstore/Upcomingslice'
 import Upcomingseriesdata from './Upcomingseriesdata'
 import Secondcontainer from './Secondcontainer'
 import { addUpcomingseriesdata } from '../Reduxstore/UpcomingseriesSlice'
+import Thirdcontainer from './Thirdcontainer'
 
 
 
@@ -72,12 +73,13 @@ const Maincontainer = () => {
    
 
     return finaldata && finalupcomingdata ? (
-        <div className=' overflow-hidden overflow-x-hidden'>
+        <div className=' overflow-hidden overflow-x-hidden bg-black'>
 
             <Nowshowingdata nowfinal={finaldata} />
             <Upcomingdata nowupcomingfinal={finalupcomingdata} />
             <Upcomingseriesdata nowupcomingseries={finalupcomingseries} />
             <Secondcontainer />
+            <Thirdcontainer/>
 
 
 
