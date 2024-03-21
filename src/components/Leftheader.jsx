@@ -1,14 +1,14 @@
-import React from 'react'
+import React from "react";
+import logo from "../Utils/headerlogo.png";
 
 const Leftheader = () => {
   return (
-    <div className=' ml-[50px]'>
-       <span className=' text-3xl text-amber-800 '>CINE</span> <br/>
-        <span className=' mx-12 bg-teal-400 rounded-lg text-black '>OUT</span>
-    
-
+    <div className=" ml-[40px]">
+      <div className=" w-[10vw] mt-4 cursor-pointer">
+        <img src={logo} alt="no image" />
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Leftheader
+export default Leftheader;

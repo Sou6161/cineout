@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.underline-black span {
+    text-decoration: underline;
+    text-decoration-color: black;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.3em;
+  }
+  
 .no-scrollbar::-webkit-scrollbar {
     display: none;
   }

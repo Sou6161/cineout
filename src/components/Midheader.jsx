@@ -1,13 +1,10 @@
-import React from 'react'
+import React from "react";
+import Searchtab from "./Searchtab";
 
 const Midheader = () => {
   return (
-    <div className='text-black '>
-      
-      Midheader
+    <Searchtab/>
+  );
+};
 
-    </div>
-  )
-}
-
-export default Midheader
+export default Midheader;

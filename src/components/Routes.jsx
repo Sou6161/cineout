@@ -18,7 +18,7 @@ const AppRoutes = () => {
       <Route path="/fan-favourites" element={<Whattowatch/>}/>
       <Route path="/" element={
         <>
-          <Header/>
+          {/* <Header/> */}
           <Maincontainer/>
           
         </>
