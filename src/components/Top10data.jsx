@@ -14,7 +14,7 @@ const Top10data = ({ finalweekdata }) => {
         <div className=" ml-3 flex gap-4  w-[100vw] h-[47vh] overflow-y-scroll no-scrollbar">
           {finalweekdata &&
             finalweekdata.map((item, index) => (
-              <div key={index}>
+              <div key={index}>   
                 <div
                   className=" mr-4  ml-3 min-w-[15vw] max-h-[38vh] rounded-[10px] p-2 overflow-x-hidden scrollbar-hide cursor-pointer bg-zinc-700 hover:bg-slate-500 "
                 >

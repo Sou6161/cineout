@@ -10,6 +10,7 @@ import Upcomingseriesdata from './Upcomingseriesdata'
 import Secondcontainer from './Secondcontainer'
 import { addUpcomingseriesdata } from '../Reduxstore/UpcomingseriesSlice'
 import Thirdcontainer from './Thirdcontainer'
+import Fourthcontainer from './Fourthcontainer'
 
 
 
@@ -80,6 +81,7 @@ const Maincontainer = () => {
             <Upcomingseriesdata nowupcomingseries={finalupcomingseries} />
             <Secondcontainer />
             <Thirdcontainer/>
+            <Fourthcontainer/>
 
 
 

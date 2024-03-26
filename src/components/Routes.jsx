@@ -8,6 +8,7 @@ import Maincontainer from "./Maincontainer"
 import Fanfavourites from './Fanfavourites';
 import Secondcontainer from './Secondcontainer';
 import Whattowatch from './Whattowatch';
+import Insideintheater from './Insideintheater';
 
 
 const AppRoutes = () => {
@@ -16,6 +17,7 @@ const AppRoutes = () => {
       <Route path="/login" element={<Login />}  />
       <Route path="/signup" element={<Signup />} />
       <Route path="/fan-favourites" element={<Whattowatch/>}/>
+      <Route path="/In-theaters" element={<Insideintheater/>}/>
       <Route path="/" element={
         <>
           {/* <Header/> */}
