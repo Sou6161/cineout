@@ -85,3 +85,580 @@ https://www.imdb.com/title/tt13304410/?ref_=hm_fanfav_tt_i_1_pd_fp1_r
 
 
 https://www.imdb.com/title/tt26591995/?ref_=hm_fanfav_tt_i_1_pd_fp1_r   
+
+
+
+
+My api films code 
+
+
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { addAlltrailers } from "../Reduxstore/Alltrailersslice";
+import { addtrailersid } from "../Reduxstore/Traileridslice";
+import { Trailersoptions } from "../constants/Rapidoptions";
+import { addvideosdata } from "../Reduxstore/Videodataslice";
+import { addtrailersurl } from "../Reduxstore/Trailerurlslice";
+
+const Sixthcontainer = () => {
+  const [Alltrailers, setAlltrailers] = useState(null);
+  const [Alltrailersid, setAlltrailersid] = useState(null);
+  const [videodata, setvideodata] = useState(null);
+  const [videosurl, setvideosurl] = useState([]);
+  const [videotitleid, setvideotitleid] = useState(null);
+  const dispatchAlltrailers = useDispatch();
+  const dispatchAlltrailersID = useDispatch();
+  const dispatchvideodata = useDispatch();
+  const dispatchtrailerurl = useDispatch();
+
+  const gettrailers = async () => {
+    const response = await fetch(
+      "https://www.myapifilms.com/imdb/trailers?token=9cf67054-cbe4-4aa6-92f3-13ea80b06125&format=json&trailers=1"
+    );
+    const data = await response.json()
+    console.log(data)
+    const Alltrailersdata = data.data.trailers
+    dispatchAlltrailers(addAlltrailers(Alltrailersdata)); 
+    setAlltrailers(Alltrailersdata);
+
+    Alltrailersdata &&
+      Alltrailersdata.map((item, index) => {
+        const AlltrailersID = item?.imdbVideoId;
+        const Alltrailerstitle = item?.idIMDB;
+        dispatchAlltrailersID(addtrailersid(AlltrailersID));
+        setAlltrailersid(AlltrailersID);
+        setvideotitleid(Alltrailerstitle)
+        // console.log(Alltrailersdata)
+        // console.log(Alltrailerstitle);
+      });
+  };
+
+  useEffect(() => {
+    gettrailers();
+  }, []);
+
+  
+  useEffect(() => {
+    if (Alltrailersid) {
+      //   console.log(Alltrailersid);
+    }
+  }, [Alltrailersid]);
+
+  const gettrailertitleid = async () => {
+    const response = await fetch(
+      `https://www.myapifilms.com/imdb/idIMDB?idIMDB=${videotitleid}&token=835efa00-e051-4b62-9cc8-76c32c747353&format=json&language=en-us&aka=0&business=0&seasons=0&seasonYear=0&technical=0&trailers=0&movieTrivia=0&awards=0&moviePhotos=0&movieVideos=0&actors=0&biography=0&uniqueName=0&filmography=0&bornDied=0&starSign=0&actorActress=0&actorTrivia=0&similarMovies=0&goofs=0&keyword=0&quotes=0&fullSize=0&companyCredits=0&filmingLocations=0&directors=1&writers=1`
+    );
+    const data = await response.json();
+    console.log(data.data.movies[0]);
+    // console.log(data.data.movies[0].title);
+    // console.log(data.data.movies[0].rating)
+    // console.log(data.data.movies[0].simplePlot)
+    // console.log(data.data.movies[0].type)
+    // console.log(data.data.movies[0].urlPoster)
+    
+
+
+
+
+
+  };
+
+useEffect(()=>{
+if(videotitleid){
+  gettrailertitleid();
+  
+}
+  },[videotitleid])
+
+  const getTrailerid = async () => {
+    const response = await fetch(
+      `https://imdb146.p.rapidapi.com/v1/video/?id=${Alltrailersid}`,
+      Trailersoptions
+    );
+    const data = await response.json();
+    const Videodata = data.playbackURLs;
+    dispatchvideodata(addvideosdata(Videodata));
+    setvideodata(Videodata);
+  };
+
+  useEffect(() => {
+    if (Alltrailersid) {
+      // getTrailerid()
+    }
+  }, [Alltrailersid]); // useEffect runs when Alltrailersid changes
+
+  useEffect(() => {
+    if (videodata) {
+      videodata.map((video, index) => {
+        if (index === 1) {
+          const finalvideosurl = video.url;
+          dispatchtrailerurl(addtrailersurl(finalvideosurl));
+          setvideosurl((prevUrls) => [...prevUrls, finalvideosurl]); // Push the new URL into the videosurl array
+          // console.log(videodata);
+        }
+      });
+    }
+  }, [videodata]);
+
+  return (
+    <>
+      <div>
+        <h1 className=" text-purple-400 text-[3.7vh] mb-5 ml-5">
+          Upcoming <span className=" text-amber-400">Trailers</span>
+        </h1>
+      </div>
+      <div className="  flex mb-[60vh] bg-red-20 gap-5 overflow-auto overflow-x-scroll no-scrollbar">
+        <div className=" flex w-[25vw] ml-5 rounded-lg gap-10 ">
+          {videosurl &&
+            videosurl.map((url, index) => {
+              return (
+                <video
+                  autoPlay
+                  muted
+                  src={url}
+                  style={{
+                    border: "1.3px solid red ",
+                    height: "15vw",
+                    borderRadius: "10  px",
+                  }} // This will make the video corners rounded
+                  onMouseEnter={(e) => {
+                    const playPromise = e.target.play();
+                    if (playPromise !== undefined) {
+                      playPromise
+                        .catch((error) => {
+                          // Auto-play was prevented
+                          // Show a UI element to let the user manually start playback
+                        })
+                        .then(() => {
+                          // Auto-play started
+                        });
+                    }
+                  }}
+                  onMouseLeave={(e) => e.target.pause()} // This will stop the video when you stop hovering over it
+                ></video>
+              );
+            })}
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Sixthcontainer;
+
+
+fifth container 
+
+import React, { createContext, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { addfinalcomingsoonmovies } from "../Reduxstore/Comingsoonslice";
+import { addcomingsoondate } from "../Reduxstore/Comingsoondate";
+import ComingSoontheaters from "./ComingSoontheaters";
+
+const Fifthcontainer = () => {
+  const [comingsoondate, setcomingsoondate] = useState(null);
+  const [comingsoonID, setcomingsoonID] = useState(null);
+  const [finalcomingsoonmovies, setfinalcomingsoonmovies] = useState(null);
+  const dispatchdate = useDispatch();
+  const dispatchfinalcomingsoonmovies = useDispatch();
+
+  const getcomingsoon= async()=>{
+
+  
+    const response = await fetch(
+      "https://www.myapifilms.com/imdb/comingSoon?token=9cf67054-cbe4-4aa6-92f3-13ea80b06125&format=json&language=hi"
+    );
+    const finalresponse = await response.json();
+    const finaldata = finalresponse?.data?.comingSoon;
+
+    let datesArray = []; // Create an empty array to hold all the dates
+    let idsArray = []; // Create an empty array to hold all the ids
+
+    finaldata&&finaldata.map((item, index) => {
+      const moviesdate = item.date;
+      datesArray.push(moviesdate);
+
+      const moviesid = item.movies;
+      moviesid.map((itemmovies, index2) => {
+        const moviesIMDB = itemmovies.idIMDB;
+        idsArray.push(moviesIMDB); // Push each id into the array
+        // getfinalmovies(moviesIMDB);
+      });
+    });
+    setcomingsoondate(datesArray);
+    setcomingsoonID(idsArray);
+    getfinalmovies(idsArray); // Set the state with the array of ids
+  };
+
+  useEffect(() => {
+    getcomingsoon();
+  }, []);
+
+  useEffect(() => {
+    if (comingsoondate) {
+      dispatchdate(addcomingsoondate(comingsoondate))
+        
+    }
+  }, [comingsoondate]);
+
+  const getfinalmovies = async (ids) => {
+    let moviesArray = []; // Create an empty array to hold all the movie details
+    for (let id of ids) {
+      const response = await fetch(
+        `http://www.omdbapi.com/?i=${id}&apikey=5ed1d028`
+      );
+      const data = await response.json();
+      moviesArray.push(data); // Push each movie's details into the array
+    }
+    setfinalcomingsoonmovies(moviesArray);
+  };
+
+  // useEffect(() => {
+  //   if (comingsoonID) {
+  //     console.log(comingsoonID);
+  //   }
+  // }, [comingsoonID]);
+
+  useEffect(() => {
+    if (finalcomingsoonmovies) {
+      dispatchfinalcomingsoonmovies(
+        addfinalcomingsoonmovies(finalcomingsoonmovies)
+      );
+      // console.log(finalcomingsoonmovies);
+    }
+  }, [finalcomingsoonmovies]);
+
+  return (
+    <>
+      <ComingSoontheaters
+        finalcomingsoonmoviestheaters={finalcomingsoonmovies}
+      />
+    </>
+  );
+};
+
+export default Fifthcontainer;
+
+
+ComingSoontheaters
+
+import React from 'react'
+import { FaArrowRight } from 'react-icons/fa';
+import { TbMinusVertical } from 'react-icons/tb';
+import { Link } from 'react-router-dom';
+
+const ComingSoontheaters = ({finalcomingsoonmoviestheaters}) => {
+  return (
+    <>
+        <div className="w-[100vw]  scrollbar-hide overflow-auto p-5">
+          <div className=" mb-10 items-center gap-[47%] overflow-y-clip   ">
+            <h1 className=" text-3xl ml-4 font-semibold text-lime-400 flex">
+              <Link to="/coming-soon">
+                <span className=" inline-block -translate-x-6 translate-y-10 text-[6vh] text-yellow-400">
+                  <TbMinusVertical />
+                </span>
+                <button className=" group flex items-center -translate-y-2 ml-4 ">
+                  Coming Soon To Theaters
+                  <span className="block relative top-1 ml-4 hover:text-purple-900 group-hover:text-purple-900">
+                    <FaArrowRight />
+                  </span>
+                </button>{" "}
+              </Link>
+            </h1>
+          </div>
+        </div>
+        <div className=" w-[100vw]  scrollbar-hide overflow-y-auto overflow-hidden mb-[8vh]">
+          <div className=" ml-3 flex gap-4  w-[100vw] h-[47vh]  no-scrollbar  overflow-x-scroll overflow-y-hidden ">
+            {/* {console.log(finalcomingsoonmovies)} */}
+            {finalcomingsoonmoviestheaters &&
+              finalcomingsoonmoviestheaters.map((movie, index) => {
+                if (
+                  movie.Poster &&
+                  movie.Title &&
+                  movie.Poster !== "N/A" &&
+                  movie.Title !== "N/A"
+                ) {
+                  return (
+                    <div key={index}>
+                      <div className="  mr-4  ml-3 min-w-[15vw] max-h-[38vh] rounded-[10px] p-2 overflow-x-hidden scrollbar-hide cursor-pointer bg-zinc-700 hover:bg-slate-500">
+                        <img
+                          className=" w-[30vw] h-[36vh] rounded-md drop-shadow-glow"
+                          src={movie.Poster}
+                          alt="no image available"
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src =
+                              "https://www.prokerala.com/movies/assets/img/no-poster-available.jpg";
+                          }}
+                        />
+                      </div>
+                      <div className=" ">
+                        <h1 className=" text-2xl font-semibold text-yellow-500 mt-3  ml-4 ">
+                          {movie.Title}
+                        </h1>
+                      </div>
+                    </div>
+                  );
+                }
+              })}
+          </div>
+        </div>
+      </>
+  )
+}
+
+export default ComingSoontheaters
+
+coming soon inside
+
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
+const Comingsooninside = () => {
+  const alertrealtimedata = () => {
+    alert(
+      " 😐OOPS! You can't change country due to unable to find specific API"
+    );
+  };
+  const comingsoondate = useSelector(
+    (state) => state.comingsoondateshowingit?.comingsoondateshowit
+  );
+
+  const comingsoontheaters = useSelector(
+    (state) => state?.finalsoonshowingit?.finalcomingsoonmovies
+  );
+
+  const [groupedMovies, setGroupedMovies] = useState({});
+
+  const sortedMovies = Object.entries(groupedMovies).sort(
+    ([date1], [date2]) => {
+      const dateObj1 = date1 !== "N/A" ? new Date(date1) : new Date(0);
+      const dateObj2 = date2 !== "N/A" ? new Date(date2) : new Date(0);
+      return dateObj1 - dateObj2;
+    }
+  );
+
+  useEffect(() => {
+    if (comingsoontheaters) {
+      const grouped = comingsoontheaters.reduce((grouped, movie) => {
+        const releaseDate = movie.Released;
+        if (!grouped[releaseDate]) {
+          grouped[releaseDate] = [];
+        }
+        grouped[releaseDate].push(movie);
+        return grouped;
+      }, {});
+
+      setGroupedMovies(grouped);
+    }
+  }, [comingsoontheaters]);
+
+  const [comingsoondatestate, setComingsoondatestate] = useState([]);
+  const [comingsoontheatersstate, setComingsoontheatersstate] = useState([]);
+
+  useEffect(() => {
+    comingsoondate && setComingsoondatestate(comingsoondate);
+    comingsoontheaters &&
+      setComingsoontheatersstate(comingsoontheaters.slice(0, 99));
+  }, [comingsoondate, comingsoontheaters]);
+
+  // console.log("Component is re-rendering");
+
+  return (
+    <div className="custom-scroll w-[100vw] h-screen  backdrop-blur-[10vh] bg-black overflow-x-hidden overscroll-auto">
+      <div className=" w-[78.3vw] h-[42vh] mx-auto bg-red-500 rounded-sm mt-2">
+        <div className=" w-[77vw] h-[40vh] mx-auto bg-gray-900 relative top-2">
+          <h1>no image</h1>
+        </div>
+      </div>
+      <div className=" w-[100vw] mx-auto bg-lime-300  mt-5 overflow-hidden ">
+        <div className="">
+          <h1 className=" relative left-[15vw] text-[2.5vw] text-black font-normal ">
+            Upcoming Releases{" "}
+            <Link onClick={alertrealtimedata}>
+              {" "}
+              <span className=" inline-block text-purple-800 underline font-semibold">
+                India
+              </span>
+            </Link>
+          </h1>
+        </div>
+
+        <div className=" w-[60vw] mx-[15vw]">
+          <div className=" w-[60vw] mt-5">
+            {sortedMovies.map(([date, movies]) => {
+              // Filter out movies that have valid data and poster is not 'N/A'
+              const validMovies = movies.filter(
+                (movie) =>
+                  movie &&
+                  movie.Title &&
+                  movie.Year &&
+                  movie.Poster !== "N/A" &&
+                  movie.Response !== "failed"
+              );
+
+              // Check if there are any valid movies for the date
+              if (validMovies.length > 0) {
+                return (
+                  <div key={date} className="mb-5 bg-cyan-700 p-5 rounded">
+                    <h2 className="mb-3 text-[2.5vh]">
+                      {date !== "N/A" ? date : "Date not available now"}
+                    </h2>
+                    {validMovies.map((movie, index) => (
+                      <div key={index} className="flex mb-3 text-black">
+                        <img
+                          src={
+                            movie.Poster !== "N/A"
+                              ? movie.Poster
+                              : "https://www.prokerala.com/movies/assets/img/no-poster-available.jpg"
+                          } // Replace 'path/to/no-poster-available.jpg' with the actual path to your 'No poster available' image
+                          alt={movie.Title}
+                          className="w-20 h-30 mr-3"
+                        />
+                        <div>
+                          <h3>
+                            {movie.Title} ({movie.Year})
+                          </h3>
+                          <p>{movie.Genre}</p>
+                          <p>{movie.Actors}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                );
+              }
+              return null; // Skip rendering if no valid movies are available for the date
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Comingsooninside;
+
+
+
+
+
+
+<a href="#_" class="relative inline-block px-4 py-2 font-medium group">
+<span class="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-black group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
+<span class="absolute inset-0 w-full h-full bg-white border-2 border-black group-hover:bg-black"></span>
+<span class="relative text-black group-hover:text-white">Button Text</span>
+</a>
+
+
+
+ <Link to="/news/tv">
+        <div className=" group ">
+          <h1 className=" group-hover: text-white text-[1.5vw] font-semibold relative ml-14 border-2  border-purple-600 rounded-lg inline-block glow2">
+            Tv/Series News
+          </h1>
+
+          <BiRightArrow className="  group-hover:text-green-400 relative left-[14vw] bottom-[3.7vh] text-red-600 text-[1.5vw] font-semibold" />
+        </div>
+      </Link>
+      <Link to="/news/celebrity">
+        <div className=" group ">
+          <h1 className=" group-hover: text-white text-[1.5vw] font-semibold relative ml-14 border-2  border-sky-600 rounded-lg inline-block glow3">
+             Celebrity News
+          </h1>
+
+          <BiRightArrow className="  group-hover:text-green-400 relative left-[14vw] bottom-[3.7vh] text-red-600 text-[1.5vw] font-semibold" />
+        </div>
+      </Link>
+
+
+
+
+CHARTS CODE
+
+
+
+  useEffect(() => {
+    const getMChartsDetails = async () => {
+      let data = localStorage.getItem("BOX OFFICE MOVIES CHARTS  DETAILS");
+      if (data)
+        try {
+          console.log("IN IF");
+          data = JSON.parse(data);
+          setBoxOfficeMChartsDetails(data)
+        } catch (error) {
+          console.error("Error parsing data from local storage:", error);
+        }
+      else {
+        data = [];
+        let index = 0;
+        for (let id of BoxOfficeMChartsID || []) {
+          console.log("Api run");
+          const response = await fetch(
+            `https://imdb8.p.rapidapi.com/title/v2/get-box-office-summary?tconst=${id}`,
+            RapidoptionsApiDojoRexona
+          );
+          const movieData = await response.json();
+          data.push(movieData?.data?.title); // Store only the title
+          console.log("entering else");
+          // If it's not the last request in this second, don't delay
+          if ((index + 1) % 5 !== 0 || index === BoxOfficeMChartsID.length - 1)
+            continue;
+          // Wait for 1 second before the next request
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+          index++;
+        }
+        // Save the data to local storage
+        localStorage.setItem(
+          "BOX OFFICE MOVIES CHARTS DETAILS",
+          JSON.stringify(data)
+        );
+        // Set the state only once after all movie data has been fetched
+        setBoxOfficeMChartsDetails(data);
+      }
+    };
+    if (BoxOfficeMChartsID && BoxOfficeMChartsID.length > 0) {
+      getMChartsDetails();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (
+      BoxOfficeMChartsDetails &&
+      BoxOfficeMChartsDetails.length === BoxOfficeMChartsID.length
+    ) {
+      console.log(BoxOfficeMChartsDetails);
+    }
+  }, [BoxOfficeMChartsDetails]);
+
+  function convertToMillions(amount) {
+    return Math.floor(amount / 1000000);
+  }
+
+
+
+ <a href="#_" class="relative inline-flex items-center justify-center inline-block p-4 px-5 py-3 overflow-hidden font-medium text-indigo-600 rounded-lg shadow-2xl group">
+<span class="absolute top-0 left-0 w-40 h-40 -mt-10 -ml-3 transition-all duration-700 bg-red-500 rounded-full blur-md ease"></span>
+<span class="absolute inset-0 w-full h-full transition duration-700 group-hover:rotate-180 ease">
+<span class="absolute bottom-0 left-0 w-24 h-24 -ml-10 bg-purple-500 rounded-full blur-md"></span>
+<span class="absolute bottom-0 right-0 w-24 h-24 -mr-10 bg-pink-500 rounded-full blur-md"></span>
+</span>
+<span class="relative text-white">Button Text</span>
+</a>
+
+
+
+<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 50 50">
+<path d="M 0 7.5 L 0 12.5 L 50 12.5 L 50 7.5 L 0 7.5 z M 0 22.5 L 0 27.5 L 50 27.5 L 50 22.5 L 0 22.5 z M 0 37.5 L 0 42.5 L 50 42.5 L 50 37.5 L 0 37.5 z"></path>
+</svg>
+
+
+
+<button class="relative group " onClick={() => setMenuOpen(!isMenuOpen)}>
+
+
+
+
+
+
+ z-50  w-[30vw] h-[50vh] -mt-[4.7vh] bg-slate-500

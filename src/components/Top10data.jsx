@@ -3,7 +3,7 @@ import React from "react";
 const Top10data = ({ finalweekdata }) => {
   return (
     <>
-      <div className=" w-[100vw] text-white -mt-[3vh]">
+      <div className=" w-[100vw] text-white mt-8">
         <h1 className=" text-[3.2vh] px-5 mb-[4vh] ml-2 ">
           Top <span className=" text-red-600 font-bold ">10</span> on{" "}
           <span className=" text-yellow-500 font-bold">CINEOUT</span> this{" "}

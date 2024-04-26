@@ -2,78 +2,181 @@
 @tailwind components;
 @tailwind utilities;
 
+.glow {
+  outline: 1px solid #f1b503;
+  outline-offset: 1px;
+  box-shadow: 0 0 1px #ffc107, 0 0 10px #ffc107;
+}
+.glow2 {
+  outline: 1px solid #d909ec;
+  outline-offset: 1px;
+  box-shadow: 0 0 1px #d909ec, 0 0 10px #d909ec;
+}
+
+.glow3 {
+  outline: 1px solid #09afec;
+  outline-offset: 1px;
+  box-shadow: 0 0 1px #09afec, 0 0 10px #09afec;
+}
+
+.Cursor {
+  cursor: url("https://cdn.custom-cursor.com/db/cursor/pointer_2042.png"), auto;
+}
 
 .underline-black span {
-    text-decoration: underline;
-    text-decoration-color: black;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 0.3em;
-  }
-  
+  text-decoration: underline;
+  text-decoration-color: black;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.3em;
+}
+
+/* Comingsooninside.css */
+.custom-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.video-player {
+  transition: transform 0.5s;
+}
+
+.video-player:hover {
+  transform: scale(1.1);
+}
+
+body {
+  overflow-x: hidden; /* Prevents horizontal scrolling */
+}
 .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 ::-webkit-scrollbar {
-    background: rgb(167, 204, 92);
-    border-radius: 10px;
+  background: rgb(167, 204, 92);
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #7264cc;
-    border-radius: 10px;
-
+  background: #7264cc;
+  border-radius: 10px;
 }
 
 select {
-    -webkit-appearance: none;  
-    -moz-appearance: none;
-    -ms-appearance: none;
-    appearance: none;
-    outline: 0;
-    box-shadow: none;
-    border: 0 !important;
-    background: #454545;
-    flex: 1;
-    padding: 0 0.5em;
-    color: #fff;
-    cursor: pointer;
-    font-size: 1em;
-    font-family: "Open Sans", sans-serif;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background: #454545;
+  flex: 1;
+  padding: 0 0.5em;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1em;
+  font-family: "Open Sans", sans-serif;
 }
 
 select::-ms-expand {
-    display: none;
+  display: none;
 }
 
 .select {
-    position: relative;
-    display: flex;
-    width: 20em;
-    height: 3em;
-    line-height: 3;
-    background: #27272a;
-    overflow: hidden;
-    border-radius: 0.25em;
+  position: relative;
+  display: flex;
+  width: 20em;
+  height: 3em;
+  line-height: 3;
+  background: #27272a;
+  overflow: hidden;
+  border-radius: 0.25em;
 }
 
 .select::after {
-    content: "\25BC";
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 0 1em;
-    background: #27272a;
-    cursor: pointer;
-    pointer-events: none;
-    transition: 0.25s all ease;
+  content: "\25BC";
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1em;
+  background: #27272a;
+  cursor: pointer;
+  pointer-events: none;
+  transition: 0.25s all ease;
 }
 
 .select:hover::after {
-    color: #6556cd;
+  color: #6556cd;
+}
+
+/* CSS for menu icon */
+
+.menu {
+  display: "relative";
+  top: 9px;
+  --s: 1.9vw; /* control the size */
+  --c: rgb(239, 239, 6); /* the color */
+  height: var(--s);
+  aspect-ratio: 1;
+  border: none;
+  padding: 0;
+  border-inline: calc(var(--s) / 2) solid #0000;
+  box-sizing: content-box;
+  --_g1: linear-gradient(var(--c) 20%, #0000 0 80%, var(--c) 0) no-repeat
+    content-box border-box;
+  --_g2: radial-gradient(circle closest-side at 50% 12.5%, var(--c) 95%, #0000)
+    repeat-y content-box border-box;
+  background: var(--_g2) left var(--_p, 0px) top,
+    var(--_g1) left calc(var(--s) / 10 + var(--_p, 0px)) top,
+    var(--_g2) right var(--_p, 0px) top,
+    var(--_g1) right calc(var(--s) / 10 + var(--_p, 0px)) top;
+  background-size: 20% 80%, 40% 100%;
+  position: relative;
+  clip-path: inset(0 25%);
+  -webkit-mask: linear-gradient(90deg, #0000, #000 25% 75%, #0000);
+  cursor: pointer;
+  transition: background-position 0.3s var(--_s, 0.3s),
+    clip-path 0s var(--_s, 0.6s);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.menu:before,
+.menu:after {
+  content: "";
+  position: absolute;
+  border-radius: var(--s);
+  inset: 40% 0;
+  background: var(--c);
+  transition: transform 0.3s calc(0.3s - var(--_s, 0.3s));
+}
+
+.menu:checked {
+  clip-path: inset(1);
+  --_p: calc(-1 * var(--s));
+  --_s: 0s;
+  background-color: black;
+}
+.menu:checked:before {
+  transform: rotate(45deg);
+}
+.menu:checked:after {
+  transform: rotate(-45deg);
+}
+.menu:focus-visible {
+  clip-path: none;
+  -webkit-mask: none;
+  border: none;
+  outline: 2px solid var(--c);
+  outline-offset: 5px;
+}
+
+body {
+  margin: 0;
+  place-content: center;
 }

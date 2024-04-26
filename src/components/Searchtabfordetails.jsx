@@ -1,15 +1,29 @@
-import React from 'react'
+import { IoSearchCircleSharp } from "react-icons/io5";
+import { useState, useRef } from "react";
 
-const Searchtabfordetails = () => {
+const Searchtab = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const searchRef = useRef();
+
+  const handleSearchClick = () => {
+    setIsOpen(!isOpen);
+    if (!isOpen) {
+      setTimeout(() => {
+        searchRef.current.focus();
+      }, 300);
+    }
+  };
+
   return (
     <div>
       <div className=' '>
-        <form className="w-[40vw] mx-[18vw] -my-[5vh]">
+        <form className={`w-[10vw] mx- ${isOpen ? "w-full transition-all duration-300 ease-in-out" : ""}`}>
           <label
             for="default-search"
             className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+            onClick={handleSearchClick}
           >
-            Search
+            <IoSearchCircleSharp />
           </label>
           <div className="relative">
             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -30,9 +44,10 @@ const Searchtabfordetails = () => {
               </svg>
             </div>
             <input
+              ref={searchRef}
               type="search"
               id="default-search"
-              className="block w-full p-2 ps-10 text-[2vh] text-gray-900  rounded-lg bg-gray-50 dark:bg-lime-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black font-semibold "
+              className={`block w-full p-2 ps-10 text-[2vh] text-gray-900  rounded-lg bg-gray-50 dark:bg-lime-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black font-semibold ${isOpen ? "w-full transition-all duration-300 ease-in-out" : ""}`}
               placeholder="Search Movies,Series..."
               required
             />
@@ -49,4 +64,4 @@ const Searchtabfordetails = () => {
   )
 }
 
-export default Searchtabfordetails
+export default Searchtab

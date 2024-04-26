@@ -9,13 +9,13 @@ import Searchtabfordetails from "./Searchtabfordetails";
 const Headerfordetails = () => {
   return (
     <>
-      <div className="">
+      <div className=" ">
         <div className=" cursor-pointer">
           <img className=" w-[8vw] -mt-[1.5vh]" src={logo} alt="no image" />
         </div>
         <Searchtabfordetails/>
 
-        <div className=" flex items-center justify-between absolute left-[68vw] top-[2vh]">
+        <div className="  flex items-center justify-between absolute left-[68vw] top-[2vh]">
             <div className="links flex gap-8 font-serif text-xl font-extrabold text-white">
             {["SIGN UP", "NEWS", "ABOUT","LANG"].map((item, index) =>{ return(<Link key={index}>{item}</Link>)})}
                 

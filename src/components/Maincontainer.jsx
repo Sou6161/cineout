@@ -11,6 +11,12 @@ import Secondcontainer from './Secondcontainer'
 import { addUpcomingseriesdata } from '../Reduxstore/UpcomingseriesSlice'
 import Thirdcontainer from './Thirdcontainer'
 import Fourthcontainer from './Fourthcontainer'
+import Fifthcontainer from './Fifthcontainer'
+import Sixthcontainer from './Sixthcontainer'
+import SeventhContainer from './SeventhContainer'
+import EightContainer from './EightContainer'
+import Ninthcontainer from './Ninthcontainer'
+import Footer from './Footer'
 
 
 
@@ -38,6 +44,7 @@ const Maincontainer = () => {
         nowshowingdispatch(addNowshowingdata(finaldata))
         let jsondata = finaldata[(Math.random() * finaldata.length).toFixed()];
         setfinaldata(jsondata)
+        console.log(finaldata)
 
     }
 
@@ -81,7 +88,14 @@ const Maincontainer = () => {
             <Upcomingseriesdata nowupcomingseries={finalupcomingseries} />
             <Secondcontainer />
             <Thirdcontainer/>
+            <Fifthcontainer/>
+            <Sixthcontainer/>
+            <SeventhContainer/>
+            <EightContainer/>
             <Fourthcontainer/>
+            <Ninthcontainer/>
+            <Footer/>
+
 
 
 
