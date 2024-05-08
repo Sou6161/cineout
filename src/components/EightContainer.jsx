@@ -5,15 +5,16 @@ import { IoArrowForwardOutline } from "react-icons/io5";
 import { TbMinusVertical } from "react-icons/tb";
 import { useDispatch } from "react-redux";
 import { addNewsSlice } from "../Reduxstore/NewsSlice";
+import { RapidOptionsDetails } from "../constants/RapidOptionsForDetails";
 
 const EightContainer = () => {
-  const [Category, setCategory] = useState("TOP")
+  const [Category, setCategory] = useState("TOP");
   const [Topnews, setTopnews] = useState(null);
   const [MovieNews, setMovieNews] = useState(null);
   const [TvNews, setTvNews] = useState(null);
   const [CelebrityNews, setCelebrityNews] = useState(null);
 
-  const dispatchTopNews = useDispatch()
+  const dispatchTopNews = useDispatch();
 
   useEffect(() => {
     const getNews = async () => {
@@ -26,20 +27,20 @@ const EightContainer = () => {
         // Otherwise, fetch data from API
         const response = await fetch(
           `https://imdb8.p.rapidapi.com/news/v2/get-by-category?category=${Category}&first=20`,
-          RapidoptionsDojo
+          RapidOptionsDetails
         );
         data = await response.json();
         // Save the data to local storage
         localStorage.setItem("newsData", JSON.stringify(data.data.news.edges));
       }
       setTopnews(data);
-      dispatchTopNews(addNewsSlice(data))
+      dispatchTopNews(addNewsSlice(data));
     };
     getNews();
   }, []);
 
   useEffect(() => {
-    // Topnews && console.log(Topnews); 
+    // Topnews && console.log(Topnews);
   }, [Topnews]);
 
   return (
@@ -78,7 +79,7 @@ const EightContainer = () => {
                 </div>
               </Link>
             );
-          })}
+          })  }
       </div>
     </>
   );

@@ -18,6 +18,9 @@ import BoxOffice from "./BoxOffice";
 import MostPopularMoviesCharts from "./MostPopularMoviesCharts";
 import IMDBTop250MoviesCharts from "./IMDBTop250MoviesCharts";
 import TopRatedEnglishMovies from "./TopRatedEnglishMovies";
+import FullDetailsPage from "./FullDetailsPage";
+import AllVideoGallery from "./AllVideoGallery";
+import AllPhotosGallery from "./AllPhotosGallery";
 
 const AppRoutes = () => {
   return (
@@ -25,6 +28,7 @@ const AppRoutes = () => {
       <Route path="/home" element={<Maincontainer />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/title/:imdbId" element={<FullDetailsPage/>}/>
       <Route path="/fan-favourites" element={<Whattowatch />} />
       <Route path="/Top-Box-Office" element={<BoxOffice />} />
       <Route path="/coming-soon" element={<Comingsooninside />} />
@@ -36,6 +40,8 @@ const AppRoutes = () => {
       <Route path="/charts/most-popular-movies" element={<MostPopularMoviesCharts/>}/>
       <Route path="/charts/top-250-movies" element={<IMDBTop250MoviesCharts/>}/>
       <Route path="/charts/top-english-movies" element={<TopRatedEnglishMovies/>}/>
+      <Route path="/title/:imdbId/video-gallery" element={<AllVideoGallery/>}/>
+      <Route path="/title/:imdbId/photo-gallery" element={<AllPhotosGallery/>}/>
       <Route
         path="/"
         element={

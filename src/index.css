@@ -5,18 +5,23 @@
 .glow {
   outline: 1px solid #f1b503;
   outline-offset: 1px;
-  box-shadow: 0 0 1px #ffc107, 0 0 10px #ffc107;
+  box-shadow: 0 0 1px #ffc107, 0 0 15px #ffc107;
 }
 .glow2 {
   outline: 1px solid #d909ec;
   outline-offset: 1px;
-  box-shadow: 0 0 1px #d909ec, 0 0 10px #d909ec;
+  box-shadow: 0 0 1px #d909ec, 0 0 15px #d909ec;
 }
 
 .glow3 {
   outline: 1px solid #09afec;
   outline-offset: 1px;
-  box-shadow: 0 0 1px #09afec, 0 0 10px #09afec;
+  box-shadow: 2px 2px 6px #09afec, 2px 2px 10px #f803d3;
+}
+
+.glow4 {
+  outline: 1px solid rgb(0, 255, 38);
+  box-shadow: 2px 2px 5px rgb(248, 179, 4) , 2px 2px 0px rgb(238, 152, 3) ;
 }
 
 .Cursor {

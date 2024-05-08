@@ -11,6 +11,8 @@ import NewsSlice from "./NewsSlice";
 import MovieNewsSlice from "./MovieNewsSlice";
 import TvNewsSlice from "./TvNewsSlice";
 import CelebrityNewsSlice from "./CelebrityNewsSlice";
+import MovieAllVideosSlice from "./MovieAllVideosSlice";
+import MovieAllPhotosSlice from "./MovieAllPhotosSlice";
 export const store = configureStore({
   reducer: {
     nowshowingit: NowShowingslice,
@@ -25,5 +27,8 @@ export const store = configureStore({
     MovieNewsSlice:MovieNewsSlice,
     TvNewsSlice:TvNewsSlice,
     CelebrityNewsSlice:CelebrityNewsSlice,
+    AllVideos:MovieAllVideosSlice,
+    AllPhotos:MovieAllPhotosSlice,
+
   },
 });

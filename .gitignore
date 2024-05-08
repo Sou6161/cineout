@@ -662,3 +662,27 @@ CHARTS CODE
 
 
  z-50  w-[30vw] h-[50vh] -mt-[4.7vh] bg-slate-500
+
+
+
+
+
+
+
+ <div className="">
+          <img className=" mt-2 w-[100vw] h-[100vh] object-center blur-md" src="https://designwithred.com/wp-content/uploads/2020/09/42-Best-Movie-Posters-of-2019-DesignwithRed-1200x801.jpg" alt="" />
+        </div>
+        {/* <div className="absolute inset-0 bg-black bg-opacity-30"></div> */}
+
+
+
+
+
+
+        <div>
+          {MovieFullInfo && console.log(MovieFullInfo)}
+          {MovieFullInfo && (
+            <img className=" w-[5vw] h-[10vh] relative top-10" src={MovieFullInfo.title.primaryImage.url} alt="" />
+          
+          )}
+        </div>  

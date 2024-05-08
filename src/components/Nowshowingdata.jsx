@@ -4,6 +4,7 @@ import { GrAnnounce } from "react-icons/gr";
 
 import { FaFire } from "react-icons/fa";
 import Header from "./Header";
+import { useEffect } from "react";
 
 const Nowshowingdata = ({ nowfinal }) => {
   // const d = useSelector((store) => store.nowshowingit?.nowshowit)
@@ -30,22 +31,24 @@ const Nowshowingdata = ({ nowfinal }) => {
             nowfinal.original_title}
         </h1>
 
-        <p className="text-lg text-red-600   font-semibold w-1/4 mb-2 relative top-[40vh] left-[10vh]">
+        <p className="text-lg text-fuchsia-500   font-semibold w-1/4 mb-2 relative top-[40vh] left-[10vh]">
           {nowfinal.overview.slice(0, 200)}....
-          <Link className=" text-blue-700 hover:underline">more</Link>
+          <Link to={`/title/tt${nowfinal.id}`} className=" text-blue-700 hover:underline">
+            more
+          </Link>
         </p>
 
         <div className=" relative top-[40vh] left-[10vh]">
           <p className=" text-lg text-lime-500 font-semibold flex gap-3 items-center">
             <GrAnnounce className=" text-yellow-400 text-3xl" />{" "}
-            {nowfinal.release_date || "No Information"}
+            {nowfinal.first_air_date || nowfinal.release_date || "No Information"}
             <FaFire className=" text-orange-500 text-3xl" />
             {nowfinal.popularity || "No Information"}
           </p>
         </div>
         <Link className=" p-2 relative bg-orange-700 rounded-md top-[29vh] left-[85%] hover:underline hover:bg-emerald-500 text-zinc-950   font-bold text-lg ">
           Watch Trailer
-        </Link>
+        </Link> 
       </div>
     </>
   );
