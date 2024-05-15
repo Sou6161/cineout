@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 .glow {
   outline: 1px solid #f1b503;
   outline-offset: 1px;
@@ -23,6 +25,11 @@
   outline: 1px solid rgb(0, 255, 38);
   box-shadow: 2px 2px 5px rgb(248, 179, 4) , 2px 2px 0px rgb(238, 152, 3) ;
 }
+
+.glo5 {
+  text-shadow: '0 0 5px rgba(0,0,255,0.5), 0 0 10px rgba(0,0,255,0.5), 0 0 15px rgba(0,0,255,0.5), 0 0 20px rgba(0,0,255,0.5)',
+}
+
 
 .Cursor {
   cursor: url("https://cdn.custom-cursor.com/db/cursor/pointer_2042.png"), auto;

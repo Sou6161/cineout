@@ -5,7 +5,7 @@ import { IoArrowForwardOutline } from "react-icons/io5";
 import { TbMinusVertical } from "react-icons/tb";
 import { useDispatch } from "react-redux";
 import { addNewsSlice } from "../Reduxstore/NewsSlice";
-import { RapidOptionsDetails } from "../constants/RapidOptionsForDetails";
+import { RapidOptionsDetails, RapidOptionsDetailsDaimond } from "../constants/RapidOptionsForDetails";
 
 const EightContainer = () => {
   const [Category, setCategory] = useState("TOP");
@@ -27,7 +27,7 @@ const EightContainer = () => {
         // Otherwise, fetch data from API
         const response = await fetch(
           `https://imdb8.p.rapidapi.com/news/v2/get-by-category?category=${Category}&first=20`,
-          RapidOptionsDetails
+          RapidOptionsDetailsDaimond
         );
         data = await response.json();
         // Save the data to local storage

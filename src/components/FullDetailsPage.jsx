@@ -5,14 +5,26 @@ import {
   RapidOPtionsDetailsRatingsWolf,
   RapidOptionsDetails,
   RapidOptionsDetailsChalo,
+  RapidOptionsDetailsDaimond,
   RapidOptionsDetailsRatingsChalo,
+  RapidOptionsDetailsRatingsDaimond,
   RapidOptionsDetailsRatingsRoman,
+  RapidOptionsDetailsRexona,
   RapidOptionsDetailsWanda,
   RapidOptionsDetailsWolf,
 } from "../constants/RapidOptionsForDetails";
 import Headerfordetails from "./Headerfordetails";
 import { PiVideoFill } from "react-icons/pi";
 import { FaImages } from "react-icons/fa6";
+import { IoStarSharp } from "react-icons/io5";
+import { IoStarOutline } from "react-icons/io5";
+import { FaArrowTrendDown } from "react-icons/fa6";
+import { FaArrowTrendUp } from "react-icons/fa6";
+import { FaRankingStar } from "react-icons/fa6";
+import { CiSquarePlus } from "react-icons/ci";
+import { FaShareAlt } from "react-icons/fa";
+import { MdRecentActors } from "react-icons/md";
+import { CgMoreVerticalO } from "react-icons/cg";
 import { addAllVideos } from "../Reduxstore/MovieAllVideosSlice";
 import { Link } from "react-router-dom";
 import { addAllPhotos } from "../Reduxstore/MovieAllPhotosSlice";
@@ -29,6 +41,7 @@ const FullDetailsPage = () => {
   const [AllRatings, setAllRatings] = useState(null);
   const dispatchAllVideos = useDispatch();
   const dispatchAllPhotos = useDispatch();
+  const [isOpen, setIsOpen] = useState(false);
 
   const finalID = useSelector((state) => state.nowshowingit.nowshowit);
 
@@ -146,13 +159,14 @@ const FullDetailsPage = () => {
   const getDetails = async (id) => {
     const response = await fetch(
       `https://imdb8.p.rapidapi.com/title/v2/get-extend-details?tconst=${id}`,
-      RapidOptionsDetailsWanda
+      RapidOptionsDetailsDaimond
     );
     const data = await response.json();
     if (id === imdbIdFromApi) {
-      // console.log(imdbIdFromApi);
+      console.log(imdbIdFromApi);
       setMovieFullInfo(data.data);
       sessionStorage.setItem("Movietitle", JSON.stringify(data.data));
+      console.log(sessionStorage.getItem("Movietitle")); // Check if data is stored correctly
     } else {
       sessionStorage.setItem("Seriestitle", JSON.stringify(data.data));
     }
@@ -195,7 +209,7 @@ const FullDetailsPage = () => {
   const getRatings = async (imdbId, storageName) => {
     const response = await fetch(
       `https://imdb-com.p.rapidapi.com/title/details?tconst=${imdbId}`,
-      RapidOptionsDetailsRatingsChalo
+      RapidOptionsDetailsRatingsDaimond
     );
     const data = await response.json();
     // Always update the data in session storage
@@ -302,11 +316,11 @@ const FullDetailsPage = () => {
       <div className=" w-[100vw] h-[151vh]  bg-black">
         <div className=" bg-red-30 w-[100vw] h-[100vh]">
           <img
-            className=" absolute w-full h-[148vh] bg-black mt-5 opacity-25 border-t-2 border-red-600 "
+            className=" absolute w-full h-[148vh] bg-black mt-5 opacity-20 border-t-2 border-red-600 "
             src={MovieFullInfo?.title?.primaryImage?.url}
             alt=""
           />
-          <div className=" absolute left-[4vw] my-[5vw] w-[90vw] p-5 rounded-lg h-[140vh] border-[1px] border-stone-600">
+          <div className=" absolute left-[4vw] my-[5vw] w-[90vw] brightness-[0.7] contrast-[0.7] p-5 rounded-lg h-[140vh] border-[1px] border-stone-600">
             <img
               className=" w-full h-[138vh] object-fill blur-lg"
               src={MovieFullInfo?.title?.primaryImage?.url}
@@ -320,13 +334,56 @@ const FullDetailsPage = () => {
         {/* {MovieFullInfo && console.log(MovieFullInfo)} */}
         {MovieFullInfo && (
           <>
-            <div className=" relative bottom-[60vw] left-[10vw] text-[4vw] ">
+            <div className=" relative  bottom-[60vw] left-[10vw] text-[4vw] ">
               <h1 className=" relative   text-cyan-40 font-semibold ">
                 {MovieFullInfo?.title?.titleText?.text}
               </h1>
+              <div className="flex gap-10 bg-red-30 text-[0.8vw] relative left-[48vw] bottom-[14vw]">
+                <h1 className=" relative top-5 font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-red-600 glow5">
+                  CINEOUT RATING
+                  <IoStarSharp className=" relative text-[2vw] text-cyan-600" />
+                  <div className=" mx-12 -my-[3.7vh] text-[1.3vw]">
+                    {
+                      AllRatings?.data?.aboveTheFoldData?.ratingsSummary
+                        ?.aggregateRating
+                    }
+                  </div>
+                </h1>
+                <h1 className=" relative top-5 font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-red-600 glow5">
+                  YOUR RATING
+                  <IoStarOutline className=" left-6 hover:bg-slate-500 rounded-lg    block relative text-[2vw] text-lime-500 font-black" />
+                </h1>
+                <h1 className="relative top-5 right- font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-red-600 glow5">
+                  POPULARITY
+                  {AllRatings.data?.aboveTheFoldData?.metacritic?.metascore
+                    ?.score > 50 ? (
+                    <FaArrowTrendUp className="text-[2vw] text-green-300 border-[2px] font-extrabold rounded-full border-green-600" />
+                  ) : (
+                    <FaArrowTrendDown className="text-[2vw] text-orange-600 border-[2px] font-extrabold rounded-full border-red-600" />
+                  )}
+                  <div className="mx-12 -my-[4vh] text-[1.3vw] ">
+                    {
+                      AllRatings.data?.aboveTheFoldData?.metacritic?.metascore
+                        ?.score
+                    }
+                  </div>
+                </h1>
+
+                <h1 className=" relative top-5 right-12  font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-red-600 glow5">
+                  CURRENT RANK
+                  <FaRankingStar className=" relative top-1  text-[2.2vw] text-cyan-600 border-[2px] font-extrabold rounded-full border-yellow-400" />
+                  <div className="mx-12 -my-[4vh] text-[1.3vw]">
+                    {
+                      AllRatings.data?.aboveTheFoldData?.meterRanking
+                        ?.currentRank
+                    }
+                  </div>
+                </h1>
+              </div>
+
               <span className=" inline-block text-[1vw] relative left-1 bottom-10 font-sm  text-slate-400">
                 <h1>
-                  {"TV-Series"} {" - "}
+                  {AllRatings.data.aboveTheFoldData.titleType.text} {" - "}
                   {MovieFullInfo?.title?.releaseDate?.day}
                   {"/"}
                   {MovieFullInfo?.title?.releaseDate?.month}
@@ -358,24 +415,37 @@ const FullDetailsPage = () => {
                 </h1>
               </span>
               <span className=" inline-block">
-                <div className=" relative left-[5vw] top-[7vw] inline-block">
+                <div className=" relative left-[5vw] top-[8vw] inline-block">
                   <h1 className=" text-red-600 font-semibold text-[1.5vw] ">
                     Director(s){" "}
                     <span className=" text-lime-400 mx-4">
                       {" "}
                       {AllRatings &&
-                        AllRatings.data.aboveTheFoldData.directorsPageTitle[0]
-                          .credits[0].name.nameText.text}
+                        AllRatings?.data?.aboveTheFoldData
+                          ?.directorsPageTitle[0]?.credits[0]?.name?.nameText
+                          ?.text}
                     </span>
                   </h1>
+                  <hr className=" border-gray-300 relative top-[1vw] " />{" "}
+                  {/* Add this line */}
                   <h1 className=" text-green-800 font-semibold relative top-10 text-[1.5vw]">
                     Writers{" "}
+                    <span className=" text-red-600 mx-4">
+                      {AllRatings &&
+                        AllRatings?.data?.mainColumnData?.writers[0]?.credits.map(
+                          (item) => {
+                            return item?.name?.nameText?.text
+                          }
+                        )}
+                    </span>
                   </h1>
+                  <hr className=" border-gray-300 relative top-[3vw]" />{" "}
+                  {/* Add this line */}
                   <h1 className=" text-indigo-800 font-semibold relative top-20 text-[1.5vw]">
                     Stars
                     <span className=" text-amber-600 mx-4">
                       {AllRatings &&
-                        AllRatings.data.aboveTheFoldData.castPageTitle.edges.map(
+                        AllRatings?.data?.aboveTheFoldData?.castPageTitle?.edges?.map(
                           (item, index, arr) => {
                             return (
                               <React.Fragment key={index}>
@@ -389,16 +459,248 @@ const FullDetailsPage = () => {
                         )}
                     </span>
                   </h1>
+                  <hr className=" border-gray-300 relative top-[5.5vw]" />{" "}
+                  {/* Add this line */}
                 </div>
               </span>
+              <div className="text-[1.4vw] relative top-[19vw] left-[18vw]">
+                <div className="">
+                  {AllRatings?.data?.aboveTheFoldData?.genres?.genres.map(
+                    (item) => {
+                      return (
+                        <span
+                          style={{
+                            marginRight: "25px",
+                            backgroundColor: "#334155",
+                            color: "yellow",
+                            borderRadius: "20px",
+                            paddingRight: "10px",
+                            paddingLeft: "10px",
+                            paddingTop: "5px",
+                            paddingBottom: "5px",
+                            fontSize: "20px",
+                            overflow: "hidden",
+                          }}
+                        >
+                          {item?.text}
+                        </span>
+                      );
+                    }
+                  )}
+                  <div className=" relative bottom-[5vw]">
+                    <div className="relative top-[8vw] right-[3vw] font-bold text-[1.8vw] underline ">
+                      Description:
+                    </div>
+                    <div className=" inline-block relative top-[10vw] right-[3vw] break-words w-[60vw] font-semibold text-green-200">
+                      {
+                        AllRatings?.data?.aboveTheFoldData?.plot?.plotText
+                          ?.plainText
+                      }
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="  absolute left-[65vw] top-[7vw] flex">
+                <Link
+                  to=""
+                  class=" w-[15vw] relative inline-flex items-center
+                  justify-center px-2 py-2 overflow-hidden
+                  bg-gray-800 rounded-lg group"
+                >
+                  <CiSquarePlus className=" text-[1.5vw] relative right-[1.4vw] z-50" />
+                  <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-green-500 rounded-full group-hover:w-[16vw] group-hover:h-[16vw]"></span>
+                  <span class="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-gray-700"></span>
+                  <span class="relative text-[1vw] -left-[1vw] font-bold text-red-600 ">
+                    Add to Watchlist
+                    <br />
+                    <span className=" font-normal text-black">
+                      {" "}
+                      {
+                        AllRatings?.data?.aboveTheFoldData?.engagementStatistics
+                          ?.watchlistStatistics?.displayableCount?.text
+                      }{" "}
+                    </span>
+                  </span>
+                </Link>{" "}
+              </div>
+              <div className=" text-[1.1vw] absolute top-[55vw] left-[62vw] ">
+                <span className=" text-blue-600 font-black bg-black px-1">
+                  {AllRatings.data.aboveTheFoldData?.reviews?.total}
+                </span>{" "}
+                <span className=" font-medium text-green-500 cursor-pointer hover:underline">
+                  User reviews
+                </span>
+                <span className=" ml-5 text-blue-600 font-black bg-black px-1x">
+                  {AllRatings.data.aboveTheFoldData?.criticReviewsTotal?.total}
+                </span>{" "}
+                <span className=" text-green-500 cursor-pointer hover:underline font-medium">
+                  Critics reviews
+                </span>{" "}
+                <br />
+                <span className="text-blue-600 font-black relative left-[6vw] bg-black px-1">
+                  {
+                    AllRatings?.data?.aboveTheFoldData?.subNavTopQuestions
+                      ?.total
+                  }
+                </span>{" "}
+                <span className=" text-green-500 relative left-[6vw] cursor-pointer hover:underline font-medium">
+                  Top Questions
+                </span>
+              </div>
             </div>
+
             <img
-              className=" w-[15vw] h-[45vh] rounded-lg relative -my-[62vw] left-[10vw]"
+              className=" w-[15vw] h-[45vh] rounded-lg relative -my-[70vw] left-[10vw]"
               src={MovieFullInfo?.title?.primaryImage?.url}
               alt=""
             />
           </>
         )}
+      </div>
+      <div className="flex relative top-[18.7vw] ml-3 left-[90vw]">
+        <div className="hs-dropdown relative inline-flex">
+          <button
+            id="hs-dropdown-custom-icon-trigger"
+            type="button"
+            className="hs-dropdown-toggle flex justify-center items-center size-9 text-sm font-semibold rounded-lg  text-black    disabled:opacity-50 disabled:pointer-events-none"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            <svg className=" relative  hover:bg-slate-400 rounded-lg h-[2vw]">
+              <FaShareAlt className=" text-[2vw] items-center " />
+            </svg>
+          </button>
+
+          {isOpen && (
+            <div
+              className=" absolute right-[1vw] top-[5vh] hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-100 min-w-60 bg-white shadow-md rounded-lg p-2 mt-2"
+              aria-labelledby="hs-dropdown-custom-icon-trigger"
+            >
+              <a
+                className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                href="#"
+              >
+                Newsletter
+              </a>
+              <a
+                className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                href="#"
+              >
+                Purchases
+              </a>
+              <a
+                className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                href="#"
+              >
+                Downloads
+              </a>
+              <a
+                className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                href="#"
+              >
+                Team Account
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
+      <div className=" w-[100vw] h-[100vh] px-[10vw] py-[5vw] border-t-[1px] border-blue-800 bg-blac relative top-[67.9vw]">
+        <div className=" bg-red-30 inline-block">
+          <h1 className=" text-yellow-400 text-[1.8vw] flex">
+            <MdRecentActors className=" relative top-2 mr-2 text-[2vw]" />
+            Top Cast
+          </h1>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+          <div className="">
+            {AllRatings?.data?.mainColumnData?.cast?.edges
+              .slice(0, 9)
+              .map((item) => {
+                return (
+                  <>
+                    <div className="mt-4 ml-2 flex">
+                      <img
+                        className=" w-[6vw] border-2 border-indigo-600 h-[13vh] object-cover rounded-full"
+                        src={
+                          item?.node?.name?.primaryImage?.url ||
+                          "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg"
+                        }
+                        alt=""
+                      />
+                      <div className=" mt-5 ml-5">
+                        <h1 className=" font-bold ml-2">
+                          {item?.node?.name?.nameText?.text}
+                        </h1>
+                        <br />
+                        <h1 className="ml-2 -mt-5 text-zinc-500 font-normal">
+                          {item?.node?.characters[0]?.name}
+                        </h1>
+                      </div>
+                    </div>
+                  </>
+                );
+              })}
+          </div>
+          <div>
+            {AllRatings?.data?.mainColumnData?.cast?.edges
+              .slice(9)
+              .map((item) => {
+                return (
+                  <>
+                    <div className="mt-4 ml-2 flex">
+                      <img
+                        className=" w-[6vw] border-2 border-indigo-600 h-[13vh] object-cover rounded-full"
+                        src={
+                          item?.node?.name?.primaryImage?.url ||
+                          "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg"
+                        }
+                        alt=""
+                      />
+                      <div className=" mt-5 ml-5">
+                        <h1 className=" font-bold ml-2">
+                          {item?.node?.name?.nameText?.text}
+                        </h1>
+                        <br />
+                        <h1 className="ml-2 -mt-5 text-zinc-500 font-normal">
+                          {item?.node?.characters[0]?.name}
+                        </h1>
+                      </div>
+                    </div>
+                  </>
+                );
+              })}
+          </div>
+        </div>
+        <div className=" relative mt-[9vw] w-[90vw] h-[100vh] bg-red-30">
+          <h1 className=" mb-10 flex text-yellow-400 text-[2vw]">
+            <span>
+              <CgMoreVerticalO className=" flex text-red-500 text-[1.7vw] mr-2 relative top-3" />
+            </span>
+            More Titles Like This
+          </h1>
+          <div className=" w-[80vw] overflow-x-auto overflow-y-clip  no-scrollbar h-[70vh] bg-red-300 flex">
+            {AllRatings?.data?.mainColumnData?.moreLikeThisTitles?.edges.map(
+              (item) => {
+                return (
+                  <>
+                    <img
+                      className=" w-[14vw] h-[43vh] object-cover"
+                      src={
+                        item?.node?.primaryImage?.url ||
+                        "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg"
+                      }
+                      alt=""
+                    />
+                    <div className=" relative top-[22vw] inline-block right-[13.6vw] whitespace-nowrap">
+                      <h1 className="">
+                        {item?.node?.originalTitleText?.text}
+                      </h1>
+                    </div>
+                  </>
+                );
+              }
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

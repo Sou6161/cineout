@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { MdTheaters } from "react-icons/md";
 import {
+  RapidOptionsApiDojoDaimond,
+  RapidOptionsTechViewDiamond,
   RapidoptionsApiDojo,
   RapidoptionsApiDojoRoman,
   RapidoptionsTechView,
@@ -23,7 +25,7 @@ const Fourthcontainer = () => {
         // Otherwise, fetch data from API
         const response = await fetch(
           `https://movies-tv-shows-database.p.rapidapi.com/?page=1`,
-          RapidoptionsTechView
+          RapidOptionsTechViewDiamond
         );
         data = await response.json();
         // Save the data to local storage
@@ -57,7 +59,7 @@ const Fourthcontainer = () => {
           const id = BoxOfficeMovieID[i];
           const response = await fetch(
             `https://imdb8.p.rapidapi.com/title/v2/get-box-office-summary?tconst=${id}`,
-            RapidoptionsApiDojoRoman
+            RapidOptionsApiDojoDaimond
           );
           const movieData = await response.json();
           data.push(movieData?.data?.title); // Store only the title

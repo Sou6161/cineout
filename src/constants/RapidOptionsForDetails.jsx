@@ -6,6 +6,14 @@ export const RapidOptionsDetails = {
   },
 };
 
+export const RapidOptionsDetailsDaimond ={
+  method: "GET",
+  headers: {
+    "X-RapidAPI-Key": "dfbbdedcacmsh2e0158b379069fdp1f3d2fjsnd2c9b19d1434",
+    "X-RapidAPI-Host": "imdb8.p.rapidapi.com",
+  },
+}
+
 export const RapidOptionsDetailsChalo = {
   method: "GET",
   headers: {
@@ -22,6 +30,15 @@ export const RapidOptionsDetailsWanda = {
   },
 };
 
+export const RapidOptionsDetailsRexona ={
+  method: "GET",
+  headers: {
+    "X-RapidAPI-Key": "7687118240mshf59a0f3e9c3270cp1005eejsnb81499281c1c",
+    "X-RapidAPI-Host": "imdb8.p.rapidapi.com",
+  },
+
+}
+
 export const RapidOptionsDetailsWolf = {
   method: "GET",
   headers: {
@@ -30,11 +47,11 @@ export const RapidOptionsDetailsWolf = {
   },
 };
 
-export const RapidOptionsDetailsRatingsRoman = {
+export const RapidOptionsDetailsRatingsDaimond = {
   method: "GET",
   headers: {
-    "X-RapidAPI-Key": "b32ab82c34msheb2730c95608ca2p117c3djsn016fb569fe8f",
-    "X-RapidAPI-Host": "movies-ratings2.p.rapidapi.com",
+    "X-RapidAPI-Key": "696fd76be0mshbb5c7c94992b67fp164bdfjsne07b3d050aab",
+    "X-RapidAPI-Host": "imdb-com.p.rapidapi.com",
   },
 };
 
@@ -48,6 +65,14 @@ export const RapidOptionsDetailsRatingsChalo={
 
 export const RapidOPtionsDetailsRatingsWolf={
 	method: "GET",
+	headers: {
+	  "X-RapidAPI-Key": "a0fa4cf009msh02b059a7ccdba07p19e3f8jsnb141a097eb26",
+	  "X-RapidAPI-Host": "movies-ratings2.p.rapidapi.com",
+	},
+}
+
+export const RapidOptionsDetailsRatingsWanda ={
+  method: "GET",
 	headers: {
 	  "X-RapidAPI-Key": "a0fa4cf009msh02b059a7ccdba07p19e3f8jsnb141a097eb26",
 	  "X-RapidAPI-Host": "movies-ratings2.p.rapidapi.com",

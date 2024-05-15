@@ -14,6 +14,17 @@ export const RapidoptionsTechView = {
     "X-RapidAPI-Host": "movies-tv-shows-database.p.rapidapi.com",
   },
 };
+
+export const RapidOptionsTechViewDiamond ={
+  method: "GET",
+  headers: {
+    Type: "get-boxoffice-movies",
+    "X-RapidAPI-Key": "b273e7ab1emsh4b2f8561ae0dd67p1dbfd0jsn69011fb03d6c",
+    "X-RapidAPI-Host": "movies-tv-shows-database.p.rapidapi.com",
+  },
+}
+
+
 export const RapidoptionsChartsForIDTechView = {
   method: "GET",
   headers: {
@@ -55,6 +66,15 @@ export const RapidoptionsApiDojoRoman={
     "X-RapidAPI-Host": "imdb8.p.rapidapi.com",
   },
 }
+
+export const RapidOptionsApiDojoDaimond = {
+  method: "GET",
+  headers: {
+    "X-RapidAPI-Key": "a23a703252mshb669fb9c7bb5125p1e41d4jsnc063f2c36f07",
+    "X-RapidAPI-Host": "imdb8.p.rapidapi.com",
+  },
+}
+
 export const RapidoptionsApiDojo2chalo ={
   method: 'GET',
 	headers: {
