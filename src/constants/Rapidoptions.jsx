@@ -15,31 +15,29 @@ export const RapidoptionsTechView = {
   },
 };
 
-export const RapidOptionsTechViewDiamond ={
-  method: "GET",
-  headers: {
-    Type: "get-boxoffice-movies",
-    "X-RapidAPI-Key": "b273e7ab1emsh4b2f8561ae0dd67p1dbfd0jsn69011fb03d6c",
-    "X-RapidAPI-Host": "movies-tv-shows-database.p.rapidapi.com",
-  },
+export const RapidOptionsApiDojoDiamond ={
+  method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': 'b32ab82c34msheb2730c95608ca2p117c3djsn016fb569fe8f',
+		'X-RapidAPI-Host': 'imdb8.p.rapidapi.com'
+	}
 }
 
 
-export const RapidoptionsChartsForIDTechView = {
-  method: "GET",
-  headers: {
-    Type: "get-boxoffice-movies",
-    "X-RapidAPI-Key": "f4d8c4b0damshaaa929b9a6a3bd1p174e49jsn66d467e50843",
-    "X-RapidAPI-Host": "movies-tv-shows-database.p.rapidapi.com",
-  },
-};
-
-export const RapidoptionsChartsMovieRatingsAPI ={
+export const RapidoptionsChartsForIDDiamond = {
   method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': 'f4d8c4b0damshaaa929b9a6a3bd1p174e49jsn66d467e50843',
-		'X-RapidAPI-Host': 'movies-ratings2.p.rapidapi.com'
+		'X-RapidAPI-Key': 'b32ab82c34msheb2730c95608ca2p117c3djsn016fb569fe8f',
+		'X-RapidAPI-Host': 'imdb8.p.rapidapi.com'
 	}
+};
+
+export const RapidoptionsChartsApiDojoDiamond ={
+  method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': 'b32ab82c34msheb2730c95608ca2p117c3djsn016fb569fe8f',
+		'X-RapidAPI-Host': 'imdb8.p.rapidapi.com'
+	} 
 }
 
 export const RapidoptionsChartsForDetailsTechView ={

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { MdTheaters } from "react-icons/md";
 import {
   RapidOptionsApiDojoDaimond,
-  RapidOptionsTechViewDiamond,
+  RapidOptionsApiDojoDiamond,
   RapidoptionsApiDojo,
   RapidoptionsApiDojoRoman,
   RapidoptionsTechView,
@@ -21,18 +21,24 @@ const Fourthcontainer = () => {
       if (data) {
         // Parse stored json if it was found
         data = JSON.parse(data);
+        // console.log(data, " box office movies ");
       } else {
         // Otherwise, fetch data from API
         const response = await fetch(
-          `https://movies-tv-shows-database.p.rapidapi.com/?page=1`,
-          RapidOptionsTechViewDiamond
+          `https://imdb8.p.rapidapi.com/title/get-coming-soon-movies?homeCountry=US&purchaseCountry=US&currentCountry=US`,
+          RapidOptionsApiDojoDiamond
         );
         data = await response.json();
+        // Extract the ID part from the string
+        data = data.map((movie) => {
+          const idParts = movie.id.split("/");
+          movie.id = idParts[idParts.length - 2];
+          return movie;
+        });
+        // Limit the data to the first 10 movies
+        data = data.slice(0, 10);
         // Save the data to local storage
-        localStorage.setItem(
-          "BOX OFFICE MOVIES LIST",
-          JSON.stringify(data?.movie_results)
-        );
+        localStorage.setItem("BOX OFFICE MOVIES LIST", JSON.stringify(data));
       }
       setBoxOfficeMovies(data);
     };
@@ -41,7 +47,7 @@ const Fourthcontainer = () => {
 
   useEffect(() => {
     BoxOfficeMovies &&
-      setBoxOfficeMovieID(BoxOfficeMovies.map((item) => item?.imdb_id));
+      setBoxOfficeMovieID(BoxOfficeMovies.map((item) => item?.id));
   }, [BoxOfficeMovies]);
 
   useEffect(() => {
@@ -53,6 +59,7 @@ const Fourthcontainer = () => {
       let data = localStorage.getItem("BOX OFFICE MOVIES DETAILS");
       if (data) {
         data = JSON.parse(data);
+        // console.log(data, " box office movie details");
       } else {
         data = [];
         for (let i = 0; i < BoxOfficeMovieID.length; i++) {
@@ -63,7 +70,7 @@ const Fourthcontainer = () => {
           );
           const movieData = await response.json();
           data.push(movieData?.data?.title); // Store only the title
-          
+
           // Save the data to local storage
           localStorage.setItem(
             "BOX OFFICE MOVIES DETAILS",
@@ -115,21 +122,30 @@ const Fourthcontainer = () => {
                 >
                   {item?.originalTitleText?.text}
                   <div className="w-[3.2vw] h-[5.5vh] rounded-lg  hover:bg-black text-black  hover:text-white bg-indigo-100 border-2 border-lime-600 absolute right-[-3.2vw] flex items-center justify-center">
-                    {convertToMillions(item?.worldwideGross?.total?.amount)}M
+                    {isNaN(
+                      convertToMillions(item?.worldwideGross?.total?.amount)
+                    )
+                      ? "N/A"
+                      : `${convertToMillions(
+                          item?.worldwideGross?.total?.amount
+                        )}M`}
                   </div>
                 </div>
               ))}
           </div>
           <div className="flex flex-col gap-10 ml-[vw]">
             {BoxOfficeMovieDetails.slice(4, 8).map((item) => (
-              
               <div
                 key={item.id}
-                className="w-[22vw] h-[5.5vh] rounded-lg hover:border-red-600 hover:bg-black font-bold hover:text-white bg-indigo-100 border-2 border-indigo-600 flex items-center justify-center relative"
+                className="w-[22vw] h-[5.5vh] rounded-lg font-bold hover:border-red-600 hover:bg-black hover:text-white bg-indigo-100 border-2 border-cyan-600 flex items-center justify-center relative"
               >
                 {item?.originalTitleText?.text}
-                <div className="w-[3.2vw] h-[5.5vh] rounded-lg  hover:bg-black text-black  hover:text-white bg-indigo-100 border-2 border-amber-400 absolute right-[-3.2vw] flex items-center justify-center">
-                  {convertToMillions(item?.worldwideGross?.total?.amount)}M
+                <div className="w-[3.2vw] h-[5.5vh] rounded-lg  hover:bg-black text-black  hover:text-white bg-indigo-100 border-2 border-lime-600 absolute right-[-3.2vw] flex items-center justify-center">
+                  {isNaN(convertToMillions(item?.worldwideGross?.total?.amount))
+                    ? "N/A"
+                    : `${convertToMillions(
+                        item?.worldwideGross?.total?.amount
+                      )}M`}
                 </div>
               </div>
             ))}
@@ -138,12 +154,15 @@ const Fourthcontainer = () => {
             {BoxOfficeMovieDetails.slice(8, 10).map((item) => (
               <div
                 key={item.id}
-                className="w-[22vw] h-[5.5vh] rounded-lg hover:border-red-600 hover:bg-black hover:text-cyan-500 font-bold bg-indigo-100 border-2 border-purple-600 flex items-center justify-center relative"
+                className="w-[22vw] h-[5.5vh] rounded-lg font-bold hover:border-red-600 hover:bg-black hover:text-white bg-indigo-100 border-2 border-cyan-600 flex items-center justify-center relative"
               >
                 {item?.originalTitleText?.text}
-
-                <div className="w-[3.2vw] h-[5.5vh] rounded-lg  hover:bg-black text-black  hover:text-white bg-indigo-100 border-2 border-purple-600 absolute right-[-3.2vw] flex items-center justify-center">
-                  {convertToMillions(item?.worldwideGross?.total?.amount)}M
+                <div className="w-[3.2vw] h-[5.5vh] rounded-lg  hover:bg-black text-black  hover:text-white bg-indigo-100 border-2 border-lime-600 absolute right-[-3.2vw] flex items-center justify-center">
+                  {isNaN(convertToMillions(item?.worldwideGross?.total?.amount))
+                    ? "N/A"
+                    : `${convertToMillions(
+                        item?.worldwideGross?.total?.amount
+                      )}M`}
                 </div>
               </div>
             ))}

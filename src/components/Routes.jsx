@@ -21,6 +21,7 @@ import TopRatedEnglishMovies from "./TopRatedEnglishMovies";
 import FullDetailsPage from "./FullDetailsPage";
 import AllVideoGallery from "./AllVideoGallery";
 import AllPhotosGallery from "./AllPhotosGallery";
+import Top250Movies from "./Top250Movies";
 
 const AppRoutes = () => {
   return (
@@ -42,6 +43,7 @@ const AppRoutes = () => {
       <Route path="/charts/top-english-movies" element={<TopRatedEnglishMovies/>}/>
       <Route path="/title/:imdbId/video-gallery" element={<AllVideoGallery/>}/>
       <Route path="/title/:imdbId/photo-gallery" element={<AllPhotosGallery/>}/>
+      <Route path="/chart/top" element={<Top250Movies/>}/>
       <Route
         path="/"
         element={

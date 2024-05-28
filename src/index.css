@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 .glow {
   outline: 1px solid #f1b503;
   outline-offset: 1px;
@@ -23,13 +21,12 @@
 
 .glow4 {
   outline: 1px solid rgb(0, 255, 38);
-  box-shadow: 2px 2px 5px rgb(248, 179, 4) , 2px 2px 0px rgb(238, 152, 3) ;
+  box-shadow: 2px 2px 5px rgb(248, 179, 4), 2px 2px 0px rgb(238, 152, 3);
 }
 
 .glo5 {
-  text-shadow: '0 0 5px rgba(0,0,255,0.5), 0 0 10px rgba(0,0,255,0.5), 0 0 15px rgba(0,0,255,0.5), 0 0 20px rgba(0,0,255,0.5)',
+  text-shadow: "0 0 5px rgba(0,0,255,0.5), 0 0 10px rgba(0,0,255,0.5), 0 0 15px rgba(0,0,255,0.5), 0 0 20px rgba(0,0,255,0.5)";
 }
-
 
 .Cursor {
   cursor: url("https://cdn.custom-cursor.com/db/cursor/pointer_2042.png"), auto;
@@ -192,3 +189,51 @@ body {
   margin: 0;
   place-content: center;
 }
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+    border-radius: 5%;
+    height: 1vw;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+    border-radius: 10%;
+  }
+}
+
+.ripple {
+  animation: ripple 0.4s ease-out;
+  background: rgba(31, 31, 31, 1); /* Change this to the color of your ripple */
+}
+
+@keyframes ripple-reverse {
+  0% {
+    transform: scale(1);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 1;
+  }
+}
+
+.ripple-reverse {
+  animation: ripple-reverse 0.5s ease-out;
+  background: rgba(
+    15,
+    12,
+    12,
+    0.5
+  ); /* Change this to the color of your ripple */
+}
+
+.neuro {
+  border-radius: 16px;
+  background: white;
+  box-shadow:  -9px -9px 18px #828282,
+               9px 9px 18px #ffffff;
+}
+

@@ -46,7 +46,7 @@ const SeventhContainer = () => {
            <span className=" text-purple-700 text-[5vh] ">B</span>orn <span className=" text-blue-600">T</span>oday
           </h1>
           <div className="inline-block relative top-9 ml-[3vw]">
-            <DatePicker className=" bg-purple-400 font-bold w-[5.5vw] rounded-md" selected={selectedDate} onChange={(date) => setSelectedDate(date)} />
+            <DatePicker className=" bg-purple-400 font-bold w-[5.5vw] rounded-md cursor-pointer" selected={selectedDate} onChange={(date) => setSelectedDate(date)} />
           </div>
         </div>
 

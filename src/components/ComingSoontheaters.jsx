@@ -25,7 +25,7 @@ const ComingSoontheaters = ({finalcomingsoonmoviestheaters}) => {
         </div>
         <div className=" w-[100vw] h-[55vh]  scrollbar-hide overflow-x-auto overflow-y-hidden  mb-[8vh] -mt-2 bg-yellow-20">
           <div className=" ml-3 flex gap-10  w-[100vw] h-[47vh]  no-scrollbar ">
-            {/* {finalcomingsoonmoviestheaters &&console.log(finalcomingsoonmoviestheaters)} */}
+            {/* {finalcomingsoonmoviestheaters && console.log(finalcomingsoonmoviestheaters)} */}
             {finalcomingsoonmoviestheaters &&
               finalcomingsoonmoviestheaters.map((movie, index) => {
                 if (

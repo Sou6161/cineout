@@ -693,3 +693,18 @@ CHARTS CODE
 <span class="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-gray-700"></span>
 <span class="relative">Add to Watchlist</span>
 </a>
+
+
+
+</div>
+          <div className=" w-[100vw] h-[100vh] bg-black relative right-[10vw] top-[10vw]">
+            <Footer />
+          </div>
+
+
+          <h1 className="text-gray-700 text-[2vw]">
+        <span className="text-orange-600 text-xl relative top-9 right-7">
+          <FaComments />
+        </span>
+        Comments
+      </h1>

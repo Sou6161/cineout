@@ -4,9 +4,7 @@ import { TbHelicopter } from "react-icons/tb";
 import { Link } from "react-router-dom";
 
 const Sixthcontainer = () => {
-  const [MovieName, setMovieName] = useState([]);
-  const [finaltrailername, setfinaltrailername] = useState([]);
-  const [finaltrailerkey, setfinaltrailerkey] = useState([]);
+  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     const getUpcomingtrailers = async () => {
@@ -17,14 +15,11 @@ const Sixthcontainer = () => {
       const data = await response.json();
       const Alltrailers = data.results;
 
-      let movieNames = [];
-      let trailerKeys = [];
-      let trailerNames = [];
+      let movies = [];
 
       for (const movie of Alltrailers) {
         const id = movie.id;
         const name = movie.title;
-        movieNames.push(name);
 
         const trailerResponse = await fetch(
           `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`,
@@ -39,25 +34,22 @@ const Sixthcontainer = () => {
             const Trailerkeys = Trailers[i]?.key;
             const TrailerNames = Trailers[i]?.name;
             if (TrailerNames && TrailerNames.includes("Trailer")) {
-              trailerKeys.push(Trailerkeys);
-              trailerNames.push(TrailerNames);
+              movies.push({ name, trailerKey: Trailerkeys, trailerName: TrailerNames });
               break;
             }
           }
         }
       }
 
-      setMovieName(movieNames);
-      setfinaltrailerkey(trailerKeys);
-      setfinaltrailername(trailerNames);
+      setMovies(movies);
     };
 
     getUpcomingtrailers();
   }, []);
 
   useEffect(() => {
-    // MovieName && console.log(MovieName);
-  }, [MovieName]);
+    // movies && console.log(movies);
+  }, [movies]);
 
   return (
     <>
@@ -73,18 +65,18 @@ const Sixthcontainer = () => {
 
       <div className=" w-[100vw] flex overflow-x-auto no-scrollbar mb-[8vh]">
         <div className=" flex gap-16 ml-7">
-          {finaltrailerkey.map((key, index) => (
+          {movies.map((movie, index) => (
             <div key={index}>
               <iframe
                 className=" h-[25vh] border-2 border-purple-600 rounded-lg"
                 width="350"
                 height="200"
-                src={`https://www.youtube.com/embed/${key}?&mute=1`}
+                src={`https://www.youtube.com/embed/${movie.trailerKey}?&mute=1`}
                 title="YouTube video player"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               ></iframe>
               <div className=" text-[1.5vw] text-yellow-400 mx-5">
-               <Link className=" hover:underline hover:"><h1>{MovieName[index]}</h1></Link> 
+                <Link className=" hover:underline hover:"><h1>{movie.name}</h1></Link> 
               </div>
             </div>
           ))}

@@ -9,13 +9,13 @@ export const RapidOptionsDetails = {
 export const RapidOptionsDetailsDaimond ={
   method: "GET",
   headers: {
-    "X-RapidAPI-Key": "dfbbdedcacmsh2e0158b379069fdp1f3d2fjsnd2c9b19d1434",
+    "X-RapidAPI-Key": "18ef92a3c3msh1101939f4e2c2dep16537fjsncaeffb0e4fd2",
     "X-RapidAPI-Host": "imdb8.p.rapidapi.com",
   },
 }
 
 export const RapidOptionsDetailsChalo = {
-  method: "GET",
+  method: "GET",  
   headers: {
     "X-RapidAPI-Key": "a098d410aemsh7717b15977a4cffp1a07d0jsn53a6e18c3af1",
     "X-RapidAPI-Host": "imdb8.p.rapidapi.com",
@@ -49,9 +49,9 @@ export const RapidOptionsDetailsWolf = {
 
 export const RapidOptionsDetailsRatingsDaimond = {
   method: "GET",
-  headers: {
-    "X-RapidAPI-Key": "696fd76be0mshbb5c7c94992b67fp164bdfjsne07b3d050aab",
-    "X-RapidAPI-Host": "imdb-com.p.rapidapi.com",
+  headers: {    
+    "X-RapidAPI-Key": "2a77274df8mshc4287bf6122a884p18d677jsna1eb138814ea",
+    "X-RapidAPI-Host": "imdb146.p.rapidapi.com",
   },
 };
 

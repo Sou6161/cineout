@@ -25,9 +25,16 @@ import { CiSquarePlus } from "react-icons/ci";
 import { FaShareAlt } from "react-icons/fa";
 import { MdRecentActors } from "react-icons/md";
 import { CgMoreVerticalO } from "react-icons/cg";
+import { FaStarHalfAlt } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
+import { RiMoneyDollarCircleFill } from "react-icons/ri";
+import { RiMovie2Line } from "react-icons/ri";
 import { addAllVideos } from "../Reduxstore/MovieAllVideosSlice";
 import { Link } from "react-router-dom";
 import { addAllPhotos } from "../Reduxstore/MovieAllPhotosSlice";
+import Footer from "../components/Footer";
+import CommentSection from "./CommentsSection";
+import RecentlyViewed from "./RecentlyViewed";
 
 const FullDetailsPage = () => {
   const [fullDetails, setFullDetails] = useState(null);
@@ -166,7 +173,7 @@ const FullDetailsPage = () => {
       console.log(imdbIdFromApi);
       setMovieFullInfo(data.data);
       sessionStorage.setItem("Movietitle", JSON.stringify(data.data));
-      console.log(sessionStorage.getItem("Movietitle")); // Check if data is stored correctly
+      // console.log(sessionStorage.getItem("Movietitle")); // Check if data is stored correctly
     } else {
       sessionStorage.setItem("Seriestitle", JSON.stringify(data.data));
     }
@@ -208,18 +215,19 @@ const FullDetailsPage = () => {
 
   const getRatings = async (imdbId, storageName) => {
     const response = await fetch(
-      `https://imdb-com.p.rapidapi.com/title/details?tconst=${imdbId}`,
+      `https://imdb146.p.rapidapi.com/v1/title/?id=${imdbId}`,
       RapidOptionsDetailsRatingsDaimond
     );
     const data = await response.json();
+
     // Always update the data in session storage
-    sessionStorage.setItem(storageName, JSON.stringify(data.data));
+    sessionStorage.setItem(storageName, JSON.stringify(data));
     // Store the data in AllRatings state
     setAllRatings(data);
   };
 
   useEffect(() => {
-    AllRatings && console.log(AllRatings.data);
+    AllRatings && console.log(AllRatings);
   }, [AllRatings]);
 
   useEffect(() => {
@@ -343,10 +351,11 @@ const FullDetailsPage = () => {
                   CINEOUT RATING
                   <IoStarSharp className=" relative text-[2vw] text-cyan-600" />
                   <div className=" mx-12 -my-[3.7vh] text-[1.3vw]">
-                    {
-                      AllRatings?.data?.aboveTheFoldData?.ratingsSummary
-                        ?.aggregateRating
-                    }
+                    {AllRatings ? (
+                      AllRatings?.ratingsSummary?.aggregateRating
+                    ) : (
+                      <h1>..loading</h1>
+                    )}
                   </div>
                 </h1>
                 <h1 className=" relative top-5 font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-red-600 glow5">
@@ -355,35 +364,41 @@ const FullDetailsPage = () => {
                 </h1>
                 <h1 className="relative top-5 right- font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-red-600 glow5">
                   POPULARITY
-                  {AllRatings.data?.aboveTheFoldData?.metacritic?.metascore
-                    ?.score > 50 ? (
-                    <FaArrowTrendUp className="text-[2vw] text-green-300 border-[2px] font-extrabold rounded-full border-green-600" />
+                  {AllRatings ? (
+                    AllRatings?.metacritic?.metascore?.score?.score > 50 ? (
+                      <FaArrowTrendUp className="text-[2vw] text-green-300 border-[2px] font-extrabold rounded-full border-green-600" />
+                    ) : (
+                      <FaArrowTrendDown className="text-[2vw] text-orange-600 border-[2px] font-extrabold rounded-full border-red-600" />
+                    )
                   ) : (
-                    <FaArrowTrendDown className="text-[2vw] text-orange-600 border-[2px] font-extrabold rounded-full border-red-600" />
+                    <>
+                      <h1>...loading</h1>
+                    </>
                   )}
                   <div className="mx-12 -my-[4vh] text-[1.3vw] ">
-                    {
-                      AllRatings.data?.aboveTheFoldData?.metacritic?.metascore
-                        ?.score
-                    }
+                    {AllRatings ? (
+                      AllRatings?.metacritic?.metascore?.score
+                    ) : (
+                      <h1>...loading</h1>
+                    )}
                   </div>
                 </h1>
-
                 <h1 className=" relative top-5 right-12  font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-red-600 glow5">
                   CURRENT RANK
                   <FaRankingStar className=" relative top-1  text-[2.2vw] text-cyan-600 border-[2px] font-extrabold rounded-full border-yellow-400" />
                   <div className="mx-12 -my-[4vh] text-[1.3vw]">
-                    {
-                      AllRatings.data?.aboveTheFoldData?.meterRanking
-                        ?.currentRank
-                    }
+                    {AllRatings ? (
+                      AllRatings?.meterRanking?.currentRank
+                    ) : (
+                      <h1>...loading</h1>
+                    )}
                   </div>
                 </h1>
               </div>
 
               <span className=" inline-block text-[1vw] relative left-1 bottom-10 font-sm  text-slate-400">
                 <h1>
-                  {AllRatings.data.aboveTheFoldData.titleType.text} {" - "}
+                  {AllRatings?.titleType?.text} {" - "}
                   {MovieFullInfo?.title?.releaseDate?.day}
                   {"/"}
                   {MovieFullInfo?.title?.releaseDate?.month}
@@ -420,10 +435,10 @@ const FullDetailsPage = () => {
                     Director(s){" "}
                     <span className=" text-lime-400 mx-4">
                       {" "}
-                      {AllRatings &&
-                        AllRatings?.data?.aboveTheFoldData
-                          ?.directorsPageTitle[0]?.credits[0]?.name?.nameText
-                          ?.text}
+                      {
+                        AllRatings?.directorsPageTitle[0]?.credits[0]?.name
+                          ?.nameText?.text
+                      }
                     </span>
                   </h1>
                   <hr className=" border-gray-300 relative top-[1vw] " />{" "}
@@ -431,12 +446,13 @@ const FullDetailsPage = () => {
                   <h1 className=" text-green-800 font-semibold relative top-10 text-[1.5vw]">
                     Writers{" "}
                     <span className=" text-red-600 mx-4">
-                      {AllRatings &&
-                        AllRatings?.data?.mainColumnData?.writers[0]?.credits.map(
-                          (item) => {
-                            return item?.name?.nameText?.text
-                          }
-                        )}
+                      {AllRatings ? (
+                        AllRatings?.writers[0]?.credits.map((item) => {
+                          return item?.name?.nameText?.text;
+                        })
+                      ) : (
+                        <h1>...loading</h1>
+                      )}
                     </span>
                   </h1>
                   <hr className=" border-gray-300 relative top-[3vw]" />{" "}
@@ -444,8 +460,8 @@ const FullDetailsPage = () => {
                   <h1 className=" text-indigo-800 font-semibold relative top-20 text-[1.5vw]">
                     Stars
                     <span className=" text-amber-600 mx-4">
-                      {AllRatings &&
-                        AllRatings?.data?.aboveTheFoldData?.castPageTitle?.edges?.map(
+                      {AllRatings ? (
+                        AllRatings?.castPageTitle?.edges?.map(
                           (item, index, arr) => {
                             return (
                               <React.Fragment key={index}>
@@ -456,7 +472,10 @@ const FullDetailsPage = () => {
                               </React.Fragment>
                             );
                           }
-                        )}
+                        )
+                      ) : (
+                        <h1>...loading</h1>
+                      )}
                     </span>
                   </h1>
                   <hr className=" border-gray-300 relative top-[5.5vw]" />{" "}
@@ -465,8 +484,8 @@ const FullDetailsPage = () => {
               </span>
               <div className="text-[1.4vw] relative top-[19vw] left-[18vw]">
                 <div className="">
-                  {AllRatings?.data?.aboveTheFoldData?.genres?.genres.map(
-                    (item) => {
+                  {AllRatings ? (
+                    AllRatings?.genres?.genres.map((item) => {
                       return (
                         <span
                           style={{
@@ -485,17 +504,16 @@ const FullDetailsPage = () => {
                           {item?.text}
                         </span>
                       );
-                    }
+                    })
+                  ) : (
+                    <h1>...loading</h1>
                   )}
                   <div className=" relative bottom-[5vw]">
                     <div className="relative top-[8vw] right-[3vw] font-bold text-[1.8vw] underline ">
                       Description:
                     </div>
                     <div className=" inline-block relative top-[10vw] right-[3vw] break-words w-[60vw] font-semibold text-green-200">
-                      {
-                        AllRatings?.data?.aboveTheFoldData?.plot?.plotText
-                          ?.plainText
-                      }
+                      {AllRatings?.plot?.plotText?.plainText}
                     </div>
                   </div>
                 </div>
@@ -516,8 +534,8 @@ const FullDetailsPage = () => {
                     <span className=" font-normal text-black">
                       {" "}
                       {
-                        AllRatings?.data?.aboveTheFoldData?.engagementStatistics
-                          ?.watchlistStatistics?.displayableCount?.text
+                        AllRatings?.engagementStatistics?.watchlistStatistics
+                          ?.displayableCount?.text
                       }{" "}
                     </span>
                   </span>
@@ -525,23 +543,20 @@ const FullDetailsPage = () => {
               </div>
               <div className=" text-[1.1vw] absolute top-[55vw] left-[62vw] ">
                 <span className=" text-blue-600 font-black bg-black px-1">
-                  {AllRatings.data.aboveTheFoldData?.reviews?.total}
+                  {AllRatings?.reviews?.total}
                 </span>{" "}
                 <span className=" font-medium text-green-500 cursor-pointer hover:underline">
                   User reviews
                 </span>
                 <span className=" ml-5 text-blue-600 font-black bg-black px-1x">
-                  {AllRatings.data.aboveTheFoldData?.criticReviewsTotal?.total}
+                  {AllRatings?.criticReviewsTotal?.total}
                 </span>{" "}
                 <span className=" text-green-500 cursor-pointer hover:underline font-medium">
                   Critics reviews
                 </span>{" "}
                 <br />
                 <span className="text-blue-600 font-black relative left-[6vw] bg-black px-1">
-                  {
-                    AllRatings?.data?.aboveTheFoldData?.subNavTopQuestions
-                      ?.total
-                  }
+                  {AllRatings?.subNavTopQuestions?.total}
                 </span>{" "}
                 <span className=" text-green-500 relative left-[6vw] cursor-pointer hover:underline font-medium">
                   Top Questions
@@ -603,18 +618,23 @@ const FullDetailsPage = () => {
           )}
         </div>
       </div>
-      <div className=" w-[100vw] h-[100vh] px-[10vw] py-[5vw] border-t-[1px] border-blue-800 bg-blac relative top-[67.9vw]">
+      <div className=" w-[100vw] h-[530vh] bg-black px-[10vw] py-[5vw] border-t-[1px] border-blue-800 bg-blac relative top-[67.6vw]">
         <div className=" bg-red-30 inline-block">
           <h1 className=" text-yellow-400 text-[1.8vw] flex">
             <MdRecentActors className=" relative top-2 mr-2 text-[2vw]" />
             Top Cast
           </h1>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            backgroundColor: "black",
+          }}
+        >
           <div className="">
-            {AllRatings?.data?.mainColumnData?.cast?.edges
-              .slice(0, 9)
-              .map((item) => {
+            {AllRatings ? (
+              AllRatings?.cast?.edges.slice(0, 9).map((item) => {
                 return (
                   <>
                     <div className="mt-4 ml-2 flex">
@@ -627,7 +647,7 @@ const FullDetailsPage = () => {
                         alt=""
                       />
                       <div className=" mt-5 ml-5">
-                        <h1 className=" font-bold ml-2">
+                        <h1 className=" font-bold ml-2 text-slate-400">
                           {item?.node?.name?.nameText?.text}
                         </h1>
                         <br />
@@ -638,12 +658,15 @@ const FullDetailsPage = () => {
                     </div>
                   </>
                 );
-              })}
+              })
+            ) : (
+              <h1>Loading...</h1>
+            )}
           </div>
-          <div>
-            {AllRatings?.data?.mainColumnData?.cast?.edges
-              .slice(9)
-              .map((item) => {
+
+          <div className="">
+            {AllRatings ? (
+              AllRatings?.cast?.edges.slice(9).map((item) => {
                 return (
                   <>
                     <div className="mt-4 ml-2 flex">
@@ -656,7 +679,7 @@ const FullDetailsPage = () => {
                         alt=""
                       />
                       <div className=" mt-5 ml-5">
-                        <h1 className=" font-bold ml-2">
+                        <h1 className=" font-bold ml-2 text-slate-400">
                           {item?.node?.name?.nameText?.text}
                         </h1>
                         <br />
@@ -667,39 +690,203 @@ const FullDetailsPage = () => {
                     </div>
                   </>
                 );
-              })}
+              })
+            ) : (
+              <h1>Loading...</h1>
+            )}
           </div>
         </div>
-        <div className=" relative mt-[9vw] w-[90vw] h-[100vh] bg-red-30">
+        <div className=" relative mt-[9vw] w-[90vw] h-[90vh]">
           <h1 className=" mb-10 flex text-yellow-400 text-[2vw]">
             <span>
               <CgMoreVerticalO className=" flex text-red-500 text-[1.7vw] mr-2 relative top-3" />
             </span>
             More Titles Like This
           </h1>
-          <div className=" w-[80vw] overflow-x-auto overflow-y-clip  no-scrollbar h-[70vh] bg-red-300 flex">
-            {AllRatings?.data?.mainColumnData?.moreLikeThisTitles?.edges.map(
-              (item) => {
+          <div className=" w-[80vw] overflow-x-auto overflow-y-clip border-l-[1px] border-r-[1px] border-cyan-300  no-scrollbar h-[70vh] bg-red-30 flex">
+            {AllRatings ? (
+              AllRatings?.moreLikeThisTitles?.edges.map((item) => {
                 return (
-                  <>
-                    <img
-                      className=" w-[14vw] h-[43vh] object-cover"
-                      src={
-                        item?.node?.primaryImage?.url ||
-                        "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg"
-                      }
-                      alt=""
-                    />
-                    <div className=" relative top-[22vw] inline-block right-[13.6vw] whitespace-nowrap">
-                      <h1 className="">
+                  <div>
+                    <div className="  mr-[5vw]  ml-3 min-w-[15vw] max-h-[45vh] rounded-[10px] p-2 overflow-x-hidden scrollbar-hide cursor-pointer bg-zinc-70  hover:bg-slate-500 overflow-y-hidden">
+                      <img
+                        className=" w-[14vw] h-[40vh]  rounded-md drop-shadow-glow object-cover"
+                        src={
+                          item?.node?.primaryImage?.url ||
+                          "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg"
+                        }
+                        alt=""
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src =
+                            "https://www.prokerala.com/movies/assets/img/no-poster-available.jpg";
+                        }}
+                      />
+                    </div>
+                    <div className="">
+                      <h1 className="text-2xl font-semibold text-yellow-500   ml-5 mt-5">
                         {item?.node?.originalTitleText?.text}
                       </h1>
+                      <div className=" ml-5 mt-3">
+                        <h1 className=" text-red-400 mb-2">
+                          <span>
+                            {" "}
+                            {parseFloat(
+                              item?.node?.ratingsSummary?.aggregateRating
+                            ) > 5 ? (
+                              <FaStar />
+                            ) : (
+                              <FaStarHalfAlt />
+                            )}
+                          </span>
+                          {item?.node?.ratingsSummary?.aggregateRating}
+                        </h1>
+                        <h1 className=" text-blue-400">
+                          Year : {"  "}
+                          {item?.node?.releaseYear?.year}
+                        </h1>
+                        <h1 className=" text-purple-500">
+                          Genre :{"  "}
+                          {item?.node?.titleGenres?.genres.map((item) => {
+                            return item?.genre?.text;
+                          })}
+                        </h1>
+                      </div>
                     </div>
-                  </>
+                  </div>
                 );
-              }
+              })
+            ) : (
+              <h1>...Loading</h1>
             )}
           </div>
+        </div>
+        <div className=" w-[100vw] h-[40vh] ">
+          <div>
+            <h1 className=" ml-4 text-[2vw] text-yellow-400">
+              <span className=" relative top-11 text-green-400 right-8 mr-2">
+                <RiMoneyDollarCircleFill />
+              </span>
+              Box Office
+            </h1>
+          </div>
+          <div className="flex flex-wrap px-6 py-10">
+            {AllRatings?.productionBudget?.budget?.amount && (
+              <div className="w-[25vw]">
+                <h1 className="text-red-500 text-[1.2vw] font-semibold">
+                  Budget
+                </h1>
+                <h1 className="text-lime-300">
+                  $
+                  {AllRatings?.productionBudget?.budget?.amount.toLocaleString(
+                    "en-US"
+                  )}{" "}
+                  <span className=" text-cyan-400">{" (estimated)"}</span>
+                </h1>
+              </div>
+            )}
+            {AllRatings?.lifetimeGross?.total?.amount && (
+              <div className="w-1/2">
+                <h1 className="text-red-500 text-[1.2vw] font-semibold mt-2 ">
+                  Life Time Gross
+                </h1>
+                <h1 className="text-lime-300">
+                  $
+                  {AllRatings?.lifetimeGross?.total?.amount.toLocaleString(
+                    "en-US"
+                  )}
+                </h1>
+              </div>
+            )}
+            {AllRatings?.openingWeekendGross?.gross?.total?.amount && (
+              <div className="w-[25vw]">
+                <h1 className="text-red-500 text-[1.2vw] font-semibold mt-4 ">
+                  Opening Weekend Gross
+                </h1>
+                <h1 className="text-lime-300">
+                  $
+                  {AllRatings?.openingWeekendGross?.gross?.total?.amount.toLocaleString(
+                    "en-US"
+                  )}
+                </h1>
+              </div>
+            )}
+            {AllRatings?.worldwideGross?.total?.amount && (
+              <div className="w-1/2">
+                <h1 className="text-red-500 text-[1.2vw] font-semibold mt-4 ">
+                  World Wide Gross
+                </h1>
+                <h1 className="text-lime-300">
+                  $
+                  {AllRatings?.worldwideGross?.total?.amount.toLocaleString(
+                    "en-US"
+                  )}
+                </h1>
+              </div>
+            )}
+          </div>
+        </div>
+        <div className=" w-[100vw] h-[40vh] -mx-3  mt-[5vw] bg-red-40">
+          <h1 className=" text-yellow-400 text-[2vw] flex">
+            <span className=" text-blue-600 relative right-3  top-3 ">
+              {" "}
+              <RiMovie2Line />{" "}
+            </span>
+            Technical Specs
+          </h1>
+          <div>
+            <h1 className=" text-purple-500 text-[1.3vw] mx-10 mt-10">
+              <span className=" text-cyan-400 font-semibold mr-7 ">
+                Run Time
+              </span>
+              {AllRatings?.runtime ? (
+                <>
+                  {Math.floor(AllRatings?.runtime?.seconds / 3600)} hours{" "}
+                  {Math.floor((AllRatings?.runtime?.seconds % 3600) / 60)}{" "}
+                  minutes
+                </>
+              ) : (
+                "Not Available"
+              )}
+            </h1>
+            <h1 className=" text-lime-500 text-[1.3vw] mx-10 mt-5">
+              <span className=" text-cyan-400 font-semibold mr-7">Color </span>
+              {AllRatings?.technicalSpecifications?.colorations?.items.map(
+                (item) => {
+                  return item?.text;
+                }
+              )}
+            </h1>
+            <h1 className=" text-green-500 text-[1.3vw] mx-10 mt-5">
+              <span className=" text-cyan-400 font-semibold mr-7">
+                Sound Mix{" "}
+              </span>
+              {AllRatings?.technicalSpecifications?.soundMixes?.items.map(
+                (item) => {
+                  return item?.text;
+                }
+              )}
+            </h1>
+            <h1 className=" text-red-600 text-[1.3vw] mx-10 mt-5">
+              <span className=" text-cyan-400 font-semibold mr-7">
+                Aspect Ratio
+              </span>
+              {
+                AllRatings?.technicalSpecifications?.aspectRatios?.items[0]
+                  ?.aspectRatio
+              }
+            </h1>
+          </div>
+        </div>
+        <div className=" ">
+          <CommentSection />
+        </div>
+        <div className=" w-[100vw] relative right-[10vw] border-t-[1px] mt-[10vw] border-cyan-400"></div>
+        <div className=" mt-5">
+          <RecentlyViewed/>
+        </div>
+        <div className=" relative right-[10vw]">
+          <Footer/>
         </div>
       </div>
     </div>
