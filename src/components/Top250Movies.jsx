@@ -1,12 +1,30 @@
 import { useEffect, useState } from "react";
 import BackToTop from "../constants/BackToTop";
 import { TbMinusVertical } from "react-icons/tb";
+import { API_OPTIONS } from "../constants/Apioptions";
+import { TiStarFullOutline } from "react-icons/ti";
+import MoreToExplore from "./MoreToExplore";
+import MovieNews from "./MovieNews";
+import MoreToRead from "./MoreToRead";
+import Header from "./Header";
+import Headerfordetails from "./Headerfordetails";
 
 const Top250Movies = () => {
   const [Top250Movies, setTop250Movies] = useState(null);
+  const [Top250MoviesBanner, setTop250MoviesBanner] = useState(null);
   const [Full250Movies, setFull250Movies] = useState(null);
+  const [Full250MoviesID, setFull250MoviesID] = useState(null);
   const [randomIndex, setRandomIndex] = useState(0);
   const [showScrollButton, setShowScrollButton] = useState(false);
+
+  useEffect(() => {
+    const shouldReload = localStorage.getItem("reloadOnce");
+
+    if (shouldReload) {
+      localStorage.removeItem("reloadOnce"); // remove the flag
+      window.location.reload();
+    }
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,18 +46,24 @@ const Top250Movies = () => {
     const getTop250Movies = async () => {
       try {
         const response = await fetch(
-          "https://run.mocky.io/v3/266f73fc-abad-4cc8-85ab-a0da1417bfce"
+          "https://run.mocky.io/v3/e1f5e402-4482-4901-bf4c-6686c9601694"
         );
         const data = await response.json();
-        const FullData = data;
+        const FullData = data.movies;
+        // console.log(FullData);
         // Filter movies released after 1990-01-01
-        const filteredMovies = data.filter(
+        const filteredMovies = FullData.filter(
           (item) =>
-            item.datePublished &&
-            new Date(item.datePublished) >= new Date("2019-01-01")
+            item.Released && new Date(item.Released) >= new Date("2018-01-01")
         );
         setTop250Movies(filteredMovies);
         setFull250Movies(FullData);
+        setFull250MoviesID(
+          filteredMovies.map((item) => {
+            return item?.imdbID;
+          })
+        );
+
         setRandomIndex(Math.floor(Math.random() * filteredMovies.length));
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -59,27 +83,69 @@ const Top250Movies = () => {
   }, [Top250Movies]);
 
   useEffect(() => {
-    Top250Movies && console.log(Top250Movies);
+    const getBannerTop250 = async () => {
+      if (Full250MoviesID) {
+        const BannerData = await Promise.all(
+          Full250MoviesID.map(async (id) => {
+            const response = await fetch(
+              `https://api.themoviedb.org/3/find/${id}?external_source=imdb_id`,
+              API_OPTIONS
+            );
+            const data = await response.json();
+            return data?.movie_results;
+          })
+        );
+        setTop250MoviesBanner(BannerData.flat());
+      }
+    };
+    getBannerTop250();
+  }, [Full250MoviesID]);
+
+  useEffect(() => {
+    Top250MoviesBanner && console.log(Top250MoviesBanner, "Banner Image");
+  }, [Top250MoviesBanner]);
+
+  useEffect(() => {
+    Top250Movies && console.log(Top250Movies, " Filtered Movies For Banner");
   }, [Top250Movies]);
 
   useEffect(() => {
-    Full250Movies && console.log(Full250Movies);
+    Full250Movies && console.log(Full250Movies, " All 250 Movies ");
   }, [Full250Movies]);
+
+  useEffect(() => {
+    Full250MoviesID && console.log(Full250MoviesID, "All 250 movies IDs");
+  }, [Full250MoviesID]);
 
   return (
     <>
       <div>
+        <Headerfordetails />
         <div className="w-[100vw] h-[100vh] bg-black  absolute">
           <div className="w-[97.6vw] mx-auto h-[65vh] border-[5px] border-blue-700 relative top-[1vw]">
             <div className="w-[97vw] mx-auto h-[57vh] relative top-[0.5vw]">
-              {Top250Movies ? (
-                <img
-                  className="w-[97vw] h-[63.9vh] object-cover relative bottom-2"
-                  src={
-                    Top250Movies[randomIndex]?.trailer?.thumbnail?.contentUrl
-                  }
-                  alt={`Movie ${randomIndex + 1}`}
-                />
+              {Top250MoviesBanner ? (
+                <>
+                  <img
+                    className="w-[97vw] h-[63.9vh] object-cover relative bottom-2 object-top      "
+                    src={`https://image.tmdb.org/t/p/original/${Top250MoviesBanner[randomIndex]?.backdrop_path}`}
+                    alt={`Movie ${randomIndex + 1}`}
+                  />
+                  <div className="   absolute left-[78vw]  top-[24vw] bg-blue-300 rounded-lg ">
+                    <a
+                      href="#_"
+                      class="px-5 py-2.5 relative rounded group font-medium text-white inline-block"
+                    >
+                      <span class="absolute top-0 left-0 w-full h-full rounded opacity-50 filter blur-sm bg-gradient-to-br from-purple-600 to-blue-500"></span>
+                      <span class="h-full w-full inset-0 absolute mt-0.5 ml-0.5 bg-gradient-to-br filter group-active:opacity-0 rounded opacity-50 from-purple-600 to-blue-500"></span>
+                      <span class="absolute inset-0 w-full h-full transition-all duration-200 ease-out rounded shadow-xl bg-gradient-to-br filter group-active:opacity-0 group-hover:blur-sm from-purple-600 to-blue-500"></span>
+                      <span class="absolute inset-0 w-full h-full transition duration-200 ease-out rounded bg-gradient-to-br to-purple-600 from-blue-500"></span>
+                      <span class="relative">
+                        {Top250MoviesBanner[randomIndex]?.title}
+                      </span>
+                    </a>
+                  </div>
+                </>
               ) : (
                 <div
                   role="status"
@@ -119,8 +185,7 @@ const Top250Movies = () => {
                   250 Titles
                 </h1>
               </h4>
-
-              <div className="w-[80vw] h-[4875vh] mx-auto p-5 bg-slae-100  neuro relative top-[14vw]">
+              <div className="w-[80vw] h-[4875vh] mx-auto p-5 bg-slae-100  neuro relative top-[10vw]">
                 {Full250Movies ? (
                   Full250Movies.map((item, index) => (
                     <div
@@ -130,14 +195,63 @@ const Top250Movies = () => {
                       <div className="w-[48vw] flex p-4 bg-red-3  border-b-[2px] rounded-lg border-red-300 ">
                         <img
                           className="w-[6vw] h-[15vh] object-contain"
-                          src={item?.image}
+                          src={item?.Poster}
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src =
+                              "https://lascrucesfilmfest.com/wp-content/uploads/2018/01/no-poster-available-737x1024.jpg";
+                          }}
                           alt=""
                         />
-                        <h1 className=" flex  font-bold hover:text-red-600 cursor-pointer">
+
+                        <h1 className="  font-bold hover:text-purple-600 cursor-pointer">
                           {index + 1}
-                          {"."} {item?.name}
+                          {"."} {item?.Title}
                         </h1>
                       </div>
+                      <div className=" flex gap-3 text-gray-500">
+                        <h1 className=" relative bottom-[6vw] left-[8vw] font-normal">
+                          {item?.Year}
+                        </h1>
+                        <h1 className="relative bottom-[6vw] left-[8vw] font-normal">
+                          {item && item.Runtime
+                            ? `${Math.floor(parseInt(item.Runtime) / 60)}h ${
+                                parseInt(item.Runtime) % 60
+                              }min`
+                            : "Runtime not available"}
+                        </h1>
+
+                        <h1 className=" relative bottom-[6vw] left-[8vw] font-normal">
+                          {item?.Rated}
+                        </h1>
+                      </div>
+                      <h1 className=" mt-4 relative flex bottom-[6vw] left-[8vw] font-normal">
+                        <TiStarFullOutline className=" text-yellow-400" />
+                        <h1 className=" relative bottom-1 mx-1">
+                          {" "}
+                          {item?.imdbRating}
+                        </h1>
+                        <h1 className="relative bottom-1 text-gray-500">
+                          (
+                          {item?.imdbVotes
+                            ? parseInt(item?.imdbVotes.replace(/,/g, "")) /
+                                1000000 <
+                              1
+                              ? `${(
+                                  parseInt(item?.imdbVotes.replace(/,/g, "")) /
+                                  1000
+                                ).toFixed(0)}K`
+                              : `${(
+                                  parseInt(item?.imdbVotes.replace(/,/g, "")) /
+                                  1000000
+                                ).toFixed(2)}M`
+                            : "Votes not available"}
+                          )
+                        </h1>
+                      </h1>
+                      <h1 className=" relative flex bottom-[6vw] left-[8vw] font-normal">
+                        Genre: {item?.Genre}
+                      </h1>
                     </div>
                   ))
                 ) : (
@@ -244,7 +358,7 @@ const Top250Movies = () => {
                       <div className="w-full">
                         <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
                         <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[480px] mb-2.5"></div>
-                        <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                        <div className="h-2 bg-red-600 rounded-full dark:bg-gray-700 w-[20vw] mb-2.5"></div>
                         <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[440px] mb-2.5"></div>
                         <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[460px] mb-2.5"></div>
                         <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
@@ -253,6 +367,12 @@ const Top250Movies = () => {
                     </div>
                   </>
                 )}
+                <div className=" absolute bottom-[2220vw] h-0   bg-red-300">
+                  <MoreToExplore />
+                </div>
+                <div className=" bg-red-400 h-0 -mt-[2280vw] mx-[52vw] ">
+                  <MoreToRead />
+                </div>
               </div>
             </div>
           </div>

@@ -237,3 +237,15 @@ body {
                9px 9px 18px #ffffff;
 }
 
+
+
+.slide-out-div {
+  opacity: 1;
+  transition: transform 2s, opacity 2s; /* Adjust time as needed */
+}
+
+.slide-out-div.active {
+  transform: translateX(100vw); /* Slide out to the right */
+  opacity: 0;
+}
+

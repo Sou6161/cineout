@@ -11,10 +11,18 @@ import { IoEarthSharp } from "react-icons/io5";
 
 
 const Searchtab = () => {
+  const [hasReloaded, setHasReloaded] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isPageRefreshed, setPageRefreshed] = useState(true);
+
+  const handleButtonClick = () => {
+    // Your button click logic here
+  
+    // Set a flag in localStorage
+    localStorage.setItem('reloadOnce', 'true');
+  };
 
   useEffect(() => {
     const navigationEntries = performance.getEntriesByType("navigation");
@@ -166,7 +174,7 @@ const Searchtab = () => {
               ? ""
               : "ripple-reverse translate-x-0"
           }`}
-          style={{ display: isMenuOpen ? "block" : "none" }}
+          style={{ display: isMenuOpen ? "block" : "none" }}  
         >
           {isMenuOpen && (
             <div className=" w-[100vw] h-[100vh] bg-red-10  ">
@@ -177,7 +185,7 @@ const Searchtab = () => {
                 </span>
                 Movies
               </h1>
-              <Link
+              <Link onClick={handleButtonClick} 
                 to="/chart/top"
                 className=" w-[7vw] relative top-[8vw] left-[22.5vw] text-[1vw] font-normal text-white hover:underline"
               >

@@ -16,6 +16,7 @@ import MostPopularMoviesCharts from "./MostPopularMoviesCharts";
 import IMDBTop250MoviesCharts from "./IMDBTop250MoviesCharts";
 import TopRatedEnglishMovies from "./TopRatedEnglishMovies";
 import MostPopularCelebs from "./MostPopularCelebs";
+import MoreToExplore from "./MoreToExplore";
 import { Link } from "react-router-dom";
 import { TbArrowBigRightLinesFilled } from "react-icons/tb";
 
@@ -58,7 +59,7 @@ const BoxOffice = () => {
       setBoxOfficeMCharts(data);
       const firstMovieReleaseDate = data[0].releaseDate;
       const tenthMovieReleaseDate = data[9].releaseDate;
-  
+
       // Update the state variables
       setFirstMovieReleaseDate(firstMovieReleaseDate);
       setTenthMovieReleaseDate(tenthMovieReleaseDate);
@@ -182,7 +183,10 @@ const BoxOffice = () => {
               <HiStop className=" text-[1.5vw] relative top-1 ml-5 text-yellow-400 " />
               Top Box Office(US)
               <h6 className=" text-[0.9vw] font-normal flex relative top-7 mb-10 mt-3   right-[12.2vw] ">
-                Weekend of    <span className=" font-bold mx-2 text-blue-700 ">{firstMovieReleaseDate} - {tenthMovieReleaseDate}</span>
+                Weekend of{" "}
+                <span className=" font-bold mx-2 text-blue-700 ">
+                  {firstMovieReleaseDate} - {tenthMovieReleaseDate}
+                </span>
               </h6>
             </h1>
             <div className=" w-[47vw] h-[240vh] mx-10 rounded-lg border-2 border-stone-600 mt-5">
@@ -245,9 +249,12 @@ const BoxOffice = () => {
               </div>
               {/* <div className=" relative top-[5vw]">
                 <h1>Next button </h1>
-              </div> */}
+              </div> */}  
             </div>
-            <div className=" text-[1.7vw] font-semibold text-black relative left-[55vw] bottom-[190vh]">
+            <div className="">
+              <MoreToExplore />
+            </div>
+            {/* <div className=" text-[1.7vw] font-semibold text-black relative left-[55vw] bottom-[190vh]">
               <div className=" relative top-10 right-10 text-purple-500 text-[2.2vw]">
                 <MdAlignVerticalCenter />
               </div>{" "}
@@ -347,7 +354,7 @@ const BoxOffice = () => {
                   </div>
                 </Link>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

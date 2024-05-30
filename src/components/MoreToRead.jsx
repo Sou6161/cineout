@@ -59,7 +59,7 @@ const MoreToRead = () => {
       </h1>
       <Link to="/news/movie">
         <div className=" group ">
-          <h1 className=" px-2 group-hover: text-white text-[1.5vw] font-semibold relative ml-14 border-2  border-yellow-400 rounded-md inline-block glow">
+          <h1 className=" px-2 group-hover: text-purple-600 text-[1.5vw] font-semibold relative ml-14 border-2  border-yellow-400 rounded-md inline-block glow">
             Movie News
           </h1>
           <BiRightArrow className="  group-hover:text-green-400 relative left-[13vw] bottom-[3.7vh] text-red-600 text-[1.5vw] font-semibold" />
@@ -92,7 +92,7 @@ const MoreToRead = () => {
 
       <Link to="/tv-series-news">
         <div className=" group mt-10 ">
-          <h1 className=" group-hover: px-2 text-white text-[1.5vw] font-semibold relative ml-14 border-2  border-purple-400 rounded-md inline-block glow2">
+          <h1 className=" group-hover: px-2 text-green-400 text-[1.5vw] font-semibold relative ml-14 border-2  border-purple-400 rounded-md inline-block glow2">
             Tv/Series News
           </h1>
           <BiRightArrow className=" group-hover:text-green-400 relative left-[15vw] bottom-[3.7vh] text-red-600 text-[1.5vw] font-semibold" />
@@ -124,7 +124,7 @@ const MoreToRead = () => {
       </div>
       <Link to="/news/celebrity">
         <div className=" group mt-10 ">
-          <h1 className=" group-hover: px-2 text-white text-[1.5vw] font-semibold relative ml-14 border-2  border-sky-400 rounded-md inline-block glow3">
+          <h1 className=" group-hover: px-2 text-yellow-400 text-[1.5vw] font-semibold relative ml-14 border-2  border-sky-400 rounded-md inline-block glow3">
             Celebrity News
           </h1>
           <BiRightArrow className=" group-hover:text-green-400 relative left-[15vw] bottom-[3.7vh] text-red-600 text-[1.5vw] font-semibold" />
