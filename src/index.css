@@ -20,11 +20,11 @@
 }
 
 .glow4 {
-  outline: 1px solid rgb(0, 255, 38);
-  box-shadow: 2px 2px 5px rgb(248, 179, 4), 2px 2px 0px rgb(238, 152, 3);
+  outline: 1px solid rgb(56, 98, 50);
+  box-shadow: 2px 2px 5px rgb(142, 79, 149), 2px 2px 15px rgb(81, 136, 152);
 }
 
-.glo5 {
+.glow5 {
   text-shadow: "0 0 5px rgba(0,0,255,0.5), 0 0 10px rgba(0,0,255,0.5), 0 0 15px rgba(0,0,255,0.5), 0 0 20px rgba(0,0,255,0.5)";
 }
 
@@ -64,7 +64,7 @@ body {
   scrollbar-width: none;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   background: rgb(167, 204, 92);
   border-radius: 10px;
 }
@@ -72,9 +72,9 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #7264cc;
   border-radius: 10px;
-}
+} */
 
-select {
+/* select {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -120,7 +120,7 @@ select::-ms-expand {
 
 .select:hover::after {
   color: #6556cd;
-}
+} */
 
 /* CSS for menu icon */
 
@@ -232,20 +232,6 @@ body {
 
 .neuro {
   border-radius: 16px;
-  background: white;
-  box-shadow:  -9px -9px 18px #828282,
-               9px 9px 18px #ffffff;
+  background: slategray;
+  box-shadow: -9px -9px 18px #494746, 9px 9px 18px #563b90;
 }
-
-
-
-.slide-out-div {
-  opacity: 1;
-  transition: transform 2s, opacity 2s; /* Adjust time as needed */
-}
-
-.slide-out-div.active {
-  transform: translateX(100vw); /* Slide out to the right */
-  opacity: 0;
-}
-

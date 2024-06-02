@@ -8,6 +8,8 @@ import MovieNews from "./MovieNews";
 import MoreToRead from "./MoreToRead";
 import Header from "./Header";
 import Headerfordetails from "./Headerfordetails";
+import RecentlyViewed from "./RecentlyViewed";
+import Footer from "./Footer";
 
 const Top250Movies = () => {
   const [Top250Movies, setTop250Movies] = useState(null);
@@ -50,7 +52,7 @@ const Top250Movies = () => {
         );
         const data = await response.json();
         const FullData = data.movies;
-        // console.log(FullData);
+          // console.log(FullData);
         // Filter movies released after 1990-01-01
         const filteredMovies = FullData.filter(
           (item) =>
@@ -131,15 +133,16 @@ const Top250Movies = () => {
                     src={`https://image.tmdb.org/t/p/original/${Top250MoviesBanner[randomIndex]?.backdrop_path}`}
                     alt={`Movie ${randomIndex + 1}`}
                   />
-                  <div className="   absolute left-[78vw]  top-[24vw] bg-blue-300 rounded-lg ">
+
+                  <div className="   absolute left-[2vw]  top-[1vw] bg-blue-300 rounded-lg ">
                     <a
                       href="#_"
-                      class="px-5 py-2.5 relative rounded group font-medium text-white inline-block"
+                      class="px-4 py-2.5 relative rounded group font-medium text-white inline-block"
                     >
-                      <span class="absolute top-0 left-0 w-full h-full rounded opacity-50 filter blur-sm bg-gradient-to-br from-purple-600 to-blue-500"></span>
-                      <span class="h-full w-full inset-0 absolute mt-0.5 ml-0.5 bg-gradient-to-br filter group-active:opacity-0 rounded opacity-50 from-purple-600 to-blue-500"></span>
-                      <span class="absolute inset-0 w-full h-full transition-all duration-200 ease-out rounded shadow-xl bg-gradient-to-br filter group-active:opacity-0 group-hover:blur-sm from-purple-600 to-blue-500"></span>
-                      <span class="absolute inset-0 w-full h-full transition duration-200 ease-out rounded bg-gradient-to-br to-purple-600 from-blue-500"></span>
+                      <span class="absolute top-0 left-0 w-full h-full rounded opacity-50 filter blur-sm bg-gradient-to-br from-lime-600 to-cyan-500"></span>
+                      <span class="h-full w-full inset-0 absolute mt-0.5 ml-0.5 bg-gradient-to-br filter group-active:opacity-0 rounded opacity-50 from-lime-600 to-cyan-500"></span>
+                      <span class="absolute inset-0 w-full h-full transition-all duration-200 ease-out rounded shadow-xl bg-gradient-to-br filter group-active:opacity-0 group-hover:blur-md from-lime-600 to-cyan-500"></span>
+                      <span class="absolute inset-0 w-full h-full transition duration-200 ease-out rounded bg-gradient-to-br to-lime-600 from-cyan-500"></span>
                       <span class="relative">
                         {Top250MoviesBanner[randomIndex]?.title}
                       </span>
@@ -167,9 +170,9 @@ const Top250Movies = () => {
               )}
             </div>
           </div>
-          <div className="w-[100vw] h-[4400vh] mx-auto mt-10 bg-black absolute">
-            <div className="w-[100vw] h-[5000vh] mx-auto absolute bg-black">
-              <div className=" absolute w-[100vw] h-[4910vh] blur-[10px] bg-indigo-200 "></div>
+          <div className="w-[90vw] h-[4400vh] mx-auto mt-10 bg-black absolute">
+            <div className="w-[100vw] h-[5004vh] mx-auto absolute bg-black border-b-2 border-gray-600">
+              <div className=" absolute w-[100vw] h-[4932vh] blur-[10px] bg-indigo-200 "></div>
               <h3 className=" absolute text-black left-[10vw] font-bold top-6 text-[1.2vw]">
                 CINEOUT Charts{" "}
               </h3>
@@ -185,16 +188,16 @@ const Top250Movies = () => {
                   250 Titles
                 </h1>
               </h4>
-              <div className="w-[80vw] h-[4875vh] mx-auto p-5 bg-slae-100  neuro relative top-[10vw]">
+              <div className="w-[80vw] h-[4910vh] mx-auto p-5  neuro relative top-[10vw]">
                 {Full250Movies ? (
                   Full250Movies.map((item, index) => (
-                    <div
+                    <div  
                       key={index}
                       className="w-[48vw] mb-5 h-[19vh] -mt-4 border-l-[1px] hover:bg-green-100 rounded-lg  border-yellow-300"
                     >
                       <div className="w-[48vw] flex p-4 bg-red-3  border-b-[2px] rounded-lg border-red-300 ">
                         <img
-                          className="w-[6vw] h-[15vh] object-contain"
+                          className="w-[5.5vw] h-[15vh] rounded-lg   object-fill glow"
                           src={item?.Poster}
                           onError={(e) => {
                             e.target.onerror = null;
@@ -204,7 +207,7 @@ const Top250Movies = () => {
                           alt=""
                         />
 
-                        <h1 className="  font-bold hover:text-purple-600 cursor-pointer">
+                        <h1 className=" mx-2   font-bold hover:text-purple-600 cursor-pointer">
                           {index + 1}
                           {"."} {item?.Title}
                         </h1>
@@ -251,7 +254,7 @@ const Top250Movies = () => {
                       </h1>
                       <h1 className=" relative flex bottom-[6vw] left-[8vw] font-normal">
                         Genre: {item?.Genre}
-                      </h1>
+                      </h1> 
                     </div>
                   ))
                 ) : (
@@ -370,8 +373,51 @@ const Top250Movies = () => {
                 <div className=" absolute bottom-[2220vw] h-0   bg-red-300">
                   <MoreToExplore />
                 </div>
-                <div className=" bg-red-400 h-0 -mt-[2280vw] mx-[52vw] ">
+                <div className=" bg-red-400 h-0 -mt-[2265vw] mx-[52vw] ">
                   <MoreToRead />
+                </div>
+              </div>
+              <div className=" bg-red-30  relative bottom-[7vw] left-[12vw] w-[30vw]">
+                <h1 className="  font-normal ">
+                  The Top Rated Movie list only includes feature films.
+                  <h1 className=" relative top-2">
+                    <li>
+                      <ul className=" relative bottom-6 left-5  text-purple-500">
+                        Shorts, TV movies, and documentaries are not included
+                      </ul>
+                    </li>
+                  </h1>
+                  <h1>
+                    <li>
+                      <ul className=" relative bottom-6 left-5 text-amber-600">
+                        The list is ranked by a formula which includes the
+                        number of ratings each movie received from users, and
+                        value of ratings received from regular users
+                      </ul>
+                    </li>
+                  </h1>
+                  <h1>
+                    <li>
+                      <ul className=" relative bottom-6 left-5">
+                        To be included on the list, a movie must receive ratings
+                        from at least 25000 users
+                      </ul>
+                    </li>
+                  </h1>
+                  <h1 className=" text-cyan-500 cursor-pointer hover:underline">
+                    Learn more about how list ranking is determined.
+                  </h1>
+                </h1>
+              </div>
+              <div className="  h-[62vh] bg-red-20   ">
+                <div className=" relative left-[10vw]">
+                  <RecentlyViewed />
+                </div>
+              </div>
+              <div className=" bg-black">
+                <div className="">
+                <Footer />
+
                 </div>
               </div>
             </div>

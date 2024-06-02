@@ -10,7 +10,7 @@ const RecentlyViewed = () => {
         <span className=" inline-block text-[1.6vw]  text-yellow-400 relative top-[.4vh] right-[17vw]">
           {" "}
           <FaEye />
-        </span>
+        </span> 
       </div>
     </div>
     <div className=" w-[80vw] h-[50vh] relative right-10 bg-lime-20 mb-10">

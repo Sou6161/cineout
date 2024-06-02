@@ -50,7 +50,7 @@ export const RapidOptionsDetailsWolf = {
 export const RapidOptionsDetailsRatingsDaimond = {
   method: "GET",
   headers: {    
-    "X-RapidAPI-Key": "2a77274df8mshc4287bf6122a884p18d677jsna1eb138814ea",
+    "X-RapidAPI-Key": "4782c2db54msha9d1ad5f1ff8902p1ba53fjsn4b8132638561",
     "X-RapidAPI-Host": "imdb146.p.rapidapi.com",
   },
 };

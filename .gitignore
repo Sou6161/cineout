@@ -721,3 +721,12 @@ CHARTS CODE
 <span class="absolute inset-0 w-full h-full transition duration-200 ease-out rounded bg-gradient-to-br to-purple-600 from-blue-500"></span>
 <span class="relative">{Top250MoviesBanner[randomIndex]?.title}</span>
 </a>
+
+
+
+movie?.runtime?.displayableProperty?.value
+                              ?.plainText
+
+
+
+                              movie.ratingsSummary.voteCount
