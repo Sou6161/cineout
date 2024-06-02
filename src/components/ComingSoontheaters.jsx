@@ -36,7 +36,7 @@ const ComingSoontheaters = ({finalcomingsoonmoviestheaters}) => {
                 ) {
                   return (
                     <div key={index}>
-                      <div className="  mr-4  ml-3 min-w-[15vw] max-h-[42vh] rounded-[10px] p-2 overflow-x-hidden scrollbar-hide cursor-pointer bg-zinc-70  bg-red-400 hover:bg-slate-500 overflow-y-auto">
+                      <div className="  mr-4  ml-3 min-w-[15vw] glow3 max-h-[42vh] rounded-[10px] p-2 overflow-x-hidden scrollbar-hide cursor-pointer bg-zinc-70  bg-slate-400  hover:bg-slate-500 overflow-y-auto">
                         <img
                           className=" w-[30vw] h-[40vh] rounded-md drop-shadow-glow"
                           src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}

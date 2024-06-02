@@ -12,13 +12,32 @@ import { RapidOptionsDetailsRatingsDaimond } from "../constants/RapidOptionsForD
 import { TiStarFullOutline } from "react-icons/ti";
 import MoreToExplore from "./MoreToExplore";
 import MoreToRead from "./MoreToRead";
+import RecentlyViewed from "./RecentlyViewed";
+import Footer from "./Footer";
+import BackToTop from "../constants/BackToTop";
 
 const MostPopularMoviesMenu = () => {
   const [MostPopularMoviesID, setMostPopularMoviesID] = useState(null);
   const [MostPopularMoviesIDs, setMostPopularMoviesIDs] = useState(null);
   const [PopularBannerImage, setPopularBannerImage] = useState(null);
   const [PopularMoviesDetails, setPopularMoviesDetails] = useState(null);
-  
+  const [showScrollButton, setShowScrollButton] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 3000) {
+        setShowScrollButton(true);
+      } else {
+        setShowScrollButton(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     const getMostPopularMovies = async () => {
@@ -179,7 +198,7 @@ const MostPopularMoviesMenu = () => {
           )}
         </div>
       </div>
-      <div className=" w-[100vw] h-[1030rem] bg-black absolute ">
+      <div className=" w-[100vw] h-[1031rem] bg-black absolute ">
         <div>
           <h3 className=" absolute text-white left-[10vw] font-bold top-[8vh] text-[1.2vw]">
             CINEOUT Charts{" "}
@@ -197,7 +216,7 @@ const MostPopularMoviesMenu = () => {
             </h1>
           </h4>
         </div>
-        <div className=" w-[80vw] h-[1010rem] mx-auto neuro py-8  px-5 bg-zinc-600 relative top-[35vh] rounded-lg">
+        <div className=" w-[80vw] h-[1012rem] mx-auto neuro py-8  px-5 bg-zinc-600 relative top-[35vh] rounded-lg">
           {PopularMoviesDetails ? (
             PopularMoviesDetails.map((movie, index) => {
               return (
@@ -257,31 +276,208 @@ const MostPopularMoviesMenu = () => {
               );
             })
           ) : (
-            <div
-              role="status"
-              className="space-y-8 p-5 animate-pulse md:space-y-0 md:space-x-8 mb-5 rtl:space-x-reverse md:flex md:items-center"
-            >
-              <div className="flex items-center justify-center w-full h-[9vw] bg-gray-300 rounded sm:w-[8vw] dark:bg-gray-700">
-                <svg
-                  className="w-10 h-10 text-gray-200 dark:text-gray-600"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 20 18"
-                >
-                  <path d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
-                </svg>
+            <>
+              <div
+                role="status"
+                className="space-y-8 p-5 animate-pulse md:space-y-0 md:space-x-8 mb-5 rtl:space-x-reverse md:flex md:items-center"
+              >
+                <div className="flex items-center justify-center w-full h-[9vw] bg-gray-300 rounded sm:w-[8vw] dark:bg-gray-700">
+                  <svg
+                    className="w-10 h-10 text-gray-200 dark:text-gray-600"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 20 18"
+                  >
+                    <path d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
+                  </svg>
+                </div>
+                <div className="w-full">
+                  <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[480px] mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[440px] mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[460px] mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                </div>
+                <span className="sr-only">Loading...</span>
               </div>
-              <div className="w-full">
-                <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
-                <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[480px] mb-2.5"></div>
-                <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
-                <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[440px] mb-2.5"></div>
-                <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[460px] mb-2.5"></div>
-                <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+              <div
+                role="status"
+                className="space-y-8 p-5 animate-pulse md:space-y-0 md:space-x-8 -mt-7 rtl:space-x-reverse md:flex md:items-center"
+              >
+                <div className="flex items-center justify-center w-full h-[9vw] bg-gray-300 rounded sm:w-[8vw] dark:bg-gray-700">
+                  <svg
+                    className="w-10 h-10 text-gray-200 dark:text-gray-600"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 20 18"
+                  >
+                    <path d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
+                  </svg>
+                </div>
+                <div className="w-full">
+                  <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[480px] mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[440px] mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[460px] mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                </div>
+                <span className="sr-only">Loading...</span>
               </div>
-              <span className="sr-only">Loading...</span>
-            </div>
+              <div
+                role="status"
+                className="space-y-8 p-5 animate-pulse md:space-y-0 md:space-x-8 -mt-5 rtl:space-x-reverse md:flex md:items-center"
+              >
+                <div className="flex items-center justify-center w-full h-[9vw] bg-gray-300 rounded sm:w-[8vw] dark:bg-gray-700">
+                  <svg
+                    className="w-10 h-10 text-gray-200 dark:text-gray-600"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 20 18"
+                  >
+                    <path d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
+                  </svg>
+                </div>
+                <div className="w-full">
+                  <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[480px] mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[440px] mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[460px] mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                </div>
+                <span className="sr-only">Loading...</span>
+              </div>
+              <div
+                role="status"
+                className="space-y-8 p-5 animate-pulse md:space-y-0 md:space-x-8 -mt-5 rtl:space-x-reverse md:flex md:items-center"
+              >
+                <div className="flex items-center justify-center w-full h-[9vw] bg-gray-300 rounded sm:w-[8vw] dark:bg-gray-700">
+                  <svg
+                    className="w-10 h-10 text-gray-200 dark:text-gray-600"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 20 18"
+                  >
+                    <path d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
+                  </svg>
+                </div>
+                <div className="w-full">
+                  <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[480px] mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[440px] mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[460px] mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                </div>
+                <span className="sr-only">Loading...</span>
+              </div>
+              <div
+                role="status"
+                className="space-y-8 p-5 animate-pulse md:space-y-0 md:space-x-8 -mt-5 rtl:space-x-reverse md:flex md:items-center"
+              >
+                <div className="flex items-center justify-center w-full h-[9vw] bg-gray-300 rounded sm:w-[8vw] dark:bg-gray-700">
+                  <svg
+                    className="w-10 h-10 text-gray-200 dark:text-gray-600"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 20 18"
+                  >
+                    <path d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
+                  </svg>
+                </div>
+                <div className="w-full">
+                  <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[480px] mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[440px] mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[460px] mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                </div>
+                <span className="sr-only">Loading...</span>
+              </div>
+              <div
+                role="status"
+                className="space-y-8 p-5 animate-pulse md:space-y-0 md:space-x-8 -mt-5 rtl:space-x-reverse md:flex md:items-center"
+              >
+                <div className="flex items-center justify-center w-full h-[9vw] bg-gray-300 rounded sm:w-[8vw] dark:bg-gray-700">
+                  <svg
+                    className="w-10 h-10 text-gray-200 dark:text-gray-600"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 20 18"
+                  >
+                    <path d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
+                  </svg>
+                </div>
+                <div className="w-full">
+                  <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[480px] mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[440px] mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[460px] mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                </div>
+                <span className="sr-only">Loading...</span>
+              </div>
+              <div
+                role="status"
+                className="space-y-8 p-5 animate-pulse md:space-y-0 md:space-x-8 -mt-5 rtl:space-x-reverse md:flex md:items-center"
+              >
+                <div className="flex items-center justify-center w-full h-[9vw] bg-gray-300 rounded sm:w-[8vw] dark:bg-gray-700">
+                  <svg
+                    className="w-10 h-10 text-gray-200 dark:text-gray-600"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 20 18"
+                  >
+                    <path d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
+                  </svg>
+                </div>
+                <div className="w-full">
+                  <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[480px] mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[440px] mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[460px] mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                </div>
+                <span className="sr-only">Loading...</span>
+              </div>
+              <div
+                role="status"
+                className="space-y-8 p-5 animate-pulse md:space-y-0 md:space-x-8 -mt-5 rtl:space-x-reverse md:flex md:items-center"
+              >
+                <div className="flex items-center justify-center w-full h-[9vw] bg-gray-300 rounded sm:w-[8vw] dark:bg-gray-700">
+                  <svg
+                    className="w-10 h-10 text-gray-200 dark:text-gray-600"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 20 18"
+                  >
+                    <path d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
+                  </svg>
+                </div>
+                <div className="w-full">
+                  <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[480px] mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[440px] mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[460px] mb-2.5"></div>
+                  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                </div>
+                <span className="sr-only">Loading...</span>
+              </div>
+            </>
           )}
           <div className=" h-0 relative bottom-[870em]    bg-red-300">
             <MoreToExplore />
@@ -289,8 +485,26 @@ const MostPopularMoviesMenu = () => {
           <div className=" h-0 relative left-[50vw] bottom-[935rem] bg-yellow-400 ">
             <MoreToRead />
           </div>
+          <div className=" relative bottom-5 w-[50vw]">
+            <h1 className=" font-normal">
+              Our Most Popular charts use data from the search behavior of
+              IMDb's more than 250 million monthly unique visitors to rank the
+              hottest, most buzzed about movies and TV shows.
+            </h1>
+          </div>
+        </div>
+        <div className="  h-[62vh] bg-red-20 bg-black  border-b-[1px] border-gray-600 relative top-[17vw]   ">
+          <div className=" relative left-[10vw] top-10">
+            <RecentlyViewed />
+          </div>
+        </div>
+        <div className=" bg-black relative top-[17vw]">
+          <div className="">
+            <Footer />
+          </div>
         </div>
       </div>
+      {showScrollButton && <BackToTop />}
     </div>
   );
 };

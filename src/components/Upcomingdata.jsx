@@ -20,7 +20,7 @@ const Upcomingdata = ({ nowupcomingfinal, func }) => {
             <div className=' flex gap-4  h-[47vh] overflow-y-scroll no-scrollbar'>
                 {nowupcomingfinal && nowupcomingfinal.map((item, index) => (
                     <>
-                        <div key={index} className=' mr-4  ml-3 min-w-[15vw] max-h-[44vh] rounded-[10px] p-2 overflow-x-hidden scrollbar-hide cursor-pointer bg-zinc-700 hover:bg-slate-500 '>
+                        <div key={index} className=' mr-4  ml-3 min-w-[15vw] max-h-[44vh] rounded-[10px] p-2 overflow-x-hidden scrollbar-hide cursor-pointer   bg-zinc-700 hover:bg-slate-500 '>
                             <img className=' w-[30vw] h-[36vh] rounded-md drop-shadow-glow'
                                 src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
                                 alt=""
