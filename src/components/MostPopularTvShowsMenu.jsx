@@ -6,9 +6,10 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import Headerfordetails from "./Headerfordetails";
+import { RapidOptionsMenuDaimond } from "../constants/RapidOptionsForMenu";
 import { API_OPTIONS } from "../constants/Apioptions";
-import { TbMinusVertical } from "react-icons/tb";
 import { RapidOptionsDetailsRatingsDaimond } from "../constants/RapidOptionsForDetails";
+import { TbMinusVertical } from "react-icons/tb";
 import { TiStarFullOutline } from "react-icons/ti";
 import MoreToExplore from "./MoreToExplore";
 import MoreToRead from "./MoreToRead";
@@ -16,12 +17,19 @@ import RecentlyViewed from "./RecentlyViewed";
 import Footer from "./Footer";
 import BackToTop from "../constants/BackToTop";
 
-const MostPopularMoviesMenu = () => {
-  const [MostPopularMoviesID, setMostPopularMoviesID] = useState(null);
-  const [MostPopularMoviesIDs, setMostPopularMoviesIDs] = useState(null);
-  const [PopularBannerImage, setPopularBannerImage] = useState(null);
-  const [PopularMoviesDetails, setPopularMoviesDetails] = useState(null);
+
+
+const MostPopularTvShowsMenu = () => {
+  const [MostPopularTvShowsIDs, setMostPopularTvShowsIDs] = useState(null);
+  const [AllMostPopularTvShowsIDs, setAllMostPopularTvShowsIDs] =
+    useState(null);
+  const [MostPopularTvShowsBanner, setMostPopularTvShowsBanner] =
+    useState(null);
+  const [AllMostPopularTvShowsDetails, setAllMostPopularTvShowsDetails] =
+    useState(null);
+
   const [showScrollButton, setShowScrollButton] = useState(false);
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,114 +39,114 @@ const MostPopularMoviesMenu = () => {
         setShowScrollButton(false);
       }
     };
-
+  
     window.addEventListener("scroll", handleScroll);
-
+  
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   useEffect(() => {
-    const getMostPopularMovies = async () => {
+    const getPopularTvShowsIDs = async () => {
       const response = await fetch(
-        "https://run.mocky.io/v3/1458a83f-0c8e-4c36-9824-6c1fa643d296"
+        "https://run.mocky.io/v3/4f0bd716-be26-43a4-9388-248076f3626f"
       );
       const data = await response.json();
-      const AllPopularMoviesIDs = data.map(
+      const AllPopularTvShowsIDs = data.map(
         (movie) => movie.split("/").filter(Boolean)[1]
       );
       // Get the first 15 movie IDs
-      const FilteredMoviesIDs = data
+      const FilteredTvShowsIDs = data
         .slice(0, 15)
         .map((movie) => movie.split("/").filter(Boolean)[1]);
-
-      // Store the 15 movie IDs in the state
-      setMostPopularMoviesID(FilteredMoviesIDs);
-      setMostPopularMoviesIDs(AllPopularMoviesIDs);
+      setMostPopularTvShowsIDs(FilteredTvShowsIDs);
+      setAllMostPopularTvShowsIDs(AllPopularTvShowsIDs);
     };
-    getMostPopularMovies();
+
+    getPopularTvShowsIDs();
   }, []);
 
   useEffect(() => {
-    MostPopularMoviesID && console.log(MostPopularMoviesID);
-  }, [MostPopularMoviesID]);
+    MostPopularTvShowsIDs && console.log(MostPopularTvShowsIDs);
+  }, [MostPopularTvShowsIDs]);
 
   useEffect(() => {
-    MostPopularMoviesIDs && console.log(MostPopularMoviesIDs);
-  }, [MostPopularMoviesIDs]);
+    AllMostPopularTvShowsIDs && console.log(AllMostPopularTvShowsIDs);
+  }, [AllMostPopularTvShowsIDs]);
 
   useEffect(() => {
     const getPopularBannerImage = async () => {
-      if (MostPopularMoviesID) {
+      if (MostPopularTvShowsIDs) {
         const BannerData = await Promise.all(
-          MostPopularMoviesID.map(async (id) => {
+          MostPopularTvShowsIDs.map(async (id) => {
             const response = await fetch(
               `https://api.themoviedb.org/3/find/${id}?external_source=imdb_id`,
               API_OPTIONS
             );
             const data = await response.json();
-            return data?.movie_results;
+            return data?.tv_results;
           })
         );
-        setPopularBannerImage(BannerData.flat());
+        setMostPopularTvShowsBanner(BannerData.flat());
       }
     };
     getPopularBannerImage();
-  }, [MostPopularMoviesID]);
+  }, [MostPopularTvShowsIDs]);
 
   useEffect(() => {
-    PopularBannerImage && console.log(PopularBannerImage);
-  }, [PopularBannerImage]);
+    MostPopularTvShowsBanner && console.log(MostPopularTvShowsBanner);
+  }, [MostPopularTvShowsBanner]);
 
-    useEffect(() => {
-      const getPopularMoviesDetails = async () => {
-        if (MostPopularMoviesIDs) {
-          // Open the IndexedDB database
-          const db = await openDB("myDb", 2, {
-            upgrade(db) {
-              db.createObjectStore("movies");
-            },
-          });
+  useEffect(() => {
+    const getPopularTvShowsDetails = async () => {
+      if (AllMostPopularTvShowsIDs) {
+        // Open the IndexedDB database
+        const db = await openDB("myMostPopularTvShowsDb", 2, {
+          upgrade(db) {
+            db.createObjectStore("MostPopularTvShows");
+          },
+        });
 
-          // Check if data is in IndexedDB
-          let storedData = await db.get("movies", "PopularMoviesDetails");
-          if (storedData) {
-            setPopularMoviesDetails(storedData);
-          } else {
-            const PopularMoviesData = await Promise.all(
-              MostPopularMoviesIDs.map(async (id) => {
-                const response = await fetch(
-                  `https://imdb146.p.rapidapi.com/v1/title/?id=${id}`,
-                  RapidOptionsDetailsRatingsDaimond
-                );
-                const data = await response.json();
-                return data;
-              })
-            );
-            const flatData = PopularMoviesData.flat();
-            setPopularMoviesDetails(flatData);
-            // Store data in IndexedDB
-            await db.put("movies", flatData, "PopularMoviesDetails");
-          }
+        // Check if data is in IndexedDB
+        let storedData = await db.get(
+          "MostPopularTvShows",
+          "PopularTvShowsDetails"
+        );
+        if (storedData) {
+          setAllMostPopularTvShowsDetails(storedData);
+        } else {
+          const PopularTvShowsData = await Promise.all(
+            AllMostPopularTvShowsIDs.map(async (id) => {
+              const response = await fetch(
+                `https://imdb146.p.rapidapi.com/v1/title/?id=${id}`,
+                RapidOptionsDetailsRatingsDaimond
+              );
+              const data = await response.json();
+              return data;
+            })
+          );
+          const flatData = PopularTvShowsData.flat();
+          setAllMostPopularTvShowsDetails(flatData);
+          // Store data in IndexedDB
+          await db.put("MostPopularTvShows", flatData, "PopularTvShowsDetails");
         }
-      };
-      getPopularMoviesDetails();
-    }, [MostPopularMoviesIDs]);
+      }
+    };
+    getPopularTvShowsDetails();
+  }, [AllMostPopularTvShowsIDs]);
 
-    useEffect(() => {
-      PopularMoviesDetails && console.log(PopularMoviesDetails);
-    }, [PopularMoviesDetails]);
-
+  useEffect(() => {
+    AllMostPopularTvShowsDetails && console.log(AllMostPopularTvShowsDetails);
+  }, [AllMostPopularTvShowsDetails]);
   return (
-    <div className=" w-[100vw] h-[71vh]  bg-black">
+    <div className=" w-[100vw] h-[100vh] bg-black">
       <div className=" z-50 sticky top-0  ">
         <Headerfordetails />
       </div>
-
       <div className=" w-[90vw] border-[1px] border--600 glow4 rounded-lg h-[60vh] mx-auto b-red-200 mt-4">
         <div className=" w-[89vw] h-[58vh] border-[1px] rounded-lg glow2 border-blue-600  mt-[6px] mx-auto b-yellow-200">
-          {PopularBannerImage ? (
+          {MostPopularTvShowsBanner ? (
             <Swiper
               spaceBetween={30}
               centeredSlides={true}
@@ -146,14 +154,14 @@ const MostPopularMoviesMenu = () => {
                 delay: 5500,
                 disableOnInteraction: false,
               }}
-              pagination={{   
+              pagination={{
                 clickable: true,
               }}
               navigation={true}
               modules={[Autoplay, Pagination, Navigation]}
               className="mySwiper"
             >
-              {PopularBannerImage.map((movie, index) => (
+              {MostPopularTvShowsBanner.map((movie, index) => (
                 <SwiperSlide>
                   <img
                     key={index}
@@ -171,7 +179,7 @@ const MostPopularMoviesMenu = () => {
                       <span class="h-full w-full inset-0 absolute mt-0.5 ml-0.5 bg-gradient-to-br filter group-active:opacity-0 rounded opacity-50 from-lime-600 to-cyan-500"></span>
                       <span class="absolute inset-0 w-full h-full transition-all duration-200 ease-out rounded shadow-xl bg-gradient-to-br filter group-active:opacity-0 group-hover:blur-md from-lime-600 to-cyan-500"></span>
                       <span class="absolute inset-0 w-full h-full transition duration-200 ease-out rounded bg-gradient-to-br to-lime-600 from-cyan-500"></span>
-                      <span class="relative">{movie?.title}</span>
+                      <span class="relative">{movie?.name}</span>
                     </a>
                   </div>
                 </SwiperSlide>
@@ -207,7 +215,7 @@ const MostPopularMoviesMenu = () => {
             <TbMinusVertical />
           </span>
           <h4 className=" absolute text-white left-[11vw] font-medium  top-[6vw] text-[2vw]">
-            Most Popular Movies
+          Most Popular TV Shows
             <h1 className=" text-[1vw] font-normal text-stone-500">
               As determined by CINEOUT users.
             </h1>
@@ -217,8 +225,8 @@ const MostPopularMoviesMenu = () => {
           </h4>
         </div>
         <div className=" w-[80vw] h-[1012rem] mx-auto neuro py-8  px-5 bg-zinc-600 relative top-[35vh] rounded-lg">
-          {PopularMoviesDetails ? (
-            PopularMoviesDetails.map((movie, index) => {
+          {AllMostPopularTvShowsDetails ? (
+            AllMostPopularTvShowsDetails.map((movie, index) => {
               return (
                 <>
                   <div className=" w-[48vw] mb-5 h-[19vh] -mt-4 border-l-[1px] hover:bg-slate-700 rounded-lg  border-yellow-300">
@@ -509,4 +517,4 @@ const MostPopularMoviesMenu = () => {
   );
 };
 
-export default MostPopularMoviesMenu;
+export default MostPopularTvShowsMenu;

@@ -14,6 +14,8 @@ export const RapidOptionsDetailsDaimond ={
   },
 }
 
+
+
 export const RapidOptionsDetailsChalo = {
   method: "GET",  
   headers: {
@@ -50,9 +52,9 @@ export const RapidOptionsDetailsWolf = {
 export const RapidOptionsDetailsRatingsDaimond = {
   method: "GET",
   headers: {    
-    "X-RapidAPI-Key": "4782c2db54msha9d1ad5f1ff8902p1ba53fjsn4b8132638561",
+    "X-RapidAPI-Key": "b32ab82c34msheb2730c95608ca2p117c3djsn016fb569fe8f",
     "X-RapidAPI-Host": "imdb146.p.rapidapi.com",
-  },
+  },  
 };
 
 export const RapidOptionsDetailsRatingsChalo={

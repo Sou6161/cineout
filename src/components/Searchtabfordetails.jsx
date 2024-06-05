@@ -229,19 +229,19 @@ const Searchtab = () => {
                 <h1 className="">Top 250 TV Shows</h1>
               </Link>
               <Link
-                to="/chart/toptv"
+                to="/chart/tvmeter"
                 className=" relative bottom-[1.2vw] left-[44.5vw] text-[1vw] font-normal text-white hover:underline"
               >
-                <h1 className="">Most Popular TV Shows</h1>
+                <h1 className ="">Most Popular TV Shows</h1>
               </Link>
               <Link
-                to="/chart/toptv"
+                to="/chart/"
                 className=" relative left-[44.5vw] text-[1vw] font-normal text-white hover:underline"
               >
                 <h1 className=" ">Browse TV Shows by Genre</h1>
               </Link>
               <Link
-                to="/chart/toptv"
+                to="/chart/ "
                 className=" relative top-[1vw] left-[44.5vw] text-[1vw] font-normal text-white hover:underline"
               >
                 <h1 className=" ">TV News</h1>

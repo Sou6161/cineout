@@ -23,6 +23,10 @@ import AllVideoGallery from "./AllVideoGallery";
 import AllPhotosGallery from "./AllPhotosGallery";
 import Top250Movies from "./Top250Movies";
 import MostPopularMoviesMenu from "./MostPopularMoviesMenu";
+import TopBoxOfficeMenu from "./TopBoxOfficeMenu";
+import Top250TvShows from "./Top250TvShows";
+import MostPopularTvShowsMenu from "./MostPopularTvShowsMenu";
+  
 
 const AppRoutes = () => {
   return (
@@ -39,13 +43,16 @@ const AppRoutes = () => {
       <Route path="/news/movie" element={<MovieNews />} />
       <Route path="/tv-series-news" element={<TvNews />} />
       <Route path="/news/celebrity" element={<CelebrityNews />} />
-      {/* <Route path="/charts/most-popular-movies" element={<MostPopularMoviesCharts/>}/> */}
-      {/* <Route path="/charts/top-250-movies" element={<IMDBTop250MoviesCharts/>}/> */}
       <Route path="/charts/top-english-movies" element={<TopRatedEnglishMovies/>}/>
       <Route path="/title/:imdbId/video-gallery" element={<AllVideoGallery/>}/>
       <Route path="/title/:imdbId/photo-gallery" element={<AllPhotosGallery/>}/>
       <Route path="/chart/top" element={<Top250Movies/>}/>
       <Route path="/chart/moviemeter" element={<MostPopularMoviesMenu/>}/>
+      <Route path="/chart/boxoffice" element={<TopBoxOfficeMenu/>}/>
+      <Route path="/chart/toptv" element={<Top250TvShows/>}/>
+      <Route path="/chart/tvmeter" element={<MostPopularTvShowsMenu/>}/>
+
+
 
       <Route
         path="/"

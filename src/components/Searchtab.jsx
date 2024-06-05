@@ -8,20 +8,31 @@ import { SlPeople } from "react-icons/sl";
 import { FaRegEye } from "react-icons/fa";
 import { IoEarthSharp } from "react-icons/io5";
 
-
-
 const Searchtab = () => {
   const [hasReloaded, setHasReloaded] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isPageRefreshed, setPageRefreshed] = useState(true);
+  const [searchInput, setSearchInput] = useState("");
+  const [isInputEmpty, setIsInputEmpty] = useState(true); // Add this line
+
+  const handleSearch = () => {
+    // Add this function
+    console.log(searchInput);
+  };
+
+  const handleInputChange = (e) => {
+    // Modify this function
+    setSearchInput(e.target.value);
+    setIsInputEmpty(e.target.value === "");
+  };
 
   const handleButtonClick = () => {
     // Your button click logic here
-  
+
     // Set a flag in localStorage
-    localStorage.setItem('reloadOnce', 'true');
+    localStorage.setItem("reloadOnce", "true");
   };
 
   useEffect(() => {
@@ -47,10 +58,10 @@ const Searchtab = () => {
   return (
     <div className="relative flex items-center space-x-2 ">
       <div
-        className={`absolute right-[15vw] mt-5 mx-auto max-w-lg py-2 px-[1vw] rounded-full bg-purple-60 border flex focus-within:border-gray-300 transition-all duration-500 ease-in-out transform ${
+        className={`absolute right-[15vw] mt-5 mx-auto max-w-lg py-2 px-[1vw] rounded-full bg-purple-60 border-2 flex focus-within:border-purple-600 transition-all duration-500 ease-in-out transform ${
           isOpen
-            ? " translate-x-0 bg-cyan-600 visible opacity-100 "
-            : "translate-x-20  opacity-0 invisible overflow-x-hidden"
+            ? " translate-x-0 bg-cyn-600 border-yellow-40 visible opacity-100  "
+            : "translate-x-20  opacity-0 border-blue-600 invisible"
         }`}
       >
         {isOpen ? (
@@ -58,12 +69,25 @@ const Searchtab = () => {
             <input
               type="text"
               placeholder="Search Movies,TV-Series"
-              class=" w-[10vw] bg-slate-300 h-[4vh] rounded-full mr-2 focus:outline-none pr-4 font-semibold border-0 focus:ring-0 px- py- transition-all duration-500 ease-in-out"
+              className=" w-[10vw] bg-slate-300 h-[4vh] rounded-full mr-2 focus:outline-none pr-4 font-semibold border-2 focus:ring-0 px- py-  focus-within:border-black transition-all duration-500 ease-in-out"
               name="topic"
+              onChange={(e) => {
+                setSearchInput(e.target.value);
+                handleInputChange(e);
+              }}
             />
-            <button class="flex flex-row items-center justify-center min-w-[5vw] h-[4vh] px-4 rounded-full  tracking-wide   border disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-500 ease-in-out text-base bg-black text-white font-medium border-transparent py-1.5 -mr-3">
+            <button
+              className="flex flex-row items-center justify-center min-w-[5vw] h-[4vh] px-4 rounded-full  tracking-wide   border disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-500 ease-in-out text-base bg-black text-white font-medium border-transparent py-1.5 -mr-3"
+              onClick={handleSearch}
+            >
               Search
             </button>
+            {!isInputEmpty && (
+              <div className="w-[32vw] h-[100vh] z-99 bg-gray-500  rounded-lg absolute top-[3vw] -mx-4   ">
+                {/* Add your content here */}
+                {/* <h1 className=" text-[2vw] text-red-600"></h1> */}
+              </div>
+            )}
           </>
         ) : null}
       </div>
@@ -72,8 +96,14 @@ const Searchtab = () => {
         className={`relative top-2 right-[2vw] text-[2.9vw] cursor-pointer transition-all duration-500 ease-in-out ${
           isOpen ? "text-lime-400" : "text-red-700"
         }`}
-        onClick={() => setIsOpen(!isOpen)}
-      />
+        onClick={() => {
+          setIsOpen(!isOpen);
+          if (isOpen) {
+            setSearchInput("");
+            setIsInputEmpty(true);
+          }
+        }}
+      />  
 
       <div className="relative">
         <button
@@ -174,7 +204,7 @@ const Searchtab = () => {
               ? ""
               : "ripple-reverse translate-x-0"
           }`}
-          style={{ display: isMenuOpen ? "block" : "none" }}  
+          style={{ display: isMenuOpen ? "block" : "none" }}
         >
           {isMenuOpen && (
             <div className=" w-[100vw] h-[100vh] bg-red-10  ">
@@ -185,7 +215,8 @@ const Searchtab = () => {
                 </span>
                 Movies
               </h1>
-              <Link onClick={handleButtonClick} 
+              <Link
+                onClick={handleButtonClick}
                 to="/chart/top"
                 className=" w-[7vw] relative top-[8vw] left-[22.5vw] text-[1vw] font-normal text-white hover:underline"
               >
