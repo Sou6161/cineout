@@ -7,6 +7,7 @@ import { MdEmojiEvents } from "react-icons/md";
 import { SlPeople } from "react-icons/sl";
 import { FaRegEye } from "react-icons/fa";
 import { IoEarthSharp } from "react-icons/io5";
+import { SearchButtonAPI } from "../constants/SearchButtonAPI";
 
 const Searchtab = () => {
   const [hasReloaded, setHasReloaded] = useState(false);
@@ -16,6 +17,9 @@ const Searchtab = () => {
   const [isPageRefreshed, setPageRefreshed] = useState(true);
   const [searchInput, setSearchInput] = useState("");
   const [isInputEmpty, setIsInputEmpty] = useState(true); // Add this line
+  const [hiddenByScroll, setHiddenByScroll] = useState(false);
+  const [SearchInputData, setSearchInputData] = useState(null);
+  const [SearchDataID, setSearchDataID] = useState();
 
   const handleSearch = () => {
     // Add this function
@@ -55,21 +59,76 @@ const Searchtab = () => {
     }
   }, [isMenuOpen]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.scrollY;
+      const visible = currentScrollPos < 2000; // Change this to the scroll position you want
+
+      if (!visible) {
+        setIsOpen(false);
+        setSearchInput("");
+        setIsInputEmpty(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    const getSearchData = async () => {
+      if (searchInput.trim() !== "") {
+        // Add this condition
+        try {
+          const response = await fetch(
+            `https://imdb8.p.rapidapi.com/auto-complete?q=${searchInput}`,
+            SearchButtonAPI
+          );
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const data = await response.json();
+          setSearchInputData({ d: data.d, q: data.q }); // Set the data in one state
+          setSearchDataID(
+            data.d.map((title) => {
+              return title?.id;
+            })
+          );
+        } catch (error) {
+          console.error("Fetch or parsing error:", error);
+        }
+      }
+    };
+
+    getSearchData();
+  }, [searchInput]); // Add searchInput as a dependency
+
+  useEffect(() => {
+    SearchInputData && console.log(SearchInputData);
+  }, [SearchInputData]);
+
+  useEffect(() => {
+    SearchDataID && console.log(SearchDataID);
+  }, [SearchDataID]);
+
   return (
     <div className="relative flex items-center space-x-2 ">
       <div
         className={`absolute right-[15vw] mt-5 mx-auto max-w-lg py-2 px-[1vw] rounded-full bg-purple-60 border-2 flex focus-within:border-purple-600 transition-all duration-500 ease-in-out transform ${
-          isOpen
-            ? " translate-x-0 bg-cyn-600 border-yellow-40 visible opacity-100  "
+          isOpen && !hiddenByScroll
+            ? " translate-x-0 bg-cya-600 border-yellow-40 visible opacity-100  "
             : "translate-x-20  opacity-0 border-blue-600 invisible"
         }`}
       >
-        {isOpen ? (
+        {isOpen && !hiddenByScroll ? (
           <>
             <input
               type="text"
-              placeholder="Search Movies,TV-Series"
-              className=" w-[10vw] bg-slate-300 h-[4vh] rounded-full mr-2 focus:outline-none pr-4 font-semibold border-2 focus:ring-0 px- py-  focus-within:border-black transition-all duration-500 ease-in-out"
+              placeholder="Search Movies,TV-Series,Actor,Actress"
+              className=" w-[20vw] bg-slate-300 h-[4vh] rounded-full mr-2 focus:outline-none pr-4 font-semibold border-2 focus:ring-0 px- py-  focus-within:border-blue-600 transition-all duration-500 ease-in-out"
               name="topic"
               onChange={(e) => {
                 setSearchInput(e.target.value);
@@ -83,9 +142,48 @@ const Searchtab = () => {
               Search
             </button>
             {!isInputEmpty && (
-              <div className="w-[32vw] h-[100vh] z-99 bg-gray-500  rounded-lg absolute top-[3vw] -mx-4   ">
+              <div className="w-[41vw] h-[79vh] p-2 z-99 bg-[#1F1F1F]  rounded-l-lg fixed top-[3vw] -mx-4  mt-1    ">
                 {/* Add your content here */}
-                {/* <h1 className=" text-[2vw] text-red-600"></h1> */}
+                <div className="rounded-l-lg  w-[40.4vw] h-[77vh] bg-zinc-500 overflow-hidden overflow-y-scroll  ">
+                  <div>
+                    {SearchInputData &&
+                      SearchInputData.d.slice(0, 5).map((data) => {
+                        return (
+                          <Link to={`/name/${data?.id}/?q=${SearchInputData?.q}`} className=" cursor-pointer">
+                            <div className=" flex hover:bg-slate-600 border-t-[1px] hover:border-purple-600  h-[7vw] py-[0.3vw] px-3 mt- ">
+                              <img
+                                className="w-[5vw] h-[13vh] flex rounded-lg mb-5 glow3   "
+                                src={data?.i?.imageUrl}
+                                alt=""
+                              />
+
+                              <div className="flex flex-col mx-5 ">
+                                <h1 className=" text-white font-bold">
+                                  {data?.l}
+                                </h1>
+                                <h1 className=" text-lime-400 font-normal">
+                                  {data?.y}
+                                </h1>
+                                <h1 className=" text-orange-400 font-normal">
+                                  {data?.s}
+                                </h1>
+                              </div>
+                            </div>
+                          </Link>
+                        );
+                      })}
+                    <Link to={`/find/?q=${SearchInputData?.q}`}>
+                      <h1 className=" w-[40vw] hover:bg-slate-600 relative top-2  border-t-[1px]">
+                        <span className=" mx-3">
+                          See All Results for{" "}
+                          <span className=" text-red-600">
+                            '{SearchInputData?.q}'
+                          </span>{" "}
+                        </span>
+                      </h1>
+                    </Link>
+                  </div>
+                </div>
               </div>
             )}
           </>
@@ -101,9 +199,11 @@ const Searchtab = () => {
           if (isOpen) {
             setSearchInput("");
             setIsInputEmpty(true);
+          } else {
+            setHiddenByScroll(false);
           }
         }}
-      />  
+      />
 
       <div className="relative">
         <button

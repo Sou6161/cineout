@@ -26,6 +26,8 @@ import MostPopularMoviesMenu from "./MostPopularMoviesMenu";
 import TopBoxOfficeMenu from "./TopBoxOfficeMenu";
 import Top250TvShows from "./Top250TvShows";
 import MostPopularTvShowsMenu from "./MostPopularTvShowsMenu";
+import SeeAllResultsMenu from "./SeeAllResultsMenu";
+import SearchDataDetailsMenu from "./SearchDataDetailsMenu";
   
 
 const AppRoutes = () => {
@@ -51,7 +53,10 @@ const AppRoutes = () => {
       <Route path="/chart/boxoffice" element={<TopBoxOfficeMenu/>}/>
       <Route path="/chart/toptv" element={<Top250TvShows/>}/>
       <Route path="/chart/tvmeter" element={<MostPopularTvShowsMenu/>}/>
+      <Route path={`/find/`} element={<SeeAllResultsMenu/>}/>
+      <Route path="/name/:id" element={<SearchDataDetailsMenu/>}/>
 
+       
 
 
       <Route
