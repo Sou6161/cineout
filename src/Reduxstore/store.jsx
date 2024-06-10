@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import userReducer from "./UserSlice"
 import Upcomingslice from "./Upcomingslice";
 import NowShowingslice from "./NowShowingslice";
 import UpcomingseriesSlice from "./UpcomingseriesSlice";
@@ -13,8 +14,13 @@ import TvNewsSlice from "./TvNewsSlice";
 import CelebrityNewsSlice from "./CelebrityNewsSlice";
 import MovieAllVideosSlice from "./MovieAllVideosSlice";
 import MovieAllPhotosSlice from "./MovieAllPhotosSlice";
+
+
+
+
 export const store = configureStore({
   reducer: {
+    user:userReducer,
     nowshowingit: NowShowingslice,
     upcomingshowingit: Upcomingslice,
     upcomingseriesshowingit: UpcomingseriesSlice,

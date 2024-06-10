@@ -35,7 +35,7 @@ const Header = () => {
 
   return (
     <div
-      className={`flex items-center justify-between bg-transparent text-xl font-semibold overflow-hidde fixed top-0 w-full ${scrollPosition > 120 ? 'border-b-[1px] border-zinc-400' : ''}`}
+      className={`  flex items-center justify-between bg-transparent text-xl font-semibold overflow-hidde fixed top-0 w-full ${scrollPosition > 120 ? 'border-b-[1px] border-zinc-400' : ''}`}
       style={{
         backdropFilter:
           scrollPosition > 120

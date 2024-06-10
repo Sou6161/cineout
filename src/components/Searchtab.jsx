@@ -1,6 +1,6 @@
 import { IoSearchCircleSharp } from "react-icons/io5";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdMovie } from "react-icons/md";
 import { IoTvOutline } from "react-icons/io5";
 import { MdEmojiEvents } from "react-icons/md";
@@ -8,8 +8,16 @@ import { SlPeople } from "react-icons/sl";
 import { FaRegEye } from "react-icons/fa";
 import { IoEarthSharp } from "react-icons/io5";
 import { SearchButtonAPI } from "../constants/SearchButtonAPI";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../constants/Firebase";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser, removeUser } from "../Reduxstore/UserSlice";
 
 const Searchtab = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector((store) => store.user);
+
   const [hasReloaded, setHasReloaded] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -20,6 +28,16 @@ const Searchtab = () => {
   const [hiddenByScroll, setHiddenByScroll] = useState(false);
   const [SearchInputData, setSearchInputData] = useState(null);
   const [SearchDataID, setSearchDataID] = useState();
+
+  const HandleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        navigate("/home");
+      })
+      .catch((error) => {
+        navigate("/error");
+      });
+  };
 
   const handleSearch = () => {
     // Add this function
@@ -56,6 +74,7 @@ const Searchtab = () => {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
+      document.body.style.overflowX = "clip";
     }
   }, [isMenuOpen]);
 
@@ -149,7 +168,10 @@ const Searchtab = () => {
                     {SearchInputData &&
                       SearchInputData.d.slice(0, 5).map((data) => {
                         return (
-                          <Link to={`/name/${data?.id}/?q=${SearchInputData?.q}`} className=" cursor-pointer">
+                          <Link
+                            to={`/name/${data?.id}/?q=${SearchInputData?.q}`}
+                            className=" cursor-pointer"
+                          >
                             <div className=" flex hover:bg-slate-600 border-t-[1px] hover:border-purple-600  h-[7vw] py-[0.3vw] px-3 mt- ">
                               <img
                                 className="w-[5vw] h-[13vh] flex rounded-lg mb-5 glow3   "
@@ -205,85 +227,122 @@ const Searchtab = () => {
         }}
       />
 
-      <div className="relative">
-        <button
-          id="dropdownInformationButton"
-          data-dropdown-toggle="dropdownInformation"
-          class=" relative top-3 text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px- py- text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          type="button"
-          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-        >
-          <img
-            className=" rounded-full hover:border-[1.5px] hover:border-yellow-400 w-[2.5vw] h-[5vh]"
-            src="https://www.denofgeek.com/wp-content/uploads/2020/11/webstory-deadpool-image06.jpg?fit=1170%2C780"
-            alt=""
-          />{" "}
-          <svg
-            class="w-2.5 h-2.5 ms-3 hover:text-lime-400"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 10 6"
+      {!user ? (
+        <div className="flex relative top-2">
+          <Link
+            to="/login"
+            class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group"
           >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="m1 1 4 4 4-4"
-            />
-          </svg>
-        </button>
+            <span class="absolute inset-0 flex items-center justify-center w-[4vw] h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                ></path>
+              </svg>
+            </span>
+            <span class="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">
+              Sign In
+            </span>
+            <span class="relative invisible w-[1vw] h-[1vw] px-5">Sign In</span>
+          </Link>
+        </div>
+      ) : null}
 
-        <div
-          id="dropdownInformation"
-          class={`absolute mt-3 right-[1vw] z-50 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 top-full ${
-            isDropdownOpen ? "" : "hidden"
-          }`}
-        >
-          <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-            <div>Bonnie Green</div>
-            <div class="font-medium truncate">name@flowbite.com</div>
-          </div>
-          <ul
-            class="py-2 text-sm text-gray-700 dark:text-gray-200"
-            aria-labelledby="dropdownInformationButton"
+      {user && (
+        <div className="relative">
+          <button
+            id="dropdownInformationButton"
+            data-dropdown-toggle="dropdownInformation"
+            class=" relative top-3 text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px- py- text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            type="button"
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           >
-            <li>
-              <a
-                href="#"
-                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              >
-                Dashboard
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              >
-                Settings
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              >
-                Earnings
-              </a>
-            </li>
-          </ul>
-          <div class="py-2">
-            <a
-              href="#"
-              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+            <img
+              className=" rounded-full hover:border-[1.5px] hover:border-yellow-400 w-[2.5vw] h-[5vh]"
+              src={user && user.photoURL}
+              alt=""
+            />{" "}
+            <svg
+              className="w-3 h-2.5 relative left-2 hover:text-lime-400"
+              aria-hidden="true"
+              fill="none"
+              viewBox="0 0 10 6"
             >
-              Sign out
-            </a>
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 1 4 4 4-4"
+              />
+            </svg>
+          </button>
+
+          <div
+            id="dropdownInformation"
+            class={`absolute mt-3 right-[1vw] z-50 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 top-full ${
+              isDropdownOpen ? "" : "hidden"
+            }`}
+          >
+            <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+              <div>{user && user.displayName}</div>
+              <div class="font-medium truncate">{user && user.email}</div>
+            </div>
+            <ul
+              class="py-2 text-sm text-gray-700 dark:text-gray-200"
+              aria-labelledby="dropdownInformationButton"
+            >
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                >
+                  Dashboard
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                >
+                  Settings
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                >
+                  Earnings
+                </a>
+              </li>
+            </ul>
+            {user && (
+              <div class="py-2">
+                <a
+                  onClick={(e) => {
+                    e.preventDefault();
+                    HandleSignOut();
+                    window.location.reload();
+                  }}
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                >
+                  Sign out
+                </a>
+              </div>
+            )}
           </div>
         </div>
-      </div>
+      )}
 
       <div className="">
         <input

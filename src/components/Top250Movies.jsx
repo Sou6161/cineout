@@ -121,10 +121,10 @@ const Top250Movies = () => {
 
   return (
     <>
-      <div>
+      <div className=" h-[20vh] w-[99.2vw] bg-black ">
         <Headerfordetails />
-        <div className="w-[100vw] h-[100vh] bg-black  absolute">
-          <div className="w-[97.6vw] mx-auto h-[65vh] border-[5px] border-blue-700 relative top-[1vw]">
+        <div className="w-[99.3vw]  h-[100vh]  absolute bg-black overflow-y-visible  ">
+          <div className="w-[97.5vw] mx-auto h-[65vh] bg-black border-[5px] border-blue-700 relative top-[1vw]">
             <div className="w-[97vw] mx-auto h-[57vh] relative top-[0.5vw]">
               {Top250MoviesBanner ? (
                 <>
@@ -170,8 +170,8 @@ const Top250Movies = () => {
               )}
             </div>
           </div>
-          <div className="w-[90vw] h-[4400vh] mx-auto mt-10 bg-black absolute">
-            <div className="w-[100vw] h-[5004vh] mx-auto absolute bg-black border-b-2 border-gray-600">
+          <div className="w-[90vw] h-[4400vh] mx-auto mt-10  bg-black absolute">
+            <div className="w-[100vw] h-[5004vh] mx-auto absolute border-b-2 border-gray-600">
               <div className=" absolute w-[100vw] h-[4932vh] blur-[10px] bg-indigo-200 "></div>
               <h3 className=" absolute text-black left-[10vw] font-bold top-6 text-[1.2vw]">
                 CINEOUT Charts{" "}

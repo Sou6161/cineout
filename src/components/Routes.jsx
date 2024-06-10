@@ -1,6 +1,6 @@
 // Routes.jsx
-import React from "react";
-import { Route, Routes } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Login from "./Login";
 import Signup from "./Signup";
 import Header from "./Header";
@@ -28,15 +28,44 @@ import Top250TvShows from "./Top250TvShows";
 import MostPopularTvShowsMenu from "./MostPopularTvShowsMenu";
 import SeeAllResultsMenu from "./SeeAllResultsMenu";
 import SearchDataDetailsMenu from "./SearchDataDetailsMenu";
-  
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../constants/Firebase";
+import { useDispatch } from "react-redux";
+import { addUser, removeUser } from "../Reduxstore/UserSlice";
+
 
 const AppRoutes = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid, email, displayName, photoURL } = user
+        dispatch(
+          addUser({
+            uid: uid,
+            email: email,
+            displayName: displayName,
+            photoURL: photoURL,
+            
+          })
+          
+        );
+        // navigate("/home");
+      } else {
+        dispatch(removeUser());
+        // navigate("/home");
+      }
+    });
+  }, []);
+
   return (
     <Routes>
       <Route path="/home" element={<Maincontainer />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      <Route path="/title/:imdbId" element={<FullDetailsPage/>}/>
+      <Route path="/title/:imdbId" element={<FullDetailsPage />} />
       <Route path="/fan-favourites" element={<Whattowatch />} />
       <Route path="/Top-Box-Office" element={<BoxOffice />} />
       <Route path="/coming-soon" element={<Comingsooninside />} />
@@ -45,19 +74,25 @@ const AppRoutes = () => {
       <Route path="/news/movie" element={<MovieNews />} />
       <Route path="/tv-series-news" element={<TvNews />} />
       <Route path="/news/celebrity" element={<CelebrityNews />} />
-      <Route path="/charts/top-english-movies" element={<TopRatedEnglishMovies/>}/>
-      <Route path="/title/:imdbId/video-gallery" element={<AllVideoGallery/>}/>
-      <Route path="/title/:imdbId/photo-gallery" element={<AllPhotosGallery/>}/>
-      <Route path="/chart/top" element={<Top250Movies/>}/>
-      <Route path="/chart/moviemeter" element={<MostPopularMoviesMenu/>}/>
-      <Route path="/chart/boxoffice" element={<TopBoxOfficeMenu/>}/>
-      <Route path="/chart/toptv" element={<Top250TvShows/>}/>
-      <Route path="/chart/tvmeter" element={<MostPopularTvShowsMenu/>}/>
-      <Route path={`/find/`} element={<SeeAllResultsMenu/>}/>
-      <Route path="/name/:id" element={<SearchDataDetailsMenu/>}/>
-
-       
-
+      <Route
+        path="/charts/top-english-movies"
+        element={<TopRatedEnglishMovies />}
+      />
+      <Route
+        path="/title/:imdbId/video-gallery"
+        element={<AllVideoGallery />}
+      />
+      <Route
+        path="/title/:imdbId/photo-gallery"
+        element={<AllPhotosGallery />}
+      />
+      <Route path="/chart/top" element={<Top250Movies />} />
+      <Route path="/chart/moviemeter" element={<MostPopularMoviesMenu />} />
+      <Route path="/chart/boxoffice" element={<TopBoxOfficeMenu />} />
+      <Route path="/chart/toptv" element={<Top250TvShows />} />
+      <Route path="/chart/tvmeter" element={<MostPopularTvShowsMenu />} />
+      <Route path={`/find/`} element={<SeeAllResultsMenu />} />
+      <Route path="/name/:id" element={<SearchDataDetailsMenu />} />
 
       <Route
         path="/"
