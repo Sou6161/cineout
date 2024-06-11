@@ -121,7 +121,7 @@ const Top250Movies = () => {
 
   return (
     <>
-      <div className=" h-[20vh] w-[99.2vw] bg-black ">
+      <div className=" h-[20vh] w-[99.3vw] bg-black ">
         <Headerfordetails />
         <div className="w-[99.3vw]  h-[100vh]  absolute bg-black overflow-y-visible  ">
           <div className="w-[97.5vw] mx-auto h-[65vh] bg-black border-[5px] border-blue-700 relative top-[1vw]">

@@ -54,7 +54,7 @@ const Headerfordetails = () => {
       }}>
         <div className=" cursor-pointer ">
           <img
-            className=" w-[5vw] relative bottom- ml-5  "
+            className=" w-[5vw] h-[10vh] relative bottom- ml-5  "
             src={logo2}
             alt="no image"
           />
@@ -71,7 +71,7 @@ const Headerfordetails = () => {
           </div>
           <div className=" text-3xl cursor-pointer ml-[5vw] text-white"></div>
         </div>
-        <div className=" absolute left-[88.2vw] bottom-[0.8vw]">
+        <div className=" absolute left-[86vw] bottom-[0.8vw]">
           <Searchtab />
         </div>
       </div>

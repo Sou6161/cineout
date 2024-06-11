@@ -9,8 +9,9 @@ const Footer = () => {
   return (
     <div className=" w-[100vw] h-[55vh] bg-cyan-20 flex flex-col items-center">
       <div>
-        <a
-          href="#_"
+        <Link
+          to="/login"
+          onClick={() => window.location.reload()}
           class="relative mt-5 items-center justify-center inline-block p-4 px-5 py-3 overflow-hidden font-medium text-indigo-600 rounded-lg shadow-2xl group"
         >
           <span class="absolute top-0 left-0 w-40 h-40 -mt-10 -ml-3 transition-all duration-700 bg-slate-5 rounded-full blur-md ease"></span>
@@ -21,7 +22,7 @@ const Footer = () => {
           <span class="relative text-[1vw] text-white font-bold">
             Sign In For More Access
           </span>
-        </a>
+        </Link>
       </div>
       <div className="  w-[25vw] h-[12vh] relative  rounded-lg border-2 border-zinc-700 flex flex-col items-center justify-center mt-10">
         <h1 className="mb-4">

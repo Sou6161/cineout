@@ -5,18 +5,18 @@
 .glow {
   outline: 1px solid #f1b503;
   outline-offset: 1px;
-  box-shadow: 0 0 1px #ffc107, 0 0 15px #ffc107;
+  box-shadow: 0 0 1px #ffc107, 0 0 20px #ffc107;
 }
 .glow2 {
   outline: 1px solid #d909ec;
   outline-offset: 1px;
-  box-shadow: 0 0 1px #d909ec, 0 0 15px #d909ec;
+  box-shadow: 0 0 1px #d909ec, 0 0 20px #d909ec;
 }
 
 .glow3 {
   outline: 1px solid #09afec;
   outline-offset: 1px;
-  box-shadow: 2px 2px 6px #09afec, 2px 2px 10px #f803d3;
+  box-shadow: 0 0 1px #09afec, 0 0 20px #09afec;
 }
 
 .glow4 {
@@ -25,7 +25,9 @@
 }
 
 .glow5 {
-  text-shadow: "0 0 5px rgba(0,0,255,0.5), 0 0 10px rgba(0,0,255,0.5), 0 0 15px rgba(0,0,255,0.5), 0 0 20px rgba(0,0,255,0.5)";
+  outline: 1px solid #4fe756;
+  outline-offset: 1px;
+  box-shadow: 0 0 1px #4fe756, 0 0 20px #4fe756;
 }
 
 .Cursor {
@@ -340,4 +342,60 @@ body {
 
 .label:nth-child(3):has(input:checked) ~ .selection {
   transform: translateX(calc(4.5cm * 2/3));
+}
+
+
+
+/* loader code */
+
+.loading-bar {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  background: transparent;
+  border: px solid #3c3c3c;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 111px;
+  font-family: sans-serif;
+  font-size: 15px;
+  color: #fff000;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-shadow: 0 0 20px #fff000;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.loading-bar:before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: 100%;
+  height: 100%;
+  border: 3px solid transparent;
+  border-top: 5px solid #fff000;
+  border-right: 5px solid #fff000;
+  border-radius: 50%;
+  animation: animateC 2s linear infinite;
+}
+
+@keyframes animateC {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animate {
+  0% {
+    transform: rotate(45deg);
+  }
+
+  100% {
+    transform: rotate(405deg);
+  }
 }

@@ -134,7 +134,7 @@ const Searchtab = () => {
   }, [SearchDataID]);
 
   return (
-    <div className="relative flex items-center space-x-2 ">
+    <div className="relative flex  items-center space-x-2 ">
       <div
         className={`absolute right-[15vw] mt-5 mx-auto max-w-lg py-2 px-[1vw] rounded-full bg-purple-60 border-2 flex focus-within:border-purple-600 transition-all duration-500 ease-in-out transform ${
           isOpen && !hiddenByScroll
@@ -231,6 +231,7 @@ const Searchtab = () => {
         <div className="flex relative top-2">
           <Link
             to="/login"
+            // onClick={() => window.location.reload()} // Add this line
             class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group"
           >
             <span class="absolute inset-0 flex items-center justify-center w-[4vw] h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
@@ -305,7 +306,7 @@ const Searchtab = () => {
                   href="#"
                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 >
-                  Dashboard
+                  Your Activity
                 </a>
               </li>
               <li>
@@ -313,7 +314,8 @@ const Searchtab = () => {
                   href="#"
                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 >
-                  Settings
+                  Your Watchlist
+                  
                 </a>
               </li>
               <li>
@@ -321,7 +323,7 @@ const Searchtab = () => {
                   href="#"
                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 >
-                  Earnings
+                  Your Ratings
                 </a>
               </li>
             </ul>

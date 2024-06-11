@@ -26,9 +26,8 @@ const Whattowatch = () => {
   const [topratedmovies, settopratedmovies] = useState(null);
   const [topratedseries, settopratedseries] = useState(null);
   const [loading, setLoading] = useState(true);
-const [currentComponent, setCurrentComponent] = useState(null);
-const [activeButton, setActiveButton] = useState("MOST POPULAR MOVIES");
-  
+  const [currentComponent, setCurrentComponent] = useState(null);
+  const [activeButton, setActiveButton] = useState("MOST POPULAR MOVIES");
 
   // const dispatchdiscovermovies = useDispatch()
   // const dispatchwatchmovies = useDispatch();
@@ -51,26 +50,24 @@ const [activeButton, setActiveButton] = useState("MOST POPULAR MOVIES");
     setdiscovermovies(Discovermoviesdata);
   };
 
-  
-
-  
-
-  // const getwhattowatchmovies = async () => {
-  //   const data = await fetch(
-  //     "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
-  //     API_OPTIONS
-  //   );
-  //   const jsonmovies = await data.json();
-  //   const finaldatamovies = jsonmovies.results;
-  //   // dispatchwatchmovies(addwhattowatchmoviesdata(finaldatamovies));
-  //   if(finaldatamovies) {
-  //       setwhattowatchmovies(finaldatamovies);
-  //       setCurrentComponent(<Whattowatchmovies finalwatchmovies={finaldatamovies} />);
-  //     }
-  //     setLoading(false);
-  //   };
-  //   fetchData();
-  // }, []); 
+  const getwhattowatchmovies = async () => {
+    const data = await fetch(
+      "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
+      API_OPTIONS
+    );
+    const jsonmovies = await data.json();
+    const finaldatamovies = jsonmovies.results;
+    // dispatchwatchmovies(addwhattowatchmoviesdata(finaldatamovies));
+    if (finaldatamovies) {
+      setwhattowatchmovies(finaldatamovies);
+      setCurrentComponent(
+        <Whattowatchmovies finalwatchmovies={finaldatamovies} />
+      );
+    }
+    setLoading(false);
+  };
+  // fetchData();
+  // }, []);
 
   const getwhattowatchseries = async () => {
     const response = await axios.request(Rapidpostoptions);
@@ -101,7 +98,6 @@ const [activeButton, setActiveButton] = useState("MOST POPULAR MOVIES");
     settopratedseries(finaltoprateddata);
   };
 
-
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetch(
@@ -110,27 +106,24 @@ const [activeButton, setActiveButton] = useState("MOST POPULAR MOVIES");
       );
       const jsonmovies = await data.json();
       const finaldatamovies = jsonmovies.results;
-      if(finaldatamovies) {
+      if (finaldatamovies) {
         setwhattowatchmovies(finaldatamovies);
-        setCurrentComponent(<Whattowatchmovies finalwatchmovies={finaldatamovies} />);
+        setCurrentComponent(
+          <Whattowatchmovies finalwatchmovies={finaldatamovies} />
+        );
       }
       setLoading(false);
     };
     fetchData();
-  }, []); 
-  
-  
+  }, []);
 
   useEffect(() => {
     !discovermovies && getDiscovermoviesfan();
-    // !whattowatchmovies && getwhattowatchmovies();
-    // getwhattowatchseries();
+    !whattowatchmovies && getwhattowatchmovies();
+    getwhattowatchseries();
     !topratedmovies && gettopratedmoviedata();
     !topratedseries && gettopratedseriesdata();
   }, []);
-
-  
-  
 
   const handleClick = (item) => {
     setActiveButton(item);
@@ -162,14 +155,14 @@ const [activeButton, setActiveButton] = useState("MOST POPULAR MOVIES");
 
   return (
     <>
-      <div className=" relative bg-black px-10 py-5 h-[8vh] w-[100vw]">
+      <div className=" absolute bg-black  w-[100vw] h-[113vh]">
         <Headerfordetails />
       </div>
-      <div className="w=[100vw] ">
+      <div className="w-[100vw] relative ">
         <Discovermoviesfan finaldiscovermovies={discovermovies} />
       </div>
       <div className=" flex w-[100vw] bg-black ">
-        <div className=" flex mx-[70vh] mb-[15vh] mt-[2vh]">
+        <div className=" flex mx-[70vh] mb-[15vh] relative top-[27vh]">
           <h1 className=" text-[5vh] text-yellow-400">WHAT</h1>
           <span className=" inline-block text-[5vh] text-red-600 ml-4">TO</span>
           <h1 className=" text-[5vh] text-blue-600 ml-4">WATCH -</h1>{" "}
@@ -178,9 +171,9 @@ const [activeButton, setActiveButton] = useState("MOST POPULAR MOVIES");
       </div>
 
       <div className=" bg-yellow-300 w-[100vw] ">
-        <div className="  space-x-2 mb-10 inline-block absolute bottom-[3vh] mx-[50vh]">
+        <div className="  space-x-2 mb-10 inline-block absolute top-[50vw] mx-[50vh]">
           <button
-            className={` px-5 py-2.5 relative rounded group overflow-hidden font-medium bg-yellow-200 text-red-600 ${
+            className={` px-5 py-2.5 mr-5 relative rounded group overflow-hidden font-medium bg-white glow text-red-600 ${
               activeButton === "MOST POPULAR MOVIES" ? "underline-black" : ""
             }`}
             onClick={() => handleClick("MOST POPULAR MOVIES")}
@@ -192,7 +185,7 @@ const [activeButton, setActiveButton] = useState("MOST POPULAR MOVIES");
           </button>
 
           <button
-            className={`px-5 py-2.5 relative rounded group overflow-hidden font-medium bg-purple-50 text-red-600 ${
+            className={`px-5 py-2.5   relative rounded group overflow-hidden font-medium bg-white glow3 text-red-600 ${
               activeButton === "MOST POPULAR SERIES" ? "underline-black" : ""
             }`}
             onClick={() => handleClick("MOST POPULAR SERIES")}
@@ -204,7 +197,7 @@ const [activeButton, setActiveButton] = useState("MOST POPULAR MOVIES");
           </button>
 
           <button
-            className={`  px-5 py-2.5 relative rounded group overflow-hidden font-medium bg-lime-300 text-red-600 ${
+            className={`  px-5 py-2.5 left-4 relative rounded group overflow-hidden font-medium bg-white glow2 text-red-600 ${
               activeButton === "TOP RATED MOVIES" ? "underline-black" : ""
             }`}
             onClick={() => handleClick("TOP RATED MOVIES")}
@@ -216,7 +209,7 @@ const [activeButton, setActiveButton] = useState("MOST POPULAR MOVIES");
           </button>
 
           <button
-            className={`  px-5 py-2.5 relative rounded group overflow-hidden font-medium bg-purple-50 text-red-600 ${
+            className={`  px-5 py-2.5 left-7 relative rounded group overflow-hidden font-medium bg-white glow5 text-red-600 ${
               activeButton === "TOP RATED SERIES" ? "underline-black" : ""
             }`}
             onClick={() => handleClick("TOP RATED SERIES")}
@@ -228,8 +221,7 @@ const [activeButton, setActiveButton] = useState("MOST POPULAR MOVIES");
           </button>
         </div>
       </div>
-
-      {currentComponent}
+      <div className=" relative top-10">{currentComponent}</div>
     </>
   );
 };

@@ -88,7 +88,7 @@ const Maincontainer = () => {
       <Footer />
     </div>
   ) : (
-    <h1>loading</h1>
+    <h1 className="loading-bar ">loading</h1>
   );
 };
 
