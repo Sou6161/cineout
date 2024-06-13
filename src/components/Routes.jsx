@@ -32,7 +32,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../constants/Firebase";
 import { useDispatch } from "react-redux";
 import { addUser, removeUser } from "../Reduxstore/UserSlice";
-
+import NowShowingMoviesFullDetailsPage from "./NowShowingMoviesFullDetailsPage";
 
 const AppRoutes = () => {
   const dispatch = useDispatch();
@@ -41,16 +41,14 @@ const AppRoutes = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const { uid, email, displayName, photoURL } = user
+        const { uid, email, displayName, photoURL } = user;
         dispatch(
           addUser({
             uid: uid,
             email: email,
             displayName: displayName,
             photoURL: photoURL,
-            
           })
-          
         );
         // navigate("/home");
       } else {
@@ -63,6 +61,7 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/home" element={<Maincontainer />} />
+      <Route path="/title/:id" element={<NowShowingMoviesFullDetailsPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/title/:imdbId" element={<FullDetailsPage />} />

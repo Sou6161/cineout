@@ -289,13 +289,13 @@ const Searchtab = () => {
 
           <div
             id="dropdownInformation"
-            class={`absolute mt-3 right-[1vw] z-50 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 top-full ${
+            class={`absolute mt-4 right-[1vw] z-50 bg-[#181717] divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 top-full ${
               isDropdownOpen ? "" : "hidden"
             }`}
           >
             <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-              <div>{user && user.displayName}</div>
-              <div class="font-medium truncate">{user && user.email}</div>
+              <div className=" text-[1vw] font-semibold text-white">{user && user.displayName}</div>
+              {/* <div class="font-medium truncate">{user && user.email}</div> */}
             </div>
             <ul
               class="py-2 text-sm text-gray-700 dark:text-gray-200"
@@ -304,7 +304,7 @@ const Searchtab = () => {
               <li>
                 <a
                   href="#"
-                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  class="block px-4 py-2 text-[1vw] hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 >
                   Your Activity
                 </a>
@@ -312,7 +312,7 @@ const Searchtab = () => {
               <li>
                 <a
                   href="#"
-                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  class="block px-4 py-2 text-[1vw] hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 >
                   Your Watchlist
                   
@@ -321,14 +321,24 @@ const Searchtab = () => {
               <li>
                 <a
                   href="#"
-                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  class="block px-4 py-2 text-[1vw] hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 >
                   Your Ratings
+                  
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-[1vw] hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                >
+                  Your Lists
+
                 </a>
               </li>
             </ul>
             {user && (
-              <div class="py-2">
+              <div class="py-2 ">
                 <a
                   onClick={(e) => {
                     e.preventDefault();
@@ -336,7 +346,7 @@ const Searchtab = () => {
                     window.location.reload();
                   }}
                   href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  class="block px-4  py-2 text-[1vw] text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                 >
                   Sign out
                 </a>
