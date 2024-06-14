@@ -2,6 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+.container {
+
+
+  background: #000000;
+  --gap: 5em;
+  --line: 1px;
+  --color: rgba(255, 255, 255, 0.2);
+
+  background-image: linear-gradient(
+      -90deg,
+      transparent calc(var(--gap) - var(--line)),
+      var(--color) calc(var(--gap) - var(--line) + 1px),
+      var(--color) var(--gap)
+    ),
+    linear-gradient(
+      0deg,
+      transparent calc(var(--gap) - var(--line)),
+      var(--color) calc(var(--gap) - var(--line) + 1px),
+      var(--color) var(--gap)
+    );
+  background-size: var(--gap) var(--gap);
+}
+
+
+
+
+
 .glow {
   outline: 1px solid #f1b503;
   outline-offset: 1px;
@@ -20,14 +49,20 @@
 }
 
 .glow4 {
-  outline: 1px solid rgb(56, 98, 50);
-  box-shadow: 2px 2px 5px rgb(142, 79, 149), 2px 2px 15px rgb(81, 136, 152);
+  outline: 1px solid rgb(5, 120, 243);
+  box-shadow: 2px 2px 5px rgb(4, 190, 246), 2px 2px 15px rgb(5, 250, 250);
 }
 
 .glow5 {
   outline: 1px solid #4fe756;
   outline-offset: 1px;
   box-shadow: 0 0 1px #4fe756, 0 0 20px #4fe756;
+}
+
+.glow6{
+  outline: 1px solid #d2d778;
+  outline-offset: 1px;
+  box-shadow: 0 0 1px #d2d778, 0 0 10px #e6ee50;
 }
 
 .Cursor {
@@ -758,6 +793,46 @@ body {
 }
 
 
+/* Add to watchlist button code */
 
-/* Other loader code */
+.btn-donate {
+  --clr-font-main: hsla(0 0% 20% / 100);
+  --btn-bg-1: hsla(194 100% 69% / 1);
+  --btn-bg-2: hsla(217 100% 56% / 1);
+  --btn-bg-color: hsla(360 100% 100% / 1);
+  --radii: 0.5em;
+  cursor: pointer;
+  padding: 0.9em 1.4em;
+  min-width: 120px;
+  min-height: 44px;
+  font-size: var(--size, 1rem);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-weight: 500;
+  transition: 0.8s;
+  background-size: 280% auto;
+  background-image: linear-gradient(325deg, var(--btn-bg-2) 0%, var(--btn-bg-1) 55%, var(--btn-bg-2) 90%);
+  border: none;
+  border-radius: var(--radii);
+  color: var(--btn-bg-color);
+  box-shadow: 0px 0px 20px rgba(71, 184, 255, 0.5), 0px 5px 5px -1px rgba(58, 125, 233, 0.25), inset 4px 4px 8px rgba(175, 230, 255, 0.5), inset -4px -4px 8px rgba(19, 95, 216, 0.35);
+}
+
+.btn-donate:hover {
+  background-position: right top;
+}
+
+.btn-donate:is(:focus, :focus-visible, :active) {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--btn-bg-color), 0 0 0 6px var(--btn-bg-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-donate {
+    transition: linear;
+  }
+}
+  
+
+
+
 
