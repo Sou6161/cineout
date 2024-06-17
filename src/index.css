@@ -27,10 +27,6 @@
   background-size: var(--gap) var(--gap);
 }
 
-
-
-
-
 .glow {
   outline: 1px solid #f1b503;
   outline-offset: 1px;
@@ -803,7 +799,7 @@ body {
   --radii: 0.5em;
   cursor: pointer;
   padding: 0.9em 1.4em;
-  min-width: 120px;
+  width: 300px;
   min-height: 44px;
   font-size: var(--size, 1rem);
   font-family: "Segoe UI", system-ui, sans-serif;
@@ -832,6 +828,48 @@ body {
   }
 }
   
+
+/* Featured Review styling code */
+
+
+.review{
+  font-size: 18px;
+  color: #e1e1e1;
+  font-family: inherit;
+  font-weight: 800;
+  position: relative;
+  border: none;
+  background: none;
+  text-transform: uppercase;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 400ms;
+  transition-property: color;
+}
+
+.review:focus,
+.review:hover {
+  color: #fff;
+}
+
+.review:focus:after,
+.review:hover:after {
+  width: 100%;
+  left: 0%;
+}
+
+.review:after {
+  content: "";
+  pointer-events: none;
+  bottom: -2px;
+  left: 50%;
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background-color: #fff;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 400ms;
+  transition-property: width, left;
+}
 
 
 

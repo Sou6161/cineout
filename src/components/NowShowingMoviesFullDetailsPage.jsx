@@ -5,6 +5,34 @@ import { API_OPTIONS } from "../constants/Apioptions";
 import { RapidOptionsDetailsNowShowingMoviesDaimond } from "../constants/RapidOptionsForDetails";
 import { PiDotOutlineBold } from "react-icons/pi";
 import { FaPlus } from "react-icons/fa6";
+import { FaStar } from "react-icons/fa6";
+import { IoStarOutline } from "react-icons/io5";
+import { FaArrowTrendUp } from "react-icons/fa6";
+import { FaArrowTrendDown } from "react-icons/fa6";
+import { IoMdStar } from "react-icons/io";
+import { IoMdArrowDropdownCircle } from "react-icons/io";
+
+const trimTextTo500Words = (text) => {
+  const words = text.split(" ");
+  if (words.length > 180) {
+    return words.slice(0, 180).join(" ") + "...";
+  }
+  return text;
+};
+
+const NumberFormatter = ({ number }) => {
+  const formatNumber = (num) => {
+    if (num >= 1000000) {
+      return (num / 1000000).toFixed(1) + "M";
+    } else if (num >= 1000) {
+      return (num / 1000).toFixed(1) + "k";
+    } else {
+      return num;
+    }
+  };
+
+  return <span>{formatNumber(number)}</span>;
+};
 
 const NowShowingMoviesFullDetailsPage = () => {
   const { id } = useParams();
@@ -86,8 +114,14 @@ const NowShowingMoviesFullDetailsPage = () => {
     NowShowingMoviesDetails && console.log(NowShowingMoviesDetails);
   }, [NowShowingMoviesDetails]);
 
+  const [isTrimmed, setIsTrimmed] = useState(true);
+
+  const toggleTrim = () => {
+    setIsTrimmed(false);
+  };
+
   return (
-    <div className=" w-[100vw] h-[700vh] bg-[#030C16] text-red-600">
+    <div className=" w-[100vw] h-[800vh] bg-[#030C16] text-red-600">
       <div className="">
         <Headerfordetails />
       </div>
@@ -179,8 +213,43 @@ const NowShowingMoviesFullDetailsPage = () => {
             </h1>
           </div>
         </div>
-        <div className=" absolute left-[80vw] top-[10vw] ">
-          <div class="btn-donate h-[8vh] relative bottom-3">
+        <div className=" flex gap-10 bg-red-30 absolute left-[70vw] top-5">
+          <h1 className=" whitespace-nowrap font-bold">CINEOUT RATING</h1>
+          <span className=" absolute top-10 left-2 text-[1.5vw] text-yellow-400">
+            <FaStar />{" "}
+            <span className=" inline-bloc relative left-9 bottom-10 text-red-600  ">
+              {NowShowingMoviesDetails?.ratingsSummary?.aggregateRating}.0/10
+            </span>
+            <span className=" relative right-8 text-white bottom-4 text-[0.9vw]">
+              (
+              <NumberFormatter
+                number={NowShowingMoviesDetails?.ratingsSummary?.voteCount}
+              />
+              )
+            </span>
+          </span>
+          <h1 className=" whitespace-nowrap font-bold">YOUR RATING</h1>
+          <span className=" absolute top-8 left-[11vw] text-[1.5vw] text-yellow-400">
+            <IoStarOutline />
+          </span>
+          <h1 className="absolute top-7 hover:underline cursor-pointer left-[12.8vw] text-[1.3vw] font-semibold">
+            RATE
+          </h1>
+
+          <h1 className="font-bold">POPULARITY</h1>
+          <span className="absolute left-[19vw] top-8 text-[2vw] border-2 border-lime-400 rounded-full p-[0.1vw]">
+            {NowShowingMoviesDetails?.meterRanking?.currentRank > 5 ? (
+              <FaArrowTrendDown />
+            ) : (
+              <FaArrowTrendUp />
+            )}
+          </span>
+          <span className="absolute left-[22vw] top-8 text-[1.3vw] font-bold">
+            {NowShowingMoviesDetails?.meterRanking?.currentRank}
+          </span>
+        </div>
+        <div className=" absolute left-[78vw] top-[10vw] ">
+          <div class="btn-donate h-[9vh] relative bottom-3">
             <span className=" relative bottom-5 left-3">
               {" "}
               <span className=" relative top-5 right-4 ">
@@ -195,8 +264,29 @@ const NowShowingMoviesFullDetailsPage = () => {
               }
             </h1>
           </div>
+          <div className=" flex cursor-pointer">
+            <h1 className=" font-semibold text-yellow-400">
+              {NowShowingMoviesDetails?.reviews?.total}{" "}
+              <span className=" font-normal text-white mr-5 hover:underline">
+                User reviews
+              </span>{" "}
+            </h1>{" "}
+            <h1 className=" font-semibold text-yellow-400">
+              {NowShowingMoviesDetails?.criticReviewsTotal?.total}{" "}
+              <span className="font-normal text-white hover:underline">
+                Critics reviews
+              </span>
+            </h1>
+          </div>
           <div>
-            <h1>kgigiig</h1>
+            <h1 className=" font-semibold text-yellow-400 cursor-pointer  ">
+              <span className=" mr-3 inline-block">
+                {NowShowingMoviesDetails?.metacritic?.metascore?.score}{" "}
+              </span>
+              <span className="font-normal text-white hover:underline">
+                Metascore
+              </span>
+            </h1>
           </div>
         </div>
 
@@ -286,6 +376,84 @@ const NowShowingMoviesFullDetailsPage = () => {
               ))}
             </div>
           </div>
+        </div>
+        <div className="absolute top-[132vw] bg-red-30 left-[25vw] text-[1.4vw]">
+          <h1 className="font-bold">More Titles Like This</h1>
+          <div className="absolute -mx-[2vw] w-[70vw] h-[65vh] mt-10 border-l-2 my-2 border-r-2 border-blue-600 flex flex-nowrap overflow-x-auto overflow-y-hidden no-scrollbar gap-10">
+            {NowShowingMoviesDetails?.moreLikeThisTitles?.edges.map((data) => (
+              <div className="flex flex-col min-w-[14vw] mx-5 h-[60vh] my-5  rounded-lg bg-black glow6 ">
+                <img
+                  className="min-w-[14vw] h-[40vh] object-center px-2 py-2 rounded-2xl"
+                  src={data?.node?.primaryImage?.url}
+                  alt="no image available"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src =
+                      "https://www.prokerala.com/movies/assets/img/no-poster-available.jpg";
+                  }}
+                />
+                <h1 className="mx-5 text-[1.2vw] overflow-hidden whitespace-nowrap truncate">
+                  {data?.node?.originalTitleText?.text}
+                </h1>
+                <span className=" mx-5 text-[1.2vw]">
+                  ({data?.node?.releaseYear?.year})
+                </span>
+
+                <span className=" mx-5 text-yellow-400 inline-block flex ">
+                  <IoMdStar className=" relative top-1 mr-2" />
+                  {data?.node?.ratingsSummary?.aggregateRating}
+                </span>
+                <span className=" mx-5 text-[1.2vw] white-space-nowrap  truncate  ">
+                  {data?.node?.titleGenres?.genres.map((movie) => {
+                    return movie?.genre?.text;
+                  })}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className=" relative top-[150vw] left-[25vw] text-[1.4vw] font-bold">
+          <h1>User Reviews</h1>
+        </div>
+        <div
+          className="relative top-[152vw] left-[25vw] w-[50vw] rounded-lg px-5 py-4"
+          style={{
+            backgroundColor: "black",
+            height: isTrimmed ? "52vh" : "auto",
+          }}
+        >
+          <h1 className=" review w-[10vw]">FEATURED REVIEW</h1>
+          <div>
+            {NowShowingMoviesDetails?.featuredReviews?.edges.map((data) => {
+              const fullText = data?.node?.text?.originalText?.plainText;
+              const trimmedText = trimTextTo500Words(fullText);
+
+              return (
+                <>
+                  <div className=" mt-5">
+                    <h1 className=" text-[1.4vw] font-bold">
+                      "{data?.node?.summary?.originalText}"
+                    </h1>
+                  </div>
+                  <p className="mt-7 text-[1vw] leading-7 font-normal">
+                    {isTrimmed ? trimmedText : fullText}
+                    {isTrimmed && (
+                      <span
+                        className="absolute top-[21.2vw] cursor-pointer"
+                        onClick={toggleTrim}
+                      >
+                        <IoMdArrowDropdownCircle />
+                      </span>
+                    )}
+                  </p>
+                </>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className=" absolute top-[220vw] left-[25vw]  ">
+          <h1 className=" text-[1.4vw] font-bold">Box Office</h1>
         </div>
       </div>
     </div>
