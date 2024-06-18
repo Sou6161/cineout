@@ -61,7 +61,7 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/home" element={<Maincontainer />} />
-      <Route path="/title/:id" element={<NowShowingMoviesFullDetailsPage />} />
+      <Route path="/name/:id" element={<NowShowingMoviesFullDetailsPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/title/:imdbId" element={<FullDetailsPage />} />
@@ -91,7 +91,7 @@ const AppRoutes = () => {
       <Route path="/chart/toptv" element={<Top250TvShows />} />
       <Route path="/chart/tvmeter" element={<MostPopularTvShowsMenu />} />
       <Route path={`/find/`} element={<SeeAllResultsMenu />} />
-      <Route path="/name/:id" element={<SearchDataDetailsMenu />} />
+      {/* <Route path="/head/:id" element={<SearchDataDetailsMenu />} /> */}
 
       <Route
         path="/"

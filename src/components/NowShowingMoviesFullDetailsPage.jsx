@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Headerfordetails from "./Headerfordetails";
 import { API_OPTIONS } from "../constants/Apioptions";
-import { RapidOptionsDetailsNowShowingMoviesDaimond } from "../constants/RapidOptionsForDetails";
+import {
+  RapidOptionsDetailsNowShowingMoviesDaimond,
+  RapidOptionsDetailsNowShowingMoviesDaimondApidojo,
+} from "../constants/RapidOptionsForDetails";
 import { PiDotOutlineBold } from "react-icons/pi";
 import { FaPlus } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa6";
@@ -15,7 +18,7 @@ import { IoMdArrowDropdownCircle } from "react-icons/io";
 const trimTextTo500Words = (text) => {
   const words = text.split(" ");
   if (words.length > 180) {
-    return words.slice(0, 180).join(" ") + "...";
+    return words.slice(0, 180).join(" ") + `...`;
   }
   return text;
 };
@@ -37,7 +40,7 @@ const NumberFormatter = ({ number }) => {
 const NowShowingMoviesFullDetailsPage = () => {
   const { id } = useParams();
   let movieId = id;
-  if (id.startsWith("tt")) {
+  if (id.startsWith("nm")) {
     movieId = id.substring(2);
   }
   console.log(movieId, "TMDB ID");
@@ -45,6 +48,7 @@ const NowShowingMoviesFullDetailsPage = () => {
   const [NowShowingTrailerYTKEY, setNowShowingTrailerYTKEY] = useState(null);
   const [NowShowingIMDBID, setNowShowingIMDBID] = useState(null);
   const [NowShowingMoviesDetails, setNowShowingMoviesDetails] = useState(null);
+  const [NowShowingImages, setNowShowingImages] = useState(null);
 
   useEffect(() => {
     const NowShowingTrailerYTKEY = async () => {
@@ -114,8 +118,23 @@ const NowShowingMoviesFullDetailsPage = () => {
     NowShowingMoviesDetails && console.log(NowShowingMoviesDetails);
   }, [NowShowingMoviesDetails]);
 
-  const [isTrimmed, setIsTrimmed] = useState(true);
+  useEffect(() => {
+    const getNowShowingPhotos = async () => {
+      const response = await fetch(
+        `https://imdb8.p.rapidapi.com/title/v2/get-images?tconst=${NowShowingIMDBID}&first=100`,
+        RapidOptionsDetailsNowShowingMoviesDaimondApidojo
+      );
+      const data = await response.json();
+      setNowShowingImages(data?.data?.title);
+    };
+    getNowShowingPhotos();
+  }, [NowShowingIMDBID]);
 
+  useEffect(() => {
+    NowShowingImages && console.log(NowShowingImages);
+  }, [NowShowingImages,NowShowingIMDBID]);
+
+  const [isTrimmed, setIsTrimmed] = useState(true);
   const toggleTrim = () => {
     setIsTrimmed(false);
   };
@@ -218,7 +237,7 @@ const NowShowingMoviesFullDetailsPage = () => {
           <span className=" absolute top-10 left-2 text-[1.5vw] text-yellow-400">
             <FaStar />{" "}
             <span className=" inline-bloc relative left-9 bottom-10 text-red-600  ">
-              {NowShowingMoviesDetails?.ratingsSummary?.aggregateRating}.0/10
+              {NowShowingMoviesDetails?.ratingsSummary?.aggregateRating}/10
             </span>
             <span className=" relative right-8 text-white bottom-4 text-[0.9vw]">
               (
@@ -412,7 +431,7 @@ const NowShowingMoviesFullDetailsPage = () => {
             ))}
           </div>
         </div>
-        <div className=" relative top-[150vw] left-[25vw] text-[1.4vw] font-bold">
+        <div className=" inline-block relative top-[150vw] left-[25vw] text-[1.4vw] font-bold">
           <h1>User Reviews</h1>
         </div>
         <div
@@ -431,15 +450,15 @@ const NowShowingMoviesFullDetailsPage = () => {
               return (
                 <>
                   <div className=" mt-5">
-                    <h1 className=" text-[1.4vw] font-bold">
+                    <h1 className=" text-[1.4vw] font-bold text-lime-500">
                       "{data?.node?.summary?.originalText}"
                     </h1>
                   </div>
-                  <p className="mt-7 text-[1vw] leading-7 font-normal">
+                  <p className="mt-7 text-[1vw] leading-7 font-normal overflow-y-scroll no-scrollbar">
                     {isTrimmed ? trimmedText : fullText}
                     {isTrimmed && (
                       <span
-                        className="absolute top-[21.2vw] cursor-pointer"
+                        className="absolute top-[23vw] left-[48vw] cursor-pointer"
                         onClick={toggleTrim}
                       >
                         <IoMdArrowDropdownCircle />
@@ -452,8 +471,85 @@ const NowShowingMoviesFullDetailsPage = () => {
           </div>
         </div>
 
-        <div className=" absolute top-[220vw] left-[25vw]  ">
-          <h1 className=" text-[1.4vw] font-bold">Box Office</h1>
+        <div className=" absolute top-[215vw] left-[25vw] inline-block  ">
+          <h1 className=" text-[1.4vw] font-bold ">Box Office</h1>
+        </div>
+        <div className=" absolute top-[219vw] left-[25vw]">
+          <h1 className=" text-[1.2vw] font-semibold whitespace-nowrap mb-3">
+            Budget
+          </h1>
+          <h1 className=" text-white text-[1vw] mb-5">
+            ${NowShowingMoviesDetails?.productionBudget?.budget?.amount}
+            (estimated)
+          </h1>
+          <h1 className=" whitespace-nowrap font-semibold mb-3 text-[1.2vw]">
+            Opening weekend US & Canada
+          </h1>
+          <h1 className="text-white text-[1vw]">
+            $
+            {NowShowingMoviesDetails?.openingWeekendGross?.gross?.total?.amount}{" "}
+          </h1>
+          <div className=" absolute left-[25vw] top-1">
+            <h1 className=" whitespace-nowrap mb-3 text-[1.2vw]">
+              Gross US & Canada
+            </h1>
+            <h1 className=" text-white text-[1vw] mb-4">
+              ${NowShowingMoviesDetails?.lifetimeGross?.total?.amount}
+            </h1>
+            <h1 className=" mb-3 text-[1.2vw]">Gross worldwide</h1>
+            <h1 className="text-white text-[1vw]">
+              ${NowShowingMoviesDetails?.worldwideGross?.total?.amount}
+            </h1>
+          </div>
+        </div>
+        <div className=" absolute top-[235vw] left-[25vw]  inline-block ">
+          <h1 className="text-[1.4vw] font-bold mb-5">Technical Specs</h1>
+          <h1 className=" text-[1.2vw] font-semibold mb-3 text-yellow-400">
+            Runtime
+            <span className=" ml-10 text-white">
+              {" "}
+              {
+                NowShowingMoviesDetails?.runtime?.displayableProperty?.value
+                  ?.plainText
+              }
+            </span>
+          </h1>
+          <h1 className="text-[1.2vw] font-semibold mb-3 text-yellow-400">
+            Color
+            <span className=" ml-10 text-blue-400">
+              {NowShowingMoviesDetails?.technicalSpecifications?.colorations?.items.map(
+                (data) => {
+                  return data?.text;
+                }
+              )}
+            </span>
+          </h1>
+          <h1 className="text-[1.2vw] font-semibold mb-3 text-yellow-400">
+            Sound mix
+            <span className=" ml-10 text-blue-400">
+              {NowShowingMoviesDetails?.technicalSpecifications?.soundMixes?.items.map(
+                (data) => {
+                  return data?.text;
+                }
+              )}
+            </span>
+          </h1>
+          <h1 className=" text-[1.2vw] font-semibold text-yellow-400">
+            Aspect ratio
+            <span className=" ml-10 text-white">
+              {NowShowingMoviesDetails?.technicalSpecifications?.aspectRatios?.items.map(
+                (data) => {
+                  return data?.aspectRatio;
+                }
+              )}
+            </span>
+          </h1>
+        </div>
+        <div className=" absolute top-[255vw] left-[25vw]">
+          <h1 className="text-[1.4vw] font-bold photogallery">Photo Gallery</h1>
+        </div>
+        <div className=" w-[25vw] h-[30vh] bg-red-200 absolute top-[260vw] left-[25vw]">
+          <h1>ggigi7g</h1>
         </div>
       </div>
     </div>

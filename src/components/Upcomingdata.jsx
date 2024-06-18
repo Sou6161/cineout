@@ -26,7 +26,7 @@ const Upcomingdata = ({
                 const movie = nowupcomingfinal[index];
                 return (
                   <div key={index}>
-                    <Link to={`/title/tt${movies.id}`}>
+                    <Link to={`/name/nm${movies.id}`}>
                       <div className="mr-4 ml-3 min-w-[15vw] mt-5 glow3 max-h-[42vh] rounded-[10px] p-2 overflow-x-hidden scrollbar-hide cursor-pointer bg-zinc-70 bg-slate-40 overflow-y-auto">
                         <img
                           className="w-[30vw] h-[40vh] rounded-md drop-shadow-glow"

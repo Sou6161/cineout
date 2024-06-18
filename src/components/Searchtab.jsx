@@ -169,7 +169,7 @@ const Searchtab = () => {
                       SearchInputData.d.slice(0, 5).map((data) => {
                         return (
                           <Link
-                            to={`/name/${data?.id}/?q=${SearchInputData?.q}`}
+                            to={`/head/hd${data?.id}/?q=${SearchInputData?.q}`}
                             className=" cursor-pointer"
                           >
                             <div className=" flex hover:bg-slate-600 border-t-[1px] hover:border-purple-600  h-[7vw] py-[0.3vw] px-3 mt- ">

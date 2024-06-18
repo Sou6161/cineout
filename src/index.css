@@ -2,11 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 .container {
-
-
   background: #000000;
   --gap: 5em;
   --line: 1px;
@@ -55,7 +51,7 @@
   box-shadow: 0 0 1px #4fe756, 0 0 20px #4fe756;
 }
 
-.glow6{
+.glow6 {
   outline: 1px solid #d2d778;
   outline-offset: 1px;
   box-shadow: 0 0 1px #d2d778, 0 0 10px #e6ee50;
@@ -106,23 +102,18 @@ body {
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
   border-radius: 10px;
-  
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #888;
   border-radius: 10px;
-  
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #555;
 }
-
-
-
 
 /* ::-webkit-scrollbar {
   background: rgb(167, 204, 92);
@@ -296,7 +287,6 @@ body {
   box-shadow: -9px -9px 18px #494746, 9px 9px 18px #563b90;
 }
 
-
 /* logo code */
 
 .container {
@@ -343,7 +333,7 @@ body {
   left: 0;
   top: 0;
   box-shadow: 0 0 10px #00ff6a77;
-  transition: .15s ease;
+  transition: 0.15s ease;
 }
 
 .label:has(input:checked) {
@@ -364,18 +354,16 @@ body {
 }
 
 .label:nth-child(1):has(input:checked) ~ .selection {
-  transform: translateX(calc(4.5cm * 0/3));
+  transform: translateX(calc(4.5cm * 0 / 3));
 }
 
 .label:nth-child(2):has(input:checked) ~ .selection {
-  transform: translateX(calc(4.5cm * 1/3));
+  transform: translateX(calc(4.5cm * 1 / 3));
 }
 
 .label:nth-child(3):has(input:checked) ~ .selection {
-  transform: translateX(calc(4.5cm * 2/3));
+  transform: translateX(calc(4.5cm * 2 / 3));
 }
-
-
 
 /* loader code */
 
@@ -431,10 +419,7 @@ body {
   }
 }
 
-
-
 /* second time logo code */
-
 
 .loader {
   font-size: 2em;
@@ -496,7 +481,8 @@ body {
 
 /* Animations */
 @keyframes ringA {
-  from, 4% {
+  from,
+  4% {
     stroke-dasharray: 0 660;
     stroke-width: 20;
     stroke-dashoffset: -330;
@@ -514,7 +500,8 @@ body {
     stroke-dashoffset: -595;
   }
 
-  40%, 54% {
+  40%,
+  54% {
     stroke-dasharray: 0 660;
     stroke-width: 20;
     stroke-dashoffset: -660;
@@ -532,7 +519,8 @@ body {
     stroke-dashoffset: -925;
   }
 
-  90%, to {
+  90%,
+  to {
     stroke-dasharray: 0 660;
     stroke-width: 20;
     stroke-dashoffset: -990;
@@ -540,7 +528,8 @@ body {
 }
 
 @keyframes ringB {
-  from, 12% {
+  from,
+  12% {
     stroke-dasharray: 0 220;
     stroke-width: 20;
     stroke-dashoffset: -110;
@@ -558,7 +547,8 @@ body {
     stroke-dashoffset: -195;
   }
 
-  48%, 62% {
+  48%,
+  62% {
     stroke-dasharray: 0 220;
     stroke-width: 20;
     stroke-dashoffset: -220;
@@ -576,7 +566,8 @@ body {
     stroke-dashoffset: -305;
   }
 
-  98%, to {
+  98%,
+  to {
     stroke-dasharray: 0 220;
     stroke-width: 20;
     stroke-dashoffset: -330;
@@ -602,7 +593,8 @@ body {
     stroke-dashoffset: -175;
   }
 
-  36%, 58% {
+  36%,
+  58% {
     stroke-dasharray: 0 440;
     stroke-width: 20;
     stroke-dashoffset: -220;
@@ -620,7 +612,8 @@ body {
     stroke-dashoffset: -395;
   }
 
-  94%, to {
+  94%,
+  to {
     stroke-dasharray: 0 440;
     stroke-width: 20;
     stroke-dashoffset: -440;
@@ -628,7 +621,8 @@ body {
 }
 
 @keyframes ringD {
-  from, 8% {
+  from,
+  8% {
     stroke-dasharray: 0 440;
     stroke-width: 20;
     stroke-dashoffset: 0;
@@ -646,7 +640,8 @@ body {
     stroke-dashoffset: -175;
   }
 
-  44%, 50% {
+  44%,
+  50% {
     stroke-dasharray: 0 440;
     stroke-width: 20;
     stroke-dashoffset: -220;
@@ -664,7 +659,8 @@ body {
     stroke-dashoffset: -395;
   }
 
-  86%, to {
+  86%,
+  to {
     stroke-dasharray: 0 440;
     stroke-width: 20;
     stroke-dashoffset: -440;
@@ -763,7 +759,7 @@ body {
 
 @keyframes ringStroke42 {
   from,
-	to {
+  to {
     stroke-dashoffset: 452;
     transform: rotate(-45deg);
   }
@@ -776,18 +772,17 @@ body {
 
 @keyframes tick42 {
   from,
-	3%,
-	47%,
-	to {
+  3%,
+  47%,
+  to {
     stroke-dashoffset: -12;
   }
 
   14%,
-	36% {
+  36% {
     stroke-dashoffset: 0;
   }
 }
-
 
 /* Add to watchlist button code */
 
@@ -806,11 +801,19 @@ body {
   font-weight: 500;
   transition: 0.8s;
   background-size: 280% auto;
-  background-image: linear-gradient(325deg, var(--btn-bg-2) 0%, var(--btn-bg-1) 55%, var(--btn-bg-2) 90%);
+  background-image: linear-gradient(
+    325deg,
+    var(--btn-bg-2) 0%,
+    var(--btn-bg-1) 55%,
+    var(--btn-bg-2) 90%
+  );
   border: none;
   border-radius: var(--radii);
   color: var(--btn-bg-color);
-  box-shadow: 0px 0px 20px rgba(71, 184, 255, 0.5), 0px 5px 5px -1px rgba(58, 125, 233, 0.25), inset 4px 4px 8px rgba(175, 230, 255, 0.5), inset -4px -4px 8px rgba(19, 95, 216, 0.35);
+  box-shadow: 0px 0px 20px rgba(71, 184, 255, 0.5),
+    0px 5px 5px -1px rgba(58, 125, 233, 0.25),
+    inset 4px 4px 8px rgba(175, 230, 255, 0.5),
+    inset -4px -4px 8px rgba(19, 95, 216, 0.35);
 }
 
 .btn-donate:hover {
@@ -827,12 +830,10 @@ body {
     transition: linear;
   }
 }
-  
 
 /* Featured Review styling code */
 
-
-.review{
+.review {
   font-size: 18px;
   color: #e1e1e1;
   font-family: inherit;
@@ -871,6 +872,33 @@ body {
   transition-property: width, left;
 }
 
+/* Photo Gallery Title Code */
 
+.photogallery {
+  /* color: red; */
+  text-decoration: none;
+  /* font-size: 25px; */
+  border: none;
+  background: none;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+}
 
+.photogallery::before {
+  margin-left: auto;
+}
 
+.photogallery::after,
+.photogallery::before {
+  content: "";
+  width: 0%;
+  height: 2px;
+  background: cyan;
+  display: block;
+  transition: 0.5s;
+}
+
+.photogallery:hover::after,
+.photogallery:hover::before {
+  width: 100%;
+}
