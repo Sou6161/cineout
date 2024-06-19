@@ -5,6 +5,7 @@ import { API_OPTIONS } from "../constants/Apioptions";
 import {
   RapidOptionsDetailsNowShowingMoviesDaimond,
   RapidOptionsDetailsNowShowingMoviesDaimondApidojo,
+  RapidOptionsDetailsNowShowingMoviesDaimondTest13ApiDojo,
 } from "../constants/RapidOptionsForDetails";
 import { PiDotOutlineBold } from "react-icons/pi";
 import { FaPlus } from "react-icons/fa6";
@@ -14,6 +15,13 @@ import { FaArrowTrendUp } from "react-icons/fa6";
 import { FaArrowTrendDown } from "react-icons/fa6";
 import { IoMdStar } from "react-icons/io";
 import { IoMdArrowDropdownCircle } from "react-icons/io";
+import { BiPlayCircle } from "react-icons/bi";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+import { Pagination, Navigation } from "swiper/modules";
 
 const trimTextTo500Words = (text) => {
   const words = text.split(" ");
@@ -37,6 +45,12 @@ const NumberFormatter = ({ number }) => {
   return <span>{formatNumber(number)}</span>;
 };
 
+const convertDuration = (seconds) => {
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+  return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
+};
+
 const NowShowingMoviesFullDetailsPage = () => {
   const { id } = useParams();
   let movieId = id;
@@ -49,6 +63,7 @@ const NowShowingMoviesFullDetailsPage = () => {
   const [NowShowingIMDBID, setNowShowingIMDBID] = useState(null);
   const [NowShowingMoviesDetails, setNowShowingMoviesDetails] = useState(null);
   const [NowShowingImages, setNowShowingImages] = useState(null);
+  const [NowShowingVideoGallery, setNowShowingVideoGallery] = useState(null);
 
   useEffect(() => {
     const NowShowingTrailerYTKEY = async () => {
@@ -120,19 +135,55 @@ const NowShowingMoviesFullDetailsPage = () => {
 
   useEffect(() => {
     const getNowShowingPhotos = async () => {
-      const response = await fetch(
-        `https://imdb8.p.rapidapi.com/title/v2/get-images?tconst=${NowShowingIMDBID}&first=100`,
-        RapidOptionsDetailsNowShowingMoviesDaimondApidojo
-      );
-      const data = await response.json();
-      setNowShowingImages(data?.data?.title);
+      try {
+        const response = await fetch(
+          `https://imdb8.p.rapidapi.com/title/v2/get-images?tconst=${NowShowingIMDBID}&first=100`,
+          RapidOptionsDetailsNowShowingMoviesDaimondApidojo
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const text = await response.text();
+        if (text) {
+          const data = JSON.parse(text);
+          setNowShowingImages(data?.data?.title);
+        }
+      } catch (error) {
+        console.error("There was a problem with the fetch operation:", error);
+      }
     };
     getNowShowingPhotos();
   }, [NowShowingIMDBID]);
 
   useEffect(() => {
     NowShowingImages && console.log(NowShowingImages);
-  }, [NowShowingImages,NowShowingIMDBID]);
+  }, [NowShowingImages, NowShowingIMDBID]);
+
+  useEffect(() => {
+    const getNowShowingVideos = async () => {
+      try {
+        const response = await fetch(
+          `https://imdb8.p.rapidapi.com/title/get-videos?tconst=${NowShowingIMDBID}&limit=100&region=US`,
+          RapidOptionsDetailsNowShowingMoviesDaimondTest13ApiDojo
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const text = await response.text();
+        if (text) {
+          const data = JSON.parse(text);
+          setNowShowingVideoGallery(data?.resource);
+        }
+      } catch (error) {
+        console.error("There was a problem with the fetch operation:", error);
+      }
+    };
+    getNowShowingVideos();
+  }, [NowShowingIMDBID]);
+
+  useEffect(() => {
+    NowShowingVideoGallery && console.log(NowShowingVideoGallery);
+  }, [NowShowingVideoGallery]);
 
   const [isTrimmed, setIsTrimmed] = useState(true);
   const toggleTrim = () => {
@@ -140,7 +191,7 @@ const NowShowingMoviesFullDetailsPage = () => {
   };
 
   return (
-    <div className=" w-[100vw] h-[800vh] bg-[#030C16] text-red-600">
+    <div className=" w-[100vw] h-[1000vh] bg-[#030C16] text-red-600 ">
       <div className="">
         <Headerfordetails />
       </div>
@@ -548,8 +599,67 @@ const NowShowingMoviesFullDetailsPage = () => {
         <div className=" absolute top-[255vw] left-[25vw]">
           <h1 className="text-[1.4vw] font-bold photogallery">Photo Gallery</h1>
         </div>
-        <div className=" w-[25vw] h-[30vh] bg-red-200 absolute top-[260vw] left-[25vw]">
-          <h1>ggigi7g</h1>
+        <div className="w-[75vw] h-[30vh] bg-red-20 absolute top-[260vw] left-[22vw]">
+          <div className="flex">
+            <Swiper
+              slidesPerView={3}
+              pagination={{
+                clickable: true,
+              }}
+              navigation={true}
+              modules={[Pagination, Navigation]}
+              className="mySwiper"
+            >
+              {NowShowingImages?.images?.edges
+                .slice(0, 12)
+                .map((data, index) => (
+                  <SwiperSlide key={index} className=" overflow-hidden">
+                    <img
+                      className=" hover:rounded-lg transition duration-300 ease-in-out hover:scale-110 mx-9 w-[20vw]  h-[30vh] object-top object-cover rounded-lg"
+                      src={data?.node?.url}
+                      alt=""
+                    />
+                  </SwiperSlide>
+                ))}
+            </Swiper>
+          </div>
+        </div>
+        <div className=" inline-block absolute top-[282vw] left-[25vw]">
+          <h1 className="text-[1.4vw] font-bold videogallery">Video Gallery</h1>
+        </div>
+        <div className=" w-[73vw] h-[27vh] absolute top-[286vw] left-[22vw]">
+          <div className="flex">
+            <Swiper
+              slidesPerView={3}
+              pagination={{
+                clickable: true,
+              }}
+              navigation={true}
+              modules={[Pagination, Navigation]}
+              className="mySwiper"
+            >
+              {NowShowingVideoGallery?.videos.map((data2, index) => (
+                <SwiperSlide key={index} className=" overflow-hidden hover:underline hover:text-yellow-400">
+                  <div className=" hover:text-yellow-400 cursor-pointer">
+                  <img
+                    className=" mx-9 w-[20vw]  h-[27vh] mb-5  object-top object-center    rounded-lg"
+                    src={data2?.image?.url}
+                    alt=""
+                  />
+
+                  <BiPlayCircle className=" absolute bottom-[5vw] text-white font-bold text-[1.8vw] left-[3vw]" />
+                  <h1 className=" text-[1.3vw] absolute left-[5vw] bottom-[5vw] font-semibold text-white ">
+                    Trailer {convertDuration(data2?.durationInSeconds)}
+                  </h1>
+
+                  <h1 className=" mx-10 text-[1.2vw] font-semibold">
+                    Watch {data2?.title}
+                  </h1>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
         </div>
       </div>
     </div>
