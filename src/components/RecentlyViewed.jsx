@@ -13,7 +13,7 @@ const RecentlyViewed = () => {
         </span> 
       </div>
     </div>
-    <div className=" w-[80vw] h-[50vh] relative right-10 bg-lime-20 mb-10">
+    <div className=" w-[80vw] h-[60vh] relative right-10 bg-lime-200 mb-10">
       <div>
 
       </div>

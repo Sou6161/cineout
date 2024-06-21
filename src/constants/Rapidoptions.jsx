@@ -179,7 +179,7 @@ export const Rapidpostoptions = {
 export const RapidOptionsDaimondApiDojoUpcomingMovies ={
   method: 'GET',
 	headers: {
-		'x-rapidapi-key': '7f4e6e9132msha1c12f89129dcd3p1871cfjsncb8c9521549d',
+		'x-rapidapi-key': '7923e6eb57msh1dd7d202dd7f281p1595b6jsna0557f418790',
 		'x-rapidapi-host': 'imdb8.p.rapidapi.com'
 	}
 }

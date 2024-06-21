@@ -53,7 +53,7 @@ const Maincontainer = () => {
   useEffect(() => {
     const getUpcomingMovies = async () => {
       const response = await fetch(
-        `https://imdb8.p.rapidapi.com/title/v2/get-coming-soon?comingSoonType=MOVIE&first=20&country=IN  &language=en-US`,
+        `https://imdb8.p.rapidapi.com/title/v2/get-coming-soon?comingSoonType=MOVIE&first=20&country=IN&language=en-US`,
         RapidOptionsDaimondApiDojoUpcomingMovies
       );
       const data = await response.json();

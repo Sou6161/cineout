@@ -904,8 +904,90 @@ body {
 }
 
 
+/* Related News Text Styling */
+
+.relatednews {
+  /* color: red; */
+  text-decoration: none;
+  /* font-size: 25px; */
+  border: none;
+  background: none;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+}
+
+.relatednews::before {
+  margin-left: auto;
+}
+
+.relatednews::after,
+.relatednews::before {
+  content: "";
+  width: 0%;
+  height: 2px;
+  background: cyan;
+  display: block;
+  transition: 0.5s;
+}
+
+.relatednews:hover::after,
+.relatednews:hover::before {
+  width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* NowShowing PhotoGallery swiper code */
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 1px;
+  /* background: #fff; */
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*  Add this CSS to your stylesheet or component */
+.mySwiper .swiper-pagination {
+  position:absolute;
+  top: 20px;
+  
+   
+}
+
+.swiper-button-prev{
+  background-color: white;
+ border-radius: 10%;
+ /* left: auto; Remove the default left position */
+ right: 100px; /* Set the desired right position */
+}
+
+.swiper-button-next {
+  background-color: white; /* Red background color */
+  border-radius: 10%;
+}
+
+
+
+
 
 
 .swiper {
@@ -914,7 +996,7 @@ body {
 }
 
 .swiper-slide {
-  /* text-align: center; */
+  text-align: center;
   font-size: 18px;
   /* background: #fff; */
 
@@ -926,8 +1008,15 @@ body {
 
 
 
-/* video gallery title code */
 
+
+.neuroVideogallery {
+  border-radius: 46px;
+  background: #e0e0e0;
+  box-shadow: inset 9px 9px 16px #b3b3b3, inset -9px -9px 16px #ffffff;
+}
+
+/* video gallery title code */
 
 .videogallery {
   color: purple;
@@ -957,3 +1046,7 @@ body {
 .videogallery:hover::before {
   width: 100%;
 }
+
+
+
+

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Headerfordetails from "./Headerfordetails";
 import { API_OPTIONS } from "../constants/Apioptions";
 import {
   RapidOptionsDetailsNowShowingMoviesDaimond,
   RapidOptionsDetailsNowShowingMoviesDaimondApidojo,
-  RapidOptionsDetailsNowShowingMoviesDaimondTest13ApiDojo,
+  RapidOptionsDetailsNowShowingMoviesDaimondTest18ApiDojo,
+  RapidOptionsDetailsNowShowingMoviesDaimondTest19ApiDojo,
 } from "../constants/RapidOptionsForDetails";
 import { PiDotOutlineBold } from "react-icons/pi";
 import { FaPlus } from "react-icons/fa6";
@@ -22,6 +23,8 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import { Pagination, Navigation } from "swiper/modules";
+import RecentlyViewed from "./RecentlyViewed";
+import Footer from "./Footer";
 
 const trimTextTo500Words = (text) => {
   const words = text.split(" ");
@@ -64,6 +67,7 @@ const NowShowingMoviesFullDetailsPage = () => {
   const [NowShowingMoviesDetails, setNowShowingMoviesDetails] = useState(null);
   const [NowShowingImages, setNowShowingImages] = useState(null);
   const [NowShowingVideoGallery, setNowShowingVideoGallery] = useState(null);
+  const [NowShowingRelatedNews, setNowShowingRelatedNews] = useState(null);
 
   useEffect(() => {
     const NowShowingTrailerYTKEY = async () => {
@@ -164,7 +168,7 @@ const NowShowingMoviesFullDetailsPage = () => {
       try {
         const response = await fetch(
           `https://imdb8.p.rapidapi.com/title/get-videos?tconst=${NowShowingIMDBID}&limit=100&region=US`,
-          RapidOptionsDetailsNowShowingMoviesDaimondTest13ApiDojo
+          RapidOptionsDetailsNowShowingMoviesDaimondTest18ApiDojo
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -190,8 +194,34 @@ const NowShowingMoviesFullDetailsPage = () => {
     setIsTrimmed(false);
   };
 
+  useEffect(() => {
+    const getNowShowingRelatedNews = async () => {
+      try {
+        const response = await fetch(
+          `https://imdb8.p.rapidapi.com/title/v2/get-related-news?tconst=${NowShowingIMDBID}&first=20&country=US&language=en-US`,
+          RapidOptionsDetailsNowShowingMoviesDaimondTest19ApiDojo
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const text = await response.text();
+        if (text) {
+          const data = JSON.parse(text);
+          setNowShowingRelatedNews(data?.data?.title);
+        }
+      } catch (error) {
+        console.error("There was a problem with the fetch operation:", error);
+      }
+    };
+    getNowShowingRelatedNews();
+  }, [NowShowingIMDBID]);
+
+  useEffect(() => {
+    NowShowingRelatedNews && console.log(NowShowingRelatedNews, "Related News");
+  }, [NowShowingRelatedNews]);
+
   return (
-    <div className=" w-[100vw] h-[1000vh] bg-[#030C16] text-red-600 ">
+    <div className=" w-[100vw] h-[868vh] bg-[#030C16] text-red-600 ">
       <div className="">
         <Headerfordetails />
       </div>
@@ -248,38 +278,68 @@ const NowShowingMoviesFullDetailsPage = () => {
             <span className=" text-white relative top-[9vw] text-[1.3vw]  ">
               Director
             </span>
-            <h1 className=" relative top-[7vw] text-[1.3vw] left-[7vw] ">
-              {NowShowingMoviesDetails?.directorsPageTitle.map((data) => {
-                return data?.credits.map((director) => {
-                  return director?.name?.nameText?.text;
-                });
-              })}
+            <h1 className="relative top-[7vw] text-[1.3vw] left-[7vw]">
+              {NowShowingMoviesDetails?.directorsPageTitle.map(
+                (data, index) => (
+                  <span key={index}>
+                    {data?.credits.map((director, i) => (
+                      <React.Fragment key={i}>
+                        {director?.name?.nameText?.text}
+                        {i < data.credits.length - 1 && ", "}
+                      </React.Fragment>
+                    ))}
+                    {index <
+                      NowShowingMoviesDetails.directorsPageTitle.length - 1 &&
+                      ", "}
+                  </span>
+                )
+              )}
             </h1>
+
             <span className=" text-white relative top-[9.5vw] text-[1.3vw]">
               Writers
             </span>
-            <h1 className=" relative top-[7.6vw] text-[1.3vw] left-[7vw]">
-              {NowShowingMoviesDetails?.writers.map((data) => {
-                return data?.credits.map((writers) => {
-                  return writers?.name?.nameText?.text;
-                });
-              })}
+            <h1 className="relative top-[7.6vw] text-[1.3vw] left-[7vw]">
+              {NowShowingMoviesDetails?.writers.map((data, index) => (
+                <span key={index}>
+                  {data?.credits.map((writers, i) => (
+                    <React.Fragment key={i}>
+                      {writers?.name?.nameText?.text}
+                      {i < data.credits.length - 1 && ", "}
+                    </React.Fragment>
+                  ))}
+                  {index < NowShowingMoviesDetails.writers.length - 1 && ", "}
+                </span>
+              ))}
             </h1>
+
             <span className=" text-white relative top-[10vw] text-[1.3vw]">
               Stars
             </span>
-            <h1 className=" relative top-[8vw] left-[7vw] text-[1.3vw]">
-              {NowShowingMoviesDetails?.castPageTitle?.edges.map((data) => {
-                return data?.node?.name?.nameText?.text;
-              })}
+            <h1 className="relative top-[8vw] left-[7vw] text-[1.3vw]">
+              {NowShowingMoviesDetails?.castPageTitle?.edges.map(
+                (data, index) => (
+                  <React.Fragment key={index}>
+                    {data?.node?.name?.nameText?.text}
+                    {index <
+                      NowShowingMoviesDetails.castPageTitle.edges.length - 1 &&
+                      ", "}
+                  </React.Fragment>
+                )
+              )}
             </h1>
+
             <span className=" text-white relative top-[10vw] text-[1.3vw]">
               Genre
             </span>
-            <h1 className=" relative top-[8.1vw] left-[7vw] text-[1.3vw]">
-              {NowShowingMoviesDetails?.genres.genres.map((data) => {
-                return data?.text;
-              })}
+            <h1 className="relative top-[8.1vw] left-[7vw] text-[1.3vw]">
+              {NowShowingMoviesDetails?.genres.genres.map((data, index) => (
+                <React.Fragment key={index}>
+                  {data?.text}
+                  {index < NowShowingMoviesDetails.genres.genres.length - 1 &&
+                    ", "}
+                </React.Fragment>
+              ))}
             </h1>
           </div>
         </div>
@@ -473,15 +533,94 @@ const NowShowingMoviesFullDetailsPage = () => {
                   <IoMdStar className=" relative top-1 mr-2" />
                   {data?.node?.ratingsSummary?.aggregateRating}
                 </span>
-                <span className=" mx-5 text-[1.2vw] white-space-nowrap  truncate  ">
-                  {data?.node?.titleGenres?.genres.map((movie) => {
-                    return movie?.genre?.text;
-                  })}
+                <span className="mx-5 text-[1.2vw] white-space-nowrap truncate">
+                  {data?.node?.titleGenres?.genres.map((movie, index) => (
+                    <React.Fragment key={index}>
+                      {movie?.genre?.text}
+                      {index < data.node.titleGenres.genres.length - 1 && ", "}
+                    </React.Fragment>
+                  ))}
                 </span>
               </div>
             ))}
           </div>
         </div>
+
+        <div className=" absolute top-[170vw] left-[25vw] inline-block">
+          <h1 className=" text-[1.4vw] font-bold ">Details</h1>
+        </div>
+        <div className="  relative top-[149vw] left-[25vw] w-[70vw] h-[60vh] mb-[5vw]">
+          <h1 className="text-[1.2vw] text-blue-500 border-t-[1px] border-b-[1px]  border-gray-700 py-5">
+            <span className="  text-yellow-400 mr-5">Release Date</span>
+            {NowShowingMoviesDetails?.releaseDate?.month}
+            {"/"}
+            {NowShowingMoviesDetails?.releaseDate?.day}
+            {"/"}
+            {NowShowingMoviesDetails?.releaseDate?.year}
+          </h1>
+          <h1 className=" text-[1.2vw] text-blue-500 border-b-[1px] border-gray-700 py-5">
+            <span className=" mr-5 text-yellow-400">Countries of Origins</span>
+            {NowShowingMoviesDetails?.countriesOfOrigin?.countries.map(
+              (data) => {
+                return data?.id;
+              }
+            )}
+          </h1>
+          <h1 className=" text-[1.2vw] text-blue-500  border-b-[1px] border-gray-700 py-5">
+            <span className=" mr-5 text-yellow-400">Language</span>
+            {NowShowingMoviesDetails?.spokenLanguages?.spokenLanguages.map(
+              (data) => {
+                return data?.text;
+              }
+            )}
+          </h1>
+          <h1 className=" text-[1.2vw] text-emerald-500  border-b-[1px] border-gray-700 py-5">
+            <span className="mr-5 text-yellow-400">Also Known As</span>
+            {NowShowingMoviesDetails?.akas?.edges.map((data) => {
+              return data?.node?.text;
+            })}
+          </h1>
+          <h1 className=" text-[1.2vw] text-blue-500  border-b-[1px] border-gray-700 py-5">
+            <span className=" mr-5 text-yellow-400">Filming Locations</span>
+            {NowShowingMoviesDetails?.filmingLocations?.edges.map((data) => {
+              return data?.node?.text;
+            })}{" "}
+            <span className=" text-cyan-400">(Studio)</span>
+          </h1>
+          <h1 className="text-[1.2vw] text-blue-500 border-b-[1px] border-gray-700 py-5">
+            <span className="mr-5 text-yellow-400">Production Companies</span>
+            {NowShowingMoviesDetails?.production?.edges.map((data, index) => (
+              <React.Fragment key={index}>
+                {data?.node?.company?.companyText?.text}
+                {index < NowShowingMoviesDetails.production.edges.length - 1 &&
+                  " & "}
+              </React.Fragment>
+            ))}
+          </h1>
+
+          <h1 className="text-[1.2vw] flex text-blue-500 border-b-[1px] border-gray-700 py-5">
+            <span className="mr-5 text-yellow-400">Official Sites</span>
+            {NowShowingMoviesDetails?.detailsExternalLinks?.edges.map(
+              (data, index) => (
+                <React.Fragment key={index}>
+                  <Link
+                    className=" hover:underline hover:text-red-500"
+                    to={`${data?.node?.url}`}
+                  >
+                    <span>{data?.node?.label}</span>
+                  </Link>
+                  {index <
+                    NowShowingMoviesDetails.detailsExternalLinks.edges.length -
+                      1 && (
+                    <span className="mx-2">& </span> // Adjust mx-2 for your preferred spacing
+                  )}
+                </React.Fragment>
+              )
+            )}
+            {"."}
+          </h1>
+        </div>
+
         <div className=" inline-block relative top-[150vw] left-[25vw] text-[1.4vw] font-bold">
           <h1>User Reviews</h1>
         </div>
@@ -522,10 +661,10 @@ const NowShowingMoviesFullDetailsPage = () => {
           </div>
         </div>
 
-        <div className=" absolute top-[215vw] left-[25vw] inline-block  ">
+        <div className=" absolute top-[260vw] left-[25vw] inline-block  ">
           <h1 className=" text-[1.4vw] font-bold ">Box Office</h1>
         </div>
-        <div className=" absolute top-[219vw] left-[25vw]">
+        <div className=" absolute top-[263vw] left-[25vw]">
           <h1 className=" text-[1.2vw] font-semibold whitespace-nowrap mb-3">
             Budget
           </h1>
@@ -553,7 +692,7 @@ const NowShowingMoviesFullDetailsPage = () => {
             </h1>
           </div>
         </div>
-        <div className=" absolute top-[235vw] left-[25vw]  inline-block ">
+        <div className=" absolute top-[276vw] left-[25vw]  inline-block ">
           <h1 className="text-[1.4vw] font-bold mb-5">Technical Specs</h1>
           <h1 className=" text-[1.2vw] font-semibold mb-3 text-yellow-400">
             Runtime
@@ -577,14 +716,24 @@ const NowShowingMoviesFullDetailsPage = () => {
           </h1>
           <h1 className="text-[1.2vw] font-semibold mb-3 text-yellow-400">
             Sound mix
-            <span className=" ml-10 text-blue-400">
+            <span className="ml-10 text-blue-400">
               {NowShowingMoviesDetails?.technicalSpecifications?.soundMixes?.items.map(
-                (data) => {
-                  return data?.text;
-                }
+                (data, index) => (
+                  <React.Fragment key={index}>
+                    {index > 0 && <span className="mx-1"> </span>}{" "}
+                    {/* Add space before each item except the first */}
+                    {data?.text}
+                    {index <
+                      NowShowingMoviesDetails.technicalSpecifications.soundMixes
+                        .items.length -
+                        1 && <span className="mx-1">, </span>}{" "}
+                    {/* Add space after each comma */}
+                  </React.Fragment>
+                )
               )}
             </span>
           </h1>
+
           <h1 className=" text-[1.2vw] font-semibold text-yellow-400">
             Aspect ratio
             <span className=" ml-10 text-white">
@@ -596,10 +745,10 @@ const NowShowingMoviesFullDetailsPage = () => {
             </span>
           </h1>
         </div>
-        <div className=" absolute top-[255vw] left-[25vw]">
+        <div className=" absolute top-[295vw] left-[25vw]">
           <h1 className="text-[1.4vw] font-bold photogallery">Photo Gallery</h1>
         </div>
-        <div className="w-[75vw] h-[30vh] bg-red-20 absolute top-[260vw] left-[22vw]">
+        <div className="w-[75vw] h-[45vh] bg-red-20 absolute top-[300vw] left-[22vw]">
           <div className="flex">
             <Swiper
               slidesPerView={3}
@@ -615,7 +764,7 @@ const NowShowingMoviesFullDetailsPage = () => {
                 .map((data, index) => (
                   <SwiperSlide key={index} className=" overflow-hidden">
                     <img
-                      className=" hover:rounded-lg transition duration-300 ease-in-out hover:scale-110 mx-9 w-[20vw]  h-[30vh] object-top object-cover rounded-lg"
+                      className=" hover:rounded-lg  hover:border-l-[3px] hover:border-r-[3px] hover:object-cover border-yellow-400 transition duration-300 ease-in-out hover:scale-105 hover:scale-y-125 mx-9 w-[20vw]  h-[30vh] object-top object-cover rounded-lg"
                       src={data?.node?.url}
                       alt=""
                     />
@@ -624,11 +773,11 @@ const NowShowingMoviesFullDetailsPage = () => {
             </Swiper>
           </div>
         </div>
-        <div className=" inline-block absolute top-[282vw] left-[25vw]">
+        <div className=" inline-block absolute top-[320vw] left-[25vw]">
           <h1 className="text-[1.4vw] font-bold videogallery">Video Gallery</h1>
         </div>
-        <div className=" w-[73vw] h-[27vh] absolute top-[286vw] left-[22vw]">
-          <div className="flex">
+        <div className=" w-[73vw]   h-[45vh]  bg-red-30  py-2 absolute top-[324vw] left-[22vw]">
+          <div className="flex  ">
             <Swiper
               slidesPerView={3}
               pagination={{
@@ -639,27 +788,84 @@ const NowShowingMoviesFullDetailsPage = () => {
               className="mySwiper"
             >
               {NowShowingVideoGallery?.videos.map((data2, index) => (
-                <SwiperSlide key={index} className=" overflow-hidden hover:underline hover:text-yellow-400">
-                  <div className=" hover:text-yellow-400 cursor-pointer">
-                  <img
-                    className=" mx-9 w-[20vw]  h-[27vh] mb-5  object-top object-center    rounded-lg"
-                    src={data2?.image?.url}
-                    alt=""
-                  />
+                <SwiperSlide
+                  key={index}
+                  className=" hover:underline hover:text-red-600"
+                >
+                  <div className="">
+                    <img
+                      className=" mx-9 w-[20vw]  h-[27vh] mb-5   object-top object-center hover:border-cyan-400  border-[3px] border-blue-800  rounded-lg"
+                      src={data2?.image?.url}
+                      alt=""
+                    />
 
-                  <BiPlayCircle className=" absolute bottom-[5vw] text-white font-bold text-[1.8vw] left-[3vw]" />
-                  <h1 className=" text-[1.3vw] absolute left-[5vw] bottom-[5vw] font-semibold text-white ">
-                    Trailer {convertDuration(data2?.durationInSeconds)}
-                  </h1>
+                    <BiPlayCircle className="  text-white  relative bottom-[4vw] left-[3vw] text-[1.8vw]" />
+                    <div className="  -mt-[6vw] ">
+                      <h1 className="  inline-flex text-[1.3vw] font-semibold text-white mr-[7vw]">
+                        Trailer {convertDuration(data2?.durationInSeconds)}
+                      </h1>
+                    </div>
 
-                  <h1 className=" mx-10 text-[1.2vw] font-semibold">
-                    Watch {data2?.title}
-                  </h1>
+                    <h1 className=" text-white relative mx-10 h-[20vh] text-[1.2vw] top-7   font-semibold">
+                      Watch {data2?.title}
+                    </h1>
                   </div>
                 </SwiperSlide>
               ))}
             </Swiper>
           </div>
+        </div>
+        <div className=" absolute top-[350vw] left-[25vw]">
+          <h1 className=" text-[1.4vw] font-bold relatednews">Related News</h1>
+        </div>
+        <div className=" absolute  w-[65vw]  h-[30vh] top-[355vw] left-[25vw] bg-red-30">
+          <div className="  flex flex-row">
+            <Swiper
+              slidesPerView={2}
+              spaceBetween={10}
+              // pagination={{
+              //   clickable: true,
+              // }}
+              navigation={true}
+              modules={[Navigation]}
+              className="mySwiper "
+            >
+              {NowShowingRelatedNews?.news?.edges.map((data, index) => (
+                <SwiperSlide
+                  key={index}
+                  className=" overflow-hidden flex mr-10 hover:text-red-600 hover:bg-gray-800 rounded-lg cursor-pointer "
+                >
+                  <div className="   flex">
+                    <img
+                      className=" w-[7vw] h-[22vh] object-cover object-top rounded-lg hover:bg-gray-600"
+                      src={data?.node?.image?.url}
+                      alt=""
+                    />
+                    <h1 className=" absolute left-[8vw]">
+                      {data?.node?.articleTitle?.plainText}
+                    </h1>
+                    <h1 className="absolute top-[6vw] text-white left-[9vw]">
+                      {new Date(data?.node?.date).toLocaleString("default", {
+                        month: "short",
+                      })}{" "}
+                      {new Date(data?.node?.date).getDate()}
+                    </h1>
+                    <h1 className=" absolute top-[6vw] left-[22vw] text-lime-400 hover:underline">
+                      Source : {data?.node?.source?.homepage?.label}
+                    </h1>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </div>
+        <div className=" absolute bg-black w-[100vw] h-[134vh]  top-[374vw]  ">
+          <div className=" absolute left-[10vw]">
+            <RecentlyViewed />
+          </div>
+        </div>
+        <div className=" absolute top-[412vw] border-t-2 border-red-600">
+          <Footer />
         </div>
       </div>
     </div>
