@@ -69,7 +69,7 @@ export const RapidOptionsDetailsNowShowingMoviesDaimond ={
 export const RapidOptionsDetailsNowShowingMoviesDaimondApidojo ={
   method: 'GET',
 	headers: {
-		'x-rapidapi-key': 'ac9703eb7cmsha3fb517d9775acep1bf6f4jsn07ebb6dd3cf0',
+		'x-rapidapi-key': '4645f2fe92msh05e035cbd74917cp1a8c56jsnd7da9a435e5c',
 		'x-rapidapi-host': 'imdb8.p.rapidapi.com'
 	}
 }

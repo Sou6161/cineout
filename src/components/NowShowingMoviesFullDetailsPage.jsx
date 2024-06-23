@@ -18,13 +18,14 @@ import { IoMdStar } from "react-icons/io";
 import { IoMdArrowDropdownCircle } from "react-icons/io";
 import { BiPlayCircle } from "react-icons/bi";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { TiStarFullOutline } from "react-icons/ti";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
 import { Pagination, Navigation } from "swiper/modules";
 import RecentlyViewed from "./RecentlyViewed";
 import Footer from "./Footer";
+import useModal from "./UseModal";
 
 const trimTextTo500Words = (text) => {
   const words = text.split(" ");
@@ -68,6 +69,7 @@ const NowShowingMoviesFullDetailsPage = () => {
   const [NowShowingImages, setNowShowingImages] = useState(null);
   const [NowShowingVideoGallery, setNowShowingVideoGallery] = useState(null);
   const [NowShowingRelatedNews, setNowShowingRelatedNews] = useState(null);
+  const { isShowing, toggle } = useModal();
 
   useEffect(() => {
     const NowShowingTrailerYTKEY = async () => {
@@ -362,10 +364,28 @@ const NowShowingMoviesFullDetailsPage = () => {
           <span className=" absolute top-8 left-[11vw] text-[1.5vw] text-yellow-400">
             <IoStarOutline />
           </span>
-          <h1 className="absolute top-7 hover:underline cursor-pointer left-[12.8vw] text-[1.3vw] font-semibold">
+          <h1
+            onClick={toggle}
+            className="absolute top-7 hover:underline cursor-pointer left-[12.8vw] text-[1.3vw] font-semibold"
+          >
             RATE
           </h1>
-
+          {/* Render the modal */}
+          {isShowing && (
+            <div className="modal-wrapper">
+              <div className="modal">
+            
+                <button
+                  className="absolute top-2 right-2 text-gray-500 hover:text-red-500"
+                  onClick={toggle}
+                >
+                  &#10006;
+                </button>
+                {/* Your modal content here */}
+                Hello, I'm a modal!
+              </div>
+            </div>
+          )}
           <h1 className="font-bold">POPULARITY</h1>
           <span className="absolute left-[19vw] top-8 text-[2vw] border-2 border-lime-400 rounded-full p-[0.1vw]">
             {NowShowingMoviesDetails?.meterRanking?.currentRank > 5 ? (
@@ -628,7 +648,7 @@ const NowShowingMoviesFullDetailsPage = () => {
           className="relative top-[152vw] left-[25vw] w-[50vw] rounded-lg px-5 py-4"
           style={{
             backgroundColor: "black",
-            height: isTrimmed ? "52vh" : "auto",
+            height: isTrimmed ? "auto" : "auto",
           }}
         >
           <h1 className=" review w-[10vw]">FEATURED REVIEW</h1>
@@ -661,10 +681,10 @@ const NowShowingMoviesFullDetailsPage = () => {
           </div>
         </div>
 
-        <div className=" absolute top-[260vw] left-[25vw] inline-block  ">
+        <div className=" absolute top-[257vw] left-[25vw] inline-block  ">
           <h1 className=" text-[1.4vw] font-bold ">Box Office</h1>
         </div>
-        <div className=" absolute top-[263vw] left-[25vw]">
+        <div className=" absolute top-[261vw] left-[25vw]">
           <h1 className=" text-[1.2vw] font-semibold whitespace-nowrap mb-3">
             Budget
           </h1>
