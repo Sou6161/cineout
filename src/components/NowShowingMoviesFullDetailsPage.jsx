@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import Headerfordetails from "./Headerfordetails";
 import { API_OPTIONS } from "../constants/Apioptions";
 import {
-  RapidOptionsDetailsNowShowingMoviesDaimondTest25,
+  RapidOptionsDetailsNowShowingMoviesDaimondTest29,
   RapidOptionsDetailsNowShowingMoviesDaimondApidojoTest26,
   RapidOptionsDetailsNowShowingMoviesDaimondTest27ApiDojo,
   RapidOptionsDetailsNowShowingMoviesDaimondTest28ApiDojo,
@@ -21,6 +21,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { TiStarFullOutline } from "react-icons/ti";
 import { RiStarLine } from "react-icons/ri";
 import { RiStarFill } from "react-icons/ri";
+import { IoMdArrowDropup } from "react-icons/io";
+import { IoMdArrowDropdown } from "react-icons/io";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -144,28 +146,23 @@ const NowShowingMoviesFullDetailsPage = () => {
 
   useEffect(() => {
     const NowShowingMoviesDetails = async () => {
-      if (NowShowingIMDBID && !loading) {
-        setLoading(true); // Set loading to true to prevent multiple requests
+      if (NowShowingIMDBID) {
         try {
           const response = await fetch(
             `https://imdb146.p.rapidapi.com/v1/title/?id=${NowShowingIMDBID}`,
-            RapidOptionsDetailsNowShowingMoviesDaimondTest25
+            RapidOptionsDetailsNowShowingMoviesDaimondTest29
           );
           const NowShowingMoviesDetails = await response.json(); // Assuming this is the variable you want to dispatch
-
+          setNowShowingMoviesDetails(NowShowingMoviesDetails);
           // Check if NowShowingMoviesDetails is valid before dispatching
-          if (NowShowingMoviesDetails && !NowShowingMoviesDetails.error) {
+          if (NowShowingMoviesDetails) {
             dispatch(addRecentlyVieweddata(NowShowingMoviesDetails)); // Dispatch action to add movie details
           } else {
             console.error("Invalid data received:", NowShowingMoviesDetails);
           }
         } catch (error) {
           console.error("Error fetching movie details:", error);
-        } finally {
-          setLoading(false); // Reset loading state
         }
-      } else {
-        console.log("NowShowingIMDBID is not available or already loading");
       }
     };
     NowShowingMoviesDetails();
@@ -269,13 +266,22 @@ const NowShowingMoviesFullDetailsPage = () => {
           <iframe
             className=" w-[97vw] mx-auto h-[75vh] relative top-1 rounded-lg"
             src={`https://www.youtube.com/embed/${NowShowingTrailerYTKEY}?si=HxKbpBA7t2t3ulUK`}
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
           ></iframe>
         ) : (
-          <div></div>
+          <div
+            role="status"
+            class="flex items-center justify-center bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700"
+          >
+            <svg
+              class="w-[97vw] h-[75vh] text-gray-200 dark:text-gray-600"
+              aria-hidden="true"
+              fill="currentColor"
+            >
+              <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z" />
+              <path d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM9 13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2Zm4 .382a1 1 0 0 1-1.447.894L10 13v-2l1.553-1.276a1 1 0 0 1 1.447.894v2.764Z" />
+            </svg>
+            <span class="sr-only">Loading...</span>
+          </div>
         )}
       </div>
 
@@ -473,8 +479,19 @@ const NowShowingMoviesFullDetailsPage = () => {
               <FaArrowTrendUp />
             )}
           </span>
-          <span className="absolute left-[22vw] top-8 text-[1.3vw] font-bold">
+          <span className="absolute flex left-[22vw] top-8 text-[1.3vw] font-bold">
             {NowShowingMoviesDetails?.meterRanking?.currentRank}
+            <span className="absolute left-4 top-1">
+              {NowShowingMoviesDetails?.meterRanking?.rankChange
+                ?.changeDirection === "UP" ? (
+                <IoMdArrowDropup />
+              ) : (
+                <IoMdArrowDropdown />
+              )}
+            </span>
+            <span className="ml-7 text-[1.3vw]">
+              {NowShowingMoviesDetails?.meterRanking?.rankChange?.difference}
+            </span>
           </span>
         </div>
         <div className=" absolute left-[78vw] top-[10vw] ">
@@ -804,7 +821,7 @@ const NowShowingMoviesFullDetailsPage = () => {
               </>
             )}
             {NowShowingMoviesDetails?.worldwideGross && (
-              <>  
+              <>
                 <h1 className="mb-3 text-sky-500 text-[1.2vw]">
                   Gross worldwide
                 </h1>
