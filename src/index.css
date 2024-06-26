@@ -46,15 +46,15 @@
 }
 
 .glow5 {
-  outline: 1px solid #4fe756;
+  outline: 1px solid black;
   outline-offset: 1px;
-  box-shadow: 0 0 1px #4fe756, 0 0 20px #4fe756;
+  box-shadow: 0 0 1px black, 0 0 20px black;
 }
 
 .glow6 {
-  outline: 1px solid #d2d778;
+  outline: 1px solid #bef264;
   outline-offset: 1px;
-  box-shadow: 0 0 1px #d2d778, 0 0 10px #e6ee50;
+  box-shadow: 0 0 1px #bef264, 0 0 15px #bef264;
 }
 
 .Cursor {
@@ -904,7 +904,6 @@ body {
   width: 100%;
 }
 
-
 /* Related News Text Styling */
 
 .relatednews {
@@ -936,18 +935,6 @@ body {
   width: 100%;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 /* NowShowing PhotoGallery swiper code */
 
 .swiper {
@@ -968,30 +955,21 @@ body {
 
 /*  Add this CSS to your stylesheet or component */
 .mySwiper .swiper-pagination {
-  position:absolute;
+  position: absolute;
   top: 20px;
-  
-   
 }
 
-.swiper-button-prev{
+.swiper-button-prev {
   background-color: white;
- border-radius: 10%;
- /* left: auto; Remove the default left position */
- right: 100px; /* Set the desired right position */
+  border-radius: 10%;
+  /* left: auto; Remove the default left position */
+  right: 100px; /* Set the desired right position */
 }
 
 .swiper-button-next {
   background-color: white; /* Red background color */
   border-radius: 10%;
 }
-
-
-
-
-
-
-
 
 .swiper {
   width: 100%;
@@ -1009,10 +987,6 @@ body {
   align-items: center;
 }
 
-
-
-
-
 .neuroVideogallery {
   border-radius: 46px;
   background: #e0e0e0;
@@ -1022,7 +996,7 @@ body {
 /* video gallery title code */
 
 .videogallery {
-  color: purple;
+  color: red;
   text-decoration: none;
   /* font-size: 25px; */
   border: none;
@@ -1050,17 +1024,13 @@ body {
   width: 100%;
 }
 
-
-
-
 /* Modal code */
-
 
 .modal-wrapper {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1050;
+  z-index: 98;
   width: 100%;
   height: 100%;
   overflow-x: hidden;
@@ -1070,11 +1040,11 @@ body {
 }
 
 .modal {
-  z-index: 100;
-  overflow-y:hidden;
-  width: 50vw;
-  height: 50vh;
-  background: rgb(30 41 59);
+  z-index: 99;
+  overflow-y: hidden;
+  width: 45vw;
+  height: 40vh;
+  background: #212121;
   position: relative;
   top: 20%;
   margin: 1.75rem auto;
@@ -1083,3 +1053,104 @@ body {
   padding: 1rem;
 }
 
+/* Rate Button Code */
+
+.Rate-button {
+  position: relative;
+  overflow: hidden;
+  width: 10rem;
+  height: 3rem;
+  padding: 0 2rem;
+  border-radius: 1.5rem;
+  background: #3d3a4e;
+  background-size: 400%;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.Rate-button:hover::before {
+  transform: scaleX(1);
+}
+
+.Rate-button-content {
+  position: relative;
+  z-index: 1;
+}
+
+.Rate-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  width: 100%;
+  height: inherit;
+  border-radius: inherit;
+  background: linear-gradient(
+    82.3deg,
+    rgba(150, 93, 233, 1) 10.8%,
+    rgba(99, 88, 238, 1) 94.3%
+  );
+  transition: all 0.475s;
+}
+
+/* RecentlyViewed Delete Button */
+
+.Deletebutton {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgb(20, 20, 20);
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  position: relative;
+}
+
+.DeletesvgIcon {
+  width: 12px;
+  transition-duration: 0.3s;
+}
+
+.DeletesvgIcon path {
+  fill: white;
+}
+
+.Deletebutton:hover {
+  width: 140px;
+  border-radius: 50px;
+  transition-duration: 0.3s;
+  background-color: rgb(255, 69, 69);
+  align-items: center;
+}
+
+.Deletebutton:hover .DeletesvgIcon {
+  width: 50px;
+  transition-duration: 0.3s;
+  transform: translateY(60%);
+}
+
+.Deletebutton::before {
+  position: absolute;
+  top: -20px;
+  content: "Clear all";
+  color: white;
+  font-weight: 700;
+  transition-duration: 0.3s;
+  font-size: 2px;
+}
+
+.Deletebutton:hover::before {
+  font-size: 14px;
+  opacity: 1;
+  transform: translateY(30px);
+  transition-duration: 0.3s;
+}

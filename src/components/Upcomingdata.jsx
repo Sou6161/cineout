@@ -20,7 +20,7 @@ const Upcomingdata = ({
         <div className=" w-[97vw] h-[55vh]  scrollbar-hide overflow-x-auto overflow-y-hidden  mb-[8vh] -mt-2 bg-yellow-20">
           <div className=" ml-3 flex gap-10  w-[100vw] h-[47vh]  no-scrollbar ">
             {/* {nowupcomingmovies &&console.log(nowupcomingmovies, "now upcoming movies ID")} */}
-            {console.log(nowupcomingfinal, "now upcoming final")}
+            {/* {console.log(nowupcomingfinal, "now upcoming final")} */}
             {nowupcomingfinal &&
               nowupcomingfinal.map((movies, index) => {
                 const movie = nowupcomingfinal[index];
@@ -56,16 +56,19 @@ const Upcomingdata = ({
           <h1 className=" text-3xl ml-7 font-semibold text-red-700">
             Upcoming Movies
           </h1>
-          {/* <Dropdown title="filter" options={["tv","movie","all"]}/> */}
         </div>
 
         <div className=" w-[97vw] mx-4  h-[55vh]  scrollbar-hide overflow-x-auto overflow-y-hidden  mb-[8vh] -mt-2 bg-yellow-20">
           <div className=" ml-3 flex gap-10  w-[100vw] h-[47vh]  no-scrollbar ">
-            {/* {finalcomingsoonmoviestheaters && console.log(finalcomingsoonmoviestheaters)} */}
-            {nowupcomingmoviesdetails &&
+            {nowupcomingmovies && console.log(nowupcomingmovies," UpcomingMoviesIMDBID Final")}
+            {nowupcomingmoviesdetails && console.log(nowupcomingmoviesdetails," UpcomingMoviesDetails Final")}
+
+
+            {nowupcomingmoviesdetails && 
               nowupcomingmoviesdetails.map((movie, index) => {
                 {
                   return (
+                    <Link to={`/silver/su${movie.id}`}>
                     <div key={index}>
                       <div className="  mr-4  ml-6 mt-4 min-w-[15vw] glow3 max-h-[42vh] rounded-[10px] p-2 overflow-x-hidden scrollbar-hide cursor-pointer bg-zinc-70  bg-slate-400  hover:bg-slate-500 overflow-y-auto">
                         <img
@@ -85,6 +88,7 @@ const Upcomingdata = ({
                         </h1>
                       </div>
                     </div>
+                    </Link>
                   );
                 }
               })}

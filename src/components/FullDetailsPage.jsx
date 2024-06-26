@@ -724,7 +724,7 @@ const FullDetailsPage = () => {
                       />
                     </div>
                     <div className="">
-                      <h1 className="text-2xl font-semibold text-yellow-500   ml-5 mt-5">
+                      <h1 className="text-2xl font-semibold text-orange-500   ml-5 mt-5">
                         {item?.node?.originalTitleText?.text}
                       </h1>
                       <div className=" ml-5 mt-3">

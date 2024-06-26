@@ -3,10 +3,10 @@ import { Link, useParams } from "react-router-dom";
 import Headerfordetails from "./Headerfordetails";
 import { API_OPTIONS } from "../constants/Apioptions";
 import {
-  RapidOptionsDetailsNowShowingMoviesDaimond,
-  RapidOptionsDetailsNowShowingMoviesDaimondApidojo,
-  RapidOptionsDetailsNowShowingMoviesDaimondTest18ApiDojo,
-  RapidOptionsDetailsNowShowingMoviesDaimondTest19ApiDojo,
+  RapidOptionsDetailsNowShowingMoviesDaimondTest25,
+  RapidOptionsDetailsNowShowingMoviesDaimondApidojoTest26,
+  RapidOptionsDetailsNowShowingMoviesDaimondTest27ApiDojo,
+  RapidOptionsDetailsNowShowingMoviesDaimondTest28ApiDojo,
 } from "../constants/RapidOptionsForDetails";
 import { PiDotOutlineBold } from "react-icons/pi";
 import { FaPlus } from "react-icons/fa6";
@@ -19,6 +19,8 @@ import { IoMdArrowDropdownCircle } from "react-icons/io";
 import { BiPlayCircle } from "react-icons/bi";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { TiStarFullOutline } from "react-icons/ti";
+import { RiStarLine } from "react-icons/ri";
+import { RiStarFill } from "react-icons/ri";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -26,6 +28,8 @@ import { Pagination, Navigation } from "swiper/modules";
 import RecentlyViewed from "./RecentlyViewed";
 import Footer from "./Footer";
 import useModal from "./UseModal";
+import { useDispatch } from "react-redux";
+import { addRecentlyVieweddata } from "../Reduxstore/RecentlyViewedSlice";
 
 const trimTextTo500Words = (text) => {
   const words = text.split(" ");
@@ -70,6 +74,24 @@ const NowShowingMoviesFullDetailsPage = () => {
   const [NowShowingVideoGallery, setNowShowingVideoGallery] = useState(null);
   const [NowShowingRelatedNews, setNowShowingRelatedNews] = useState(null);
   const { isShowing, toggle } = useModal();
+  const [isHovered, setIsHovered] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [clickedIndex, setClickedIndex] = useState(null);
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+
+  const handleIconClick = (index) => {
+    setClickedIndex(index);
+  };
+
+  useEffect(() => {
+    if (isShowing) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+      document.body.style.overflowX = "clip";
+    }
+  }, [isShowing]);
 
   useEffect(() => {
     const NowShowingTrailerYTKEY = async () => {
@@ -115,36 +137,51 @@ const NowShowingMoviesFullDetailsPage = () => {
   }, []);
 
   useEffect(() => {
-    NowShowingIMDBID && console.log(NowShowingIMDBID, "IMDB ID");
+    if (NowShowingIMDBID !== null) {
+      console.log(NowShowingIMDBID, "IMDB ID");
+    }
   }, [NowShowingIMDBID]);
 
   useEffect(() => {
     const NowShowingMoviesDetails = async () => {
-      if (NowShowingIMDBID) {
-        // Check if NowShowingIMDBID is available
-        const response = await fetch(
-          `https://imdb146.p.rapidapi.com/v1/title/?id=${NowShowingIMDBID}`,
-          RapidOptionsDetailsNowShowingMoviesDaimond
-        );
-        const data = await response.json();
-        setNowShowingMoviesDetails(data);
+      if (NowShowingIMDBID && !loading) {
+        setLoading(true); // Set loading to true to prevent multiple requests
+        try {
+          const response = await fetch(
+            `https://imdb146.p.rapidapi.com/v1/title/?id=${NowShowingIMDBID}`,
+            RapidOptionsDetailsNowShowingMoviesDaimondTest25
+          );
+          const NowShowingMoviesDetails = await response.json(); // Assuming this is the variable you want to dispatch
+
+          // Check if NowShowingMoviesDetails is valid before dispatching
+          if (NowShowingMoviesDetails && !NowShowingMoviesDetails.error) {
+            dispatch(addRecentlyVieweddata(NowShowingMoviesDetails)); // Dispatch action to add movie details
+          } else {
+            console.error("Invalid data received:", NowShowingMoviesDetails);
+          }
+        } catch (error) {
+          console.error("Error fetching movie details:", error);
+        } finally {
+          setLoading(false); // Reset loading state
+        }
       } else {
-        console.log("NowShowingIMDBID is not available");
+        console.log("NowShowingIMDBID is not available or already loading");
       }
     };
     NowShowingMoviesDetails();
   }, [NowShowingIMDBID]);
 
   useEffect(() => {
-    NowShowingMoviesDetails && console.log(NowShowingMoviesDetails);
-  }, [NowShowingMoviesDetails]);
+    NowShowingMoviesDetails &&
+      console.log(NowShowingMoviesDetails, " All NowShowingMovies Details");
+  }, [dispatch, NowShowingMoviesDetails]);
 
   useEffect(() => {
     const getNowShowingPhotos = async () => {
       try {
         const response = await fetch(
           `https://imdb8.p.rapidapi.com/title/v2/get-images?tconst=${NowShowingIMDBID}&first=100`,
-          RapidOptionsDetailsNowShowingMoviesDaimondApidojo
+          RapidOptionsDetailsNowShowingMoviesDaimondApidojoTest26
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -170,7 +207,7 @@ const NowShowingMoviesFullDetailsPage = () => {
       try {
         const response = await fetch(
           `https://imdb8.p.rapidapi.com/title/get-videos?tconst=${NowShowingIMDBID}&limit=100&region=US`,
-          RapidOptionsDetailsNowShowingMoviesDaimondTest18ApiDojo
+          RapidOptionsDetailsNowShowingMoviesDaimondTest27ApiDojo
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -201,7 +238,7 @@ const NowShowingMoviesFullDetailsPage = () => {
       try {
         const response = await fetch(
           `https://imdb8.p.rapidapi.com/title/v2/get-related-news?tconst=${NowShowingIMDBID}&first=20&country=US&language=en-US`,
-          RapidOptionsDetailsNowShowingMoviesDaimondTest19ApiDojo
+          RapidOptionsDetailsNowShowingMoviesDaimondTest28ApiDojo
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -227,7 +264,7 @@ const NowShowingMoviesFullDetailsPage = () => {
       <div className="">
         <Headerfordetails />
       </div>
-      <div className=" w-[98vw] mx-auto mt-5 h-[76.5vh] border-2 border-lime-400 glow5 rounded-lg  ">
+      <div className=" w-[98vw] mx-auto mt-5 h-[76.5vh] border- border-black glow5 rounded-lg  ">
         {NowShowingTrailerYTKEY ? (
           <iframe
             className=" w-[97vw] mx-auto h-[75vh] relative top-1 rounded-lg"
@@ -280,18 +317,18 @@ const NowShowingMoviesFullDetailsPage = () => {
             <span className=" text-white relative top-[9vw] text-[1.3vw]  ">
               Director
             </span>
-            <h1 className="relative top-[7vw] text-[1.3vw] left-[7vw]">
+            <h1 className="relative text-emerald-400 font-semibold top-[7vw] text-[1.3vw] left-[7vw]">
               {NowShowingMoviesDetails?.directorsPageTitle.map(
                 (data, index) => (
                   <span key={index}>
                     {data?.credits.map((director, i) => (
                       <React.Fragment key={i}>
                         {director?.name?.nameText?.text}
-                        {i < data.credits.length - 1 && ", "}
+                        {i < data?.credits?.length - 1 && ", "}
                       </React.Fragment>
                     ))}
                     {index <
-                      NowShowingMoviesDetails.directorsPageTitle.length - 1 &&
+                      NowShowingMoviesDetails?.directorsPageTitle?.length - 1 &&
                       ", "}
                   </span>
                 )
@@ -301,16 +338,16 @@ const NowShowingMoviesFullDetailsPage = () => {
             <span className=" text-white relative top-[9.5vw] text-[1.3vw]">
               Writers
             </span>
-            <h1 className="relative top-[7.6vw] text-[1.3vw] left-[7vw]">
+            <h1 className="relative top-[7.6vw] text-emerald-400 text-[1.3vw] left-[7vw]">
               {NowShowingMoviesDetails?.writers.map((data, index) => (
                 <span key={index}>
                   {data?.credits.map((writers, i) => (
                     <React.Fragment key={i}>
                       {writers?.name?.nameText?.text}
-                      {i < data.credits.length - 1 && ", "}
+                      {i < data?.credits?.length - 1 && ", "}
                     </React.Fragment>
                   ))}
-                  {index < NowShowingMoviesDetails.writers.length - 1 && ", "}
+                  {index < NowShowingMoviesDetails?.writers?.length - 1 && ", "}
                 </span>
               ))}
             </h1>
@@ -318,14 +355,14 @@ const NowShowingMoviesFullDetailsPage = () => {
             <span className=" text-white relative top-[10vw] text-[1.3vw]">
               Stars
             </span>
-            <h1 className="relative top-[8vw] left-[7vw] text-[1.3vw]">
+            <h1 className="relative top-[8vw] text-emerald-400 left-[7vw] text-[1.3vw]">
               {NowShowingMoviesDetails?.castPageTitle?.edges.map(
                 (data, index) => (
                   <React.Fragment key={index}>
                     {data?.node?.name?.nameText?.text}
                     {index <
-                      NowShowingMoviesDetails.castPageTitle.edges.length - 1 &&
-                      ", "}
+                      NowShowingMoviesDetails?.castPageTitle?.edges?.length -
+                        1 && ", "}
                   </React.Fragment>
                 )
               )}
@@ -334,19 +371,21 @@ const NowShowingMoviesFullDetailsPage = () => {
             <span className=" text-white relative top-[10vw] text-[1.3vw]">
               Genre
             </span>
-            <h1 className="relative top-[8.1vw] left-[7vw] text-[1.3vw]">
-              {NowShowingMoviesDetails?.genres.genres.map((data, index) => (
+            <h1 className="relative top-[8.1vw] text-emerald-400 left-[7vw] text-[1.3vw]">
+              {NowShowingMoviesDetails?.genres?.genres.map((data, index) => (
                 <React.Fragment key={index}>
                   {data?.text}
-                  {index < NowShowingMoviesDetails.genres.genres.length - 1 &&
-                    ", "}
+                  {index <
+                    NowShowingMoviesDetails?.genres?.genres?.length - 1 && ", "}
                 </React.Fragment>
               ))}
             </h1>
           </div>
         </div>
         <div className=" flex gap-10 bg-red-30 absolute left-[70vw] top-5">
-          <h1 className=" whitespace-nowrap font-bold">CINEOUT RATING</h1>
+          <h1 className=" whitespace-nowrap font-bold text-yellow-400">
+            CINEOUT RATING
+          </h1>
           <span className=" absolute top-10 left-2 text-[1.5vw] text-yellow-400">
             <FaStar />{" "}
             <span className=" inline-bloc relative left-9 bottom-10 text-red-600  ">
@@ -374,7 +413,6 @@ const NowShowingMoviesFullDetailsPage = () => {
           {isShowing && (
             <div className="modal-wrapper">
               <div className="modal">
-            
                 <button
                   className="absolute top-2 right-2 text-gray-500 hover:text-red-500"
                   onClick={toggle}
@@ -382,10 +420,51 @@ const NowShowingMoviesFullDetailsPage = () => {
                   &#10006;
                 </button>
                 {/* Your modal content here */}
-                Hello, I'm a modal!
+
+                <TiStarFullOutline className=" text-yellow-400  text-[7vw] absolute z-100 left-[18vw] -top-[0.5vw]" />
+                <span className=" relative left-[20.2vw] text-[1.4vw] top-[1.2vw] text-black font-semibold">
+                  ?
+                </span>
+                <h1 className=" absolute left-[19.5vw] top-[6vw] text-[1vw] text-white font-semibold">
+                  Rate This
+                </h1>
+                <h1 className=" absolute left-[15vw] text-[1.5vw] top-[7.5vw] font-semibold  ">
+                  {NowShowingMoviesDetails?.titleText?.text}
+                </h1>
+                <span className=" absolute left-[12vw] text-[1.5vw] top-[11vw] font-semibold ">
+                  <div className="flex gap-2">
+                    {Array.from({ length: 10 }, (_, index) => (
+                      <span
+                        key={index}
+                        className="text-yellow-400 text-[1.5vw] relative cursor-pointer"
+                        onMouseEnter={() => {
+                          if (clickedIndex === null || clickedIndex === index) {
+                            setHoveredIndex(index);
+                          }
+                        }}
+                        onMouseLeave={() => {
+                          if (clickedIndex === null || clickedIndex === index) {
+                            setHoveredIndex(null);
+                          }
+                        }}
+                        onClick={() => handleIconClick(index)}
+                      >
+                        {clickedIndex === index || hoveredIndex === index ? (
+                          <RiStarFill className="text-[1.5vw] relative cursor-pointer text-blue-500" />
+                        ) : (
+                          <RiStarLine />
+                        )}
+                      </span>
+                    ))}
+                  </div>
+                </span>
+                <button class="Rate-button relative top-[14vw] left-[16vw]">
+                  <span class="Rate-button-content">Rate </span>
+                </button>
               </div>
             </div>
           )}
+
           <h1 className="font-bold">POPULARITY</h1>
           <span className="absolute left-[19vw] top-8 text-[2vw] border-2 border-lime-400 rounded-full p-[0.1vw]">
             {NowShowingMoviesDetails?.meterRanking?.currentRank > 5 ? (
@@ -441,8 +520,8 @@ const NowShowingMoviesFullDetailsPage = () => {
         </div>
 
         <div className=" bg-red-30 absolute left-[25vw] top-[33vw]">
-          <h1 className=" text-[1.4vw] font-bold">STORYLINE</h1>
-          <p className=" w-[60vw] text-[1.1vw] mt-5">
+          <h1 className=" text-[1.4vw] text-red-600 font-bold">STORYLINE</h1>
+          <p className=" w-[60vw] text-[1.1vw] mt-5 text-amber-300">
             {NowShowingMoviesDetails?.plot?.plotText?.plainText}
           </p>
         </div>
@@ -466,7 +545,7 @@ const NowShowingMoviesFullDetailsPage = () => {
                     <h1 className=" font-normal text-white">
                       {data?.node?.name?.nameText?.text}
                     </h1>
-                    <h1 className=" font-normal">
+                    <h1 className=" font-normal text-lime-400">
                       {data?.node?.characters.map((data) => {
                         return data?.name;
                       })}
@@ -491,7 +570,7 @@ const NowShowingMoviesFullDetailsPage = () => {
                     <h1 className=" font-normal text-white">
                       {data?.node?.name?.nameText?.text}
                     </h1>
-                    <h1 className=" font-normal">
+                    <h1 className=" font-normal text-lime-400">
                       {data?.node?.characters.map((data) => {
                         return data?.name;
                       })}
@@ -516,7 +595,7 @@ const NowShowingMoviesFullDetailsPage = () => {
                     <h1 className=" font-normal text-white">
                       {data?.node?.name?.nameText?.text}
                     </h1>
-                    <h1 className=" font-normal">
+                    <h1 className=" font-normal text-lime-400">
                       {data?.node?.characters.map((data) => {
                         return data?.name;
                       })}
@@ -542,10 +621,10 @@ const NowShowingMoviesFullDetailsPage = () => {
                       "https://www.prokerala.com/movies/assets/img/no-poster-available.jpg";
                   }}
                 />
-                <h1 className="mx-5 text-[1.2vw] overflow-hidden whitespace-nowrap truncate">
+                <h1 className="mx-5 text-[1.2vw] text-teal-400 overflow-hidden whitespace-nowrap truncate">
                   {data?.node?.originalTitleText?.text}
                 </h1>
-                <span className=" mx-5 text-[1.2vw]">
+                <span className=" mx-5 text-[1.2vw] text-rose-400">
                   ({data?.node?.releaseYear?.year})
                 </span>
 
@@ -553,11 +632,12 @@ const NowShowingMoviesFullDetailsPage = () => {
                   <IoMdStar className=" relative top-1 mr-2" />
                   {data?.node?.ratingsSummary?.aggregateRating}
                 </span>
-                <span className="mx-5 text-[1.2vw] white-space-nowrap truncate">
+                <span className="mx-5 text-[1.2vw] text-violet-500 white-space-nowrap truncate">
                   {data?.node?.titleGenres?.genres.map((movie, index) => (
                     <React.Fragment key={index}>
                       {movie?.genre?.text}
-                      {index < data.node.titleGenres.genres.length - 1 && ", "}
+                      {index < data?.node?.titleGenres?.genres?.length - 1 &&
+                        ", "}
                     </React.Fragment>
                   ))}
                 </span>
@@ -612,7 +692,8 @@ const NowShowingMoviesFullDetailsPage = () => {
             {NowShowingMoviesDetails?.production?.edges.map((data, index) => (
               <React.Fragment key={index}>
                 {data?.node?.company?.companyText?.text}
-                {index < NowShowingMoviesDetails.production.edges.length - 1 &&
+                {index <
+                  NowShowingMoviesDetails?.production?.edges?.length - 1 &&
                   " & "}
               </React.Fragment>
             ))}
@@ -630,7 +711,8 @@ const NowShowingMoviesFullDetailsPage = () => {
                     <span>{data?.node?.label}</span>
                   </Link>
                   {index <
-                    NowShowingMoviesDetails.detailsExternalLinks.edges.length -
+                    NowShowingMoviesDetails?.detailsExternalLinks?.edges
+                      ?.length -
                       1 && (
                     <span className="mx-2">& </span> // Adjust mx-2 for your preferred spacing
                   )}
@@ -664,7 +746,7 @@ const NowShowingMoviesFullDetailsPage = () => {
                       "{data?.node?.summary?.originalText}"
                     </h1>
                   </div>
-                  <p className="mt-7 text-[1vw] leading-7 font-normal overflow-y-scroll no-scrollbar">
+                  <p className="mt-7 text-[1vw] leading-7 text-fuchsia-300 font-normal overflow-y-scroll no-scrollbar">
                     {isTrimmed ? trimmedText : fullText}
                     {isTrimmed && (
                       <span
@@ -685,31 +767,52 @@ const NowShowingMoviesFullDetailsPage = () => {
           <h1 className=" text-[1.4vw] font-bold ">Box Office</h1>
         </div>
         <div className=" absolute top-[261vw] left-[25vw]">
-          <h1 className=" text-[1.2vw] font-semibold whitespace-nowrap mb-3">
-            Budget
-          </h1>
-          <h1 className=" text-white text-[1vw] mb-5">
-            ${NowShowingMoviesDetails?.productionBudget?.budget?.amount}
-            (estimated)
-          </h1>
-          <h1 className=" whitespace-nowrap font-semibold mb-3 text-[1.2vw]">
-            Opening weekend US & Canada
-          </h1>
-          <h1 className="text-white text-[1vw]">
-            $
-            {NowShowingMoviesDetails?.openingWeekendGross?.gross?.total?.amount}{" "}
-          </h1>
+          <div className=" Budget">
+            <h1 className=" text-[1.2vw] font-semibold text-sky-500 whitespace-nowrap mb-3">
+              Budget
+            </h1>
+            <h1 className=" text-white text-[1vw] mb-5">
+              ${NowShowingMoviesDetails?.productionBudget?.budget?.amount}
+              (estimated)
+            </h1>
+          </div>
+          <div className=" opening Earning ">
+            {NowShowingMoviesDetails?.openingWeekendGross && (
+              <>
+                <h1 className="text-sky-500 whitespace-nowrap font-semibold mb-3 text-[1.2vw]">
+                  Opening weekend US & Canada
+                </h1>
+                <h1 className="text-white text-[1vw]">
+                  $
+                  {
+                    NowShowingMoviesDetails.openingWeekendGross.gross.total
+                      .amount
+                  }
+                </h1>
+              </>
+            )}
+          </div>
           <div className=" absolute left-[25vw] top-1">
-            <h1 className=" whitespace-nowrap mb-3 text-[1.2vw]">
-              Gross US & Canada
-            </h1>
-            <h1 className=" text-white text-[1vw] mb-4">
-              ${NowShowingMoviesDetails?.lifetimeGross?.total?.amount}
-            </h1>
-            <h1 className=" mb-3 text-[1.2vw]">Gross worldwide</h1>
-            <h1 className="text-white text-[1vw]">
-              ${NowShowingMoviesDetails?.worldwideGross?.total?.amount}
-            </h1>
+            {NowShowingMoviesDetails?.lifetimeGross && (
+              <>
+                <h1 className="text-sky-500 whitespace-nowrap mb-3 text-[1.2vw]">
+                  Gross US & Canada
+                </h1>
+                <h1 className="text-white text-[1vw] mb-4">
+                  ${NowShowingMoviesDetails.lifetimeGross.total.amount}
+                </h1>
+              </>
+            )}
+            {NowShowingMoviesDetails?.worldwideGross && (
+              <>  
+                <h1 className="mb-3 text-sky-500 text-[1.2vw]">
+                  Gross worldwide
+                </h1>
+                <h1 className="text-white text-[1vw]">
+                  ${NowShowingMoviesDetails.worldwideGross.total.amount}
+                </h1>
+              </>
+            )}
           </div>
         </div>
         <div className=" absolute top-[276vw] left-[25vw]  inline-block ">
@@ -726,7 +829,7 @@ const NowShowingMoviesFullDetailsPage = () => {
           </h1>
           <h1 className="text-[1.2vw] font-semibold mb-3 text-yellow-400">
             Color
-            <span className=" ml-10 text-blue-400">
+            <span className=" ml-10 text-lime-300">
               {NowShowingMoviesDetails?.technicalSpecifications?.colorations?.items.map(
                 (data) => {
                   return data?.text;
@@ -736,7 +839,7 @@ const NowShowingMoviesFullDetailsPage = () => {
           </h1>
           <h1 className="text-[1.2vw] font-semibold mb-3 text-yellow-400">
             Sound mix
-            <span className="ml-10 text-blue-400">
+            <span className="ml-10 text-lime-300">
               {NowShowingMoviesDetails?.technicalSpecifications?.soundMixes?.items.map(
                 (data, index) => (
                   <React.Fragment key={index}>
@@ -744,8 +847,8 @@ const NowShowingMoviesFullDetailsPage = () => {
                     {/* Add space before each item except the first */}
                     {data?.text}
                     {index <
-                      NowShowingMoviesDetails.technicalSpecifications.soundMixes
-                        .items.length -
+                      NowShowingMoviesDetails?.technicalSpecifications
+                        ?.soundMixes?.items?.length -
                         1 && <span className="mx-1">, </span>}{" "}
                     {/* Add space after each comma */}
                   </React.Fragment>
@@ -861,7 +964,7 @@ const NowShowingMoviesFullDetailsPage = () => {
                       src={data?.node?.image?.url}
                       alt=""
                     />
-                    <h1 className=" absolute left-[8vw]">
+                    <h1 className=" absolute left-[8vw] text-amber-500">
                       {data?.node?.articleTitle?.plainText}
                     </h1>
                     <h1 className="absolute top-[6vw] text-white left-[9vw]">

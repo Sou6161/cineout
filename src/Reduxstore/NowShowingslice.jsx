@@ -10,7 +10,7 @@ export const NowShowingslice = createSlice({
 
     },
     reducers: {
-        addNowshowingdata: (state, actions) => {
+        addNowshowingdata: (state, actions) => {    
             state.nowshowit = actions.payload;
         }
     }

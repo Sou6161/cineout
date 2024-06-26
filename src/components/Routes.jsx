@@ -33,6 +33,7 @@ import { auth } from "../constants/Firebase";
 import { useDispatch } from "react-redux";
 import { addUser, removeUser } from "../Reduxstore/UserSlice";
 import NowShowingMoviesFullDetailsPage from "./NowShowingMoviesFullDetailsPage";
+import UpcomingMoviesFullDetailsPage from "./UpcomingMoviesFullDetailsPage";
 
 const AppRoutes = () => {
   const dispatch = useDispatch();
@@ -62,6 +63,7 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/home" element={<Maincontainer />} />
       <Route path="/name/:id" element={<NowShowingMoviesFullDetailsPage />} />
+      <Route path="/silver/:id" element={<UpcomingMoviesFullDetailsPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/title/:imdbId" element={<FullDetailsPage />} />

@@ -12,5 +12,6 @@ export const NewsSlice = createSlice({
     },
   },
 });
+
 export default NewsSlice.reducer;
 export const { addNewsSlice } = NewsSlice.actions;

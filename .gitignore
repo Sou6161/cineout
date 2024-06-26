@@ -757,6 +757,17 @@ Trailer {convertDuration(data2?.durationInSeconds)}
 
 
 
+useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+      document.body.style.overflowX = "clip";
+    }
+  }, [isMenuOpen]);
+
+
+
 
 
 
