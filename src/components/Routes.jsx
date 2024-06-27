@@ -63,7 +63,7 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/home" element={<Maincontainer />} />
       <Route path="/name/:id" element={<NowShowingMoviesFullDetailsPage />} />
-      <Route path="/silver/:id" element={<UpcomingMoviesFullDetailsPage />} />
+      <Route path="/silver/:title" element={<UpcomingMoviesFullDetailsPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/title/:imdbId" element={<FullDetailsPage />} />

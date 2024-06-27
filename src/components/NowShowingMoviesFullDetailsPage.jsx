@@ -86,6 +86,40 @@ const NowShowingMoviesFullDetailsPage = () => {
     setClickedIndex(index);
   };
 
+
+  const cast = NowShowingMoviesDetails?.cast?.edges || [];
+  const leftNames = cast.slice(0, 8);
+  const middleNames = cast.slice(8, 16);
+  const rightNames = cast.slice(16, 24);
+
+  const renderNames = (namesArray) => (
+    <div className="w-[24vw]">
+      {namesArray.map((data, index) => (
+        <div key={index}>
+          <img
+            className="w-[6vw] h-[12vh] rounded-full object-cover blur-[3px] hover:blur-0 border-2 border-cyan-400 hover:border-purple-500"
+            src={
+              data?.node?.name?.primaryImage?.url ||
+              "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
+            }
+            alt="no image available"
+          />
+          <div className="relative bottom-[5vw] left-[8vw]">
+            <h1 className="font-normal text-white">
+              {data?.node?.name?.nameText?.text}
+            </h1>
+            <h1 className="font-normal text-lime-400">
+              {data &&
+                data?.node?.characters.map((character) => character?.name).join(', ')}
+            </h1>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+
+
+
   useEffect(() => {
     if (isShowing) {
       document.body.style.overflow = "hidden";
@@ -324,67 +358,73 @@ const NowShowingMoviesFullDetailsPage = () => {
               Director
             </span>
             <h1 className="relative text-emerald-400 font-semibold top-[7vw] text-[1.3vw] left-[7vw]">
-              {NowShowingMoviesDetails?.directorsPageTitle.map(
-                (data, index) => (
-                  <span key={index}>
-                    {data?.credits.map((director, i) => (
-                      <React.Fragment key={i}>
-                        {director?.name?.nameText?.text}
-                        {i < data?.credits?.length - 1 && ", "}
-                      </React.Fragment>
-                    ))}
-                    {index <
-                      NowShowingMoviesDetails?.directorsPageTitle?.length - 1 &&
-                      ", "}
-                  </span>
-                )
-              )}
+              {NowShowingMoviesDetails &&
+                NowShowingMoviesDetails?.directorsPageTitle.map(
+                  (data, index) => (
+                    <span key={index}>
+                      {data?.credits.map((director, i) => (
+                        <React.Fragment key={i}>
+                          {director?.name?.nameText?.text}
+                          {i < data?.credits?.length - 1 && ", "}
+                        </React.Fragment>
+                      ))}
+                      {index <
+                        NowShowingMoviesDetails?.directorsPageTitle?.length -
+                          1 && ", "}
+                    </span>
+                  )
+                )}
             </h1>
 
             <span className=" text-white relative top-[9.5vw] text-[1.3vw]">
               Writers
             </span>
             <h1 className="relative top-[7.6vw] text-emerald-400 text-[1.3vw] left-[7vw]">
-              {NowShowingMoviesDetails?.writers.map((data, index) => (
-                <span key={index}>
-                  {data?.credits.map((writers, i) => (
-                    <React.Fragment key={i}>
-                      {writers?.name?.nameText?.text}
-                      {i < data?.credits?.length - 1 && ", "}
-                    </React.Fragment>
-                  ))}
-                  {index < NowShowingMoviesDetails?.writers?.length - 1 && ", "}
-                </span>
-              ))}
+              {NowShowingMoviesDetails &&
+                NowShowingMoviesDetails?.writers.map((data, index) => (
+                  <span key={index}>
+                    {data?.credits.map((writers, i) => (
+                      <React.Fragment key={i}>
+                        {writers?.name?.nameText?.text}
+                        {i < data?.credits?.length - 1 && ", "}
+                      </React.Fragment>
+                    ))}
+                    {index < NowShowingMoviesDetails?.writers?.length - 1 &&
+                      ", "}
+                  </span>
+                ))}
             </h1>
 
             <span className=" text-white relative top-[10vw] text-[1.3vw]">
               Stars
             </span>
             <h1 className="relative top-[8vw] text-emerald-400 left-[7vw] text-[1.3vw]">
-              {NowShowingMoviesDetails?.castPageTitle?.edges.map(
-                (data, index) => (
-                  <React.Fragment key={index}>
-                    {data?.node?.name?.nameText?.text}
-                    {index <
-                      NowShowingMoviesDetails?.castPageTitle?.edges?.length -
-                        1 && ", "}
-                  </React.Fragment>
-                )
-              )}
+              {NowShowingMoviesDetails &&
+                NowShowingMoviesDetails?.castPageTitle?.edges.map(
+                  (data, index) => (
+                    <React.Fragment key={index}>
+                      {data?.node?.name?.nameText?.text}
+                      {index <
+                        NowShowingMoviesDetails?.castPageTitle?.edges?.length -
+                          1 && ", "}
+                    </React.Fragment>
+                  )
+                )}
             </h1>
 
             <span className=" text-white relative top-[10vw] text-[1.3vw]">
               Genre
             </span>
             <h1 className="relative top-[8.1vw] text-emerald-400 left-[7vw] text-[1.3vw]">
-              {NowShowingMoviesDetails?.genres?.genres.map((data, index) => (
-                <React.Fragment key={index}>
-                  {data?.text}
-                  {index <
-                    NowShowingMoviesDetails?.genres?.genres?.length - 1 && ", "}
-                </React.Fragment>
-              ))}
+              {NowShowingMoviesDetails &&
+                NowShowingMoviesDetails?.genres?.genres.map((data, index) => (
+                  <React.Fragment key={index}>
+                    {data?.text}
+                    {index <
+                      NowShowingMoviesDetails?.genres?.genres?.length - 1 &&
+                      ", "}
+                  </React.Fragment>
+                ))}
             </h1>
           </div>
         </div>
@@ -546,127 +586,88 @@ const NowShowingMoviesFullDetailsPage = () => {
         <div className=" absolute top-[45vw] left-[25vw] text-[1.4vw] font-bold">
           <h1>TOP CAST</h1>
           <div className="flex justify-between mt-10">
-            <div>
-              {NowShowingMoviesDetails?.cast?.edges.slice(0, 8).map((data) => (
-                <div>
-                  <img
-                    className=" w-[6vw] h-[12vh] rounded-full object-cover blur-[3px] hover:blur-0 border-2 border-cyan-400 hover:border-purple-500 "
-                    src={
-                      data?.node?.name?.primaryImage?.url
-                        ? data?.node?.name?.primaryImage?.url
-                        : "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
-                    }
-                    alt="no image available"
-                  />
-                  <div className=" relative bottom-[5vw] left-[8vw]">
-                    <h1 className=" font-normal text-white">
-                      {data?.node?.name?.nameText?.text}
-                    </h1>
-                    <h1 className=" font-normal text-lime-400">
-                      {data?.node?.characters.map((data) => {
-                        return data?.name;
-                      })}
-                    </h1>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div>
-              {NowShowingMoviesDetails?.cast?.edges.slice(8, 16).map((data) => (
-                <div className=" relative left-[12vw]">
-                  <img
-                    className=" w-[6vw] h-[12vh] rounded-full object-cover blur-[3px] hover:blur-0 border-2 border-cyan-400 hover:border-purple-500 "
-                    src={
-                      data?.node?.name?.primaryImage?.url
-                        ? data?.node?.name?.primaryImage?.url
-                        : "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
-                    }
-                    alt="no image available"
-                  />
-                  <div className=" relative bottom-[5vw] left-[8vw]">
-                    <h1 className=" font-normal text-white">
-                      {data?.node?.name?.nameText?.text}
-                    </h1>
-                    <h1 className=" font-normal text-lime-400">
-                      {data?.node?.characters.map((data) => {
-                        return data?.name;
-                      })}
-                    </h1>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div>
-              {NowShowingMoviesDetails?.cast?.edges.slice(16).map((data) => (
-                <div className=" relative left-[22vw]">
-                  <img
-                    className=" w-[6vw] h-[12vh] rounded-full object-cover blur-[3px] hover:blur-0 border-2 border-cyan-400 hover:border-purple-500 "
-                    src={
-                      data?.node?.name?.primaryImage?.url
-                        ? data?.node?.name?.primaryImage?.url
-                        : "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
-                    }
-                    alt="no image available"
-                  />
-                  <div className=" relative bottom-[5vw] left-[8vw]">
-                    <h1 className=" font-normal text-white">
-                      {data?.node?.name?.nameText?.text}
-                    </h1>
-                    <h1 className=" font-normal text-lime-400">
-                      {data?.node?.characters.map((data) => {
-                        return data?.name;
-                      })}
-                    </h1>
-                  </div>
-                </div>
-              ))}
-            </div>
+          <div className="name-list flex">
+      {renderNames(leftNames)}
+      {middleNames.length > 0 && renderNames(middleNames)}
+      {rightNames.length > 0 && renderNames(rightNames)}
+    </div>
+            {/* <div>
+              {NowShowingMoviesDetails &&
+                NowShowingMoviesDetails?.cast?.edges
+                  .slice(8, 10)
+                  .map((data) => (
+                    <div className=" relative left-[12vw]">
+                      <img
+                        className=" w-[6vw] h-[12vh] rounded-full object-cover blur-[3px] hover:blur-0 border-2 border-cyan-400 hover:border-purple-500 "
+                        src={
+                          data?.node?.name?.primaryImage?.url
+                            ? data?.node?.name?.primaryImage?.url
+                            : "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
+                        }
+                        alt="no image available"
+                      />
+                      <div className=" relative bottom-[5vw] left-[8vw]">
+                        <h1 className=" font-normal text-white">
+                          {data?.node?.name?.nameText?.text}
+                        </h1>
+                        <h1 className=" font-normal text-lime-400">
+                          {data &&
+                            data?.node?.characters.map((data) => {
+                              return data?.name;
+                            })}
+                        </h1>
+                      </div>
+                    </div>
+                  ))}
+            </div> */}
           </div>
         </div>
-        <div className="absolute top-[132vw] bg-red-30 left-[25vw] text-[1.4vw]">
+        {/* <div className="absolute top-[132vw] bg-red-30 left-[25vw] text-[1.4vw]">
           <h1 className="font-bold">More Titles Like This</h1>
           <div className="absolute -mx-[2vw] w-[70vw] h-[65vh] mt-10 border-l-2 my-2 border-r-2 border-blue-600 flex flex-nowrap overflow-x-auto overflow-y-hidden no-scrollbar gap-10">
-            {NowShowingMoviesDetails?.moreLikeThisTitles?.edges.map((data) => (
-              <div className="flex flex-col min-w-[14vw] mx-5 h-[60vh] my-5  rounded-lg bg-black glow6 ">
-                <img
-                  className="min-w-[14vw] h-[40vh] object-center px-2 py-2 rounded-2xl"
-                  src={data?.node?.primaryImage?.url}
-                  alt="no image available"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src =
-                      "https://www.prokerala.com/movies/assets/img/no-poster-available.jpg";
-                  }}
-                />
-                <h1 className="mx-5 text-[1.2vw] text-teal-400 overflow-hidden whitespace-nowrap truncate">
-                  {data?.node?.originalTitleText?.text}
-                </h1>
-                <span className=" mx-5 text-[1.2vw] text-rose-400">
-                  ({data?.node?.releaseYear?.year})
-                </span>
+            {NowShowingMoviesDetails &&
+              NowShowingMoviesDetails?.moreLikeThisTitles?.edges.map((data) => (
+                <div className="flex flex-col min-w-[14vw] mx-5 h-[60vh] my-5  rounded-lg bg-black glow6 ">
+                  <img
+                    className="min-w-[14vw] h-[40vh] object-center px-2 py-2 rounded-2xl"
+                    src={data?.node?.primaryImage?.url}
+                    alt="no image available"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src =
+                        "https://www.prokerala.com/movies/assets/img/no-poster-available.jpg";
+                    }}
+                  />
+                  <h1 className="mx-5 text-[1.2vw] text-teal-400 overflow-hidden whitespace-nowrap truncate">
+                    {data?.node?.originalTitleText?.text}
+                  </h1>
+                  <span className=" mx-5 text-[1.2vw] text-rose-400">
+                    ({data?.node?.releaseYear?.year})
+                  </span>
 
-                <span className=" mx-5 text-yellow-400 inline-block flex ">
-                  <IoMdStar className=" relative top-1 mr-2" />
-                  {data?.node?.ratingsSummary?.aggregateRating}
-                </span>
-                <span className="mx-5 text-[1.2vw] text-violet-500 white-space-nowrap truncate">
-                  {data?.node?.titleGenres?.genres.map((movie, index) => (
-                    <React.Fragment key={index}>
-                      {movie?.genre?.text}
-                      {index < data?.node?.titleGenres?.genres?.length - 1 &&
-                        ", "}
-                    </React.Fragment>
-                  ))}
-                </span>
-              </div>
-            ))}
+                  <span className=" mx-5 text-yellow-400 inline-block flex ">
+                    <IoMdStar className=" relative top-1 mr-2" />
+                    {data?.node?.ratingsSummary?.aggregateRating}
+                  </span>
+                  <span className="mx-5 text-[1.2vw] text-violet-500 white-space-nowrap truncate">
+                    {data &&
+                      data?.node?.titleGenres?.genres.map((movie, index) => (
+                        <React.Fragment key={index}>
+                          {movie?.genre?.text}
+                          {index <
+                            data?.node?.titleGenres?.genres?.length - 1 && ", "}
+                        </React.Fragment>
+                      ))}
+                  </span>
+                </div>
+              ))}
           </div>
-        </div>
+        </div> */}
 
         <div className=" absolute top-[170vw] left-[25vw] inline-block">
           <h1 className=" text-[1.4vw] font-bold ">Details</h1>
         </div>
-        <div className="  relative top-[149vw] left-[25vw] w-[70vw] h-[60vh] mb-[5vw]">
+        {/* <div className="  relative top-[149vw] left-[25vw] w-[70vw] h-[60vh] mb-[5vw]">
           <h1 className="text-[1.2vw] text-blue-500 border-t-[1px] border-b-[1px]  border-gray-700 py-5">
             <span className="  text-yellow-400 mr-5">Release Date</span>
             {NowShowingMoviesDetails?.releaseDate?.month}
@@ -677,73 +678,79 @@ const NowShowingMoviesFullDetailsPage = () => {
           </h1>
           <h1 className=" text-[1.2vw] text-blue-500 border-b-[1px] border-gray-700 py-5">
             <span className=" mr-5 text-yellow-400">Countries of Origins</span>
-            {NowShowingMoviesDetails?.countriesOfOrigin?.countries.map(
-              (data) => {
-                return data?.id;
-              }
-            )}
+            {NowShowingMoviesDetails &&
+              NowShowingMoviesDetails?.countriesOfOrigin?.countries.map(
+                (data) => {
+                  return data?.id;
+                }
+              )}
           </h1>
           <h1 className=" text-[1.2vw] text-blue-500  border-b-[1px] border-gray-700 py-5">
             <span className=" mr-5 text-yellow-400">Language</span>
-            {NowShowingMoviesDetails?.spokenLanguages?.spokenLanguages.map(
-              (data) => {
-                return data?.text;
-              }
-            )}
+            {NowShowingMoviesDetails &&
+              NowShowingMoviesDetails?.spokenLanguages?.spokenLanguages.map(
+                (data) => {
+                  return data?.text;
+                }
+              )}
           </h1>
           <h1 className=" text-[1.2vw] text-emerald-500  border-b-[1px] border-gray-700 py-5">
             <span className="mr-5 text-yellow-400">Also Known As</span>
-            {NowShowingMoviesDetails?.akas?.edges.map((data) => {
-              return data?.node?.text;
-            })}
+            {NowShowingMoviesDetails &&
+              NowShowingMoviesDetails?.akas?.edges.map((data) => {
+                return data?.node?.text;
+              })}
           </h1>
           <h1 className=" text-[1.2vw] text-blue-500  border-b-[1px] border-gray-700 py-5">
             <span className=" mr-5 text-yellow-400">Filming Locations</span>
-            {NowShowingMoviesDetails?.filmingLocations?.edges.map((data) => {
-              return data?.node?.text;
-            })}{" "}
+            {NowShowingMoviesDetails &&
+              NowShowingMoviesDetails?.filmingLocations?.edges.map((data) => {
+                return data?.node?.text;
+              })}{" "}
             <span className=" text-cyan-400">(Studio)</span>
           </h1>
           <h1 className="text-[1.2vw] text-blue-500 border-b-[1px] border-gray-700 py-5">
             <span className="mr-5 text-yellow-400">Production Companies</span>
-            {NowShowingMoviesDetails?.production?.edges.map((data, index) => (
-              <React.Fragment key={index}>
-                {data?.node?.company?.companyText?.text}
-                {index <
-                  NowShowingMoviesDetails?.production?.edges?.length - 1 &&
-                  " & "}
-              </React.Fragment>
-            ))}
+            {NowShowingMoviesDetails &&
+              NowShowingMoviesDetails?.production?.edges.map((data, index) => (
+                <React.Fragment key={index}>
+                  {data?.node?.company?.companyText?.text}
+                  {index <
+                    NowShowingMoviesDetails?.production?.edges?.length - 1 &&
+                    " & "}
+                </React.Fragment>
+              ))}
           </h1>
 
           <h1 className="text-[1.2vw] flex text-blue-500 border-b-[1px] border-gray-700 py-5">
             <span className="mr-5 text-yellow-400">Official Sites</span>
-            {NowShowingMoviesDetails?.detailsExternalLinks?.edges.map(
-              (data, index) => (
-                <React.Fragment key={index}>
-                  <Link
-                    className=" hover:underline hover:text-red-500"
-                    to={`${data?.node?.url}`}
-                  >
-                    <span>{data?.node?.label}</span>
-                  </Link>
-                  {index <
-                    NowShowingMoviesDetails?.detailsExternalLinks?.edges
-                      ?.length -
-                      1 && (
-                    <span className="mx-2">& </span> // Adjust mx-2 for your preferred spacing
-                  )}
-                </React.Fragment>
-              )
-            )}
+            {NowShowingMoviesDetails &&
+              NowShowingMoviesDetails?.detailsExternalLinks?.edges.map(
+                (data, index) => (
+                  <React.Fragment key={index}>
+                    <Link
+                      className=" hover:underline hover:text-red-500"
+                      to={`${data?.node?.url}`}
+                    >
+                      <span>{data?.node?.label}</span>
+                    </Link>
+                    {index <
+                      NowShowingMoviesDetails?.detailsExternalLinks?.edges
+                        ?.length -
+                        1 && (
+                      <span className="mx-2">& </span> // Adjust mx-2 for your preferred spacing
+                    )}
+                  </React.Fragment>
+                )
+              )}
             {"."}
           </h1>
-        </div>
+        </div> */}
 
         <div className=" inline-block relative top-[150vw] left-[25vw] text-[1.4vw] font-bold">
           <h1>User Reviews</h1>
         </div>
-        <div
+        {/* <div
           className="relative top-[152vw] left-[25vw] w-[50vw] rounded-lg px-5 py-4"
           style={{
             backgroundColor: "black",
@@ -752,38 +759,39 @@ const NowShowingMoviesFullDetailsPage = () => {
         >
           <h1 className=" review w-[10vw]">FEATURED REVIEW</h1>
           <div>
-            {NowShowingMoviesDetails?.featuredReviews?.edges.map((data) => {
-              const fullText = data?.node?.text?.originalText?.plainText;
-              const trimmedText = trimTextTo500Words(fullText);
+            {NowShowingMoviesDetails &&
+              NowShowingMoviesDetails?.featuredReviews?.edges.map((data) => {
+                const fullText = data?.node?.text?.originalText?.plainText;
+                const trimmedText = trimTextTo500Words(fullText);
 
-              return (
-                <>
-                  <div className=" mt-5">
-                    <h1 className=" text-[1.4vw] font-bold text-lime-500">
-                      "{data?.node?.summary?.originalText}"
-                    </h1>
-                  </div>
-                  <p className="mt-7 text-[1vw] leading-7 text-fuchsia-300 font-normal overflow-y-scroll no-scrollbar">
-                    {isTrimmed ? trimmedText : fullText}
-                    {isTrimmed && (
-                      <span
-                        className="absolute top-[23vw] left-[48vw] cursor-pointer"
-                        onClick={toggleTrim}
-                      >
-                        <IoMdArrowDropdownCircle />
-                      </span>
-                    )}
-                  </p>
-                </>
-              );
-            })}
+                return (
+                  <>
+                    <div className=" mt-5">
+                      <h1 className=" text-[1.4vw] font-bold text-lime-500">
+                        "{data?.node?.summary?.originalText}"
+                      </h1>
+                    </div>
+                    <p className="mt-7 text-[1vw] leading-7 text-fuchsia-300 font-normal overflow-y-scroll no-scrollbar">
+                      {isTrimmed ? trimmedText : fullText}
+                      {isTrimmed && (
+                        <span
+                          className="absolute top-[23vw] left-[48vw] cursor-pointer"
+                          onClick={toggleTrim}
+                        >
+                          <IoMdArrowDropdownCircle />
+                        </span>
+                      )}
+                    </p>
+                  </>
+                );
+              })}
           </div>
-        </div>
+        </div> */}
 
         <div className=" absolute top-[257vw] left-[25vw] inline-block  ">
           <h1 className=" text-[1.4vw] font-bold ">Box Office</h1>
         </div>
-        <div className=" absolute top-[261vw] left-[25vw]">
+        {/* <div className=" absolute top-[261vw] left-[25vw]">
           <div className=" Budget">
             <h1 className=" text-[1.2vw] font-semibold text-sky-500 whitespace-nowrap mb-3">
               Budget
@@ -831,8 +839,8 @@ const NowShowingMoviesFullDetailsPage = () => {
               </>
             )}
           </div>
-        </div>
-        <div className=" absolute top-[276vw] left-[25vw]  inline-block ">
+        </div> */}
+        {/* <div className=" absolute top-[276vw] left-[25vw]  inline-block ">
           <h1 className="text-[1.4vw] font-bold mb-5">Technical Specs</h1>
           <h1 className=" text-[1.2vw] font-semibold mb-3 text-yellow-400">
             Runtime
@@ -847,48 +855,49 @@ const NowShowingMoviesFullDetailsPage = () => {
           <h1 className="text-[1.2vw] font-semibold mb-3 text-yellow-400">
             Color
             <span className=" ml-10 text-lime-300">
-              {NowShowingMoviesDetails?.technicalSpecifications?.colorations?.items.map(
-                (data) => {
-                  return data?.text;
-                }
-              )}
+              {NowShowingMoviesDetails &&
+                NowShowingMoviesDetails?.technicalSpecifications?.colorations?.items.map(
+                  (data) => {
+                    return data?.text;
+                  }
+                )}
             </span>
           </h1>
           <h1 className="text-[1.2vw] font-semibold mb-3 text-yellow-400">
             Sound mix
             <span className="ml-10 text-lime-300">
-              {NowShowingMoviesDetails?.technicalSpecifications?.soundMixes?.items.map(
-                (data, index) => (
-                  <React.Fragment key={index}>
-                    {index > 0 && <span className="mx-1"> </span>}{" "}
-                    {/* Add space before each item except the first */}
-                    {data?.text}
-                    {index <
-                      NowShowingMoviesDetails?.technicalSpecifications
-                        ?.soundMixes?.items?.length -
-                        1 && <span className="mx-1">, </span>}{" "}
-                    {/* Add space after each comma */}
-                  </React.Fragment>
-                )
-              )}
+              {NowShowingMoviesDetails &&
+                NowShowingMoviesDetails?.technicalSpecifications?.soundMixes?.items.map(
+                  (data, index) => (
+                    <React.Fragment key={index}>
+                      {index > 0 && <span className="mx-1"> </span>}{" "}
+                      {data?.text}
+                      {index <
+                        NowShowingMoviesDetails?.technicalSpecifications
+                          ?.soundMixes?.items?.length -
+                          1 && <span className="mx-1">, </span>}{" "}
+                    </React.Fragment>
+                  )
+                )}
             </span>
           </h1>
 
           <h1 className=" text-[1.2vw] font-semibold text-yellow-400">
             Aspect ratio
             <span className=" ml-10 text-white">
-              {NowShowingMoviesDetails?.technicalSpecifications?.aspectRatios?.items.map(
-                (data) => {
-                  return data?.aspectRatio;
-                }
-              )}
+              {NowShowingMoviesDetails &&
+                NowShowingMoviesDetails?.technicalSpecifications?.aspectRatios?.items.map(
+                  (data) => {
+                    return data?.aspectRatio;
+                  }
+                )}
             </span>
           </h1>
-        </div>
+        </div> */}
         <div className=" absolute top-[295vw] left-[25vw]">
           <h1 className="text-[1.4vw] font-bold photogallery">Photo Gallery</h1>
         </div>
-        <div className="w-[75vw] h-[45vh] bg-red-20 absolute top-[300vw] left-[22vw]">
+        {/* <div className="w-[75vw] h-[45vh] bg-red-20 absolute top-[300vw] left-[22vw]">
           <div className="flex">
             <Swiper
               slidesPerView={3}
@@ -904,7 +913,7 @@ const NowShowingMoviesFullDetailsPage = () => {
                 .map((data, index) => (
                   <SwiperSlide key={index} className=" overflow-hidden">
                     <img
-                      className=" hover:rounded-lg  hover:border-l-[3px] hover:border-r-[3px] hover:object-cover border-yellow-400 transition duration-300 ease-in-out hover:scale-105 hover:scale-y-125 mx-9 w-[20vw]  h-[30vh] object-top object-cover rounded-lg"
+                      className=" hover:rounded-lg  hover:border-l-[3px] hover:border-r-[3px] hover:object-cover border-yellow-400 transition duration-300 ease-in-out hover:scale-105 hover:scale-y-120 mx-9 w-[20vw]  h-[30vh] object-top object-cover rounded-lg"
                       src={data?.node?.url}
                       alt=""
                     />
@@ -912,11 +921,11 @@ const NowShowingMoviesFullDetailsPage = () => {
                 ))}
             </Swiper>
           </div>
-        </div>
+        </div> */}
         <div className=" inline-block absolute top-[320vw] left-[25vw]">
           <h1 className="text-[1.4vw] font-bold videogallery">Video Gallery</h1>
         </div>
-        <div className=" w-[73vw]   h-[45vh]  bg-red-30  py-2 absolute top-[324vw] left-[22vw]">
+        {/* <div className=" w-[73vw]   h-[45vh]  bg-red-30  py-2 absolute top-[324vw] left-[22vw]">
           <div className="flex  ">
             <Swiper
               slidesPerView={3}
@@ -954,11 +963,11 @@ const NowShowingMoviesFullDetailsPage = () => {
               ))}
             </Swiper>
           </div>
-        </div>
+        </div> */}
         <div className=" absolute top-[350vw] left-[25vw]">
           <h1 className=" text-[1.4vw] font-bold relatednews">Related News</h1>
         </div>
-        <div className=" absolute  w-[65vw]  h-[30vh] top-[355vw] left-[25vw] bg-red-30">
+        {/* <div className=" absolute  w-[65vw]  h-[30vh] top-[355vw] left-[25vw] bg-red-30">
           <div className="  flex flex-row">
             <Swiper
               slidesPerView={2}
@@ -970,7 +979,7 @@ const NowShowingMoviesFullDetailsPage = () => {
               modules={[Navigation]}
               className="mySwiper "
             >
-              {NowShowingRelatedNews?.news?.edges.map((data, index) => (
+              {NowShowingMoviesDetails&&NowShowingRelatedNews?.news?.edges.map((data, index) => (
                 <SwiperSlide
                   key={index}
                   className=" overflow-hidden flex mr-10 hover:text-red-600 hover:bg-gray-800 rounded-lg cursor-pointer "
@@ -998,15 +1007,15 @@ const NowShowingMoviesFullDetailsPage = () => {
               ))}
             </Swiper>
           </div>
-        </div>
-        <div className=" absolute bg-black w-[100vw] h-[134vh]  top-[374vw]  ">
+        </div> */}
+        {/* <div className=" absolute bg-black w-[100vw] h-[134vh]  top-[374vw]  ">
           <div className=" absolute left-[10vw]">
             <RecentlyViewed />
           </div>
         </div>
         <div className=" absolute top-[412vw] border-t-2 border-red-600">
           <Footer />
-        </div>
+        </div> */}
       </div>
     </div>
   );
