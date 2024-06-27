@@ -1154,3 +1154,97 @@ body {
   transform: translateY(30px);
   transition-duration: 0.3s;
 }
+
+
+
+/* Footer logo code */
+
+.button {
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: #212121;
+  position: relative;
+  z-index: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+  overflow: hidden;
+}
+
+.button svg {
+  color: white;
+  width: 30px;
+  height: 30px;
+  z-index: 2;
+  transition: 0.3s;
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #212121;
+  border-radius: 50%;
+  z-index: 1;
+  transition: 0.3s;
+}
+
+.button:hover::before {
+  opacity: 0;
+}
+
+/* Instagram */
+.button:nth-child(1)::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  border-radius: 50%;
+  opacity: 0;
+  z-index: 1;
+  transition: 0.3s;
+}
+
+.button:nth-child(1):hover::after {
+  opacity: 1;
+}
+
+/* WhatsApp */
+.button:nth-child(2):hover {
+  background: #25D366;
+}
+
+/* Twitter */
+.button:nth-child(3):hover {
+  background: #1DA1F2;
+}
+
+/* YouTube */
+.button:nth-child(4):hover {
+  background: #FF0000;
+}
+
+/* GitHub */
+.button:nth-child(5):hover {
+  background: #333;
+}
+
+.button:active {
+  transform: scale(0.85);
+}
+
+.social-buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}

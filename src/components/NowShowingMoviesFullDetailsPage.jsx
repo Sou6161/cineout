@@ -86,7 +86,6 @@ const NowShowingMoviesFullDetailsPage = () => {
     setClickedIndex(index);
   };
 
-
   const cast = NowShowingMoviesDetails?.cast?.edges || [];
   const leftNames = cast.slice(0, 8);
   const middleNames = cast.slice(8, 16);
@@ -94,31 +93,32 @@ const NowShowingMoviesFullDetailsPage = () => {
 
   const renderNames = (namesArray) => (
     <div className="w-[24vw]">
-      {namesArray.map((data, index) => (
-        <div key={index}>
-          <img
-            className="w-[6vw] h-[12vh] rounded-full object-cover blur-[3px] hover:blur-0 border-2 border-cyan-400 hover:border-purple-500"
-            src={
-              data?.node?.name?.primaryImage?.url ||
-              "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
-            }
-            alt="no image available"
-          />
-          <div className="relative bottom-[5vw] left-[8vw]">
-            <h1 className="font-normal text-white">
-              {data?.node?.name?.nameText?.text}
-            </h1>
-            <h1 className="font-normal text-lime-400">
-              {data &&
-                data?.node?.characters.map((character) => character?.name).join(', ')}
-            </h1>
+      {namesArray &&
+        namesArray.map((data, index) => (
+          <div key={index}>
+            <img
+              className="w-[7vw] p-1 h-[14vh] rounded-full object-cover blur-[3px] hover:blur-0 border-2 border-cyan-400 hover:border-purple-500"
+              src={
+                data?.node?.name?.primaryImage?.url ||
+                "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
+              }
+              alt="no image available"
+            />
+            <div className="relative bottom-[5vw] left-[8vw]">
+              <h1 className="font-normal text-white">
+                {data?.node?.name?.nameText?.text}
+              </h1>
+              <h1 className="font-normal text-lime-400">
+                {data?.node?.characters &&
+                  data.node.characters
+                    .map((character) => character?.name)
+                    .join(", ")}
+              </h1>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
     </div>
   );
-
-
 
   useEffect(() => {
     if (isShowing) {
@@ -295,10 +295,11 @@ const NowShowingMoviesFullDetailsPage = () => {
       <div className="">
         <Headerfordetails />
       </div>
-      <div className=" w-[98vw] mx-auto mt-5 h-[76.5vh] border- border-black glow5 rounded-lg  ">
+      <div className=" w-[98vw] mx-auto mt-5 h-[76.5vh]  border-black glow5 rounded-lg  ">
+        
         {NowShowingTrailerYTKEY ? (
           <iframe
-            className=" w-[97vw] mx-auto h-[75vh] relative top-1 rounded-lg"
+            className=" w-[97vw] mx-auto h-[75vh] relative top-1 rounded-lg glow3  glow"
             src={`https://www.youtube.com/embed/${NowShowingTrailerYTKEY}?si=HxKbpBA7t2t3ulUK`}
           ></iframe>
         ) : (
@@ -586,12 +587,13 @@ const NowShowingMoviesFullDetailsPage = () => {
         <div className=" absolute top-[45vw] left-[25vw] text-[1.4vw] font-bold">
           <h1>TOP CAST</h1>
           <div className="flex justify-between mt-10">
-          <div className="name-list flex">
-      {renderNames(leftNames)}
-      {middleNames.length > 0 && renderNames(middleNames)}
-      {rightNames.length > 0 && renderNames(rightNames)}
-    </div>
-            {/* <div>
+            <div className="name-list flex">
+              {renderNames(leftNames)}
+              {middleNames.length > 0 && renderNames(middleNames)}
+              {rightNames.length > 0 && renderNames(rightNames)}
+            </div>
+
+            <div>
               {NowShowingMoviesDetails &&
                 NowShowingMoviesDetails?.cast?.edges
                   .slice(8, 10)
@@ -619,10 +621,10 @@ const NowShowingMoviesFullDetailsPage = () => {
                       </div>
                     </div>
                   ))}
-            </div> */}
+            </div>
           </div>
         </div>
-        {/* <div className="absolute top-[132vw] bg-red-30 left-[25vw] text-[1.4vw]">
+        <div className="absolute top-[132vw] bg-red-30 left-[25vw] text-[1.4vw]">
           <h1 className="font-bold">More Titles Like This</h1>
           <div className="absolute -mx-[2vw] w-[70vw] h-[65vh] mt-10 border-l-2 my-2 border-r-2 border-blue-600 flex flex-nowrap overflow-x-auto overflow-y-hidden no-scrollbar gap-10">
             {NowShowingMoviesDetails &&
@@ -662,12 +664,12 @@ const NowShowingMoviesFullDetailsPage = () => {
                 </div>
               ))}
           </div>
-        </div> */}
+        </div>
 
         <div className=" absolute top-[170vw] left-[25vw] inline-block">
           <h1 className=" text-[1.4vw] font-bold ">Details</h1>
         </div>
-        {/* <div className="  relative top-[149vw] left-[25vw] w-[70vw] h-[60vh] mb-[5vw]">
+        <div className="  relative top-[149vw] left-[25vw] w-[70vw] h-[60vh] mb-[5vw]">
           <h1 className="text-[1.2vw] text-blue-500 border-t-[1px] border-b-[1px]  border-gray-700 py-5">
             <span className="  text-yellow-400 mr-5">Release Date</span>
             {NowShowingMoviesDetails?.releaseDate?.month}
@@ -745,12 +747,12 @@ const NowShowingMoviesFullDetailsPage = () => {
               )}
             {"."}
           </h1>
-        </div> */}
+        </div>
 
         <div className=" inline-block relative top-[150vw] left-[25vw] text-[1.4vw] font-bold">
           <h1>User Reviews</h1>
         </div>
-        {/* <div
+        <div
           className="relative top-[152vw] left-[25vw] w-[50vw] rounded-lg px-5 py-4"
           style={{
             backgroundColor: "black",
@@ -786,12 +788,12 @@ const NowShowingMoviesFullDetailsPage = () => {
                 );
               })}
           </div>
-        </div> */}
+        </div>
 
         <div className=" absolute top-[257vw] left-[25vw] inline-block  ">
           <h1 className=" text-[1.4vw] font-bold ">Box Office</h1>
         </div>
-        {/* <div className=" absolute top-[261vw] left-[25vw]">
+        <div className=" absolute top-[261vw] left-[25vw]">
           <div className=" Budget">
             <h1 className=" text-[1.2vw] font-semibold text-sky-500 whitespace-nowrap mb-3">
               Budget
@@ -839,8 +841,9 @@ const NowShowingMoviesFullDetailsPage = () => {
               </>
             )}
           </div>
-        </div> */}
-        {/* <div className=" absolute top-[276vw] left-[25vw]  inline-block ">
+        </div>
+
+        <div className=" absolute top-[276vw] left-[25vw]  inline-block ">
           <h1 className="text-[1.4vw] font-bold mb-5">Technical Specs</h1>
           <h1 className=" text-[1.2vw] font-semibold mb-3 text-yellow-400">
             Runtime
@@ -893,11 +896,11 @@ const NowShowingMoviesFullDetailsPage = () => {
                 )}
             </span>
           </h1>
-        </div> */}
+        </div>
         <div className=" absolute top-[295vw] left-[25vw]">
           <h1 className="text-[1.4vw] font-bold photogallery">Photo Gallery</h1>
         </div>
-        {/* <div className="w-[75vw] h-[45vh] bg-red-20 absolute top-[300vw] left-[22vw]">
+        <div className="w-[75vw] h-[45vh] bg-red-20 absolute top-[300vw] left-[22vw]">
           <div className="flex">
             <Swiper
               slidesPerView={3}
@@ -921,11 +924,11 @@ const NowShowingMoviesFullDetailsPage = () => {
                 ))}
             </Swiper>
           </div>
-        </div> */}
+        </div>
         <div className=" inline-block absolute top-[320vw] left-[25vw]">
           <h1 className="text-[1.4vw] font-bold videogallery">Video Gallery</h1>
         </div>
-        {/* <div className=" w-[73vw]   h-[45vh]  bg-red-30  py-2 absolute top-[324vw] left-[22vw]">
+        <div className=" w-[73vw]   h-[45vh]  bg-red-30  py-2 absolute top-[324vw] left-[22vw]">
           <div className="flex  ">
             <Swiper
               slidesPerView={3}
@@ -963,11 +966,11 @@ const NowShowingMoviesFullDetailsPage = () => {
               ))}
             </Swiper>
           </div>
-        </div> */}
+        </div>
         <div className=" absolute top-[350vw] left-[25vw]">
           <h1 className=" text-[1.4vw] font-bold relatednews">Related News</h1>
         </div>
-        {/* <div className=" absolute  w-[65vw]  h-[30vh] top-[355vw] left-[25vw] bg-red-30">
+        <div className=" absolute  w-[65vw]  h-[30vh] top-[355vw] left-[25vw] bg-red-30">
           <div className="  flex flex-row">
             <Swiper
               slidesPerView={2}
@@ -979,43 +982,44 @@ const NowShowingMoviesFullDetailsPage = () => {
               modules={[Navigation]}
               className="mySwiper "
             >
-              {NowShowingMoviesDetails&&NowShowingRelatedNews?.news?.edges.map((data, index) => (
-                <SwiperSlide
-                  key={index}
-                  className=" overflow-hidden flex mr-10 hover:text-red-600 hover:bg-gray-800 rounded-lg cursor-pointer "
-                >
-                  <div className="   flex">
-                    <img
-                      className=" w-[7vw] h-[22vh] object-cover object-top rounded-lg hover:bg-gray-600"
-                      src={data?.node?.image?.url}
-                      alt=""
-                    />
-                    <h1 className=" absolute left-[8vw] text-amber-500">
-                      {data?.node?.articleTitle?.plainText}
-                    </h1>
-                    <h1 className="absolute top-[6vw] text-white left-[9vw]">
-                      {new Date(data?.node?.date).toLocaleString("default", {
-                        month: "short",
-                      })}{" "}
-                      {new Date(data?.node?.date).getDate()}
-                    </h1>
-                    <h1 className=" absolute top-[6vw] left-[22vw] text-lime-400 hover:underline">
-                      Source : {data?.node?.source?.homepage?.label}
-                    </h1>
-                  </div>
-                </SwiperSlide>
-              ))}
+              {NowShowingMoviesDetails &&
+                NowShowingRelatedNews?.news?.edges.map((data, index) => (
+                  <SwiperSlide
+                    key={index}
+                    className=" overflow-hidden flex mr-10 hover:text-red-600 hover:bg-gray-800 rounded-lg cursor-pointer "
+                  >
+                    <div className="   flex">
+                      <img
+                        className=" w-[7vw] h-[22vh] object-cover object-top rounded-lg hover:bg-gray-600"
+                        src={data?.node?.image?.url}
+                        alt=""
+                      />
+                      <h1 className=" absolute left-[8vw] text-amber-500">
+                        {data?.node?.articleTitle?.plainText}
+                      </h1>
+                      <h1 className="absolute top-[6vw] text-white left-[9vw]">
+                        {new Date(data?.node?.date).toLocaleString("default", {
+                          month: "short",
+                        })}{" "}
+                        {new Date(data?.node?.date).getDate()}
+                      </h1>
+                      <h1 className=" absolute top-[6vw] left-[22vw] text-lime-400 hover:underline">
+                        Source : {data?.node?.source?.homepage?.label}
+                      </h1>
+                    </div>
+                  </SwiperSlide>
+                ))}
             </Swiper>
           </div>
-        </div> */}
-        {/* <div className=" absolute bg-black w-[100vw] h-[134vh]  top-[374vw]  ">
+        </div>
+        <div className=" absolute bg-black w-[100vw] h-[134vh]  top-[374vw]  ">
           <div className=" absolute left-[10vw]">
             <RecentlyViewed />
           </div>
         </div>
         <div className=" absolute top-[412vw] border-t-2 border-red-600">
           <Footer />
-        </div> */}
+        </div>
       </div>
     </div>
   );
