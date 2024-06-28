@@ -1,20 +1,19 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}","node_modules/flowbite-react/lib/esm/**/*.js",
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "node_modules/flowbite-react/lib/esm/**/*.js",
   ],
   theme: {
     extend: {
-      // dropShadow: {
-      //   glow: ["0 0px 20px rgba(255,255, 255, 0.35)", "0 0px 65px rgba(255, 255,255, 0.2)"]
-      // },
-      
+      fontFamily: {
+        "roboto-medium": ["Roboto-Medium", "sans-serif"],
+        "roboto-black": ["Roboto-Black", "sans-serif"],
+        "roboto-bold": ["Roboto-Bold", "sans-serif"],
+        'roboto-black-italic': ['Roboto-BlackItalic', 'sans-serif'],
+      },
     },
   },
   variants: {},
-  plugins: [
-    require('tailwind-scrollbar-hide'),
-    require('flowbite/plugin')
-
-  ],
-}
-
+  plugins: [require("tailwind-scrollbar-hide"), require("flowbite/plugin")],
+};

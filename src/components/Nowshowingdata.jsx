@@ -46,8 +46,8 @@ const Nowshowingdata = ({ nowfinal }) => {
             {nowfinal.popularity || "No Information"}
           </p>
         </div>
-        <Link className=" p-2 relative bg-orange-700 rounded-md top-[29vh] left-[85%] hover:underline hover:bg-emerald-500 text-zinc-950   font-bold text-lg ">
-          Watch Trailer
+        <Link to={`/title/tt${nowfinal.id}`} role="trailerbtn" className=" golden-button trailerbtn p-2 relative bg-orange-700 rounded-md top-[29vh] left-[85%] hover:underline hover:bg-emerald-500 text-zinc-950   font-bold text-lg ">
+         <span className=" golden-text">Watch Trailer</span> 
         </Link> 
       </div>
     </>

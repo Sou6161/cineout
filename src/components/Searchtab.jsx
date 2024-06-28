@@ -262,7 +262,7 @@ const Searchtab = () => {
           <button
             id="dropdownInformationButton"
             data-dropdown-toggle="dropdownInformation"
-            class=" relative top-3 text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px- py- text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            class=" relative top-3 text-white font-medium rounded-lg text-sm px- py- text-center inline-flex items-center"
             type="button"
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           >

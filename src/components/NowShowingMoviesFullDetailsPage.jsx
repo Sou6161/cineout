@@ -14,7 +14,7 @@ import { FaStar } from "react-icons/fa6";
 import { IoStarOutline } from "react-icons/io5";
 import { FaArrowTrendUp } from "react-icons/fa6";
 import { FaArrowTrendDown } from "react-icons/fa6";
-import { IoMdStar } from "react-icons/io";
+import { IoMdArrowDropupCircle, IoMdStar } from "react-icons/io";
 import { IoMdArrowDropdownCircle } from "react-icons/io";
 import { BiPlayCircle } from "react-icons/bi";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -33,12 +33,9 @@ import useModal from "./UseModal";
 import { useDispatch } from "react-redux";
 import { addRecentlyVieweddata } from "../Reduxstore/RecentlyViewedSlice";
 
-const trimTextTo500Words = (text) => {
+const trimTextTo180Words = (text) => {
   const words = text.split(" ");
-  if (words.length > 180) {
-    return words.slice(0, 180).join(" ") + `...`;
-  }
-  return text;
+  return words.slice(0, 180).join(" ") + (words.length > 180 ? "..." : "");
 };
 
 const NumberFormatter = ({ number }) => {
@@ -76,7 +73,6 @@ const NowShowingMoviesFullDetailsPage = () => {
   const [NowShowingVideoGallery, setNowShowingVideoGallery] = useState(null);
   const [NowShowingRelatedNews, setNowShowingRelatedNews] = useState(null);
   const { isShowing, toggle } = useModal();
-  const [isHovered, setIsHovered] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [clickedIndex, setClickedIndex] = useState(null);
   const dispatch = useDispatch();
@@ -92,7 +88,7 @@ const NowShowingMoviesFullDetailsPage = () => {
   const rightNames = cast.slice(16, 24);
 
   const renderNames = (namesArray) => (
-    <div className="w-[24vw]">
+    <div className="w-[20vw]">
       {namesArray &&
         namesArray.map((data, index) => (
           <div key={index}>
@@ -261,7 +257,7 @@ const NowShowingMoviesFullDetailsPage = () => {
 
   const [isTrimmed, setIsTrimmed] = useState(true);
   const toggleTrim = () => {
-    setIsTrimmed(false);
+    setIsTrimmed(!isTrimmed);
   };
 
   useEffect(() => {
@@ -296,7 +292,6 @@ const NowShowingMoviesFullDetailsPage = () => {
         <Headerfordetails />
       </div>
       <div className=" w-[98vw] mx-auto mt-5 h-[76.5vh]  border-black glow5 rounded-lg  ">
-        
         {NowShowingTrailerYTKEY ? (
           <iframe
             className=" w-[97vw] mx-auto h-[75vh] relative top-1 rounded-lg glow3  glow"
@@ -522,7 +517,7 @@ const NowShowingMoviesFullDetailsPage = () => {
           </span>
           <span className="absolute flex left-[22vw] top-8 text-[1.3vw] font-bold">
             {NowShowingMoviesDetails?.meterRanking?.currentRank}
-            <span className="absolute left-4 top-1">
+            <span className="absolute left-6 top-1">
               {NowShowingMoviesDetails?.meterRanking?.rankChange
                 ?.changeDirection === "UP" ? (
                 <IoMdArrowDropup />
@@ -587,44 +582,16 @@ const NowShowingMoviesFullDetailsPage = () => {
         <div className=" absolute top-[45vw] left-[25vw] text-[1.4vw] font-bold">
           <h1>TOP CAST</h1>
           <div className="flex justify-between mt-10">
-            <div className="name-list flex">
+            <div className="name-list flex justify-start space-x-10">
               {renderNames(leftNames)}
               {middleNames.length > 0 && renderNames(middleNames)}
               {rightNames.length > 0 && renderNames(rightNames)}
             </div>
 
-            <div>
-              {NowShowingMoviesDetails &&
-                NowShowingMoviesDetails?.cast?.edges
-                  .slice(8, 10)
-                  .map((data) => (
-                    <div className=" relative left-[12vw]">
-                      <img
-                        className=" w-[6vw] h-[12vh] rounded-full object-cover blur-[3px] hover:blur-0 border-2 border-cyan-400 hover:border-purple-500 "
-                        src={
-                          data?.node?.name?.primaryImage?.url
-                            ? data?.node?.name?.primaryImage?.url
-                            : "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
-                        }
-                        alt="no image available"
-                      />
-                      <div className=" relative bottom-[5vw] left-[8vw]">
-                        <h1 className=" font-normal text-white">
-                          {data?.node?.name?.nameText?.text}
-                        </h1>
-                        <h1 className=" font-normal text-lime-400">
-                          {data &&
-                            data?.node?.characters.map((data) => {
-                              return data?.name;
-                            })}
-                        </h1>
-                      </div>
-                    </div>
-                  ))}
-            </div>
+           
           </div>
         </div>
-        <div className="absolute top-[132vw] bg-red-30 left-[25vw] text-[1.4vw]">
+        <div className="absolute top-[137vw] bg-red-30 left-[25vw] text-[1.4vw]">
           <h1 className="font-bold">More Titles Like This</h1>
           <div className="absolute -mx-[2vw] w-[70vw] h-[65vh] mt-10 border-l-2 my-2 border-r-2 border-blue-600 flex flex-nowrap overflow-x-auto overflow-y-hidden no-scrollbar gap-10">
             {NowShowingMoviesDetails &&
@@ -666,10 +633,10 @@ const NowShowingMoviesFullDetailsPage = () => {
           </div>
         </div>
 
-        <div className=" absolute top-[170vw] left-[25vw] inline-block">
+        <div className=" absolute top-[175vw] left-[25vw] inline-block">
           <h1 className=" text-[1.4vw] font-bold ">Details</h1>
         </div>
-        <div className="  relative top-[149vw] left-[25vw] w-[70vw] h-[60vh] mb-[5vw]">
+        <div className="  relative top-[155vw] left-[25vw] w-[70vw] h-[60vh] mb-[5vw]">
           <h1 className="text-[1.2vw] text-blue-500 border-t-[1px] border-b-[1px]  border-gray-700 py-5">
             <span className="  text-yellow-400 mr-5">Release Date</span>
             {NowShowingMoviesDetails?.releaseDate?.month}
@@ -749,44 +716,64 @@ const NowShowingMoviesFullDetailsPage = () => {
           </h1>
         </div>
 
-        <div className=" inline-block relative top-[150vw] left-[25vw] text-[1.4vw] font-bold">
+        <div className=" inline-block relative top-[155vw] left-[25vw] text-[1.4vw] font-bold">
           <h1>User Reviews</h1>
         </div>
+
         <div
-          className="relative top-[152vw] left-[25vw] w-[50vw] rounded-lg px-5 py-4"
+          className="relative top-[157vw] left-[25vw] w-[50vw] rounded-lg px-5 py-4"
           style={{
             backgroundColor: "black",
-            height: isTrimmed ? "auto" : "auto",
+            height: "auto",
           }}
         >
-          <h1 className=" review w-[10vw]">FEATURED REVIEW</h1>
+          <h1 className="review w-[10vw]">FEATURED REVIEW</h1>
           <div>
             {NowShowingMoviesDetails &&
-              NowShowingMoviesDetails?.featuredReviews?.edges.map((data) => {
-                const fullText = data?.node?.text?.originalText?.plainText;
-                const trimmedText = trimTextTo500Words(fullText);
+              NowShowingMoviesDetails?.featuredReviews?.edges.map(
+                (data, index) => {
+                  const fullText = data?.node?.text?.originalText?.plainText;
+                  const words = fullText.split(" ");
+                  const isLongText = words.length > 180;
+                  const displayText = isTrimmed
+                    ? trimTextTo180Words(fullText)
+                    : fullText;
 
-                return (
-                  <>
-                    <div className=" mt-5">
-                      <h1 className=" text-[1.4vw] font-bold text-lime-500">
-                        "{data?.node?.summary?.originalText}"
-                      </h1>
+                  return (
+                    <div key={index}>
+                      <div className="mt-5">
+                        <h1 className="text-[1.4vw] font-bold text-lime-500">
+                          "{data?.node?.summary?.originalText}"
+                        </h1>
+                      </div>
+                      <div className="relative">
+                        <p className="mt-7 text-[1vw] leading-7 text-fuchsia-300 font-normal">
+                          {displayText}
+                          {isLongText && isTrimmed && (
+                            <>
+                              ...
+                              <span
+                                className="inline-block ml-2 cursor-pointer text-white"
+                                onClick={toggleTrim}
+                              >
+                                <IoMdArrowDropdownCircle size={24} />
+                              </span>
+                            </>
+                          )}
+                        </p>
+                        {isLongText && !isTrimmed && (
+                          <span
+                            className="block mt-2 cursor-pointer text-white"
+                            onClick={toggleTrim}
+                          >
+                            <IoMdArrowDropupCircle size={24} />
+                          </span>
+                        )}
+                      </div>
                     </div>
-                    <p className="mt-7 text-[1vw] leading-7 text-fuchsia-300 font-normal overflow-y-scroll no-scrollbar">
-                      {isTrimmed ? trimmedText : fullText}
-                      {isTrimmed && (
-                        <span
-                          className="absolute top-[23vw] left-[48vw] cursor-pointer"
-                          onClick={toggleTrim}
-                        >
-                          <IoMdArrowDropdownCircle />
-                        </span>
-                      )}
-                    </p>
-                  </>
-                );
-              })}
+                  );
+                }
+              )}
           </div>
         </div>
 
@@ -832,7 +819,7 @@ const NowShowingMoviesFullDetailsPage = () => {
             )}
             {NowShowingMoviesDetails?.worldwideGross && (
               <>
-                <h1 className="mb-3 text-sky-500 text-[1.2vw]">
+                <h1 className="mb-3 whitespace-nowrap text-sky-500 text-[1.2vw]">
                   Gross worldwide
                 </h1>
                 <h1 className="text-white text-[1vw]">

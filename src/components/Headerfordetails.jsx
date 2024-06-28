@@ -52,6 +52,7 @@ const Headerfordetails = () => {
         backgroundColor: "transparent",
         zIndex: 1000,
       }}>
+        <Link to="/home">
         <div className=" cursor-pointer ">
           <img
             className=" w-[5vw] h-[10vh] relative bottom- ml-5  "
@@ -59,6 +60,7 @@ const Headerfordetails = () => {
             alt="no image"
           />
         </div>
+        </Link>
 
         <div className="  flex items-center justify-between absolute left-[28vw] top-[4vh]">
           <div className="links flex gap-8 font-serif text-xl font-extrabold text-red-600">

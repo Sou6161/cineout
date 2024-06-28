@@ -50,7 +50,7 @@ const RecentlyViewed = () => {
                     src={data?.primaryImage?.url}
                     alt=""
                   />
-                  <h1 className="mt-5 ml-2 text-[1.4vw]">
+                  <h1 className="mt-5 ml-2 text-[1.4vw] w-[15vw]">
                     {data?.titleText?.text}
                   </h1>
                 </div>
