@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-const UpcomingMoviesFullDetailsPage = () => {
+const UpcomingSeriesFullDetailsPage = () => {
   const { title } = useParams();
   let movieId = title;
   if (title.startsWith("su")) {
@@ -12,4 +12,4 @@ const UpcomingMoviesFullDetailsPage = () => {
   return <div>{movieId && console.log(movieId)} fyufuuff7f77f</div>;
 };
 
-export default UpcomingMoviesFullDetailsPage;
+export default UpcomingSeriesFullDetailsPage;

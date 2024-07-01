@@ -20,13 +20,14 @@ const Upcomingseriesdata = ({ nowupcomingseries }) => {
       <div className=" w-[97vw] mx-  h-[55vh]  scrollbar-hide overflow-x-auto overflow-y-hidden  mb-[8vh] -mt-2 bg-yellow-20">
           <div className=" ml-3 flex gap-10  w-[100vw] h-[47vh]  no-scrollbar ">
             {/* {finalcomingsoonmoviestheaters && console.log(finalcomingsoonmoviestheaters)} */}
-            {/* {console.log(nowupcomingseries)} */}
+            {console.log(nowupcomingseries)}
             {nowupcomingseries &&
-              nowupcomingseries .map((movie, index) => {
+              nowupcomingseries.map((movie, index) => {
                 {
                   return (
                     <div key={index}>
-                      <div className="  mr-4  ml- mt-4  min-w-[15vw] glow3 max-h-[42vh] rounded-[10px] p-2 overflow-x-hidden scrollbar-hide cursor-pointer bg-zinc-70  bg-slate-400  hover:bg-slate-500 overflow-y-auto">
+                      <Link to={`/name/nm${movie.id}`}>
+                      <div className="  mr-4  ml- mt-4  min-w-[15vw] glow3 max-h-[42vh] overflow-y-hidden rounded-[10px] p-2 overflow-x-hidden scrollbar-hide cursor-pointer bg-zinc-70  bg-slate-400  hover:bg-slate-500 ">
                         <img
                           className=" w-[30vw] h-[40vh] rounded-md drop-shadow-glow"
                           src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
@@ -43,6 +44,7 @@ const Upcomingseriesdata = ({ nowupcomingseries }) => {
                           {movie.name}
                         </h1>
                       </div>
+                      </Link>
                     </div>
                   );
                 }

@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import Headerfordetails from "./Headerfordetails";
 import { API_OPTIONS } from "../constants/Apioptions";
 import {
-  RapidOptionsDetailsNowShowingMoviesDaimondTest29,
+  RapidOptionsDetailsNowShowingMoviesDaimondTest30,
   RapidOptionsDetailsNowShowingMoviesDaimondApidojoTest26,
   RapidOptionsDetailsNowShowingMoviesDaimondTest27ApiDojo,
   RapidOptionsDetailsNowShowingMoviesDaimondTest28ApiDojo,
@@ -126,30 +126,55 @@ const NowShowingMoviesFullDetailsPage = () => {
   }, [isShowing]);
 
   useEffect(() => {
-    const NowShowingTrailerYTKEY = async () => {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,
-        API_OPTIONS
-      );
-      const data = await response.json();
-      if (data?.results) {
-        const trailerVideos = data.results.filter(
-          (movie) => movie.type === "Trailer"
+    const fetchTrailer = async () => {
+      try {
+        // First, try to fetch from movie API
+        let response = await fetch(
+          `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,
+          API_OPTIONS
         );
-        if (trailerVideos.length > 0) {
-          const randomTrailer =
-            trailerVideos[Math.floor(Math.random() * trailerVideos.length)];
-          setNowShowingTrailerYTKEY(randomTrailer.key);
-        } else {
-          console.log("No trailer videos found in the data");
+        let data = await response.json();
+
+        // If we get valid data from movie API, process it
+        if (data?.results && data.results.length > 0) {
+          processTrailerData(data);
+          return; // Exit the function here if we got data from movie API
         }
-      } else {
-        console.log("No results found in the data");
+
+        // If no results from movie API, try TV API
+        response = await fetch(
+          `https://api.themoviedb.org/3/tv/${movieId}/videos?language=en-US`,
+          API_OPTIONS
+        );
+        data = await response.json();
+
+        // Process data from TV API
+        if (data?.results && data.results.length > 0) {
+          processTrailerData(data);
+        } else {
+          console.log("No results found in both movie and TV APIs");
+        }
+      } catch (error) {
+        console.error("Error fetching trailer:", error);
       }
     };
 
-    NowShowingTrailerYTKEY();
-  }, [id]);
+    const processTrailerData = (data) => {
+      const trailerVideos = data.results.filter(
+        (video) => video.type === "Trailer"
+      );
+      if (trailerVideos.length > 0) {
+        const randomTrailer =
+          trailerVideos[Math.floor(Math.random() * trailerVideos.length)];
+        setNowShowingTrailerYTKEY(randomTrailer.key);
+      } else {
+        console.log("No trailer videos found in the data");
+      }
+    };
+
+    fetchTrailer();
+  }, [movieId]);
+
 
   useEffect(() => {
     NowShowingTrailerYTKEY &&
@@ -157,16 +182,43 @@ const NowShowingMoviesFullDetailsPage = () => {
   }, [NowShowingTrailerYTKEY]);
 
   useEffect(() => {
-    const getNowShowingIMDBID = async () => {
-      const response = await fetch(
+  const getNowShowingIMDBID = async () => {
+    try {
+      // First, try to fetch from movie API
+      let response = await fetch(
         `https://api.themoviedb.org/3/movie/${movieId}/external_ids`,
         API_OPTIONS
       );
-      const data = await response.json();
-      setNowShowingIMDBID(data?.imdb_id);
-    };
-    getNowShowingIMDBID();
-  }, []);
+      let data = await response.json();
+
+      // If we get valid IMDB ID from movie API, set it and return
+      if (data && data.imdb_id) {
+        setNowShowingIMDBID(data.imdb_id);
+        return;
+      }
+
+      // If no IMDB ID from movie API, try TV API
+      response = await fetch(
+        `https://api.themoviedb.org/3/tv/${movieId}/external_ids`,
+        API_OPTIONS
+      );
+      data = await response.json();
+
+      // Set IMDB ID from TV API if found
+      if (data && data.imdb_id) {
+        setNowShowingIMDBID(data.imdb_id);
+      } else {
+        console.log("No IMDB ID found in both movie and TV APIs");
+        setNowShowingIMDBID(null); // or however you want to handle this case
+      }
+    } catch (error) {
+      console.error("Error fetching IMDB ID:", error);
+      setNowShowingIMDBID(null); // or however you want to handle errors
+    }
+  };
+
+  getNowShowingIMDBID();
+}, [movieId]); // Added movieId to the dependency array
 
   useEffect(() => {
     if (NowShowingIMDBID !== null) {
@@ -177,12 +229,15 @@ const NowShowingMoviesFullDetailsPage = () => {
   useEffect(() => {
     const NowShowingMoviesDetails = async () => {
       if (NowShowingIMDBID) {
+        console.log(NowShowingIMDBID, "ughigigigiggg");
         try {
           const response = await fetch(
             `https://imdb146.p.rapidapi.com/v1/title/?id=${NowShowingIMDBID}`,
-            RapidOptionsDetailsNowShowingMoviesDaimondTest29
+            RapidOptionsDetailsNowShowingMoviesDaimondTest30
           );
+
           const NowShowingMoviesDetails = await response.json(); // Assuming this is the variable you want to dispatch
+          console.log(NowShowingMoviesDetails);
           setNowShowingMoviesDetails(NowShowingMoviesDetails);
           // Check if NowShowingMoviesDetails is valid before dispatching
           if (NowShowingMoviesDetails) {
@@ -303,9 +358,10 @@ const NowShowingMoviesFullDetailsPage = () => {
             class="flex items-center justify-center bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700"
           >
             <svg
-              class="w-[97vw] h-[75vh] text-gray-200 dark:text-gray-600"
+              class="w-[97vw] h-[75vh] text-[10vw]  text-red-600  dark:text-gray-600"
               aria-hidden="true"
               fill="currentColor"
+              style={{ position: "relative", left: "800px", top: "250px" }}
             >
               <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z" />
               <path d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM9 13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2Zm4 .382a1 1 0 0 1-1.447.894L10 13v-2l1.553-1.276a1 1 0 0 1 1.447.894v2.764Z" />
@@ -355,6 +411,7 @@ const NowShowingMoviesFullDetailsPage = () => {
             </span>
             <h1 className="relative text-emerald-400 font-semibold top-[7vw] text-[1.3vw] left-[7vw]">
               {NowShowingMoviesDetails &&
+                console.log(NowShowingMoviesDetails, "kjggygiigigiggg7og") &&
                 NowShowingMoviesDetails?.directorsPageTitle.map(
                   (data, index) => (
                     <span key={index}>
@@ -587,8 +644,6 @@ const NowShowingMoviesFullDetailsPage = () => {
               {middleNames.length > 0 && renderNames(middleNames)}
               {rightNames.length > 0 && renderNames(rightNames)}
             </div>
-
-           
           </div>
         </div>
         <div className="absolute top-[137vw] bg-red-30 left-[25vw] text-[1.4vw]">

@@ -790,3 +790,7 @@ useEffect(() => {
   // useEffect(() => {
   //   NowShowingMovieTrailerID && console.log(NowShowingMovieTrailerID);
   // }, [NowShowingMovieTrailerID]);
+
+
+
+
