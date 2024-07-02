@@ -107,7 +107,7 @@ export const RapidoptionsDojo = {
 export const Rapidoptions = {
   method: "GET",
   headers: {
-    "X-RapidAPI-Key": "f4d8c4b0damshaaa929b9a6a3bd1p174e49jsn66d467e50843",
+    "X-RapidAPI-Key": "b32ab82c34msheb2730c95608ca2p117c3djsn016fb569fe8f",
     "X-RapidAPI-Host": "imdb188.p.rapidapi.com",
   },
 };

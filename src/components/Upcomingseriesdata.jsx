@@ -20,7 +20,7 @@ const Upcomingseriesdata = ({ nowupcomingseries }) => {
       <div className=" w-[97vw] mx-  h-[55vh]  scrollbar-hide overflow-x-auto overflow-y-hidden  mb-[8vh] -mt-2 bg-yellow-20">
           <div className=" ml-3 flex gap-10  w-[100vw] h-[47vh]  no-scrollbar ">
             {/* {finalcomingsoonmoviestheaters && console.log(finalcomingsoonmoviestheaters)} */}
-            {console.log(nowupcomingseries)}
+            {/* {console.log(nowupcomingseries)} */}
             {nowupcomingseries &&
               nowupcomingseries.map((movie, index) => {
                 {

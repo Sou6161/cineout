@@ -93,22 +93,29 @@ const NowShowingMoviesFullDetailsPage = () => {
         namesArray.map((data, index) => (
           <div key={index}>
             <img
-              className="w-[7vw] p-1 h-[14vh] rounded-full object-cover blur-[3px] hover:blur-0 border-2 border-cyan-400 hover:border-purple-500"
+              className="w-[7vw]  p-1 h-[14vh] rounded-full object-cover blur-[3px] hover:blur-0 border-2 border-cyan-400 hover:border-purple-500"
               src={
                 data?.node?.name?.primaryImage?.url ||
                 "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
               }
               alt="no image available"
             />
-            <div className="relative bottom-[5vw] left-[8vw]">
+            <div className="relative bottom-[6.5vw] left-[8vw]">
               <h1 className="font-normal text-white">
                 {data?.node?.name?.nameText?.text}
               </h1>
               <h1 className="font-normal text-lime-400">
                 {data?.node?.characters &&
-                  data.node.characters
-                    .map((character) => character?.name)
-                    .join(", ")}
+                  (() => {
+                    const characterNames = data.node.characters
+                      .map((character) => character?.name)
+                      .join(", ");
+                    const words = characterNames.split(" ");
+                    if (words.length > 4) {
+                      return words.slice(0, 4).join(" ") + "...";
+                    }
+                    return characterNames;
+                  })()}
               </h1>
             </div>
           </div>
@@ -136,7 +143,8 @@ const NowShowingMoviesFullDetailsPage = () => {
         let data = await response.json();
 
         // If we get valid data from movie API, process it
-        if (data?.results && data.results.length > 0) {
+        if (data?.results && data.results.length > 1) {
+          console.log(data, "Movie THe boys DAtaaaaaaa");
           processTrailerData(data);
           return; // Exit the function here if we got data from movie API
         }
@@ -150,6 +158,7 @@ const NowShowingMoviesFullDetailsPage = () => {
 
         // Process data from TV API
         if (data?.results && data.results.length > 0) {
+          console.log(data, "the boys seriesd dataaaaaa");
           processTrailerData(data);
         } else {
           console.log("No results found in both movie and TV APIs");
@@ -175,50 +184,55 @@ const NowShowingMoviesFullDetailsPage = () => {
     fetchTrailer();
   }, [movieId]);
 
-
   useEffect(() => {
     NowShowingTrailerYTKEY &&
       console.log(NowShowingTrailerYTKEY, " MOVIE YT KEY");
   }, [NowShowingTrailerYTKEY]);
 
   useEffect(() => {
-  const getNowShowingIMDBID = async () => {
-    try {
-      // First, try to fetch from movie API
-      let response = await fetch(
-        `https://api.themoviedb.org/3/movie/${movieId}/external_ids`,
-        API_OPTIONS
-      );
-      let data = await response.json();
+    const getNowShowingExternalIDs = async () => {
+      try {
+        // First, try to fetch from movie API
+        let response = await fetch(
+          `https://api.themoviedb.org/3/movie/${movieId}/external_ids`,
+          API_OPTIONS
+        );
+        let data = await response.json();
 
-      // If we get valid IMDB ID from movie API, set it and return
-      if (data && data.imdb_id) {
-        setNowShowingIMDBID(data.imdb_id);
-        return;
+        // If we get valid Instagram ID from movie API, use this data and return
+        if (data && data.wikidata_id) {
+          setNowShowingIMDBID(data.imdb_id);
+          // You might want to set other external IDs here as well
+          // For example: setInstagramID(data.instagram_id);
+          return;
+        }
+
+        // If no Instagram ID from movie API, try TV API
+        response = await fetch(
+          `https://api.themoviedb.org/3/tv/${movieId}/external_ids`,
+          API_OPTIONS
+        );
+        data = await response.json();
+
+        // Set IMDB ID and other external IDs from TV API if found
+        if (data) {
+          setNowShowingIMDBID(data.imdb_id);
+          // You might want to set other external IDs here as well
+          // For example: setInstagramID(data.instagram_id);
+        } else {
+          console.log("No external IDs found in both movie and TV APIs");
+          setNowShowingIMDBID(null);
+          // Reset other external IDs if needed
+        }
+      } catch (error) {
+        console.error("Error fetching external IDs:", error);
+        setNowShowingIMDBID(null);
+        // Reset other external IDs if needed
       }
+    };
 
-      // If no IMDB ID from movie API, try TV API
-      response = await fetch(
-        `https://api.themoviedb.org/3/tv/${movieId}/external_ids`,
-        API_OPTIONS
-      );
-      data = await response.json();
-
-      // Set IMDB ID from TV API if found
-      if (data && data.imdb_id) {
-        setNowShowingIMDBID(data.imdb_id);
-      } else {
-        console.log("No IMDB ID found in both movie and TV APIs");
-        setNowShowingIMDBID(null); // or however you want to handle this case
-      }
-    } catch (error) {
-      console.error("Error fetching IMDB ID:", error);
-      setNowShowingIMDBID(null); // or however you want to handle errors
-    }
-  };
-
-  getNowShowingIMDBID();
-}, [movieId]); // Added movieId to the dependency array
+    getNowShowingExternalIDs();
+  }, [movieId]);
 
   useEffect(() => {
     if (NowShowingIMDBID !== null) {
@@ -406,48 +420,93 @@ const NowShowingMoviesFullDetailsPage = () => {
         </div>
         <div className=" relative left-[27vw] ">
           <div className=" absolute bottom-[5vw] ">
-            <span className=" text-white relative top-[9vw] text-[1.3vw]  ">
-              Director
-            </span>
-            <h1 className="relative text-emerald-400 font-semibold top-[7vw] text-[1.3vw] left-[7vw]">
-              {NowShowingMoviesDetails &&
-                console.log(NowShowingMoviesDetails, "kjggygiigigiggg7og") &&
-                NowShowingMoviesDetails?.directorsPageTitle.map(
-                  (data, index) => (
-                    <span key={index}>
-                      {data?.credits.map((director, i) => (
-                        <React.Fragment key={i}>
-                          {director?.name?.nameText?.text}
-                          {i < data?.credits?.length - 1 && ", "}
-                        </React.Fragment>
-                      ))}
-                      {index <
-                        NowShowingMoviesDetails?.directorsPageTitle?.length -
-                          1 && ", "}
-                    </span>
-                  )
+            <>
+              <span className="text-white relative top-[9vw] text-[1.3vw]">
+                {NowShowingMoviesDetails?.directorsPageTitle &&
+                NowShowingMoviesDetails.directorsPageTitle.length > 0
+                  ? "Directors"
+                  : NowShowingMoviesDetails?.creatorsPageTitle &&
+                    NowShowingMoviesDetails.creatorsPageTitle.length > 0
+                  ? "Creators"
+                  : ""}
+              </span>
+
+              <h1 className="relative text-emerald-400 font-semibold top-[7vw] text-[1.3vw] left-[7vw]">
+                {NowShowingMoviesDetails && (
+                  <>
+                    {NowShowingMoviesDetails.directorsPageTitle &&
+                    NowShowingMoviesDetails.directorsPageTitle.length > 0
+                      ? NowShowingMoviesDetails.directorsPageTitle.map(
+                          (data, index) => (
+                            <span key={index}>
+                              {data?.credits.map((director, i) => (
+                                <React.Fragment key={i}>
+                                  {director?.name?.nameText?.text}
+                                  {i < data?.credits?.length - 1 && ", "}
+                                </React.Fragment>
+                              ))}
+                              {index <
+                                NowShowingMoviesDetails.directorsPageTitle
+                                  .length -
+                                  1 && ", "}
+                            </span>
+                          )
+                        )
+                      : NowShowingMoviesDetails.creatorsPageTitle &&
+                        NowShowingMoviesDetails.creatorsPageTitle.length > 0
+                      ? NowShowingMoviesDetails.creatorsPageTitle.map(
+                          (data, index) => (
+                            <span key={index}>
+                              {data?.credits.map((creator, i) => (
+                                <React.Fragment key={i}>
+                                  {creator?.name?.nameText?.text}
+                                  {i < data?.credits?.length - 1 && ", "}
+                                </React.Fragment>
+                              ))}
+                              {index <
+                                NowShowingMoviesDetails.creatorsPageTitle
+                                  .length -
+                                  1 && ", "}
+                            </span>
+                          )
+                        )
+                      : "No directors or creators found"}
+                  </>
                 )}
-            </h1>
-
-            <span className=" text-white relative top-[9.5vw] text-[1.3vw]">
-              Writers
-            </span>
-            <h1 className="relative top-[7.6vw] text-emerald-400 text-[1.3vw] left-[7vw]">
-              {NowShowingMoviesDetails &&
-                NowShowingMoviesDetails?.writers.map((data, index) => (
-                  <span key={index}>
-                    {data?.credits.map((writers, i) => (
-                      <React.Fragment key={i}>
-                        {writers?.name?.nameText?.text}
-                        {i < data?.credits?.length - 1 && ", "}
-                      </React.Fragment>
-                    ))}
-                    {index < NowShowingMoviesDetails?.writers?.length - 1 &&
-                      ", "}
+              </h1>
+            </>
+            {NowShowingMoviesDetails?.writers &&
+              NowShowingMoviesDetails.writers.length > 0 &&
+              NowShowingMoviesDetails.writers.some(
+                (writer) => writer.credits && writer.credits.length > 0
+              ) && (
+                <>
+                  <span className="text-white relative top-[9.5vw] text-[1.3vw]">
+                    Writers
                   </span>
-                ))}
-            </h1>
-
+                  <h1 className="relative top-[7.6vw] text-emerald-400 text-[1.3vw] left-[7vw]">
+                    {NowShowingMoviesDetails.writers.map(
+                      (data, index) =>
+                        data.credits &&
+                        data.credits.length > 0 && (
+                          <span key={index}>
+                            {data.credits.map((writer, i) => (
+                              <React.Fragment key={i}>
+                                {writer?.name?.nameText?.text}
+                                {i < data.credits.length - 1 && ", "}
+                              </React.Fragment>
+                            ))}
+                            {index <
+                              NowShowingMoviesDetails.writers.length - 1 &&
+                              NowShowingMoviesDetails.writers[index + 1]
+                                ?.credits?.length > 0 &&
+                              ", "}
+                          </span>
+                        )
+                    )}
+                  </h1>
+                </>
+              )}
             <span className=" text-white relative top-[10vw] text-[1.3vw]">
               Stars
             </span>
@@ -639,14 +698,18 @@ const NowShowingMoviesFullDetailsPage = () => {
         <div className=" absolute top-[45vw] left-[25vw] text-[1.4vw] font-bold">
           <h1>TOP CAST</h1>
           <div className="flex justify-between mt-10">
-            <div className="name-list flex justify-start space-x-10">
-              {renderNames(leftNames)}
-              {middleNames.length > 0 && renderNames(middleNames)}
-              {rightNames.length > 0 && renderNames(rightNames)}
+            <div className="name-list flex justify-start">
+              <div className="">{renderNames(leftNames)}</div>
+              {middleNames.length > 0 && (
+                <div className="ml-[5vw]">{renderNames(middleNames)}</div>
+              )}
+              {rightNames.length > 0 && (
+                <div className="ml-[5vw]">{renderNames(rightNames)}</div>
+              )}
             </div>
           </div>
         </div>
-        <div className="absolute top-[137vw] bg-red-30 left-[25vw] text-[1.4vw]">
+        <div className="absolute top-[141vw] bg-red-30 left-[25vw] text-[1.4vw]">
           <h1 className="font-bold">More Titles Like This</h1>
           <div className="absolute -mx-[2vw] w-[70vw] h-[65vh] mt-10 border-l-2 my-2 border-r-2 border-blue-600 flex flex-nowrap overflow-x-auto overflow-y-hidden no-scrollbar gap-10">
             {NowShowingMoviesDetails &&
@@ -688,10 +751,10 @@ const NowShowingMoviesFullDetailsPage = () => {
           </div>
         </div>
 
-        <div className=" absolute top-[175vw] left-[25vw] inline-block">
+        <div className=" absolute top-[178vw] left-[25vw] inline-block">
           <h1 className=" text-[1.4vw] font-bold ">Details</h1>
         </div>
-        <div className="  relative top-[155vw] left-[25vw] w-[70vw] h-[60vh] mb-[5vw]">
+        <div className="  relative top-[157vw] left-[25vw] w-[70vw] h-[60vh] mb-[5vw]">
           <h1 className="text-[1.2vw] text-blue-500 border-t-[1px] border-b-[1px]  border-gray-700 py-5">
             <span className="  text-yellow-400 mr-5">Release Date</span>
             {NowShowingMoviesDetails?.releaseDate?.month}

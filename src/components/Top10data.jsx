@@ -5,8 +5,8 @@ const Top10data = ({ finalweekdata }) => {
     <>
       <div className=" w-[100vw] text-white mt-8">
         <h1 className=" text-[3.2vh] px-5 mb-[4vh] ml-2 ">
-          Top <span className=" text-red-600 font-bold ">10</span> on{" "}
-          <span className=" text-yellow-500 font-bold">CINEOUT</span> this{" "}
+        <span className=" glowText2">Top</span>   <span className=" text-red-600 font-bold ">10</span> <span className=" glowText">on</span>{" "}
+          <span className=" text-yellow-500 font-bold">CINEOUT</span> <span className=" glowText">this</span>{" "}
           <span className=" text-violet-400 font-bold">week</span>
         </h1>
       </div>
