@@ -1379,30 +1379,103 @@ body {
 /* ipjsipjopsdjops */
 
 .glowText2 {
-  text-shadow: 0 0 5px #00a6ff, 0 0 15px #00d0ff, 0 0 20px #00c8ff, 0 0 40px #00e5ff, 0 0 60px #ff0000, 0 0 10px #ff8d00, 0 0 98px #ff0000;
-  color: #fff6a9;
-  animation: blink 6s infinite; /* Reduced from 12s to 6s */
-  -webkit-animation: blink 6s infinite; /* Reduced from 12s to 6s */
+  text-shadow: 0 0 5px #ffffff, 0 0 15px #ffffff, 0 0 20px #ffffff, 0 0 40px #ffffff, 0 0 60px #ffffff, 0 0 10px #ffffff, 0 0 98px #ffffff;
+  color: #ffffff;
+  animation: sink 6s infinite;
+  -webkit-animation: sink 6s infinite;
 }
 
-@-webkit-keyframes blink {
+@-webkit-keyframes sink {
   10%, 12%, 27% {
     color: #111;
     text-shadow: none;
   }
   0%, 9%, 11%, 13%, 26%, 28%, 100% {
-    text-shadow: 0 0 5px #ffa500, 0 0 15px #ffa500, 0 0 20px #ffa500, 0 0 40px #ffa500, 0 0 60px #ff0000, 0 0 10px #ff8d00, 0 0 98px #ff0000;
-    color: #fff6a9;
+    text-shadow: 0 0 5px #ffffff, 0 0 15px #ffffff, 0 0 20px #ffffff, 0 0 40px #ffffff, 0 0 60px #ffffff, 0 0 10px #ffffff, 0 0 98px #ffffff;
+    color: #ffffff;
   }
 }
 
-@keyframes blink {
+@keyframes sink {
   10%, 12%, 27% {
     color: #111;
     text-shadow: none;
   }
   0%, 9%, 11%, 13%, 26%, 28%, 100% {
-    text-shadow: 0 0 5px #ffa500, 0 0 15px #ffa500, 0 0 20px #ffa500, 0 0 40px #ffa500, 0 0 60px #ff0000, 0 0 10px #ff8d00, 0 0 98px #ff0000;
-    color: #fff6a9;
+    text-shadow: 0 0 5px #ffffff, 0 0 15px #ffffff, 0 0 20px #ffffff, 0 0 40px #ffffff, 0 0 60px #ffffff, 0 0 10px #ffffff, 0 0 98px #ffffff;
+    color: #ffffff;
+  }
+}
+
+
+/* Upcoming Trailers Glow Text */
+
+.glowText3 {
+  text-shadow: 0 0 5px #00ff00, 0 0 15px #00ff00, 0 0 20px #00ff00, 0 0 40px #00ff00, 0 0 60px #00ff00, 0 0 10px #00ff00, 0 0 98px #00ff00;
+  color: #00ff00;
+  animation: wink 6s infinite;
+  -webkit-animation: wink 6s infinite;
+}
+
+@-webkit-keyframes wink {
+  10%, 12%, 27% {
+    color: #111;
+    text-shadow: none;
+  }
+  0%, 9%, 11%, 13%, 26%, 28%, 100% {
+    text-shadow: 0 0 5px #00ff00, 0 0 15px #00ff00, 0 0 20px #00ff00, 0 0 40px #00ff00, 0 0 60px #00ff00, 0 0 10px #00ff00, 0 0 98px #00ff00;
+    color: #00ff00;
+  }
+}
+
+@keyframes wink {
+  10%, 12%, 27% {
+    color: #111;
+    text-shadow: none;
+  }
+  0%, 9%, 11%, 13%, 26%, 28%, 100% {
+    text-shadow: 0 0 5px #00ff00, 0 0 15px #00ff00, 0 0 20px #00ff00, 0 0 40px #00ff00, 0 0 60px #00ff00, 0 0 10px #00ff00, 0 0 98px #00ff00;
+    color: #00ff00;
+  }
+}
+
+
+/* Born Person */
+
+.glowText4 {
+  text-shadow: 0 0 5px #9333ea, 0 0 15px #9333ea, 0 0 20px #9333ea, 0 0 40px #9333ea, 0 0 60px #9333ea, 0 0 10px #9333ea, 0 0 98px #9333ea;
+  color: #9333ea;
+  animation: kink 6s infinite;
+  -webkit-animation: kink 6s infinite;
+}
+
+@-webkit-keyframes kink {
+  10%, 12%, 27% {
+    color: #111;
+    text-shadow: none;
+  }
+  0%, 9%, 11%, 13%, 26%, 28%, 100% {
+    text-shadow: 0 0 5px #800080, 0 0 15px #800080, 0 0 20px #800080, 0 0 40px #800080, 0 0 60px #800080, 0 0 10px #800080, 0 0 98px #800080;
+    color: #800080;
+  }
+}
+
+@keyframes kink {
+  10%, 12%, 27% {
+    color: #111;
+    text-shadow: none;
+  }
+  0%, 9%, 11%, 13%, 26%, 28%, 100% {
+    text-shadow: 0 0 5px #9333ea, 0 0 15px #9333ea, 0 0 20px #9333ea, 0 0 40px #9333ea, 0 0 60px #9333ea, 0 0 10px #9333ea, 0 0 98px #9333ea;
+    color: #9333ea;
+  }
+}
+
+
+/* Born Today Border glow */
+
+@layer utilities {
+  .shadow-glow {
+    box-shadow: 0 0 15px 5px rgba(5, 136, 197, 0.7);
   }
 }

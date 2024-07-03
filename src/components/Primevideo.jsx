@@ -4,14 +4,14 @@ const Primevideo = ({ finalprimemovies }) => {
   // console.log(finalprimemovies, "finalprimemovies");
 
   return (
-    <div className=" flex gap-4  w-[100vw] mt-5 overflow-y-hidden h-[50vh] no-scrollbar">
+    <div className=" flex gap-4  w-[100vw] mt-5 overflow-y-hidden bg-lime-30 h-auto no-scrollbar">
       {finalprimemovies &&
         finalprimemovies.map((item, index) => (
           <>
             {" "}
-            <div key={index} className=" mr-4  ml-3 min-w-[15%] rounded-xl p-5">
+            <div key={index} className=" mr-4  ml-3 min-w-[15vw] rounded-xl bg-red-30 relative top-2  p-4">
               <img
-                className="  hover:shadow-[8px_12px_3px_2px_rgba(255,255,0,.5)] hover:ring-2 hover:ring-yellow-500 hover:scale-100  w-[30vw] h-[37vh] rounded "
+                className=" border-[3px] glow3 border-gray-600 hover:scale-105  w-[30vw] h-[40vh] rounded "
                 src={item?.title?.primaryImage?.imageUrl}
                 alt=""
               />

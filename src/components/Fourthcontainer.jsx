@@ -21,37 +21,36 @@ const Fourthcontainer = () => {
       if (data) {
         // Parse stored json if it was found
         data = JSON.parse(data);
-        // console.log(data, " box office movies ");
+        console.log(data, " box office movies ");
+        setBoxOfficeMovies(data);
       } else {
         // Otherwise, fetch data from API
         const response = await fetch(
-          `https://imdb8.p.rapidapi.com/title/get-coming-soon-movies?homeCountry=US&purchaseCountry=US&currentCountry=US`,
+          `https://movies-tv-shows-database.p.rapidapi.com/?page=1`,
           RapidOptionsApiDojoDiamond
         );
         data = await response.json();
-        // Extract the ID part from the string
-        data = data.map((movie) => {
-          const idParts = movie.id.split("/");
-          movie.id = idParts[idParts.length - 2];
-          return movie;
-        });
-        // Limit the data to the first 10 movies
-        data = data.slice(0, 10);
+        console.log(data.movie_results, "gougog8g7igg7iui");
         // Save the data to local storage
-        localStorage.setItem("BOX OFFICE MOVIES LIST", JSON.stringify(data));
+        localStorage.setItem(
+          "BOX OFFICE MOVIES LIST",
+          JSON.stringify(data.movie_results)
+        );
+        setBoxOfficeMovies(data.movie_results);
       }
-      setBoxOfficeMovies(data);
     };
     getMovies();
   }, []);
 
+
+
   useEffect(() => {
     BoxOfficeMovies &&
-      setBoxOfficeMovieID(BoxOfficeMovies.map((item) => item?.id));
+      setBoxOfficeMovieID(BoxOfficeMovies.map((item) => item?.imdb_id));
   }, [BoxOfficeMovies]);
 
   useEffect(() => {
-    // BoxOfficeMovieID && console.log(BoxOfficeMovieID);
+    BoxOfficeMovieID && console.log(BoxOfficeMovieID);
   }, [BoxOfficeMovieID]);
 
   useEffect(() => {
@@ -90,7 +89,7 @@ const Fourthcontainer = () => {
   }, [BoxOfficeMovieID]);
 
   useEffect(() => {
-    // BoxOfficeMovieDetails && console.log(BoxOfficeMovieDetails);
+    BoxOfficeMovieDetails && console.log(BoxOfficeMovieDetails);
   }, [BoxOfficeMovieDetails]);
 
   function convertToMillions(amount) {

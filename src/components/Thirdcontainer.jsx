@@ -17,12 +17,12 @@ const Thirdcontainer = () => {
   };
 
   useEffect(() => {
-    // getweekdata()
+    getweekdata()
   }, []);
 
-//   useEffect(() => {
-//     weekdata && console.log(weekdata);
-//   }, [weekdata]);
+  useEffect(() => {
+    // weekdata && console.log(weekdata);
+  }, [weekdata]);
 
   return( <div>
 

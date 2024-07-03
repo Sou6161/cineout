@@ -69,7 +69,7 @@ const EightContainer = () => {
                   <img
                     src={article?.node?.image?.url}
                     alt=""
-                    className=" hover:border-2  hover:transition-all ease-out hover:border-red-600 object-center h-[25vh] w-[19vw] rounded-lg" // This line ensures all images have the same width and height
+                    className=" hover:border-2  hover:transition-all ease-out hover:border-red-600 object-top h-[25vh] w-[22vw] rounded-lg" // This line ensures all images have the same width and height
                   />
                   <div className="absolute top-0 right-0 bg-slate-600 rounded-lg hover:border-2  hover:transition-all ease-out hover:border-red-600 text-black  w-full h-full transition-all duration-500 transform translate-x-full group-hover:translate-x-0 p-4">
                     <p className=" text-red-500 text-[1vw] font-semibold">

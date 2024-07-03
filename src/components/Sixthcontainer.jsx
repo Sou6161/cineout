@@ -54,9 +54,9 @@ const Sixthcontainer = () => {
   return (
     <>
       <div className="">
-        <h2 className=" text-[2vw] text-red-600 overflow-x-auto ml-8 mb-5 font-medium ">
-          <span className=" text-[5vh] text-cyan-300 font-semibold  ">U</span>
-          pcoming <span className=" text-[5vh] text-lime-600">T</span>railers
+        <h2 className=" inline-block p-5 bg-red-30 text-[2vw] text-white overflow-x-auto mr-3 mb-5 font-medium ">
+          <span className=" text-[5vh]  text-cyan-300 glowText3 font-semibold ml-5  ">U</span>
+          pcoming <span className=" text-[5vh] text-lime-600 glowText3">T</span>railers
         </h2>
       </div>
       <h5 className=" ml-10 -mt-6 text-emerald-600 mb-5 font-light">

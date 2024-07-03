@@ -39,7 +39,7 @@ const RecentlyViewed = () => {
         <div className="w-[80vw] h-[60vh] relative left-[vw] bg-lime-20 mb-10 overflow-x-scroll no-scrollbar">
           <div className="flex gap-">
             {uniqueRecentlyViewed.length === 0 ? (
-              <h1 className="text-[1.4vw] mt-20 relative right-[3vw] text-white">
+              <h1 className="text-[1.4vw] mt-20 relative right-[vw] text-white">
                 You have no recently viewed pages
               </h1>
             ) : (
