@@ -138,7 +138,7 @@ const Maincontainer = () => {
     </div>
   ) : (
     <div className=" w-[100vw] h-[100vh] bg-[#100f0f]">
-      <h1 className=" absolute left-[45vw] top-[20vw]   ">
+      <h1 className=" absolute left-[45vw]  top-[20vw]   ">
         <svg
           class="pl"
           viewBox="0 0 160 160"

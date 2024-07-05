@@ -134,9 +134,9 @@ const Searchtab = () => {
   }, [SearchDataID]);
 
   return (
-    <div className="relative flex  items-center space-x-2 ">
+    <div className="relative flex  items-cente space-x-2 ">
       <div
-        className={`absolute right-[15vw] mt-5 mx-auto max-w-lg py-2 px-[1vw] rounded-full bg-purple-60 border-2 flex focus-within:border-purple-600 transition-all duration-500 ease-in-out transform ${
+        className={`absolute 2xlarge:right-[16vw] right-[600px] bg-red-600 mt-2 mx-auto max-w-lg py-2 px-[1vw] rounded-full bg-purple-60 border-2 flex focus-within:border-purple-600 transition-all duration-500 ease-in-out transform ${
           isOpen && !hiddenByScroll
             ? " translate-x-0 bg-cya-600 border-yellow-40 visible opacity-100  "
             : "translate-x-20  opacity-0 border-blue-600 invisible"
@@ -213,9 +213,46 @@ const Searchtab = () => {
       </div>
 
       <IoSearchCircleSharp
-        className={`relative top-2 right-[2vw] text-[2.9vw] cursor-pointer transition-all duration-500 ease-in-out ${
-          isOpen ? "text-lime-400" : "text-red-700"
-        }`}
+        className={`
+    relative 
+    cursor-pointer 
+    transition-all 
+    duration-500 
+    ease-in-out 
+
+    /* 0-479px */
+    text-[50px]
+    right-[350px]
+    
+
+    /* 480px-639px */
+    xsmall:text-[55px]
+    xsmall:right-[300px]
+
+    /* 640px-767px */
+    small:text-[8vw]
+    small:right-[20vw]
+
+    /* 768px-1023px */
+    medium:text-[30px]
+    medium:right-[40vw]
+
+    /* 1024px-1279px */
+    large:text-[10vw]
+    large:right-4
+
+    /* 1280px-1535px */
+    xlarge:text-[50px]
+    xlarge:right-5
+
+    /* 1536px and above and this is my laptop size */
+    2xlarge:text-[50px]
+    2xlarge:right-[2vw]
+    2xlarge:top-2
+
+    ${isOpen ? "text-lime-400" : "text-red-700"}
+
+  `}
         onClick={() => {
           setIsOpen(!isOpen);
           if (isOpen) {
@@ -294,7 +331,9 @@ const Searchtab = () => {
             }`}
           >
             <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-              <div className=" text-[1vw] font-semibold text-white">{user && user.displayName}</div>
+              <div className=" text-[1vw] font-semibold text-white">
+                {user && user.displayName}
+              </div>
               {/* <div class="font-medium truncate">{user && user.email}</div> */}
             </div>
             <ul
@@ -315,7 +354,6 @@ const Searchtab = () => {
                   class="block px-4 py-2 text-[1vw] hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 >
                   Your Watchlist
-                  
                 </a>
               </li>
               <li>
@@ -324,7 +362,6 @@ const Searchtab = () => {
                   class="block px-4 py-2 text-[1vw] hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 >
                   Your Ratings
-                  
                 </a>
               </li>
               <li>
@@ -333,7 +370,6 @@ const Searchtab = () => {
                   class="block px-4 py-2 text-[1vw] hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 >
                   Your Lists
-
                 </a>
               </li>
             </ul>

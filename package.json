@@ -13,7 +13,8 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.8",
     "css-to-tailwindcss": "^1.0.5",
-    "firebase": "^10.8.1",
+    "firebase": "^10.12.3",
+    "firebase-tools": "^13.13.0",
     "flowbite": "^2.3.0",
     "flowbite-react": "^0.9.0",
     "formik": "^2.4.5",
@@ -44,7 +45,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "firebase:login": "firebase login",
+    "firebase:init": "firebase init",
+    "firebase:deploy": "firebase deploy"
   },
   "eslintConfig": {
     "extends": [
