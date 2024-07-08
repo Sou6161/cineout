@@ -12,7 +12,7 @@ module.exports = {
       'medium': '768px',
       'large': '1024px',
       'xlarge': '1280px',
-      '2xlarge': '1536px',
+      '2xlarge': '1536px',  
     },
     extend: {
       fontFamily: {

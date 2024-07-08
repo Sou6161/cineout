@@ -3,7 +3,7 @@ import Searchtab from "./Searchtab";
 
 const Midheader = () => {
   return (
-    <div className="">
+    <div className=" ">
       <Searchtab />
     </div>
   );

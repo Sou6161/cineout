@@ -136,10 +136,10 @@ const Searchtab = () => {
   return (
     <div className="relative flex  items-cente space-x-2 ">
       <div
-        className={`absolute 2xlarge:right-[16vw] right-[600px] bg-red-600 mt-2 mx-auto max-w-lg py-2 px-[1vw] rounded-full bg-purple-60 border-2 flex focus-within:border-purple-600 transition-all duration-500 ease-in-out transform ${
+        className={`absolute  right-[49vw] xsmall:right-[37vw] xsmall:top-2 small:right-[27vw] medium:right-[24vw] top-1 medium:top-2 large:right-[19vw] xlarge:right-[17vw] large:top-2 bg-black  mx-auto w-[51vw] xsmall:w-[62vw] small:w-[72vw] medium:w-[41vw] large:w-[44.5vw] py-1 px-[1vw] rounded-full bg-purple-60 border-2 flex focus-within:border-purple-600 transition-all duration-500 ease-in-out transform ${
           isOpen && !hiddenByScroll
-            ? " translate-x-0 bg-cya-600 border-yellow-40 visible opacity-100  "
-            : "translate-x-20  opacity-0 border-blue-600 invisible"
+            ? " translate-x-0 bg-gray-600 border-yellow-40 visible opacity-100  "
+            : "translate-y-5  opacity-0 border-blue-600 invisible"
         }`}
       >
         {isOpen && !hiddenByScroll ? (
@@ -147,7 +147,7 @@ const Searchtab = () => {
             <input
               type="text"
               placeholder="Search Movies,TV-Series,Actor,Actress"
-              className=" w-[20vw] bg-slate-300 h-[4vh] rounded-full mr-2 focus:outline-none pr-4 font-semibold border-2 focus:ring-0 px- py-  focus-within:border-blue-600 transition-all duration-500 ease-in-out"
+              className=" w-[28vw] xsmall:w-[45vw] small:w-[58vw] medium:w-[30vw] large:w-[35vw] relative bg-slate-300 h-[4vh] small:h-[5vh] rounded-full mr-2 focus:outline-none pr-4 font-semibold border-2 focus:ring-0 px- py-  focus-within:border-blue-600 transition-all duration-500 ease-in-out"
               name="topic"
               onChange={(e) => {
                 setSearchInput(e.target.value);
@@ -155,7 +155,7 @@ const Searchtab = () => {
               }}
             />
             <button
-              className="flex flex-row items-center justify-center min-w-[5vw] h-[4vh] px-4 rounded-full  tracking-wide   border disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-500 ease-in-out text-base bg-black text-white font-medium border-transparent py-1.5 -mr-3"
+              className="flex flex-row items-center justify-center min-w-[5vw] h-[4vh] px-1  small:px-2 small:h-[5vh] medium:left-[1vw] relative  rounded-full  tracking-wide   border disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-500 ease-in-out text-base bg-red-600 text-white font-medium border-transparent py-1.5 -mr-3"
               onClick={handleSearch}
             >
               Search
@@ -219,37 +219,23 @@ const Searchtab = () => {
     transition-all 
     duration-500 
     ease-in-out 
-
-    /* 0-479px */
-    text-[50px]
-    right-[350px]
-    
-
-    /* 480px-639px */
-    xsmall:text-[55px]
-    xsmall:right-[300px]
-
-    /* 640px-767px */
+    top-1
+    text-[12vw]
+    left-[6vw]
+    xsmall:text-[9vw]
+    xsmall:top
+    small:left-[5.5vw]
     small:text-[8vw]
-    small:right-[20vw]
-
-    /* 768px-1023px */
-    medium:text-[30px]
-    medium:right-[40vw]
-
-    /* 1024px-1279px */
-    large:text-[10vw]
-    large:right-4
-
-    /* 1280px-1535px */
-    xlarge:text-[50px]
-    xlarge:right-5
-
-    /* 1536px and above and this is my laptop size */
-    2xlarge:text-[50px]
-    2xlarge:right-[2vw]
-    2xlarge:top-2
-
+    small:top-1
+    medium:text-[6vw]
+    medium:left-[4vw]
+    large:text-[5vw]
+    large:left-[3vw]
+    xlarge:text-[4vw]
+    xlarge:left-[2vw]
+    
+  
+    
     ${isOpen ? "text-lime-400" : "text-red-700"}
 
   `}
@@ -269,7 +255,7 @@ const Searchtab = () => {
           <Link
             to="/login"
             // onClick={() => window.location.reload()} // Add this line
-            class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group"
+            class="relative inline-flex bottom- h-[5vw] left-[4vw] xsmall:top-1 xsmall:left-[5vw] medium:left-[4vw] medium:w-[12vw] medium:h-[4vw]  medium:-top-1 large:top-0 large:left-[3vw] large:h-[4vw]  large:w-[9vw]  items-center justify-center  px-5 py-4 medium:-px-2  overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group"
           >
             <span class="absolute inset-0 flex items-center justify-center w-[4vw] h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
               <svg
@@ -286,7 +272,7 @@ const Searchtab = () => {
                 ></path>
               </svg>
             </span>
-            <span class="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">
+            <span class="absolute flex items-center top-0  justify-center w-full h-full  large:rounded-full  text-purple-500  bg-white transition-all duration-300 transform group-hover:translate-x-full ease">
               Sign In
             </span>
             <span class="relative invisible w-[1vw] h-[1vw] px-5">Sign In</span>
@@ -394,7 +380,7 @@ const Searchtab = () => {
 
       <div className="">
         <input
-          className={`relative group menu w-8 ${
+          className={`relative group menu  xsmall:left-[2vw] w-8  ${
             isMenuOpen ? "ripple" : isPageRefreshed ? "" : "ripple-reverse"
           }`}
           onClick={() => setMenuOpen(!isMenuOpen)}

@@ -803,3 +803,52 @@ screens: {
       '2xlarge': '1536px',
       '3xlarge': '1920px',
     },
+
+
+
+
+
+
+    /* 480px-639px */
+    xsmall:text-[55px]
+    xsmall:right-[300px]
+
+    /* 640px-767px */
+    small:text-[8vw]
+    small:right-[20vw]
+
+    /* 768px-1023px */
+    medium:text-[30px]
+    medium:right-[40vw]
+
+    /* 1024px-1279px */
+    large:text-[10vw]
+    large:right-4
+
+    /* 1280px-1535px */
+    xlarge:text-[50px]
+    xlarge:right-5
+
+    /* 1536px and above and this is my laptop size */
+    2xlarge:text-[50px]
+    2xlarge:right-[2vw]
+    2xlarge:top-2
+
+
+
+
+
+
+
+
+
+
+
+# somethng important
+
+text-[40px]
+    right-[20px]
+xsmall:right-[30px]
+    small:right-[150px]
+    medium:right-[40px]
+    large:right-[15px]
