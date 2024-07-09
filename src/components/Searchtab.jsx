@@ -136,7 +136,7 @@ const Searchtab = () => {
   return (
     <div className="relative flex  items-cente space-x-2 ">
       <div
-        className={`absolute  right-[49vw] xsmall:right-[37vw] xsmall:top-2 small:right-[27vw] medium:right-[24vw] top-1 medium:top-2 large:right-[19vw] xlarge:right-[17vw] large:top-2 bg-black  mx-auto w-[51vw] xsmall:w-[62vw] small:w-[72vw] medium:w-[41vw] large:w-[44.5vw] py-1 px-[1vw] rounded-full bg-purple-60 border-2 flex focus-within:border-purple-600 transition-all duration-500 ease-in-out transform ${
+        className={`absolute  right-[49vw] xsmall:right-[35vw] xsmall:top-2 small:right-[27vw] small:top-1 medium:right-[24vw] top-1 medium:top-1 large:right-[18vw] xlarge:right-[18vw] large:top-2  2xlarge:top-1 2xlarge:right-[14vw] bg-black  mx-auto w-[51vw] xsmall:w-[62vw] small:w-[72vw] medium:w-[43vw] large:w-[45vw] xlarge:w-[43.2vw] 2xlarge:w-[36vw] py-1 px-[1vw] rounded-full bg-purple-60 border-2 flex focus-within:border-purple-600 transition-all duration-500 ease-in-out transform ${
           isOpen && !hiddenByScroll
             ? " translate-x-0 bg-gray-600 border-yellow-40 visible opacity-100  "
             : "translate-y-5  opacity-0 border-blue-600 invisible"
@@ -147,7 +147,7 @@ const Searchtab = () => {
             <input
               type="text"
               placeholder="Search Movies,TV-Series,Actor,Actress"
-              className=" w-[28vw] xsmall:w-[45vw] small:w-[58vw] medium:w-[30vw] large:w-[35vw] relative bg-slate-300 h-[4vh] small:h-[5vh] rounded-full mr-2 focus:outline-none pr-4 font-semibold border-2 focus:ring-0 px- py-  focus-within:border-blue-600 transition-all duration-500 ease-in-out"
+              className=" w-[28vw] xsmall:w-[45vw] small:w-[58vw] medium:w-[30vw] large:w-[35vw] 2xlarge:w-[28vw] relative bg-slate-300 h-[4vh] small:h-[5vh] rounded-full mr-2 focus:outline-none pr-4 font-semibold border-2 focus:ring-0 px- py-  focus-within:border-blue-600 transition-all duration-500 ease-in-out"
               name="topic"
               onChange={(e) => {
                 setSearchInput(e.target.value);
@@ -155,15 +155,15 @@ const Searchtab = () => {
               }}
             />
             <button
-              className="flex flex-row items-center justify-center min-w-[5vw] h-[4vh] px-1  small:px-2 small:h-[5vh] medium:left-[1vw] relative  rounded-full  tracking-wide   border disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-500 ease-in-out text-base bg-red-600 text-white font-medium border-transparent py-1.5 -mr-3"
+              className="flex flex-row items-center justify-center min-w-[5vw] h-[4vh] px-1  small:px-2 small:h-[5vh] medium:left-[1vw]  relative  rounded-full  tracking-wide   border disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-500 ease-in-out text-base bg-red-600 text-white font-medium border-transparent py-1.5 -mr-3"
               onClick={handleSearch}
             >
               Search
             </button>
             {!isInputEmpty && (
-              <div className="w-[41vw] h-[79vh] p-2 z-99 bg-[#1F1F1F]  rounded-l-lg fixed top-[3vw] -mx-4  mt-1    ">
+              <div className="max-w-[100vw] h-[94vh] p-2 z-99 bg-[#1F1F1F] overflow-hidden  rounded-l-lg absolute top-[10vw] -left-[0.5vw] xsmall:-left-[3.2vw] xsmall:top-[7.5vw] small:-left-[1.5vw] small:w-[80vw] small:top-[7vw] medium:top-[5.5vw] medium:w-[70vw] large:w-[65vw] large:top-[4.5vw] xlarge:w-[45vw] xlarge:top-[3.5vw]   ">
                 {/* Add your content here */}
-                <div className="rounded-l-lg  w-[40.4vw] h-[77vh] bg-zinc-500 overflow-hidden overflow-y-scroll  ">
+                <div className="rounded-l-lg max-w-[100vw] h-[85vh] small:w-[78vw] medium:w-[63.5vw] large:w-[63vw] xlarge:w-[44.4vw] bg-zinc-500 overflow-hidde overflow-y-scroll   ">
                   <div>
                     {SearchInputData &&
                       SearchInputData.d.slice(0, 5).map((data) => {
@@ -172,14 +172,15 @@ const Searchtab = () => {
                             to={`/head/hd${data?.id}/?q=${SearchInputData?.q}`}
                             className=" cursor-pointer"
                           >
-                            <div className=" flex hover:bg-slate-600 border-t-[1px] hover:border-purple-600  h-[7vw] py-[0.3vw] px-3 mt- ">
+                            <div className=" flex hover:bg-slate-600 border-t-[1px] hover:border-purple-600  max-h-[42vw] xsmall:h-[30vw] small:h-[25vw] small:py-[2vw] medium:h-[20vw] medium:py-[2vw] large:max-h-[15vw] large:py-[2vw] xlarge:max-h-[13vw] xlarge:py-[2vw] py-[3.5vw] px-3  mt-    ">
+                            
                               <img
-                                className="w-[5vw] h-[13vh] flex rounded-lg mb-5 glow3   "
+                                className="max-w-[22vw] h-[17vh] xsmall:max-w-[17vw] xsmall:h-[17vh]  object-center flex rounded-lg mb-5 glow5 "
                                 src={data?.i?.imageUrl}
                                 alt=""
                               />
 
-                              <div className="flex flex-col mx-5 ">
+                              <div className="flex flex-col mx-5 -mt-1 ">
                                 <h1 className=" text-white font-bold">
                                   {data?.l}
                                 </h1>
@@ -195,7 +196,7 @@ const Searchtab = () => {
                         );
                       })}
                     <Link to={`/find/?q=${SearchInputData?.q}`}>
-                      <h1 className=" w-[40vw] hover:bg-slate-600 relative top-2  border-t-[1px]">
+                      <h1 className=" w-[97vw] small:w-[76vw] large:w-[62vw] xlarge:w-[62vw]  hover:bg-slate-600 relative top-2  border-t-[1px]">
                         <span className=" mx-3">
                           See All Results for{" "}
                           <span className=" text-red-600">
@@ -228,11 +229,13 @@ const Searchtab = () => {
     small:text-[8vw]
     small:top-1
     medium:text-[6vw]
-    medium:left-[4vw]
+    medium:left-[3.5vw]
     large:text-[5vw]
-    large:left-[3vw]
+    large:left-[3.5vw]
     xlarge:text-[4vw]
     xlarge:left-[2vw]
+    2xlarge:text-[3vw]
+    
     
   
     
@@ -255,7 +258,7 @@ const Searchtab = () => {
           <Link
             to="/login"
             // onClick={() => window.location.reload()} // Add this line
-            class="relative inline-flex bottom- h-[5vw] left-[4vw] xsmall:top-1 xsmall:left-[5vw] medium:left-[4vw] medium:w-[12vw] medium:h-[4vw]  medium:-top-1 large:top-0 large:left-[3vw] large:h-[4vw]  large:w-[9vw]  items-center justify-center  px-5 py-4 medium:-px-2  overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group"
+            class="relative inline-flex top-[0.vw] h-[7vw] left-[4vw] xsmall:top-0 xsmall:left-[5vw] small:h-[6vw] medium:left-[4vw] medium:w-[12vw] medium:h-[4vw]  medium:-top-0 large:top-0 large:left-[3vw] large:h-[3.5vw]  large:w-[9vw] xlarge:left-[2vw]  2xlarge:h-[2.5vw] 2xlarge:w-[7.5vw] 2xlarge:left-[2vw]  items-center justify-center  px-5 py-4 medium:-px-2  overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group"
           >
             <span class="absolute inset-0 flex items-center justify-center w-[4vw] h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
               <svg
@@ -380,7 +383,7 @@ const Searchtab = () => {
 
       <div className="">
         <input
-          className={`relative group menu  xsmall:left-[2vw] w-8  ${
+          className={`relative group menu  xsmall:left-[2vw] xsmall:w-[6vw] small:w-[4.8vw] medium:w-[4vw] w-[8vw] large:left-[0.8vw] large:w-9 xlarge:left-[0.5vw] 2xlarge:left-[0.8vw]  ${
             isMenuOpen ? "ripple" : isPageRefreshed ? "" : "ripple-reverse"
           }`}
           onClick={() => setMenuOpen(!isMenuOpen)}

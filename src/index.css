@@ -209,8 +209,8 @@ select::-ms-expand {
 
 @media (min-width: 480px) {
   .menu {
-    --s: 6.5vw; /* new size for xsmall breakpoint and above */
-    top: 14px;
+    --s: 6vw; /* new size for xsmall breakpoint and above */
+    top: 10px;
   }
 }
 
@@ -235,8 +235,16 @@ select::-ms-expand {
 
 @media(min-width:1280px){
   .menu{
-    --s:2.8vw;
-    top:18px
+    --s:3vw;
+    top:13px;
+  }
+}
+
+@media(min-width:1536px){
+  .menu{
+    --s:2.2vw;
+    top:11px;
+
   }
 }
 
