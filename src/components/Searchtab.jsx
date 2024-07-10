@@ -161,7 +161,7 @@ const Searchtab = () => {
               Search
             </button>
             {!isInputEmpty && (
-              <div className="max-w-[100vw] h-[94vh] p-2 z-99 bg-[#1F1F1F] overflow-hidden  rounded-l-lg absolute top-[10vw] -left-[0.5vw] xsmall:-left-[3.2vw] xsmall:top-[7.5vw] small:-left-[1.5vw] small:w-[80vw] small:top-[7vw] medium:top-[5.5vw] medium:w-[70vw] large:w-[65vw] large:top-[4.5vw] xlarge:w-[45vw] xlarge:top-[3.5vw]   ">
+              <div className="max-w-[100vw] h-[94vh] p-2 z-99 bg-[#1F1F1F] overflow-hidden  rounded-l-lg absolute top-[10vw] -left-[0.5vw] xsmall:-left-[3.2vw] xsmall:top-[7.5vw] small:-left-[1.5vw] small:w-[80vw] small:top-[7vw] medium:top-[5.5vw] medium:w-[65vw] large:w-[65vw] large:top-[4.5vw] xlarge:w-[45.5vw] xlarge:top-[3.5vw] xlarge:left-[0vw] 2xlarge:w-[45vw] 2xlarge:top-[3vw]   ">
                 {/* Add your content here */}
                 <div className="rounded-l-lg max-w-[100vw] h-[85vh] small:w-[78vw] medium:w-[63.5vw] large:w-[63vw] xlarge:w-[44.4vw] bg-zinc-500 overflow-hidde overflow-y-scroll   ">
                   <div>
@@ -172,22 +172,22 @@ const Searchtab = () => {
                             to={`/head/hd${data?.id}/?q=${SearchInputData?.q}`}
                             className=" cursor-pointer"
                           >
-                            <div className=" flex hover:bg-slate-600 border-t-[1px] hover:border-purple-600  max-h-[42vw] xsmall:h-[30vw] small:h-[25vw] small:py-[2vw] medium:h-[20vw] medium:py-[2vw] large:max-h-[15vw] large:py-[2vw] xlarge:max-h-[13vw] xlarge:py-[2vw] py-[3.5vw] px-3  mt-    ">
+                            <div className=" flex hover:bg-slate-600 border-t-[1px] hover:border-cyan-400  max-h-[55vw] xsmall:h-[30vw] small:h-[25vw] small:py-[2vw] medium:h-[20vw] medium:py-[2vw] large:max-h-[15vw] large:py-[2vw] xlarge:max-h-[13vw] xlarge:py-[2vw] 2xlarge:max-h-[10vw] 2xlarge:py-[1vw] py-[3.5vw] px-3  mt-    ">
                             
                               <img
-                                className="max-w-[22vw] h-[17vh] xsmall:max-w-[17vw] xsmall:h-[17vh]  object-center flex rounded-lg mb-5 glow5 "
+                                className="max-w-[22vw] max-h-[16vh] xsmall:max-w-[17vw] xsmall:h-[17vh]  object-center flex rounded-lg mb-5 glow5 "
                                 src={data?.i?.imageUrl}
                                 alt=""
                               />
 
-                              <div className="flex flex-col mx-5 -mt-1 ">
+                              <div className="flex flex-col mx-5 -mt-1  ">
                                 <h1 className=" text-white font-bold">
                                   {data?.l}
                                 </h1>
                                 <h1 className=" text-lime-400 font-normal">
                                   {data?.y}
                                 </h1>
-                                <h1 className=" text-orange-400 font-normal">
+                                <h1 className=" text-orange-400 font-normal   ">
                                   {data?.s}
                                 </h1>
                               </div>
@@ -196,7 +196,7 @@ const Searchtab = () => {
                         );
                       })}
                     <Link to={`/find/?q=${SearchInputData?.q}`}>
-                      <h1 className=" w-[97vw] small:w-[76vw] large:w-[62vw] xlarge:w-[62vw]  hover:bg-slate-600 relative top-2  border-t-[1px]">
+                      <h1 className=" w-[97vw] small:w-[76vw] medium:w-[62vw] large:w-[62vw] xlarge:w-[43.5vw] 2xlarge:w-[43.5vw] -mt-2  hover:bg-slate-600 relative top-2  border-t-[1px]">
                         <span className=" mx-3">
                           See All Results for{" "}
                           <span className=" text-red-600">

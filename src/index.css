@@ -1352,9 +1352,9 @@ body {
 /* Trailer Button NowShowing */
 
 .comic-button {
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 24px;
+  display: none; /* Hide by default */
+  padding: 5px 5px;
+  font-size: 15px;
   font-weight: bold;
   text-align: center;
   text-decoration: none;
@@ -1367,6 +1367,8 @@ body {
   cursor: pointer;
 }
 
+
+
 .comic-button:hover {
   background-color: black;
   color: #ff5252;
@@ -1378,6 +1380,12 @@ body {
   background-color: #fcf414;
   box-shadow: none;
   transform: translateY(4px);
+}
+
+@media (min-width: 480px) {
+  .comic-button {
+    display: inline-block; /* Show when screen width is 480px or less */
+  }
 }
 
 /* See What That Excites You */
@@ -1587,3 +1595,6 @@ body {
     box-shadow: 0 0 15px 5px rgba(5, 136, 197, 0.7);
   }
 }
+
+
+
