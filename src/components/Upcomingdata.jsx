@@ -17,7 +17,7 @@ const Upcomingdata = ({
           {/* <Dropdown title="filter" options={["tv","movie","all"]}/> */}
         </div>
 
-        <div className=" w-[97vw] min-h-[58vh] 2xlarge:w-[97vw]  scrollbar-hide overflow-x-auto overflow-y-hidden -mt-6  bg-yellow-20">
+        <div className=" w-[97vw] min-h-[58vh] 2xlarge:w-[97vw]  scrollbar-hide overflow-x-auto overflow-y-hidden 2xlarge:-mt-6  bg-yellow-20">
           <div className=" ml-1 flex  gap-10  w-[100vw] h-[47vh] no-scrollbar ">
             {/* {nowupcomingmovies &&console.log(nowupcomingmovies, "now upcoming movies ID")} */}
             {/* {console.log(nowupcomingfinal, "now upcoming final")} */}
