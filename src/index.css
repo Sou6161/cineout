@@ -1388,6 +1388,14 @@ body {
   }
 }
 
+@media (min-width: 1280px) {
+  .comic-button {
+    display: inline-block; /* Show when screen width is 480px or less */
+    padding: 8px 8px;
+    font-size: 18px;
+  }
+}
+
 /* See What That Excites You */
 
 .glowText {
