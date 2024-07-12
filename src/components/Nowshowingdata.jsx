@@ -29,6 +29,9 @@ const Nowshowingdata = ({ nowfinal }) => {
   const [detailsColor, setDetailsColor] = useState("white");
   const [width] = useWindowSize();
   const [backgroundStyle, setBackgroundStyle] = useState({});
+  const [leftOpacity, setLeftOpacity] = useState(0.7);
+const [middleOpacity, setMiddleOpacity] = useState(0.2);
+
 
   const bannerUrl = `https://image.tmdb.org/t/p/original/${nowfinal.backdrop_path}`;
   const { data: dominantColor } = useColor(bannerUrl, "rgb", {
@@ -50,10 +53,11 @@ const Nowshowingdata = ({ nowfinal }) => {
 
   useEffect(() => {
     const baseStyle = {
-      background: `url(${bannerUrl})`,
+      backgroundImage: `linear-gradient(to right, rgba(0,0,0,${leftOpacity}) 0%, rgba(0,0,0,${middleOpacity}) 50%, rgba(0,0,0,0) 100%), url(${bannerUrl})`,
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat",
     };
+  
 
     if (width >= 1536) {
       // 2xl
@@ -77,7 +81,7 @@ const Nowshowingdata = ({ nowfinal }) => {
       // smaller than xsmall
       setBackgroundStyle({ ...baseStyle, backgroundPosition: "center" });
     }
-  }, [width, bannerUrl]);
+  }, [width, bannerUrl, leftOpacity, middleOpacity]);
 
   const titleStyle = {
     color: titleColor,
@@ -99,7 +103,7 @@ const Nowshowingdata = ({ nowfinal }) => {
         style={backgroundStyle}
       >
         <h1
-          className="text-[5vw] font-bold relative top-[23vh] left-[2vh]  xsmall:top-[25vh] small:top-[30vh] medium:top-[33vh] medium:text-[3vw] large:top-[36vh] large:text-[3vw] xlarge:text-[3vw] xlarge:top-[40vh] 2xlarge:top-[42vh] 2xlarge:text-[2.5vw] mb-2"
+          className="text-[5vw] font-bold relative top-[23vh] left-[2vh]  xsmall:top-[25vh] small:top-[30vh] medium:top-[33vh] medium:text-[3vw] large:top-[36vh] large:text-[3vw] xlarge:text-[3vw] xlarge:top-[40vh] 2xlarge:top-[42vh] 2xlarge:text-[2vw] mb-2"
           style={titleStyle}
         >
           {nowfinal.name ||
@@ -109,7 +113,7 @@ const Nowshowingdata = ({ nowfinal }) => {
         </h1>
 
         <p
-          className="text-sm font-semibold max-w-[60vw] mb-2 relative top-[23vh] xsmall:top-[25vh] small:top-[30vh] medium:top-[33vh] large:text-[1.5vw] large:top-[37vh] xlarge:text-[1.3vw] xlarge:top-[40vh] 2xlarge:top-[43vh] 2xlarge:text-[1.1vw] left-[2vh]"
+          className="text-sm font-semibold max-w-[60vw] mb-2 relative top-[23vh] xsmall:top-[25vh] small:top-[30vh] medium:top-[33vh] medium:w-1/2 large:text-[1.5vw] large:top-[37vh] large:w-1/2 xlarge:text-[1.3vw] xlarge:top-[40vh] xlarge:w-1/2 2xlarge:top-[43vh] 2xlarge:text-[1vw] 2xlarge:w-1/3 left-[2vh]"
           style={detailsStyle}
         >
           {width >= 1536 ? ( // 2xlarge

@@ -106,7 +106,15 @@ export const RapidoptionsDojo = {
 export const Rapidoptions = {
   method: "GET",
   headers: {
-    "X-RapidAPI-Key": "b273e7ab1emsh4b2f8561ae0dd67p1dbfd0jsn69011fb03d6c",
+    "X-RapidAPI-Key": "a23a703252mshb669fb9c7bb5125p1e41d4jsnc063f2c36f07",
+    "X-RapidAPI-Host": "imdb188.p.rapidapi.com",
+  },
+};
+
+export const RapidoptionsDataCrawler = {
+  method: "GET",
+  headers: {
+    "X-RapidAPI-Key": "a9f40a0ac4msh07e2c34b5b35966p1d1323jsnb99f93dccedb",
     "X-RapidAPI-Host": "imdb188.p.rapidapi.com",
   },
 };

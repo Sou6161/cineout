@@ -4,7 +4,7 @@ const Top10data = ({ finalweekdata }) => {
   return (
     <>
       <div className=" w-[100vw] text-white mt-8">
-        <h1 className=" text-[3.2vh] px-5 mb-[4vh] ml-2 ">
+        <h1 className=" text-xl small:text-[3.5vw]  medium:text-[2.5vw] large:text-[2.5vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] px-5 mb-[4vh] ml-2 ">
           <span className="glowText2">Top</span>{" "}
           <span className=" text-red-600 font-bold ">10</span>{" "}
           <span className=" glowText2 ">on</span>{" "}
@@ -18,15 +18,15 @@ const Top10data = ({ finalweekdata }) => {
           {finalweekdata &&
             finalweekdata.map((item, index) => (
               <div key={index} className=" relative top-5">
-                <div className="  mr-4  ml-3 min-w-[15vw]  min-h-[42vh] rounded-[10px] p-2 overflow-x-hidden scrollbar-hide cursor-pointer bg-gray-700 hover:bg-slate-500 ">
+                <div className="  mr-4  ml-3 max-w-[52vw] max-h-[42vh] xsmall:max-w-[40vw] small:max-w-[30vw] medium:max-w-[30vw] large:max-w-[25vw] xlarge:max-w-[20vw] 2xlarge:max-w-[15vw] rounded-[10px] p-2 overflow-x-hidden scrollbar-hide cursor-pointer bg-black hover:bg-slate-500 glow3 ">
                   <img
-                    className=" w-[30vw] h-[42vh] rounded-md drop-shadow-glow"
+                    className=" min-w-[48vw]  h-[40vh] xsmall:min-w-[34vw] small:min-w-[25vw]  medium:min-w-[22vw] large:min-w-[18vw] xlarge:min-w-[15vw] 2xlarge:min-w-[14vw] rounded-md "
                     src={item?.primaryImage?.imageUrl}
                     alt=""
                   />
                 </div>
                 <div className=" ">
-                  <h1 className=" text-2xl font-semibold text-yellow-500 mt-3  ml-4 ">
+                  <h1 className="text-[4.5vw] xsmall:text-[4vw] small:text-[3vw] medium:text-[2vw] large:text-[1.7vw] xlarge:text-[1.5vw] 2xlarge:text-[1.3vw] font-semibold text-yellow-500 mt-3  ml-5 ">
                     {item?.titleText?.text}
                   </h1>
                 </div>
