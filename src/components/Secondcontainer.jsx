@@ -56,8 +56,8 @@ const Secondcontainer = () => {
     }
   };
   useEffect(() => {
-    fetchData();
-    fetchfanfavouritedata();
+    // fetchData();
+    // fetchfanfavouritedata();
   }, []);
 
   useEffect(() => {

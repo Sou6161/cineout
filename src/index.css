@@ -1499,9 +1499,9 @@ body {
 /* Upcoming Trailers Glow Text */
 
 .glowText3 {
-  text-shadow: 0 0 5px #00ff00, 0 0 15px #00ff00, 0 0 20px #00ff00,
-    0 0 40px #00ff00, 0 0 60px #00ff00, 0 0 10px #00ff00, 0 0 98px #00ff00;
-  color: #00ff00;
+  text-shadow: 0 0 5px #f6faf6, 0 0 15px #f6faf6, 0 0 20px #f6faf6,
+    0 0 40px #f6faf6, 0 0 60px #f6faf6, 0 0 10px #f6faf6, 0 0 98px #f6faf6;
+  color: #f6faf6;
   animation: wink 6s infinite;
   -webkit-animation: wink 6s infinite;
 }
@@ -1520,9 +1520,9 @@ body {
   26%,
   28%,
   100% {
-    text-shadow: 0 0 5px #00ff00, 0 0 15px #00ff00, 0 0 20px #00ff00,
-      0 0 40px #00ff00, 0 0 60px #00ff00, 0 0 10px #00ff00, 0 0 98px #00ff00;
-    color: #00ff00;
+    text-shadow: 0 0 5px #f6faf6, 0 0 15px #f6faf6, 0 0 20px #f6faf6,
+      0 0 40px #f6faf6, 0 0 60px #f6faf6, 0 0 10px #f6faf6, 0 0 98px #f6faf6;
+    color: #f6faf6;
   }
 }
 
@@ -1540,9 +1540,9 @@ body {
   26%,
   28%,
   100% {
-    text-shadow: 0 0 5px #00ff00, 0 0 15px #00ff00, 0 0 20px #00ff00,
-      0 0 40px #00ff00, 0 0 60px #00ff00, 0 0 10px #00ff00, 0 0 98px #00ff00;
-    color: #00ff00;
+    text-shadow: 0 0 5px #f6faf6, 0 0 15px #f6faf6, 0 0 20px #f6faf6,
+      0 0 40px #f6faf6, 0 0 60px #f6faf6, 0 0 10px #f6faf6, 0 0 98px #f6faf6;
+    color: #f6faf6;
   }
 }
 

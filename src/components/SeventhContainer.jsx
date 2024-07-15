@@ -19,7 +19,7 @@ const SeventhContainer = () => {
         const response = await fetch(
           `https://imdb188.p.rapidapi.com/api/v1/getBornOn?month=0${
             selectedDate.getMonth() + 1
-          }&day=0${selectedDate.getDate()}`,
+          }&day=${selectedDate.getDate()}`,
           RapidoptionsCrawler
         );
 
@@ -45,30 +45,30 @@ const SeventhContainer = () => {
   }, [selectedDate]);
 
   useEffect(() => {
-    // Borntoday && console.log(Borntoday);
+    Borntoday && console.log(Borntoday);
   }, [Borntoday]);
 
   return (
     <>
-      <div className=" mb-5 h-[14vh] -mt-20">
-        <div className=" text-[2vw] text-red-600 inline-block relative top-16 ml-3">
+      <div className=" mb-5 h-[14vh] bg-red-30 -mt-20">
+        <div className=" text-2xl text-red-600 inline-block relative top-[12vw] ml-3">
           <FaEllipsisVertical />
         </div>
         <div className="flex group">
-          <h1 className=" text-[2vw] text-amber-400 ml-10 inline-block relative top-2">
-            <span className=" text-purple-700 text-[5vh] glowText4 ">B</span>orn{" "}
-            <span className=" text-[5vh] glowText4">T</span>oday
+          <h1 className=" text-xl text-amber-400 ml-10 inline-block relative top-2">
+            <span className=" text-purple-700 text-[5vh] glowText3 ">B</span>orn{" "}
+            <span className=" text-[5vh] glowText3">T</span>oday
           </h1>
-          <div className="inline-block relative top-7 ml-[3vw]">
+          <div className="inline-block relative top-3 ml-[8vw]">
             <DatePicker
-              className=" bg-white font-bold w-[5.5vw] rounded-md cursor-pointer"
+              className=" bg-white font-bold w-[32vw] rounded-md cursor-pointer"
               selected={selectedDate}
               onChange={(date) => setSelectedDate(date)}
             />
           </div>
         </div>
 
-        <div className=" text-slate-700 ml-10">
+        <div className=" text-slate-400 text-[3vw] ml-10">
           <h1>
             People born on {selectedDate.getMonth() + 1}-
             {selectedDate.getDate()}
@@ -76,19 +76,19 @@ const SeventhContainer = () => {
         </div>
       </div>
       <div className="">
-        <div className="flex h-[30vh] ml-10 gap-10  w-[96vw]  mb-10 overflow-x-auto no-scrollbar">
+        <div className="flex h-[30vh] ml-5 gap-10  w-[96vw]  mb-10 bg-lime-20 overflow-x-auto no-scrollbar">
           {Borntoday && Borntoday.length > 0 ? (
             Borntoday.map((people, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center ml-5  bg-red-30 py-5 mr-5"
+                className=" w-[100vw] bg-red-300 flex flex-col ml-2 items-center  py-5  "
               >
                 <img
-                  className="min-w-[10.5vw] object-cover hover:scale-105 p-1 h-[22vh] rounded-full transition-all duration-300 border-2 border-blue-600 cursor-pointer filter grayscale hover:grayscale-0 hover:shadow-glow"
+                  className="w-[40vw] h-[18vh] hover:scale-105 p-1  rounded-full transition-all duration-300 border-2 border-blue-600 cursor-pointer filter grayscale hover:grayscale-0 hover:shadow-glow"
                   src={people?.primaryImage?.imageUrl}
                   alt="no image"
                 />
-                <h1 className="text-white">{people.nameText.text}</h1>
+                <h1 className="text-white ml-2 mt-2 whitespace-nowrap">{people.nameText.text}</h1>
               </div>
             ))
           ) : (

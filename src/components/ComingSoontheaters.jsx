@@ -8,14 +8,14 @@ const ComingSoontheaters = ({ finalcomingsoonmoviestheaters }) => {
     <>
       <div className="w-[100vw]  scrollbar-hide overflow-auto p-5">
         <div className=" mb-10 items-center gap-[47%] overflow-y-clip   ">
-          <h1 className=" text-3xl ml-4 font-semibold text-lime-400 flex">
+          <h1 className=" text-xl ml-2 font-semibold text-lime-400 flex">
             <Link to="/coming-soon">
               <span className=" inline-block -translate-x-6 translate-y-10 text-[6vh] text-yellow-400">
                 <TbMinusVertical />
               </span>
-              <button className=" group flex items-center -translate-y-2 ml-4 ">
+              <button className=" group flex items-center -translate-y- ml-4 ">
                 Coming Soon To Theaters
-                <span className="block relative top-1 ml-4 hover:text-purple-900 group-hover:text-purple-900">
+                <span className="block relative top- ml-4 hover:text-purple-900 group-hover:text-purple-900">
                   <FaArrowRight />
                 </span>
               </button>{" "}
@@ -36,9 +36,9 @@ const ComingSoontheaters = ({ finalcomingsoonmoviestheaters }) => {
               ) {
                 return (
                   <div key={index} className=" bg-red-30">
-                    <div className="  mr-4  ml-3 min-w-[15vw]  glow3 min-h-[42vh] rounded-[10px] p-2 overflow-x-hidden scrollbar-hide cursor-pointer bg-zinc-70  bg-slate-400  hover:bg-slate-500 overflow-y-auto">
+                    <div className=" mr-4 ml-3 max-w-[52vw] max-h-[42vh] xsmall:max-w-[40vw] small:max-w-[30vw] medium:max-w-[30vw] large:max-w-[25vw] xlarge:max-w-[20vw] 2xlarge:max-w-[15vw] mt-5 glow3  rounded-[10px] p-2 overflow-x-hidden scrollbar-hide cursor-pointer bg-zinc-70 bg-slate-40 overflow-y-hidden">
                       <img
-                        className=" w-[30vw] h-[42vh] rounded-md drop-shadow-glow"
+                        className=" min-w-[48vw]  h-[40vh] xsmall:min-w-[34vw] small:min-w-[25vw]  medium:min-w-[22vw] large:min-w-[18vw] xlarge:min-w-[15vw] 2xlarge:min-w-[14vw] rounded-md drop-shadow-glow"
                         src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
                         alt="no image available"
                         onError={(e) => {
@@ -49,7 +49,7 @@ const ComingSoontheaters = ({ finalcomingsoonmoviestheaters }) => {
                       />
                     </div>
                     <div className=" ">
-                      <h1 className=" text-2xl font-semibold text-yellow-500   ml-6 mt-5 ">
+                      <h1 className=" text-[5vw] xsmall:text-[4vw] small:text-[3vw] medium:text-[2vw] large:text-[1.7vw] xlarge:text-[1.5vw] 2xlarge:text-[1.3vw] font-semibold hover:underline hover:cursor-pointer text-yellow-500 ml-4 mt-5 ">
                         {movie.original_title}
                       </h1>
                     </div>

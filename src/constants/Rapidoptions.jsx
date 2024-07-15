@@ -1,7 +1,7 @@
 export const RapidoptionsCrawler = {
   method: "GET",
   headers: {
-    "X-RapidAPI-Key": "77e155d53bmshbdf8af2969d7a2ep111234jsn3cae100146d7",
+    "X-RapidAPI-Key": "dfbbdedcacmsh2e0158b379069fdp1f3d2fjsnd2c9b19d1434",
     "X-RapidAPI-Host": "imdb188.p.rapidapi.com",
   },
 };
@@ -106,7 +106,7 @@ export const RapidoptionsDojo = {
 export const Rapidoptions = {
   method: "GET",
   headers: {
-    "X-RapidAPI-Key": "a23a703252mshb669fb9c7bb5125p1e41d4jsnc063f2c36f07",
+    "X-RapidAPI-Key": "ce6403f9cbmshcc65ca0b0f96ba7p197682jsn2a92cb85b489",
     "X-RapidAPI-Host": "imdb188.p.rapidapi.com",
   },
 };
@@ -114,7 +114,7 @@ export const Rapidoptions = {
 export const RapidoptionsDataCrawler = {
   method: "GET",
   headers: {
-    "X-RapidAPI-Key": "a9f40a0ac4msh07e2c34b5b35966p1d1323jsnb99f93dccedb",
+    "X-RapidAPI-Key": "696fd76be0mshbb5c7c94992b67fp164bdfjsne07b3d050aab",
     "X-RapidAPI-Host": "imdb188.p.rapidapi.com",
   },
 };
