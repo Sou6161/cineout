@@ -4,6 +4,7 @@ import { FaXTwitter } from "react-icons/fa6";
 import { FiYoutube } from "react-icons/fi";
 import { ImFacebook2 } from "react-icons/im";
 import { Link } from "react-router-dom";
+import { MdLaunch } from "react-icons/md";
 
 const Footer = () => {
   return (
@@ -126,6 +127,76 @@ const Footer = () => {
               ></path>
             </svg>
           </button>
+        </div>
+      </div>
+      <div className="flex flex-col items-center space-y-5 mt-5">
+        <div className="flex flex-wrap justify-center gap-5 w-full">
+          <h1 className="text-[5vw] xsmall:text-[4vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.5vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] text-white flex items-center hover:underline hover:cursor-pointer">
+            Help{" "}
+            <span className="ml-1">
+              <MdLaunch />
+            </span>
+          </h1>
+          <h1 className="text-[5vw] xsmall:text-[4vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.5vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] text-white flex items-center hover:underline hover:cursor-pointer">
+            Site Index{" "}
+            <span className="ml-1">
+              <MdLaunch />
+            </span>
+          </h1>
+          <h1 className="text-[5vw] xsmall:text-[4vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.5vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] text-white flex items-center hover:underline hover:cursor-pointer">
+            CINEOUTPro{" "}
+            <span className="ml-1">
+              <MdLaunch />
+            </span>
+          </h1>
+        </div>
+
+        <div className="flex flex-wrap justify-center gap-5 w-full">
+          <h1 className="text-[5vw] xsmall:text-[4vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.5vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] text-white flex items-center hover:underline hover:cursor-pointer">
+            Box Office Mojo{" "}
+            <span className="ml-1">
+              <MdLaunch />
+            </span>
+          </h1>
+          <h1 className="text-[5vw] xsmall:text-[4vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.5vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] text-white flex items-center hover:underline hover:cursor-pointer">
+            License CINEOUT Data{" "}
+            <span className="ml-1">
+              <MdLaunch />
+            </span>
+          </h1>
+        </div>
+
+        <div className="flex flex-wrap justify-center gap-5 w-full">
+          <h1 className="text-[5vw] xsmall:text-[4vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.5vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] text-white">
+            Press Room
+          </h1>
+          <h1 className="text-[5vw] xsmall:text-[4vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.5vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] text-white flex items-center hover:underline hover:cursor-pointer">
+            Advertising{" "}
+            <span className="ml-1">
+              <MdLaunch />
+            </span>
+          </h1>
+          <h1 className="text-[5vw] xsmall:text-[4vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.5vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] text-white flex items-center hover:underline hover:cursor-pointer">
+            Jobs{" "}
+            <span className="ml-1">
+              <MdLaunch />
+            </span>
+          </h1>
+        </div>
+
+        <div className="flex flex-wrap justify-center gap-5 w-full">
+          <h1 className="text-[5vw] xsmall:text-[4vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.5vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] text-white">
+            Conditions of Use
+          </h1>
+          <h1 className="text-[5vw] xsmall:text-[4vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.5vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] text-white">
+            Privacy Policy
+          </h1>
+        </div>
+
+        <div className="w-full text-center">
+          <h1 className="text-[5vw] xsmall:text-[4vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.5vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] text-white">
+            Made By Cinephile
+          </h1>
         </div>
       </div>
     </div>
