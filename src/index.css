@@ -1140,10 +1140,10 @@ body {
 /* RecentlyViewed Delete Button */
 
 .Deletebutton {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background-color: rgb(20, 20, 20);
+  background-color: rgb(28, 157, 204);
   border: none;
   font-weight: 600;
   display: flex;
@@ -1166,7 +1166,7 @@ body {
 }
 
 .Deletebutton:hover {
-  width: 140px;
+  width: 80px;
   border-radius: 50px;
   transition-duration: 0.3s;
   background-color: rgb(255, 69, 69);

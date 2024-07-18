@@ -1,7 +1,7 @@
 export const RapidoptionsCrawler = {
   method: "GET",
   headers: {
-    "X-RapidAPI-Key": "dfbbdedcacmsh2e0158b379069fdp1f3d2fjsnd2c9b19d1434",
+    "X-RapidAPI-Key": "c1b29a20b5msh29d1991d5b3140dp1e6411jsn19f2783c375f",
     "X-RapidAPI-Host": "imdb188.p.rapidapi.com",
   },
 };
@@ -18,7 +18,7 @@ export const RapidoptionsTechView = {
 export const RapidOptionsApiDojoDiamond = {
   method: "GET",
   headers: {
-    "x-rapidapi-key": "77e155d53bmshbdf8af2969d7a2ep111234jsn3cae100146d7",
+    "x-rapidapi-key": "a9f40a0ac4msh07e2c34b5b35966p1d1323jsnb99f93dccedb",
     "x-rapidapi-host": "movies-tv-shows-database.p.rapidapi.com",
     Type: "get-boxoffice-movies",
   },
@@ -67,7 +67,7 @@ export const RapidoptionsApiDojoRoman = {
 export const RapidOptionsApiDojoDaimond = {
   method: "GET",
   headers: {
-    "X-RapidAPI-Key": "a23a703252mshb669fb9c7bb5125p1e41d4jsnc063f2c36f07",
+    "X-RapidAPI-Key": "2a77274df8mshc4287bf6122a884p18d677jsna1eb138814ea",
     "X-RapidAPI-Host": "imdb8.p.rapidapi.com",
   },
 };

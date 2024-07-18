@@ -45,34 +45,34 @@ const EightContainer = () => {
 
   return (
     <>
-      <TbMinusVertical className=" text-lime-400 text-[3vw] relative  top-7" />
+      {/* <TbMinusVertical className=" text-lime-400 text-[13vw] relative  top-10" /> */}
       <Link to="/news/top">
         <div className=" relative flex group cursor-pointer">
-          <div className=" relative -mt-7">
-            <h1 className=" text-[1.6vw] bg-cyan-30 text-red-600 mb-8 inline-block ml-10">
-              <span className=" text-[2.2vw] text-violet-600">T</span>op{" "}
-              <span className=" text-[2.2vw] text-sky-500 font-bg-red-600">
+          <div className=" relative bg-red-30 bottom-2">
+            <h1 className=" text-[5vw] xsmall:text-[4vw] small:text-[3vw] medium:text-[3vw] large:text-[2vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] bg-cyan-30 text-red-600  inline-block ml-7">
+              <span className=" text-[8vw] xsmall:text-[7vw] small:text-[5vw] medium:text-[4vw] large:text-[2.5vw] xlarge:text-[3vw] 2xlarge:text-[2vw] text-violet-600">T</span>op{" "}
+              <span className=" text-[8vw] xsmall:text-[7vw] small:text-[5vw] medium:text-[4vw] large:text-[2.5vw] xlarge:text-[3vw] 2xlarge:text-[2vw] text-sky-500 font-bg-red-600">
                 N
               </span>
               ews
             </h1>
           </div>
-          <IoArrowForwardOutline className="  relative left-3 bottom-3 text-[1.9vw] text-yellow-400 group-hover:text-orange-600 " />
+          <IoArrowForwardOutline className="  relative left-3 top-[1vh] xsmall:top-[2vh] small:top-[1vh] medium:top-[1vh] large:top-[0vh] xlarge:top-[1.8vh] 2xlarge:top-[1vh] text-[7vw] xsmall:text-[5vw] medium:text-[4vw] large:text-[3vw] xlarge:text-[2.5vw] 2xlarge:text-[2vw] text-amber-400 group-hover:text-cyan-400 " />
         </div>
       </Link>
-      <div className="w-[96vw] bg-red-40 -z-888  static flex overflow-x-scroll mb-10 no-scrollbar ml-7 mr-10">
+      <div className="w-[96vw] mt-5 bg-red-30 -z-888  static flex overflow-x-scroll mb-10 no-scrollbar ml-7 mr-10">
         {Topnews &&
           Topnews.map((article, index) => {
             return (
               <Link>
-                <div className=" bg-red-40 flex-shrink-0 w-[100vw] md:w-1/2 lg:w-1/3 xl:w-[20vw] mr-14 relative group overflow-hidden flex">
+                <div className=" bg-red-40 flex-shrink-0 w-[70vw] xsmall:w-[50vw] small:w-[40vw] medium:w-[35vw] large:w-[28vw] xlarge:w-[22vw] 2xlarge:w-[20vw]  mr-14 relative group overflow-hidden flex">
                   <img
                     src={article?.node?.image?.url}
                     alt=""
-                    className=" hover:border-2  hover:transition-all ease-out hover:border-red-600 object-top h-[25vh] w-[22vw] rounded-lg" // This line ensures all images have the same width and height
+                    className=" hover:border-2  hover:transition-all ease-out hover:border-red-600 object-cover h-[25vh] w-[70vw] xsmall:w-[50vw] small:w-[40vw] medium:w-[35vw] large:w-[28vw] xlarge:w-[22vw] 2xlarge:w-[20vw]  rounded-lg" // This line ensures all images have the same width and height
                   />
-                  <div className="absolute top-0 right-0 bg-slate-600 rounded-lg hover:border-2  hover:transition-all ease-out hover:border-red-600 text-black  w-full h-full transition-all duration-500 transform translate-x-full group-hover:translate-x-0 p-4">
-                    <p className=" text-red-500 text-[1vw] font-semibold">
+                  <div className="absolute top-0 right-0 bg-slate-600 rounded-lg hover:border-2  hover:transition-all ease-out hover:border-red-600 text-black  max-w-[70vw] xsmall:w-[50vw] small:w-[40vw] medium:w-[35vw] large:w-[28vw] xlarge:w-[22vw] 2xlarge:w-[20vw] h-full transition-all duration-500 transform translate-x-full group-hover:translate-x-0 p-4">
+                    <p className=" text-red-500 text-[4vw] xsmall:text-[2.5vw] small:text-[2.5vw] medium:text-[1.5vw]  large:text-[1.5vw] xlarge:text-[1.2vw] 2xlarge:text-[1vw] font-semibold">
                       {article?.node?.articleTitle?.plainText}
                     </p>
                   </div>

@@ -8,166 +8,177 @@ import {
   RapidoptionsApiDojoRoman,
   RapidoptionsTechView,
 } from "../constants/Rapidoptions";
+import { API_OPTIONS } from "../constants/Apioptions";
 
 const Fourthcontainer = () => {
   const [BoxOfficeMovies, setBoxOfficeMovies] = useState(null);
   const [BoxOfficeMovieID, setBoxOfficeMovieID] = useState([]);
+  const [BoxOfficeIMDBID, setBoxOfficeIMDBID] = useState(null);
   const [BoxOfficeMovieDetails, setBoxOfficeMovieDetails] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getMovies = async () => {
-      // Check if data is in local storage
-      let data = localStorage.getItem("BOX OFFICE MOVIES LIST");
-      if (data) {
-        // Parse stored json if it was found
-        data = JSON.parse(data);
-        console.log(data, " box office movies ");
-        setBoxOfficeMovies(data);
-      } else {
-        // Otherwise, fetch data from API
-        const response = await fetch(
-          `https://movies-tv-shows-database.p.rapidapi.com/?page=1`,
-          RapidOptionsApiDojoDiamond
-        );
-        data = await response.json();
-        console.log(data.movie_results, "gougog8g7igg7iui");
-        // Save the data to local storage
-        localStorage.setItem(
-          "BOX OFFICE MOVIES LIST",
-          JSON.stringify(data.movie_results)
-        );
-        setBoxOfficeMovies(data.movie_results);
-      }
+      const response = await fetch(
+        `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1`,
+        API_OPTIONS
+      );
+      const data = await response.json();
+      console.log(data?.results.slice(0, 10), "Box Office Movies List");
+      setBoxOfficeMovies(data?.results.slice(0, 10));
     };
     getMovies();
   }, []);
 
-
-
   useEffect(() => {
-    BoxOfficeMovies &&
-      setBoxOfficeMovieID(BoxOfficeMovies.map((item) => item?.imdb_id));
+    if (BoxOfficeMovies) {
+      const movieIDs = BoxOfficeMovies.map((item) => item?.id);
+      setBoxOfficeMovieID(movieIDs);
+    }
   }, [BoxOfficeMovies]);
 
   useEffect(() => {
-    BoxOfficeMovieID && console.log(BoxOfficeMovieID);
+    const findIMDBIDs = async () => {
+      if (BoxOfficeMovieID && BoxOfficeMovieID.length > 0) {
+        const imdbIDs = await Promise.all(
+          BoxOfficeMovieID.map(async (id) => {
+            try {
+              const response = await fetch(
+                `https://api.themoviedb.org/3/movie/${id}/external_ids`,
+                API_OPTIONS
+              );
+              const data = await response.json();
+              return data?.imdb_id;
+            } catch (error) {
+              console.error(`Error fetching IMDB ID for movie ${id}:`, error);
+              return null;
+            }
+          })
+        );
+
+        // Filter out any null values in case of errors
+        const validIMDBIDs = imdbIDs.filter((id) => id !== null);
+        setBoxOfficeIMDBID(validIMDBIDs);
+      }
+    };
+
+    findIMDBIDs();
   }, [BoxOfficeMovieID]);
+
+  useEffect(() => {
+    if (BoxOfficeIMDBID) {
+      console.log("Box Office IMDB IDs:", BoxOfficeIMDBID);
+    }
+  }, [BoxOfficeIMDBID]);
 
   useEffect(() => {
     const getMovieDetails = async () => {
-      let data = localStorage.getItem("BOX OFFICE MOVIES DETAILS");
-      if (data) {
-        data = JSON.parse(data);
-        // console.log(data, " box office movie details");
-      } else {
-        data = [];
-        for (let i = 0; i < BoxOfficeMovieID.length; i++) {
-          const id = BoxOfficeMovieID[i];
-          const response = await fetch(
-            `https://imdb8.p.rapidapi.com/title/v2/get-box-office-summary?tconst=${id}`,
-            RapidOptionsApiDojoDaimond
-          );
-          const movieData = await response.json();
-          data.push(movieData?.data?.title); // Store only the title
+      setIsLoading(true);
 
-          // Save the data to local storage
-          localStorage.setItem(
-            "BOX OFFICE MOVIES DETAILS",
-            JSON.stringify(data)
-          );
-          // If it's not the last request in this second, don't delay
-          if ((i + 1) % 5 !== 0 || i === BoxOfficeMovieID.length - 1) continue;
-          // Wait for 1 second before the next request
-          await new Promise((resolve) => setTimeout(resolve, 1000));
-        }
+      // Check local storage first
+      const storedData = localStorage.getItem("Top Box Office Movies List");
+      if (storedData) {
+        setBoxOfficeMovieDetails(JSON.parse(storedData));
+        setIsLoading(false);
+        return;
       }
-      setBoxOfficeMovieDetails(data);
+
+      const details = [];
+
+      const fetchMovieWithDelay = (index) => {
+        if (index >= BoxOfficeIMDBID.length) {
+          setBoxOfficeMovieDetails(details);
+          // Store in local storage
+          localStorage.setItem(
+            "Top Box Office Movies List",
+            JSON.stringify(details)
+          );
+          setIsLoading(false);
+          return;
+        }
+
+        const id = BoxOfficeIMDBID[index];
+        fetch(
+          `https://imdb8.p.rapidapi.com/title/v2/get-box-office-summary?tconst=${id}`,
+          RapidOptionsApiDojoDaimond
+        )
+          .then((response) => response.json())
+          .then((movieData) => {
+            details.push(movieData);
+            setTimeout(() => fetchMovieWithDelay(index + 1), 2000);
+          })
+          .catch((error) => {
+            console.error(`Error fetching details for movie ${id}:`, error);
+            setTimeout(() => fetchMovieWithDelay(index + 1), 2000);
+          });
+      };
+
+      if (BoxOfficeIMDBID && BoxOfficeIMDBID.length > 0) {
+        fetchMovieWithDelay(0);
+      } else {
+        setIsLoading(false);
+      }
     };
-    if (BoxOfficeMovieID.length > 0) {
-      getMovieDetails();
-    }
-  }, [BoxOfficeMovieID]);
+
+    getMovieDetails();
+
+    // Removed the cleanup function that was clearing local storage
+  }, [BoxOfficeIMDBID]);
 
   useEffect(() => {
-    BoxOfficeMovieDetails && console.log(BoxOfficeMovieDetails);
+    if (BoxOfficeMovieDetails && BoxOfficeMovieDetails.length > 0) {
+      console.log("All Box Office Movie Details:", BoxOfficeMovieDetails);
+    }
   }, [BoxOfficeMovieDetails]);
 
-  function convertToMillions(amount) {
-    return Math.floor(amount / 1000000);
+  const convertToMillions = (amount) => {
+    if (!amount) return "N/A";
+    return (amount / 1000000).toFixed(1);
+  };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!BoxOfficeMovieDetails || BoxOfficeMovieDetails.length === 0) {
+    return <div>No movie details available</div>;
   }
 
   return (
     <>
       <Link to="/Top-Box-Office">
-        <div className=" w-[21vw] h-[10vh]">
-          <div>
-            <div>
-              <MdTheaters className=" text-red-600 text-[2vw] relative top-11 ml-5" />
-              <h1 className=" text-purple-300 font-semibold text-[2vw] ml-14">
-                Top Box Office(US)
-              </h1>
-            </div>
-          </div>
+        <div className="">
+          <MdTheaters className=" text-red-600 text-[8vw] xsmall:text-[6vw] small:text-[5vw] medium:text-[4vw] large:text-[3.5vw] xlarge:text-[3vw] 2xlarge:text-[2.5vw] relative top-[10vw] ml-5" />
+          <h1 className=" text-purple-300 font-semibold text-[5vw] xsmall:text-[4vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.5vw] xlarge:text-[2.5vw] 2xlarge:text-[1.5vw] relative top-[2vw] xsmall:top-[4vw] small:top-[5vw] medium:top-[5.5vw] large:top-[6.2vw] xlarge:top-[6.4vw] 2xlarge:top-[7.5vw] ml-[14vw]   xsmall:ml-[11vw]  small:ml-[9vw] medium:ml-[7vw] large:ml-[6vw] xlarge:ml-[5vw] 2xlarge:ml-[4vw]">
+            Top Box Office(US)
+          </h1>
         </div>
       </Link>
-      {BoxOfficeMovieDetails && (
-        <div className=" w-[100vw] h-[50vh] bg-lime-30 flex justify-between mt-10 cursor-pointer">
-          <div className="flex flex-col gap-10 ml-[6vw]">
-            {BoxOfficeMovieDetails &&
-              BoxOfficeMovieDetails.slice(0, 4).map((item) => (
-                <div
-                  key={item.id}
-                  className="w-[22vw] h-[5.5vh] rounded-lg font-bold hover:border-red-600 hover:bg-black hover:text-white bg-indigo-100 border-2 border-cyan-600 flex items-center justify-center relative"
-                >
-                  {item?.originalTitleText?.text}
-                  <div className="w-[3.2vw] h-[5.5vh] rounded-lg  hover:bg-black text-black  hover:text-white bg-indigo-100 border-2 border-lime-600 absolute right-[-3.2vw] flex items-center justify-center">
-                    {isNaN(
-                      convertToMillions(item?.worldwideGross?.total?.amount)
-                    )
-                      ? "N/A"
-                      : `${convertToMillions(
-                          item?.worldwideGross?.total?.amount
-                        )}M`}
+
+      <div className="w-full p-4 mt-[10vw] cursor-pointer">
+        <div className="grid grid-cols-1 xsmall:grid-cols-2 small:grid-cols-3 medium:grid-cols-4 large:grid-cols-5 gap-4">
+          {BoxOfficeMovieDetails &&
+            BoxOfficeMovieDetails.map((item, index) => (
+              <div
+                key={index}
+                className="bg-[#080808] border-2 border-cyan-600 rounded-lg p-4 hover:border-red-600 hover:bg-black hover:text-white transition-all duration-300"
+              >
+                <div className="flex justify-between items-center">
+                  <div className="font-bold text-purple-600 text-md small:text-base truncate flex-1">
+                    {item?.data?.title?.originalTitleText?.text ||
+                      "Title Not Available"}
+                  </div>
+                  <div className="text-white font-semibold text-sm small:text-base ml-2">
+                    {convertToMillions(
+                      item?.data?.title?.worldwideGross?.total?.amount
+                    )}{" "}
+                    M
                   </div>
                 </div>
-              ))}
-          </div>
-          <div className="flex flex-col gap-10 ml-[vw]">
-            {BoxOfficeMovieDetails.slice(4, 8).map((item) => (
-              <div
-                key={item.id}
-                className="w-[22vw] h-[5.5vh] rounded-lg font-bold hover:border-red-600 hover:bg-black hover:text-white bg-indigo-100 border-2 border-cyan-600 flex items-center justify-center relative"
-              >
-                {item?.originalTitleText?.text}
-                <div className="w-[3.2vw] h-[5.5vh] rounded-lg  hover:bg-black text-black  hover:text-white bg-indigo-100 border-2 border-lime-600 absolute right-[-3.2vw] flex items-center justify-center">
-                  {isNaN(convertToMillions(item?.worldwideGross?.total?.amount))
-                    ? "N/A"
-                    : `${convertToMillions(
-                        item?.worldwideGross?.total?.amount
-                      )}M`}
-                </div>
               </div>
             ))}
-          </div>
-          <div className="flex flex-col gap-10 mr-[8vw] mt-20">
-            {BoxOfficeMovieDetails.slice(8, 10).map((item) => (
-              <div
-                key={item.id}
-                className="w-[22vw] h-[5.5vh] rounded-lg font-bold hover:border-red-600 hover:bg-black hover:text-white bg-indigo-100 border-2 border-cyan-600 flex items-center justify-center relative"
-              >
-                {item?.originalTitleText?.text}
-                <div className="w-[3.2vw] h-[5.5vh] rounded-lg  hover:bg-black text-black  hover:text-white bg-indigo-100 border-2 border-lime-600 absolute right-[-3.2vw] flex items-center justify-center">
-                  {isNaN(convertToMillions(item?.worldwideGross?.total?.amount))
-                    ? "N/A"
-                    : `${convertToMillions(
-                        item?.worldwideGross?.total?.amount
-                      )}M`}
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
-      )}
+      </div>
     </>
   );
 };
