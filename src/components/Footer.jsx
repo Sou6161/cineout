@@ -8,7 +8,7 @@ import { MdLaunch } from "react-icons/md";
 
 const Footer = () => {
   return (
-    <div className=" w-[100vw] bg-lime-10 h-[70vh] bg-cyan-20 flex flex-col items-center">
+    <div className=" w-[100vw] bg-lime-10 h-[70vh] xsmall:h-[72vh] small:h-[62vh] medium:h-[55vh] large:h-[60vh] bg-cyan-20 flex flex-col items-center">
       <div>
         <Link
           to="/login"
@@ -25,7 +25,7 @@ const Footer = () => {
           </span>
         </Link>
       </div>
-      <div className="w-[95vw] h-[18vh] xsmall:w-[75vw] small:w-[55vw] medium:w-[45vw] large:w-[32vw] xlarge:w-[27vw] 2xlarge:w-[20vw] relative rounded-lg border-2 border-zinc-700 flex flex-col items-center justify-center mt-10 p-4">
+      <div className="w-[95vw] h-[18vh] xsmall:w-[75vw] small:w-[55vw] medium:w-[45vw] large:w-[32vw] xlarge:w-[27vw] 2xlarge:w-[20vw] relative rounded-lg border- border-zinc-700 flex flex-col items-center justify-center mt-10 p-4">
         <h1 className="mb-5">
           <span className=" text-yellow-400 font-bold  text-[4.5vw] xsmall:text-[3.5vw] small:text-[2.8vw] medium:text-[2vw]  large:text-[1.5vw] xlarge:text-[1.4vw] 2xlarge:text-[1vw]">
             Follow CINEOUT on Social
@@ -130,72 +130,63 @@ const Footer = () => {
         </div>
       </div>
       <div className="flex flex-col items-center space-y-5 mt-5">
-        <div className="flex flex-wrap justify-center gap-5 w-full">
-          <h1 className="text-[5vw] xsmall:text-[4vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.5vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] text-white flex items-center hover:underline hover:cursor-pointer">
+        <div className="flex flex-wrap justify-center gap-5 w-[100vw] items-center small:flex-row small:flex-wrap xsmall:w-[90vw] small:w-[80vw] medium:w-[90vw]  large:w-[60vw] xlarge:w-[60vw]">
+          <h1 className="text-[4.5vw] xsmall:text-[3.5vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white flex items-center hover:underline hover:cursor-pointer">
             Help{" "}
             <span className="ml-1">
               <MdLaunch />
             </span>
           </h1>
-          <h1 className="text-[5vw] xsmall:text-[4vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.5vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] text-white flex items-center hover:underline hover:cursor-pointer">
+          <h1 className="text-[4.5vw] xsmall:text-[3.5vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white flex items-center hover:underline hover:cursor-pointer">
             Site Index{" "}
             <span className="ml-1">
               <MdLaunch />
             </span>
           </h1>
-          <h1 className="text-[5vw] xsmall:text-[4vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.5vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] text-white flex items-center hover:underline hover:cursor-pointer">
+          <h1 className="text-[4.5vw] xsmall:text-[3.5vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white flex items-center hover:underline hover:cursor-pointer">
             CINEOUTPro{" "}
             <span className="ml-1">
               <MdLaunch />
             </span>
           </h1>
-        </div>
-
-        <div className="flex flex-wrap justify-center gap-5 w-full">
-          <h1 className="text-[5vw] xsmall:text-[4vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.5vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] text-white flex items-center hover:underline hover:cursor-pointer">
+          <h1 className="text-[4.5vw] xsmall:text-[3.5vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white flex items-center hover:underline hover:cursor-pointer">
             Box Office Mojo{" "}
             <span className="ml-1">
               <MdLaunch />
             </span>
           </h1>
-          <h1 className="text-[5vw] xsmall:text-[4vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.5vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] text-white flex items-center hover:underline hover:cursor-pointer">
+          <h1 className="text-[4.5vw] xsmall:text-[3.5vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white flex items-center hover:underline hover:cursor-pointer">
             License CINEOUT Data{" "}
             <span className="ml-1">
               <MdLaunch />
             </span>
           </h1>
-        </div>
-
-        <div className="flex flex-wrap justify-center gap-5 w-full">
-          <h1 className="text-[5vw] xsmall:text-[4vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.5vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] text-white">
+          <h1 className="text-[4.5vw] xsmall:text-[3.5vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white">
             Press Room
           </h1>
-          <h1 className="text-[5vw] xsmall:text-[4vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.5vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] text-white flex items-center hover:underline hover:cursor-pointer">
+          <h1 className="text-[4.5vw] xsmall:text-[3.5vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white flex items-center hover:underline hover:cursor-pointer">
             Advertising{" "}
             <span className="ml-1">
               <MdLaunch />
             </span>
           </h1>
-          <h1 className="text-[5vw] xsmall:text-[4vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.5vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] text-white flex items-center hover:underline hover:cursor-pointer">
+          <h1 className="text-[4.5vw] xsmall:text-[3.5vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white flex items-center hover:underline hover:cursor-pointer">
             Jobs{" "}
             <span className="ml-1">
               <MdLaunch />
             </span>
           </h1>
-        </div>
-
-        <div className="flex flex-wrap justify-center gap-5 w-full">
-          <h1 className="text-[5vw] xsmall:text-[4vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.5vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] text-white">
+          <h1 className="text-[4.5vw] xsmall:text-[3.5vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white">
             Conditions of Use
           </h1>
-          <h1 className="text-[5vw] xsmall:text-[4vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.5vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] text-white">
+          <h1 className="text-[4.5vw] xsmall:text-[3.5vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white">
             Privacy Policy
           </h1>
         </div>
 
         <div className="w-full text-center">
-          <h1 className="text-[5vw] xsmall:text-[4vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.5vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] text-white">
-            Made By Cinephile
+          <h1 className="text-[4.5vw] xsmall:text-[3.5vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white">
+            Made By a Cinephile
           </h1>
         </div>
       </div>

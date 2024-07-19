@@ -12,6 +12,8 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.8",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
     "color-thief-react": "^2.1.0",
     "css-to-tailwindcss": "^1.0.5",
     "firebase": "^10.12.3",
@@ -19,9 +21,11 @@
     "flowbite": "^2.3.0",
     "flowbite-react": "^0.9.0",
     "formik": "^2.4.5",
+    "framer-motion": "^11.3.7",
     "idb": "^8.0.0",
     "idb-keyval": "^6.2.1",
     "lodash": "^4.17.21",
+    "lucide-react": "^0.408.0",
     "react": "^18.2.0",
     "react-datepicker": "^6.6.0",
     "react-dom": "^18.2.0",
@@ -38,7 +42,9 @@
     "redux": "^5.0.1",
     "redux-persist": "^6.0.0",
     "swiper": "^11.1.4",
+    "tailwind-merge": "^2.4.0",
     "tailwind-scrollbar-hide": "^1.1.7",
+    "tailwindcss-animate": "^1.0.7",
     "use-glassmorphism": "^1.0.8",
     "web-vitals": "^2.1.4"
   },
@@ -70,6 +76,6 @@
     ]
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.1"
+    "tailwindcss": "^3.4.6"
   }
 }

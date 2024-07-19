@@ -1034,3 +1034,19 @@ const Fourthcontainer = () => {
 
 export default Fourthcontainer;
 
+
+
+
+
+
+
+
+
+
+
+<div className="w-full text-center">
+          <h1 className="text-[4.5vw] xsmall:text-[3.5vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white">
+            Made By a Cinephile
+          </h1>
+        </div>
+
