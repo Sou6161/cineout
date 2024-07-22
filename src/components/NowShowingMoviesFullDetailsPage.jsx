@@ -32,6 +32,7 @@ import Footer from "./Footer";
 import useModal from "./UseModal";
 import { useDispatch } from "react-redux";
 import { addRecentlyVieweddata } from "../Reduxstore/RecentlyViewedSlice";
+import Header from "./Header";
 
 const trimTextTo180Words = (text) => {
   const words = text.split(" ");
@@ -356,14 +357,14 @@ const NowShowingMoviesFullDetailsPage = () => {
   }, [NowShowingRelatedNews]);
 
   return (
-    <div className=" w-[100vw] h-[868vh] bg-[#030C16] text-red-600 ">
+    <div className="min-h-[360vh] bg-[#030C16] text-red-600 overflow-x-hidden">
       <div className="">
-        <Headerfordetails />
+        <Header/>
       </div>
-      <div className=" w-[98vw] mx-auto mt-5 h-[76.5vh]  border-black glow5 rounded-lg  ">
+      <div className=" w-[98vw] mx-auto  relative top-[18vw]  h-[35vh]   border-black glow5 rounded-lg  ">
         {NowShowingTrailerYTKEY ? (
           <iframe
-            className=" w-[97vw] mx-auto h-[75vh] relative top-1 rounded-lg glow3  glow"
+            className=" w-[95vw] mx-auto h-[30vh] relative top-[0.5vw] rounded-lg glow3  glow"
             src={`https://www.youtube.com/embed/${NowShowingTrailerYTKEY}?si=HxKbpBA7t2t3ulUK`}
           ></iframe>
         ) : (
@@ -385,7 +386,7 @@ const NowShowingMoviesFullDetailsPage = () => {
         )}
       </div>
 
-      <div className=" w-[100vw] h-[100vh] absolute bg-red-20 mt-10 border-t-[1px] border-gray-700">
+      <div className=" w-[100vw] h-[100vh] absolute bg-red-20 mt-[12vw] border-t-[1px] border-gray-700">
         <div className="">
           <div>
             <h1 className=" relative top-[3vw] left-[10vw] text-[3vw] text-purple-500 font-semibold ">
@@ -540,7 +541,7 @@ const NowShowingMoviesFullDetailsPage = () => {
             </h1>
           </div>
         </div>
-        <div className=" flex gap-10 bg-red-30 absolute left-[70vw] top-5">
+        <div className=" flex gap-10 bg-red-30 absolute right-[0vw] top-5">
           <h1 className=" whitespace-nowrap font-bold text-yellow-400">
             CINEOUT RATING
           </h1>
@@ -626,7 +627,7 @@ const NowShowingMoviesFullDetailsPage = () => {
           <h1 className="font-bold">POPULARITY</h1>
           <span className="absolute left-[19vw] top-8 text-[2vw] border-2 border-lime-400 rounded-full p-[0.1vw]">
             {NowShowingMoviesDetails?.meterRanking?.currentRank > 5 ? (
-              <FaArrowTrendDown />
+              <FaArrowTrendDown className="" />
             ) : (
               <FaArrowTrendUp />
             )}
@@ -646,7 +647,7 @@ const NowShowingMoviesFullDetailsPage = () => {
             </span>
           </span>
         </div>
-        <div className=" absolute left-[78vw] top-[10vw] ">
+        <div className=" absolute left-[45vw] top-[10vw] ">
           <div class="btn-donate h-[9vh] relative bottom-3">
             <span className=" relative bottom-5 left-3">
               {" "}

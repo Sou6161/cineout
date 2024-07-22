@@ -13,6 +13,28 @@ import { auth } from "../constants/Firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../Reduxstore/UserSlice";
 
+const MenuSection = ({ icon, title, items, linkPrefix, handleClick }) => (
+  <div className="menu-section">
+    <h2 className="section-title">
+      <span className="icon">{icon}</span>
+      {title}
+    </h2>
+    <ul className="section-items">
+      {items.map((item, index) => (
+        <li key={index}>
+          <Link
+            to={`${linkPrefix}${item.toLowerCase().replace(/\s+/g, "-")}`}
+            onClick={handleClick}
+            className="menu-link"
+          >
+            {item}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
 const Searchtab = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -173,7 +195,6 @@ const Searchtab = () => {
                             className=" cursor-pointer"
                           >
                             <div className=" flex hover:bg-slate-600 border-t-[1px] hover:border-cyan-400  max-h-[55vw] xsmall:h-[30vw] small:h-[25vw] small:py-[2vw] medium:h-[20vw] medium:py-[2vw] large:max-h-[15vw] large:py-[2vw] xlarge:max-h-[13vw] xlarge:py-[2vw] 2xlarge:max-h-[10vw] 2xlarge:py-[1vw] py-[3.5vw] px-3  mt-    ">
-                            
                               <img
                                 className="max-w-[22vw] max-h-[16vh] xsmall:max-w-[17vw] xsmall:h-[17vh]  object-center flex rounded-lg mb-5 glow5 "
                                 src={data?.i?.imageUrl}
@@ -224,6 +245,7 @@ const Searchtab = () => {
     text-[12vw]
     left-[6vw]
     xsmall:text-[9vw]
+    xsmall:left-[2vw]
     xsmall:top
     small:left-[5.5vw]
     small:text-[8vw]
@@ -258,7 +280,7 @@ const Searchtab = () => {
           <Link
             to="/login"
             // onClick={() => window.location.reload()} // Add this line
-            class="relative inline-flex top-[0.vw] h-[7vw] left-[4vw] xsmall:top-0 xsmall:left-[5vw] small:h-[6vw] medium:left-[4vw] medium:w-[12vw] medium:h-[4vw]  medium:-top-0 large:top-0 large:left-[3vw] large:h-[3.5vw]  large:w-[9vw] xlarge:left-[2vw]  2xlarge:h-[2.5vw] 2xlarge:w-[7.5vw] 2xlarge:left-[2vw]  items-center justify-center  px-5 py-4 medium:-px-2  overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group"
+            class="relative inline-flex top-[0.vw] h-[7vw] left-[4vw] xsmall:top-0 xsmall:left-[2vw] small:h-[6vw] medium:left-[4vw] medium:w-[12vw] medium:h-[4vw]  medium:-top-0 large:top-0 large:left-[3vw] large:h-[3.5vw]  large:w-[9vw] xlarge:left-[2vw]  2xlarge:h-[2.5vw] 2xlarge:w-[7.5vw] 2xlarge:left-[2vw]  items-center justify-center  px-5 py-4 medium:-px-2  overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group"
           >
             <span class="absolute inset-0 flex items-center justify-center w-[4vw] h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
               <svg
@@ -383,7 +405,7 @@ const Searchtab = () => {
 
       <div className="">
         <input
-          className={`relative group menu  xsmall:left-[2vw] xsmall:w-[6vw] small:w-[4.8vw] medium:w-[4vw] w-[8vw] large:left-[0.8vw] large:w-9 xlarge:left-[0.5vw] 2xlarge:left-[0.8vw]  ${
+          className={`relative group menu  xsmall:left-[vw] xsmall:w-[5.5vw] small:w-[4.8vw] medium:w-[4vw] w-[8vw] large:left-[0.8vw] large:w-9 xlarge:left-[0.5vw] 2xlarge:left-[0.8vw]  ${
             isMenuOpen ? "ripple" : isPageRefreshed ? "" : "ripple-reverse"
           }`}
           onClick={() => setMenuOpen(!isMenuOpen)}
@@ -393,7 +415,7 @@ const Searchtab = () => {
           style={{ zIndex: 9999 }} // yahan z-index add kiya gaya hai
         />
         <div
-          className={`absolute -top-[1.7vh]  right-0 z-50 w-[100vw] h-[100vh] transition-transform duration-500 ease-in-out transform ${
+          className={` absolute -top-[0.5vh] 2xlarge:-top-[1.2vh]  right-0 z-50 w-[100vw] h-[100vh] transition-transform duration-500 ease-in-out transform ${
             isMenuOpen
               ? "ripple translate-x-0"
               : isPageRefreshed
@@ -403,170 +425,68 @@ const Searchtab = () => {
           style={{ display: isMenuOpen ? "block" : "none" }}
         >
           {isMenuOpen && (
-            <div className=" w-[100vw] h-[100vh] bg-red-10  ">
-              <h1 className=" flex relative top-[7vw] left-[20vw] font-bold text-cyan-400 text-[2vw]">
-                <span className="text-yellow-400 mr-2">
-                  {" "}
-                  <MdMovie />
-                </span>
-                Movies
-              </h1>
-              <Link
-                onClick={handleButtonClick}
-                to="/chart/top"
-                className=" w-[7vw] relative top-[8vw] left-[22.5vw] text-[1vw] font-normal text-white hover:underline"
-              >
-                <h1 className="">Top 250 Movies</h1>
-              </Link>
-              <Link
-                to="/chart/moviemeter"
-                className=" w-[10vw] relative top-[9vw] left-[22.5vw] text-[1vw] font-normal text-white hover:underline"
-              >
-                <h1 className="">Most Popular Movies</h1>
-              </Link>
-              <Link
-                to="/chart/boxoffice"
-                className=" relative top-[10vw] left-[22.5vw] text-[1vw] font-normal text-white hover:underline"
-              >
-                <h1 className="  ">Top Box Office</h1>
-              </Link>
-              <Link
-                to="/news/movie"
-                className=" relative top-[11vw] left-[22.5vw] text-[1vw] font-normal text-white hover:underline"
-              >
-                <h1 className="  ">Movie News</h1>
-              </Link>
-              <Link
-                to="/chart/india-spotlight"
-                className=" relative top-[12vw] left-[22.5vw] text-[1vw] font-normal text-white hover:underline"
-              >
-                <h1 className="  ">India Movie Spotlight</h1>
-              </Link>
-              <h1 className=" flex relative bottom-[3vw] left-[42vw] font-bold text-cyan-400 text-[2vw]">
-                <span className="text-yellow-400 mr-2">
-                  {" "}
-                  <IoTvOutline />
-                </span>
-                TV Shows
-              </h1>
-              <Link
-                to="/chart/toptv"
-                className="  inline-block relative bottom-[2.2vw] left-[44.5vw] text-[1vw] font-normal text-white hover:underline"
-              >
-                <h1 className="">Top 250 TV Shows</h1>
-              </Link>
-              <Link
-                to="/chart/toptv"
-                className=" relative bottom-[1.2vw] left-[44.5vw] text-[1vw] font-normal text-white hover:underline"
-              >
-                <h1 className="">Most Popular TV Shows</h1>
-              </Link>
-              <Link
-                to="/chart/toptv"
-                className=" relative left-[44.5vw] text-[1vw] font-normal text-white hover:underline"
-              >
-                <h1 className=" ">Browse TV Shows by Genre</h1>
-              </Link>
-              <Link
-                to="/chart/toptv"
-                className=" relative top-[1vw] left-[44.5vw] text-[1vw] font-normal text-white hover:underline"
-              >
-                <h1 className=" ">TV News</h1>
-              </Link>
-              <h1 className=" flex relative bottom-[11.5vw] left-[65vw] font-bold text-cyan-400 text-[2vw]">
-                <span className="text-yellow-400 mr-2">
-                  {" "}
-                  <MdEmojiEvents />
-                </span>
-                Awards & Events
-              </h1>
-              <Link
-                to="/chart/toptv"
-                className="  inline-block relative bottom-[10.8vw] left-[67.4vw] text-[1vw] font-normal text-white hover:underline"
-              >
-                <h1 className="">Oscars Winners</h1>
-              </Link>
-              <Link
-                to="/chart/toptv"
-                className=" relative bottom-[9.8vw] left-[67.4vw] text-[1vw] font-normal text-white hover:underline"
-              >
-                <h1 className="">Emmy Winners</h1>
-              </Link>
-              <h1 className=" flex relative top-[8vw] left-[20vw] font-bold text-cyan-400 text-[2vw]">
-                <span className="text-yellow-400 mr-2 text-[1.7vw]">
-                  {" "}
-                  <SlPeople />
-                </span>
-                Celebs
-              </h1>
-              <Link
-                to="/chart/moviemeter"
-                className=" w-[10vw] relative top-[9vw] left-[22.5vw] text-[1vw] font-normal text-white hover:underline"
-              >
-                <h1 className="">Born Today</h1>
-              </Link>
-              <Link
-                to="/chart/moviemeter"
-                className=" w-[10vw] relative top-[10vw] left-[22.5vw] text-[1vw] font-normal text-white hover:underline"
-              >
-                <h1 className="">Most Popular Celebs</h1>
-              </Link>
-              <Link
-                to="/chart/moviemeter"
-                className=" w-[10vw] relative top-[11vw] left-[22.5vw] text-[1vw] font-normal text-white hover:underline"
-              >
-                <h1 className="">Celebrity News</h1>
-              </Link>
-              <h1 className=" flex relative top-[1.5vw] left-[42vw] font-bold text-cyan-400 text-[2vw]">
-                <span className="text-yellow-400 mr-2 text-[1.7vw]">
-                  {" "}
-                  <FaRegEye />
-                </span>
-                Watch
-              </h1>
-              <Link
-                to="/chart/moviemeter"
-                className=" w-[10vw] relative top-[2.4vw] left-[44.5vw] text-[1vw] font-normal text-white hover:underline"
-              >
-                <h1 className="">What To Watch</h1>
-              </Link>
-              <Link
-                to="/chart/moviemeter"
-                className=" w-[10vw] relative top-[3.4vw] left-[44.5vw] text-[1vw] font-normal text-white hover:underline"
-              >
-                <h1 className="">Latest Trailers</h1>
-              </Link>
-              <Link
-                to="/chart/moviemeter"
-                className=" w-[10vw] relative top-[4.4vw] left-[44.5vw] text-[1vw] font-normal text-white hover:underline"
-              >
-                <h1 className="">Born Today</h1>
-              </Link>
-              <h1 className=" flex relative bottom-[5vw] left-[65vw] font-bold text-cyan-400 text-[2vw]">
-                <span className="text-yellow-400 mr-2 text-[1.7vw]">
-                  {" "}
-                  <IoEarthSharp />
-                </span>
-                Community
-              </h1>
-              <Link
-                to="/chart/moviemeter"
-                className=" w-[10vw] relative bottom-[4.2vw] left-[67.2vw] text-[1vw] font-normal text-white hover:underline"
-              >
-                <h1 className="">Help Center</h1>
-              </Link>
-              <Link
-                to="/chart/moviemeter"
-                className=" w-[10vw] relative bottom-[3.2vw] left-[67.2vw] text-[1vw] font-normal text-white hover:underline"
-              >
-                <h1 className="">Contributor Zone</h1>
-              </Link>
-              <Link
-                to="/chart/moviemeter"
-                className=" w-[10vw] relative bottom-[2.2vw] left-[67.2vw] text-[1vw] font-normal text-white hover:underline"
-              >
-                <h1 className="">Polls</h1>
-              </Link>
+            <div className="responsive-menu bgcontainer">
+              <div className="menu-container">
+                <div className="menu-grid">
+                  <MenuSection
+                    icon={<MdMovie />}
+                    title="Movies"
+                    items={[
+                      "Top 250 Movies",
+                      "Most Popular Movies",
+                      "Top Box Office",
+                      "Movie News",
+                      "India Movie Spotlight",
+                    ]}
+                    linkPrefix="/chart/"
+                    handleClick={handleButtonClick}
+                  />
+
+                  <MenuSection
+                    icon={<IoTvOutline />}
+                    title="TV Shows"
+                    items={[
+                      "Top 250 TV Shows",
+                      "Most Popular TV Shows",
+                      "Browse TV Shows by Genre",
+                      "TV News",
+                    ]}
+                    linkPrefix="/chart/toptv"
+                  />
+
+                  <MenuSection
+                    icon={<MdEmojiEvents />}
+                    title="Awards & Events"
+                    items={["Oscars Winners", "Emmy Winners"]}
+                    linkPrefix="/chart/awards"
+                  />
+
+                  <MenuSection
+                    icon={<SlPeople />}
+                    title="Celebs"
+                    items={[
+                      "Born Today",
+                      "Most Popular Celebs",
+                      "Celebrity News",
+                    ]}
+                    linkPrefix="/chart/celebs"
+                  />
+
+                  <MenuSection
+                    icon={<FaRegEye />}
+                    title="Watch"
+                    items={["What To Watch", "Latest Trailers"]}
+                    linkPrefix="/watch"
+                  />
+
+                  <MenuSection
+                    icon={<IoEarthSharp />}
+                    title="Community"
+                    items={["Help Center", "Contributor Zone", "Polls"]}
+                    linkPrefix="/community"
+                  />
+                </div>
+              </div>
             </div>
           )}
         </div>
