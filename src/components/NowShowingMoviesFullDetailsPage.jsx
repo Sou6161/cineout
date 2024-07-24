@@ -34,10 +34,10 @@ import { useDispatch } from "react-redux";
 import { addRecentlyVieweddata } from "../Reduxstore/RecentlyViewedSlice";
 import Header from "./Header";
 
-const trimTextTo180Words = (text) => {
-  const words = text.split(" ");
-  return words.slice(0, 180).join(" ") + (words.length > 180 ? "..." : "");
-};
+// const trimTextTo180Words = (text) => {
+//   const words = text.split(" ");
+//   return words.slice(0, 130).join(" ") + (words.length > 130 ? "..." : "");
+// };
 
 const NumberFormatter = ({ number }) => {
   const formatNumber = (num) => {
@@ -78,6 +78,20 @@ const NowShowingMoviesFullDetailsPage = () => {
   const [clickedIndex, setClickedIndex] = useState(null);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const [expandedReviews, setExpandedReviews] = useState({});
+
+  const toggleReview = (index) => {
+    setExpandedReviews((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+  };
+
+  const trimTextTo130Words = (text) => {
+    const words = text.split(" ");
+    if (words.length <= 130) return text;
+    return words.slice(0, 130).join(" ") + "";
+  };
 
   const handleIconClick = (index) => {
     setClickedIndex(index);
@@ -357,9 +371,9 @@ const NowShowingMoviesFullDetailsPage = () => {
   }, [NowShowingRelatedNews]);
 
   return (
-    <div className="h-[800vh] bg-[#030C16] text-red-600">
+    <div className="min-h-[780vh] bg-[#030C16] text-red-600">
       <div className=" ">
-        <Header/>
+        <Header />
       </div>
       <div className=" w-[98vw] mx-auto  relative top-[18vw]  h-[35vh]   border-black glow5 rounded-lg  ">
         {NowShowingTrailerYTKEY ? (
@@ -541,8 +555,8 @@ const NowShowingMoviesFullDetailsPage = () => {
             </h1>
           </div>
         </div>
-        <div className=" flex gap-5 bg-red-30 absolute right-[0vw] top-5">
-          <h1 className=" whitespace-nowrap text-[2vw] font-bold text-yellow-400">
+        <div className=" flex gap-5 bg-red-30 absolute left-[8vw] top-5">
+          <h1 className=" whitespace-nowrap text-[2vw] relative left-[34vw] font-bold text-yellow-400">
             CINEOUT RATING
           </h1>
           <span className=" absolute top-10 left-2 text-[1.5vw] text-yellow-400">
@@ -558,13 +572,15 @@ const NowShowingMoviesFullDetailsPage = () => {
               )
             </span>
           </span>
-          <h1 className=" whitespace-nowrap font-bold text-[2vw]">YOUR RATING</h1>
-          <span className=" absolute top-8 left-[11vw] text-[1.5vw] text-yellow-400">
+          <h1 className=" whitespace-nowrap relative left-[36vw] font-bold text-[2vw]">
+            YOUR RATING
+          </h1>
+          <span className=" absolute top-3 left-[23vw] text-[3vw] text-yellow-400">
             <IoStarOutline />
           </span>
           <h1
             onClick={toggle}
-            className="absolute top-7 hover:underline cursor-pointer left-[12.8vw] text-[2vw] font-semibold"
+            className="absolute top-3 hover:underline cursor-pointer left-[28vw] text-[2vw] font-semibold"
           >
             RATE
           </h1>
@@ -622,30 +638,30 @@ const NowShowingMoviesFullDetailsPage = () => {
             </div>
           )}
 
-          <h1 className="font-bold text-[2vw]">POPULARITY</h1>
-          <span className="absolute left-[19vw] top-8 text-[2vw] border-2 border-lime-400 rounded-full p-[0.1vw]">
+          <h1 className="font-bold relative left-[36vw] text-[2vw]">POPULARITY</h1>
+          <span className="absolute left-[40vw] top-4 text-[3vw] border-2 border-lime-400 rounded-full p-[0.1vw]">
             {NowShowingMoviesDetails?.meterRanking?.currentRank > 5 ? (
               <FaArrowTrendDown className="" />
             ) : (
               <FaArrowTrendUp />
             )}
           </span>
-          <span className="absolute flex left-[22vw] top-8 text-[1.3vw] font-bold">
+          <span className="absolute flex left-[45vw] top-4 text-[3vw] font-bold">
             {NowShowingMoviesDetails?.meterRanking?.currentRank}
-            <span className="absolute left-6 top-1">
+            <span className="absolute left-[44vw] top-9">
               {NowShowingMoviesDetails?.meterRanking?.rankChange
                 ?.changeDirection === "UP" ? (
-                <IoMdArrowDropup />
+                <IoMdArrowDropup className=" relative text-[4vw]" />
               ) : (
                 <IoMdArrowDropdown />
               )}
             </span>
-            <span className="ml-7 text-[1.3vw]">
+            <span className="ml-3 text-[3vw]">
               {NowShowingMoviesDetails?.meterRanking?.rankChange?.difference}
             </span>
           </span>
         </div>
-        <div className=" absolute left-[45vw] top-[10vw] ">
+        <div className=" absolute left-[45vw] top-[40vw] ">
           <div class="btn-donate h-[9vh] relative bottom-3">
             <span className=" relative bottom-5 left-3">
               {" "}
@@ -823,9 +839,7 @@ const NowShowingMoviesFullDetailsPage = () => {
                     {index <
                       NowShowingMoviesDetails?.detailsExternalLinks?.edges
                         ?.length -
-                        1 && (
-                      <span className="mx-2">& </span>
-                    )}
+                        1 && <span className="mx-2">& </span>}
                   </React.Fragment>
                 )
               )}
@@ -833,57 +847,49 @@ const NowShowingMoviesFullDetailsPage = () => {
           </h1>
         </div>
 
-        <div className=" inline-block relative top-[600vw] left-[25vw] text-[1.4vw] font-bold">
+        <div className=" inline-block relative top-[642vw] left-[5vw] text-[4vw] font-bold">
           <h1>User Reviews</h1>
         </div>
 
-        <div
-          className="relative top-[600vw] left-[25vw] w-[50vw] rounded-lg px-5 py-4"
-          style={{
-            backgroundColor: "black",
-            height: "auto",
-          }}
-        >
-          <h1 className="review w-[10vw]">FEATURED REVIEW</h1>
-          <div>
-            {NowShowingMoviesDetails &&
-              NowShowingMoviesDetails?.featuredReviews?.edges.map(
+        <div className="flex flex-col ml-[2vw] relative top-[650vw] ">
+          <div
+            className="w-[95vw] rounded-lg px-5 py-4 mb-4"
+            style={{
+              backgroundColor: "slategrey",
+            }}
+          >
+            <h1 className="review w-[45vw]">FEATURED REVIEW</h1>
+            <div>
+              {NowShowingMoviesDetails?.featuredReviews?.edges.map(
                 (data, index) => {
                   const fullText = data?.node?.text?.originalText?.plainText;
-                  const words = fullText.split(" ");
-                  const isLongText = words.length > 180;
-                  const displayText = isTrimmed
-                    ? trimTextTo180Words(fullText)
-                    : fullText;
+                  const isLongText = fullText.split(" ").length > 150;
+                  const displayText = expandedReviews[index]
+                    ? fullText
+                    : trimTextTo130Words(fullText);
 
                   return (
                     <div key={index}>
                       <div className="mt-5">
-                        <h1 className="text-[1.4vw] font-bold text-lime-500">
+                        <h1 className="text-[4vw] font-bold text-lime-500">
                           "{data?.node?.summary?.originalText}"
                         </h1>
                       </div>
                       <div className="relative">
-                        <p className="mt-7 text-[1vw] leading-7 text-fuchsia-300 font-normal">
-                          {displayText}
-                          {isLongText && isTrimmed && (
-                            <>
-                              ...
-                              <span
-                                className="inline-block ml-2 cursor-pointer text-white"
-                                onClick={toggleTrim}
-                              >
-                                <IoMdArrowDropdownCircle size={24} />
-                              </span>
-                            </>
-                          )}
+                        <p className="mt-7 text-[3.5vw] overflow-ellipsis leading-6 text-amber-400 font-semibold">
+                          {displayText.slice(0, 800)}
+                          {"..."}
                         </p>
-                        {isLongText && !isTrimmed && (
+                        {isLongText && (
                           <span
                             className="block mt-2 cursor-pointer text-white"
-                            onClick={toggleTrim}
+                            onClick={() => toggleReview(index)}
                           >
-                            <IoMdArrowDropupCircle size={24} />
+                            {expandedReviews[index] ? (
+                              <IoMdArrowDropupCircle size={24} />
+                            ) : (
+                              <IoMdArrowDropdownCircle size={24} />
+                            )}
                           </span>
                         )}
                       </div>
@@ -891,18 +897,19 @@ const NowShowingMoviesFullDetailsPage = () => {
                   );
                 }
               )}
+            </div>
           </div>
         </div>
 
-        <div className=" absolute top-[700vw] left-[25vw] inline-block  ">
-          <h1 className=" text-[1.4vw] font-bold ">Box Office</h1>
+        <div className=" absolute top-[750vw] left-[5vw] inline-block  ">
+          <h1 className=" text-[4vw] font-bold ">Box Office</h1>
         </div>
-        <div className=" absolute top-[700vw] left-[25vw]">
+        <div className=" absolute top-[760vw] left-[5vw]">
           <div className=" Budget">
-            <h1 className=" text-[1.2vw] font-semibold text-sky-500 whitespace-nowrap mb-3">
+            <h1 className=" text-[3vw] font-semibold text-sky-500 whitespace-nowrap mb-3">
               Budget
             </h1>
-            <h1 className=" text-white text-[1vw] mb-5">
+            <h1 className=" text-white text-[2vw] mb-5">
               ${NowShowingMoviesDetails?.productionBudget?.budget?.amount}
               (estimated)
             </h1>
@@ -910,10 +917,10 @@ const NowShowingMoviesFullDetailsPage = () => {
           <div className=" opening Earning ">
             {NowShowingMoviesDetails?.openingWeekendGross && (
               <>
-                <h1 className="text-sky-500 whitespace-nowrap font-semibold mb-3 text-[1.2vw]">
+                <h1 className="text-sky-500 whitespace-break-spaces font-semibold mb-3 text-[3vw]">
                   Opening weekend US & Canada
                 </h1>
-                <h1 className="text-white text-[1vw]">
+                <h1 className="text-white text-[2vw]">
                   $
                   {
                     NowShowingMoviesDetails.openingWeekendGross.gross.total
@@ -923,23 +930,23 @@ const NowShowingMoviesFullDetailsPage = () => {
               </>
             )}
           </div>
-          <div className=" absolute left-[25vw] top-1">
+          <div className=" absolute left-[50vw] top-1">
             {NowShowingMoviesDetails?.lifetimeGross && (
               <>
-                <h1 className="text-sky-500 whitespace-nowrap mb-3 text-[1.2vw]">
+                <h1 className="text-sky-500 whitespace-nowrap mb-3 text-[3vw]">
                   Gross US & Canada
                 </h1>
-                <h1 className="text-white text-[1vw] mb-4">
+                <h1 className="text-white text-[2vw] mb-4">
                   ${NowShowingMoviesDetails.lifetimeGross.total.amount}
                 </h1>
               </>
             )}
             {NowShowingMoviesDetails?.worldwideGross && (
               <>
-                <h1 className="mb-3 whitespace-nowrap text-sky-500 text-[1.2vw]">
+                <h1 className="mb-3 whitespace-nowrap text-sky-500 text-[3vw]">
                   Gross worldwide
                 </h1>
-                <h1 className="text-white text-[1vw]">
+                <h1 className="text-white text-[2vw]">
                   ${NowShowingMoviesDetails.worldwideGross.total.amount}
                 </h1>
               </>
@@ -947,9 +954,9 @@ const NowShowingMoviesFullDetailsPage = () => {
           </div>
         </div>
 
-        <div className=" absolute top-[900vw] left-[25vw]  inline-block ">
-          <h1 className="text-[1.4vw] font-bold mb-5">Technical Specs</h1>
-          <h1 className=" text-[1.2vw] font-semibold mb-3 text-yellow-400">
+        <div className=" absolute top-[980vw] left-[5vw]  inline-block ">
+          <h1 className="text-[4vw] font-bold mb-5">Technical Specs</h1>
+          <h1 className=" text-[2.5vw] font-semibold mb-3 text-yellow-400">
             Runtime
             <span className=" ml-10 text-white">
               {" "}
@@ -959,7 +966,7 @@ const NowShowingMoviesFullDetailsPage = () => {
               }
             </span>
           </h1>
-          <h1 className="text-[1.2vw] font-semibold mb-3 text-yellow-400">
+          <h1 className="text-[2.5vw] font-semibold mb-3 text-yellow-400">
             Color
             <span className=" ml-10 text-lime-300">
               {NowShowingMoviesDetails &&
@@ -970,9 +977,9 @@ const NowShowingMoviesFullDetailsPage = () => {
                 )}
             </span>
           </h1>
-          <h1 className="text-[1.2vw] font-semibold mb-3 text-yellow-400">
+          <h1 className="text-[2.5vw] font-semibold mb-3 text-yellow-400">
             Sound mix
-            <span className="ml-10 text-lime-300">
+            <span className="ml-10 text-lime-300 whitespace-break-spaces">
               {NowShowingMoviesDetails &&
                 NowShowingMoviesDetails?.technicalSpecifications?.soundMixes?.items.map(
                   (data, index) => (
@@ -989,7 +996,7 @@ const NowShowingMoviesFullDetailsPage = () => {
             </span>
           </h1>
 
-          <h1 className=" text-[1.2vw] font-semibold text-yellow-400">
+          <h1 className=" text-[2.5vw] font-semibold text-yellow-400">
             Aspect ratio
             <span className=" ml-10 text-white">
               {NowShowingMoviesDetails &&
@@ -1001,26 +1008,32 @@ const NowShowingMoviesFullDetailsPage = () => {
             </span>
           </h1>
         </div>
-        <div className=" absolute top-[1000vw] left-[25vw]">
-          <h1 className="text-[1.4vw] font-bold photogallery">Photo Gallery</h1>
+        <div className=" absolute top-[1040vw] left-[5vw]">
+          <h1 className="text-[4vw] font-bold photogallery">Photo Gallery</h1>
         </div>
-        <div className="w-[75vw] h-[45vh] bg-red-20 absolute top-[1000vw] left-[22vw]">
+        <div className="w-[95vw] bg-red-20 absolute top-[1052vw] left-[1vw]">
           <div className="flex">
             <Swiper
-              slidesPerView={3}
+              slidesPerView={1}
               pagination={{
                 clickable: true,
               }}
               navigation={true}
               modules={[Pagination, Navigation]}
               className="mySwiper"
+              breakpoints={{
+                1536: {
+                  slidesPerView: 3,
+                  spaceBetween: 10,
+                },
+              }}
             >
               {NowShowingImages?.images?.edges
                 .slice(0, 12)
                 .map((data, index) => (
                   <SwiperSlide key={index} className=" overflow-hidden">
                     <img
-                      className=" hover:rounded-lg  hover:border-l-[3px] hover:border-r-[3px] hover:object-cover border-yellow-400 transition duration-300 ease-in-out hover:scale-105 hover:scale-y-120 mx-9 w-[20vw]  h-[30vh] object-top object-cover rounded-lg"
+                      className=" hover:rounded-lg  hover:border-l-[3px] hover:border-r-[3px] hover:object-cover border-yellow-400 transition duration-300 ease-in-out hover:scale-105 hover:scale-y-120 mx-8 w-[80vw]  h-[27vh] 2xlarge:w-[20vw] object-top object-cover rounded-lg"
                       src={data?.node?.url}
                       alt=""
                     />
@@ -1029,19 +1042,25 @@ const NowShowingMoviesFullDetailsPage = () => {
             </Swiper>
           </div>
         </div>
-        <div className=" inline-block absolute top-[1100vw] left-[25vw]">
-          <h1 className="text-[1.4vw] font-bold videogallery">Video Gallery</h1>
+        <div className=" inline-block absolute top-[1130vw] left-[5vw]">
+          <h1 className="text-[4vw] font-bold videogallery">Video Gallery</h1>
         </div>
-        <div className=" w-[73vw]   h-[45vh]  bg-red-30  py-2 absolute top-[1100vw] left-[22vw]">
+        <div className=" w-[95vw]   bg-red-30  py-2 absolute top-[1145vw] left-[1vw]">
           <div className="flex  ">
             <Swiper
-              slidesPerView={3}
+              slidesPerView={1}
               pagination={{
                 clickable: true,
               }}
               navigation={true}
               modules={[Pagination, Navigation]}
               className="mySwiper"
+              breakpoints={{
+                1536: {
+                  slidesPerView: 3,
+                  spaceBetween: 10,
+                },
+              }}
             >
               {NowShowingVideoGallery?.videos.map((data2, index) => (
                 <SwiperSlide
@@ -1050,19 +1069,19 @@ const NowShowingMoviesFullDetailsPage = () => {
                 >
                   <div className="">
                     <img
-                      className=" mx-9 w-[20vw]  h-[27vh] mb-5   object-top object-center hover:border-cyan-400  border-[3px] border-blue-800  rounded-lg"
+                      className=" mx-9 w-[80vw]  h-[27vh] -mb-20   object-top object-center hover:border-cyan-400  border-[3px] border-blue-800  rounded-lg"
                       src={data2?.image?.url}
                       alt=""
                     />
 
-                    <BiPlayCircle className="  text-white  relative bottom-[4vw] left-[3vw] text-[1.8vw]" />
+                    <BiPlayCircle className="  text-white  relative top-[12vw] left-[12vw] text-[8vw]" />
                     <div className="  -mt-[6vw] ">
-                      <h1 className="  inline-flex text-[1.3vw] font-semibold text-white mr-[7vw]">
+                      <h1 className="  inline-flex text-[4vw] relative top-[10vw] font-semibold text-white mr-[30vw]">
                         Trailer {convertDuration(data2?.durationInSeconds)}
                       </h1>
                     </div>
 
-                    <h1 className=" text-white relative mx-10 h-[20vh] text-[1.2vw] top-7   font-semibold">
+                    <h1 className=" text-white relative mx-[10vw] h-[25vh] text-[4vw] top-[20vw]   font-semibold">
                       Watch {data2?.title}
                     </h1>
                   </div>
@@ -1071,40 +1090,45 @@ const NowShowingMoviesFullDetailsPage = () => {
             </Swiper>
           </div>
         </div>
-        <div className=" absolute top-[1200vw] left-[25vw]">
-          <h1 className=" text-[1.4vw] font-bold relatednews">Related News</h1>
+        <div className=" absolute top-[1260vw] left-[5vw]">
+          <h1 className=" text-[4vw] font-bold relatednews">Related News</h1>
         </div>
-        <div className=" absolute  w-[65vw]  h-[30vh] top-[1200vw] left-[25vw] bg-red-30">
+        <div className=" absolute w-[100vw] top-[1275vw] bg-red-30">
           <div className="  flex flex-row">
             <Swiper
-              slidesPerView={2}
-              spaceBetween={10}
+              slidesPerView={1}
               navigation={true}
               modules={[Navigation]}
               className="mySwiper "
+              breakpoints={{
+                1536: {
+                  slidesPerView: 3,
+                  spaceBetween: 10,
+                },
+              }}
             >
               {NowShowingMoviesDetails &&
                 NowShowingRelatedNews?.news?.edges.map((data, index) => (
                   <SwiperSlide
                     key={index}
-                    className=" overflow-hidden flex mr-10 hover:text-red-600 hover:bg-gray-800 rounded-lg cursor-pointer "
+                    className=" overflow-hidden flex ml-[vw] hover:text-red-600 hover:bg-gray-800 rounded-lg cursor-pointer "
                   >
-                    <div className="   flex">
+                    <div className="   flex  h-[30vh]">
                       <img
-                        className=" w-[7vw] h-[22vh] object-cover object-top rounded-lg hover:bg-gray-600"
+                        className=" w-[27vw] h-[20vh] object-cover rounded-lg hover:bg-gray-600"
                         src={data?.node?.image?.url}
                         alt=""
                       />
-                      <h1 className=" absolute left-[8vw] text-amber-500">
+                      <h1 className=" absolute left-[30vw]  text-[4vw] w-[60vw] text-amber-500">
                         {data?.node?.articleTitle?.plainText}
                       </h1>
-                      <h1 className="absolute top-[6vw] text-white left-[9vw]">
+                      <h1 className="absolute top-[33vw] text-white left-[32vw]">
                         {new Date(data?.node?.date).toLocaleString("default", {
                           month: "short",
                         })}{" "}
                         {new Date(data?.node?.date).getDate()}
                       </h1>
-                      <h1 className=" absolute top-[6vw] left-[22vw] text-lime-400 hover:underline">
+                      <h1 className=" absolute top-[42vw] left-[40vw] text-lime-400 hover:underline">
                         Source : {data?.node?.source?.homepage?.label}
                       </h1>
                     </div>
@@ -1113,12 +1137,12 @@ const NowShowingMoviesFullDetailsPage = () => {
             </Swiper>
           </div>
         </div>
-        {/* <div className="  absolute bg-red-300 w-[10vw] h-[134vh]  top-[374vw]  ">
+        {/* <div className=" overflow-hidden  absolute bg-[#030C16]  w-[100vw] h-[150vw]  top-[1350vw]  ">
           <div className="">
             <RecentlyViewed />
           </div>
         </div>
-        <div className=" absolute top-[412vw] border-t-2 border-red-600">
+        <div className=" absolute  bg-[#030C16] top-[1500vw] border-t-2 border-red-600">
           <Footer />
         </div> */}
       </div>

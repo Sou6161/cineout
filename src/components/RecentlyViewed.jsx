@@ -37,8 +37,8 @@ const RecentlyViewed = () => {
           </div>
         </div>
       </div>
-      <div className="w-[80vw] h-[60vh] relative left-[3.5vw] bg-lime-20 mb-5 border-b-2 border-red-600">
-        <div className="w-[80vw] h-[60vh] relative left-[vw] bg-lime-20 mb-10 overflow-x-scroll no-scrollbar">
+      <div className="w-[80vw] h-[60vh] relative left-[3.5vw] bg-lime-20 mb-5">
+        <div className="w-[92vw] h-[60vh] relative left-[vw] bg-lime-20 mb-10 overflow-x-scroll no-scrollbar">
           <div className="flex gap-">
             {uniqueRecentlyViewed.length === 0 ? (
               <h1 className="text-[5vw] 2xlarge:text-[2vw] mt-20 relative right-[vw] text-white">
@@ -48,7 +48,7 @@ const RecentlyViewed = () => {
               uniqueRecentlyViewed.map((data) => (
                 <div key={data.id} className="">
                   <img
-                    className="max-w-[55vw] h-[45vh] object-center rounded-lg border-2 border-sky-400"
+                    className="max-w-[50vw] h-[40vh] mr-10 object-center rounded-lg border-2 border-sky-400"
                     src={data?.primaryImage?.url}
                     alt=""
                   />

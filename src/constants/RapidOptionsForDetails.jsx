@@ -61,7 +61,7 @@ export const RapidOptionsDetailsRatingsDaimond = {
 export const RapidOptionsDetailsNowShowingMoviesDaimondTest30 ={
   method: 'GET',
 	headers: {
-		'x-rapidapi-key': '372bb3695emsh91824f839e61d11p1a97c4jsn6bf7162fd98d',
+		'x-rapidapi-key': 'db62453119msh5082f96e2a78affp1d0a02jsn01a59aa395b6',
 		'x-rapidapi-host': 'imdb146.p.rapidapi.com'
 	} 
 }
@@ -69,7 +69,7 @@ export const RapidOptionsDetailsNowShowingMoviesDaimondTest30 ={
 export const RapidOptionsDetailsNowShowingMoviesDaimondApidojoTest26 ={
   method: 'GET',
 	headers: {
-		'x-rapidapi-key': 'f97c569adamshc37c109edb5f7cep1e6200jsn533a7f0bccbf',
+		'x-rapidapi-key': '95a014df66mshbf3f9a97f399bc7p197292jsnbb2c525a57be',
 		'x-rapidapi-host': 'imdb8.p.rapidapi.com'
 	}
 }
@@ -77,7 +77,7 @@ export const RapidOptionsDetailsNowShowingMoviesDaimondApidojoTest26 ={
 export const RapidOptionsDetailsNowShowingMoviesDaimondTest27ApiDojo={
   method: 'GET',
 	headers: {
-		'x-rapidapi-key': 'd2da2594e7mshf280c34601099dap12c2bdjsnbd876580bd5b',
+		'x-rapidapi-key': 'a9951ec3bamshaef7128a581a774p127c3ejsnba135e6112e7',
 		'x-rapidapi-host': 'imdb8.p.rapidapi.com'
 	}
 }
@@ -85,7 +85,7 @@ export const RapidOptionsDetailsNowShowingMoviesDaimondTest27ApiDojo={
 export const RapidOptionsDetailsNowShowingMoviesDaimondTest28ApiDojo={
   method: 'GET',
 	headers: {
-		'x-rapidapi-key': '2c3030fa82msh51075f8885e9eacp1ab19djsneec5eb43e31c',
+		'x-rapidapi-key': '2c129ee9b7msh9be3a93881f983dp1ec10djsn43d78be3939c',
 		'x-rapidapi-host': 'imdb8.p.rapidapi.com'
 	}
 
