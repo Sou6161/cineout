@@ -247,7 +247,7 @@ const Searchtab = () => {
     xsmall:text-[9vw]
     xsmall:left-[2vw]
     xsmall:top
-    small:left-[5.5vw]
+    small:left-[3vw]
     small:text-[8vw]
     small:top-1
     medium:text-[6vw]
@@ -280,7 +280,7 @@ const Searchtab = () => {
           <Link
             to="/login"
             // onClick={() => window.location.reload()} // Add this line
-            class="relative inline-flex top-[0.vw] h-[7vw] left-[4vw] xsmall:top-0 xsmall:left-[2vw] small:h-[6vw] medium:left-[4vw] medium:w-[12vw] medium:h-[4vw]  medium:-top-0 large:top-0 large:left-[3vw] large:h-[3.5vw]  large:w-[9vw] xlarge:left-[2vw]  2xlarge:h-[2.5vw] 2xlarge:w-[7.5vw] 2xlarge:left-[2vw]  items-center justify-center  px-5 py-4 medium:-px-2  overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group"
+            class="relative inline-flex top-[0.vw] h-[7vw] left-[4vw] xsmall:top-0 xsmall:left-[2vw] small:h-[6vw] medium:left-[3vw] medium:w-[11vw] medium:h-[4vw]  medium:-top-0 large:top-0 large:left-[3vw] large:h-[3.5vw]  large:w-[9vw] xlarge:left-[2vw]  2xlarge:h-[2.5vw] 2xlarge:w-[7.5vw] 2xlarge:left-[2vw]  items-center justify-center  px-5 py-4 medium:-px-2  overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group"
           >
             <span class="absolute inset-0 flex items-center justify-center w-[4vw] h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
               <svg

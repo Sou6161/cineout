@@ -372,51 +372,85 @@ const NowShowingMoviesFullDetailsPage = () => {
 
   return (
     <div className="min-h-[780vh] bg-[#030C16] text-red-600">
-      <div className=" ">
+      <div className=" -mt-1  ">
         <Header />
       </div>
-      <div className=" w-[98vw] mx-auto  relative top-[18vw]  h-[35vh]   border-black glow5 rounded-lg  ">
+      <div
+        // className=" relative  w-[98vw] h-[32vh]  mx-auto top-[17vw]   py-1 rounded-lg glow5 "
+        className="w-[97vw] h-[31vh] mx-auto relative top-[18vw]  border-black glow5 rounded-lg
+                xsmall:top-[13vw] xsmall:h-[37vh]
+                small:top-[12vw] small:h-[42vh]
+                medium:top-[10vw] medium:h-[58vh]
+                large:top-[7vw] large:h-[63vh]
+                xlarge:top-[6vw] xlarge:h-[63vh]
+                2xlarge:top-[5vw] 2xlarge:h-[68vh]"
+      >
         {NowShowingTrailerYTKEY ? (
           <iframe
-            className=" w-[95vw] mx-auto h-[30vh] relative top-[0.5vw] rounded-lg glow3  glow"
+            className="w-[95vw] mx-auto h-[30vh] relative top-[1vw] rounded-lg glow3 glow
+                 xsmall:h-[35vh]
+                 small:h-[40vh]
+                 medium:h-[55vh]
+                 large:h-[60vh]
+                 xlarge:h-[60vh]
+                 2xlarge:h-[65vh]"
             src={`https://www.youtube.com/embed/${NowShowingTrailerYTKEY}?si=HxKbpBA7t2t3ulUK`}
           ></iframe>
         ) : (
           <div
             role="status"
-            class="flex items-center justify-center bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700"
+            className="flex items-center justify-center bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700 h-full"
           >
             <svg
-              class="w-[97vw] h-[75vh] text-[10vw]  text-red-600  dark:text-gray-600"
+              className="w-full h-full text-[10vw] text-red-600 dark:text-gray-600
+                   xsmall:text-[9vw]
+                   small:text-[8vw]
+                   medium:text-[7vw]
+                   large:text-[6vw]
+                   xlarge:text-[5vw]
+                   2xlarge:text-[4vw]"
               aria-hidden="true"
               fill="currentColor"
-              style={{ position: "relative", left: "800px", top: "250px" }}
+              viewBox="0 0 16 20"
             >
               <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z" />
               <path d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM9 13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2Zm4 .382a1 1 0 0 1-1.447.894L10 13v-2l1.553-1.276a1 1 0 0 1 1.447.894v2.764Z" />
             </svg>
-            <span class="sr-only">Loading...</span>
+            <span className="sr-only">Loading...</span>
           </div>
         )}
       </div>
-
-      <div className=" w-[89vw] h-[100vh] absolute bg-red-20 mt-[12vw] border-t-[1px] border-gray-700   ">
+      <div className=" w-[89vw] h-[100vh] absolute bg-red-20 mt-[20vw]  ">
         <div className="">
           <div>
-            <h1 className=" relative top-[3vw] left-[5vw] text-[4.5vw] text-purple-500 font-semibold ">
+            <h1
+              className="relative top-[3vw] left-[5vw] text-[4.5vw] text-purple-500 font-semibold
+                   xsmall:text-[4vw] xsmall:top-[2.5vw]
+                   small:text-[3.5vw] small:top-[2vw]
+                   medium:text-[3vw] medium:top-[1.5vw]
+                   large:text-[2.5vw] large:top-[1vw]
+                   xlarge:text-[2vw] xlarge:top-[0.5vw]
+                   2xlarge:text-[1.5vw] 2xlarge:top-[0.25vw]"
+            >
               {NowShowingMoviesDetails?.titleText?.text}
             </h1>
-            <h1 className=" flex relative text-[2vw] left-[5.2vw] top-3">
-              <span className=" mr-2">
+            <h1
+              className="flex relative text-[2vw] left-[5.2vw] top-3
+                   xsmall:text-[1.8vw] xsmall:top-2
+                   small:text-[1.6vw] small:top-1
+                   medium:text-[1.4vw] medium:top-0.5
+                   large:text-[1.2vw] large:top-0
+                   xlarge:text-[1vw] xlarge:top-[-0.5]
+                   2xlarge:text-[0.8vw] 2xlarge:top-[-1]"
+            >
+              <span className="mr-2">
                 {NowShowingMoviesDetails?.releaseDate?.year}
               </span>
-              <PiDotOutlineBold className=" relative top-[0.3vw] right-1" />
-
-              <span className=" mr-2 ">
-                {" "}
+              <PiDotOutlineBold className="relative top-[0.3vw] right-1" />
+              <span className="mr-2">
                 {NowShowingMoviesDetails?.certificate?.rating}
               </span>
-              <PiDotOutlineBold className=" relative top-[0.3vw] right-1" />
+              <PiDotOutlineBold className="relative top-[0.3vw] right-1" />
               <span>
                 {
                   NowShowingMoviesDetails?.runtime?.displayableProperty?.value
@@ -427,7 +461,13 @@ const NowShowingMoviesFullDetailsPage = () => {
           </div>
           <div>
             <img
-              className=" w-[25vw] h-[18vh] glow4   relative left-[5vw] top-[5vw] rounded-lg object-center"
+              className="w-[25vw] h-[18vh] glow4 relative left-[5vw] top-[5vw] rounded-lg object-center
+                 xsmall:w-[23vw] xsmall:h-[20vh] xsmall:top-[4.5vw]
+                 small:w-[21vw] small:h-[22vh] small:top-[4vw]
+                 medium:w-[19vw] medium:h-[24vh] medium:top-[3.5vw]
+                 large:w-[17vw] large:h-[26vh] large:top-[3vw]
+                 xlarge:w-[15vw] xlarge:h-[28vh] xlarge:top-[2.5vw]
+                 2xlarge:w-[13vw] 2xlarge:h-[30vh] 2xlarge:top-[2vw]"
               src={NowShowingMoviesDetails?.primaryImage.url}
               alt=""
             />
@@ -555,16 +595,64 @@ const NowShowingMoviesFullDetailsPage = () => {
             </h1>
           </div>
         </div>
-        <div className=" flex gap-5 bg-red-30 absolute left-[8vw] top-5">
-          <h1 className=" whitespace-nowrap text-[2vw] relative left-[34vw] font-bold text-yellow-400">
+        <div
+          className="flex gap-5 bg-red-30 absolute left-[8vw] top-2 
+                xsmall:left-[7vw] xsmall:gap-4
+                small:left-[6vw] small:gap-3
+                medium:left-[5vw] medium:gap-2
+                large:left-[4vw] large:gap-1
+                xlarge:left-[3vw]
+                2xlarge:left-[2vw]"
+        >
+          <h1
+            className="whitespace-nowrap text-[2vw] bottom-1  relative left-[34vw] font-bold text-yellow-400
+                 xsmall:text-[2vw] xsmall:left-[32vw]
+                 small:text-[2vw] small:left-[35vw] small:bottom-[6vw]
+                 medium:text-[2vw] medium:left-[36vw] medium:bottom-[6vw]
+                 large:text-[1.5vw] large:left-[36vw] large:bottom-[8vw]
+                 xlarge:text-[1.5vw] xlarge:left-[36vw]
+                 2xlarge:text-[1.5vw] 2xlarge:left-[50vw] 2xlarge:bottom-[12vw]                 "
+          >
             CINEOUT RATING
           </h1>
-          <span className=" absolute top-10 left-2 text-[1.5vw] text-yellow-400">
-            <FaStar className=" relative -left-[2vw] bottom-6 text-[2vw]" />{" "}
-            <span className=" inline-bloc relative text-[3vw] left-[1vw] bottom-[10vw] text-red-600  ">
+          <span
+            className="absolute top-9 left-2 text-[1.5vw] text-yellow-400
+                   xsmall:text-[1.3vw] xsmall:top-9
+                   small:text-[1.1vw] small:top-8 small:left-[4vw]
+                   medium:text-[0.9vw] medium:top-8  medium:left-[6vw]
+                   large:text-[0.7vw] large:top-6 
+                   xlarge:text-[0.5vw] xlarge:top-5
+                   2xlarge:text-[0.3vw] 2xlarge:top-4"
+          >
+            <FaStar
+              className="relative left-[33.5vw] bottom-[5vw] text-[2vw]
+                    xsmall:text-[2vw] xsmall:bottom-[3vw]
+                      small:text-[1.6vw] small:bottom-[6.4vw]
+                      medium:text-[2vw] medium:bottom-[6vw]
+                      large:text-[2vw] large:bottom-[6vw]
+                      xlarge:text-[2vw] xlarge:bottom-[7vw] xlarge:left-[32vw]
+                      2xlarge:text-[2vw] 2xlarge:bottom-[10vw] 2xlarge:left-[46vw]          "
+            />
+            <span
+              className="inline-block relative text-[2.5vw] left-[36vw] bottom-[8vw] text-red-600
+                     xsmall:text-[2.3vw] xsmall:bottom-[6vw]
+                     small:text-[2.1vw] small:bottom-[9vw]
+                     medium:text-[2.2vw] medium:bottom-[8.5vw]
+                     large:text-[2vw] large:bottom-[8.5vw]
+                     xlarge:text-[2vw] xlarge:bottom-[9.5vw] xlarge:left-[35vw]
+                     2xlarge:text-[2vw] 2xlarge:bottom-[12.5vw] 2xlarge:left-[49vw] "
+            >
               {NowShowingMoviesDetails?.ratingsSummary?.aggregateRating}/10
             </span>
-            <span className=" relative right-8 text-white bottom-[7vw] text-[3vw]">
+            <span
+              className="relative right-8 left-[29vw] text-white bottom-[6vw] text-[2vw]
+                     xsmall:text-[1.8vw] xsmall:bottom-[4vw]
+                     small:text-[1.6vw] small:bottom-[7vw] small:left-[30vw]
+                     medium:text-[2vw] medium:bottom-[5.5vw] medium:left-[30vw]
+                     large:text-[1.5vw] large:bottom-[6vw]
+                     xlarge:text-[1.5vw] xlarge:bottom-[8vw]
+                     2xlarge:text-[1.5vw] 2xlarge:bottom-[11vw] 2xlarge:left-[44vw]"
+            >
               (
               <NumberFormatter
                 number={NowShowingMoviesDetails?.ratingsSummary?.voteCount}
@@ -572,15 +660,37 @@ const NowShowingMoviesFullDetailsPage = () => {
               )
             </span>
           </span>
-          <h1 className=" whitespace-nowrap relative left-[36vw] font-bold text-[2vw]">
+          <h1
+            className="whitespace-nowrap relative left-[34vw] font-bold text-[2vw]
+                 xsmall:text-[2vw] xsmall:left-[35vw] 
+                 small:text-[2vw] small:left-[38vw] small:-top-[6vw]
+                 medium:text-[2vw] medium:left-[42vw] 
+                 large:text-[1.5vw] large:left-[43vw] large:-top-[8vw]
+                 xlarge:text-[1.5vw] xlarge:left-[43vw]
+                 2xlarge:text-[1.5vw] 2xlarge:left-[57vw] 2xlarge:-top-[12vw]"
+          >
             YOUR RATING
           </h1>
-          <span className=" absolute top-3 left-[23vw] text-[3vw] text-yellow-400">
+          <span
+            className="absolute top-3 left-[57vw] text-[3vw] text-yellow-400
+                 xsmall:text-[2.5vw] xsmall:left-[56vw] xsmall:top-[3vw]
+                   small:text-[3vw] small:left-[57vw]  small:-top-[3vw]
+                   medium:text-[2.1vw] medium:left-[62vw] medium:-top-[2.5vw]
+                   large:text-[2.5vw] large:left-[60vw] large:-top-[5vw]
+                   xlarge:text-[2.5vw] xlarge:left-[58vw] xlarge:-top-[5.5vw]
+                   2xlarge:text-[2.5vw] 2xlarge:left-[71vw] 2xlarge:-top-[9.5vw]"
+          >
             <IoStarOutline />
           </span>
           <h1
             onClick={toggle}
-            className="absolute top-3 hover:underline cursor-pointer left-[28vw] text-[2vw] font-semibold"
+            className="absolute top-3 hover:underline cursor-pointer left-[61vw] text-[2.3vw] font-semibold
+                 xsmall:text-[2.1vw] xsmall:left-[59vw] xsmall:top-[2.8vw]
+                 small:text-[2.2vw] small:left-[61vw] small:-top-[3vw]
+                 medium:text-[2vw] medium:left-[65vw]
+                 large:text-[1.5vw] large:left-[66vw] large:-top-[5vw]
+                 xlarge:text-[1.5vw] xlarge:left-[62vw] xlarge:-top-[5vw]
+                 2xlarge:text-[1.5vw] 2xlarge:left-[74vw] 2xlarge:-top-[9.5vw]"
           >
             RATE
           </h1>
@@ -588,28 +698,75 @@ const NowShowingMoviesFullDetailsPage = () => {
             <div className="modal-wrapper">
               <div className="modal">
                 <button
-                  className="absolute top-2 right-2 text-gray-500 hover:text-red-500"
+                  className="absolute top-2 right-2 text-gray-500 hover:text-red-500
+                           xsmall:top-1 xsmall:right-1
+                           2xlarge:top-3 2xlarge:right-3"
                   onClick={toggle}
                 >
                   &#10006;
                 </button>
-
-                <TiStarFullOutline className=" text-yellow-400  text-[7vw] absolute z-100 left-[18vw] -top-[0.5vw]" />
-                <span className=" relative left-[20.2vw] text-[1.4vw] top-[1.2vw] text-black font-semibold">
+                <TiStarFullOutline
+                  className="text-yellow-400 text-[7vw] absolute z-100 left-[18vw] -top-[0.5vw]
+                                      xsmall:text-[6.5vw] xsmall:left-[17vw]
+                                      small:text-[6vw] small:left-[16vw]
+                                      medium:text-[5.5vw] medium:left-[15vw]
+                                      large:text-[5vw] large:left-[14vw]
+                                      xlarge:text-[4.5vw] xlarge:left-[13vw]
+                                      2xlarge:text-[4vw] 2xlarge:left-[12vw]"
+                />
+                <span
+                  className="relative left-[20.2vw] text-[1.4vw] top-[1.2vw] text-black font-semibold
+                         xsmall:text-[1.3vw] xsmall:left-[19.2vw]
+                         small:text-[1.2vw] small:left-[18.2vw]
+                         medium:text-[1.1vw] medium:left-[17.2vw]
+                         large:text-[1vw] large:left-[16.2vw]
+                         xlarge:text-[0.9vw] xlarge:left-[15.2vw]
+                         2xlarge:text-[0.8vw] 2xlarge:left-[14.2vw]"
+                >
                   ?
                 </span>
-                <h1 className=" absolute left-[19.5vw] top-[6vw] text-[1vw] text-white font-semibold">
+                <h1
+                  className="absolute left-[19.5vw] top-[6vw] text-[1vw] text-white font-semibold
+                       xsmall:left-[18.5vw] xsmall:top-[5.5vw]
+                       small:left-[17.5vw] small:top-[5vw]
+                       medium:left-[16.5vw] medium:top-[4.5vw]
+                       large:left-[15.5vw] large:top-[4vw]
+                       xlarge:left-[14.5vw] xlarge:top-[3.5vw]
+                       2xlarge:left-[13.5vw] 2xlarge:top-[3vw]"
+                >
                   Rate This
                 </h1>
-                <h1 className=" absolute left-[15vw] text-[1.5vw] top-[7.5vw] font-semibold  ">
+                <h1
+                  className="absolute left-[15vw] text-[1.5vw] top-[7.5vw] font-semibold
+                       xsmall:text-[1.4vw] xsmall:left-[14vw] xsmall:top-[7vw]
+                       small:text-[1.3vw] small:left-[13vw] small:top-[6.5vw]
+                       medium:text-[1.2vw] medium:left-[12vw] medium:top-[6vw]
+                       large:text-[1.1vw] large:left-[11vw] large:top-[5.5vw]
+                       xlarge:text-[1vw] xlarge:left-[10vw] xlarge:top-[5vw]
+                       2xlarge:text-[0.9vw] 2xlarge:left-[9vw] 2xlarge:top-[4.5vw]"
+                >
                   {NowShowingMoviesDetails?.titleText?.text}
                 </h1>
-                <span className=" absolute left-[12vw] text-[1.5vw] top-[11vw] font-semibold ">
+                <span
+                  className="absolute left-[12vw] text-[1.5vw] top-[11vw] font-semibold
+                         xsmall:text-[1.4vw] xsmall:left-[11vw] xsmall:top-[10.5vw]
+                         small:text-[1.3vw] small:left-[10vw] small:top-[10vw]
+                         medium:text-[1.2vw] medium:left-[9vw] medium:top-[9.5vw]
+                         large:text-[1.1vw] large:left-[8vw] large:top-[9vw]
+                         xlarge:text-[1vw] xlarge:left-[7vw] xlarge:top-[8.5vw]
+                         2xlarge:text-[0.9vw] 2xlarge:left-[6vw] 2xlarge:top-[8vw]"
+                >
                   <div className="flex gap-2">
                     {Array.from({ length: 10 }, (_, index) => (
                       <span
                         key={index}
-                        className="text-yellow-400 text-[1.5vw] relative cursor-pointer"
+                        className="text-yellow-400 text-[1.5vw] relative cursor-pointer
+                           xsmall:text-[1.4vw]
+                           small:text-[1.3vw]
+                           medium:text-[1.2vw]
+                           large:text-[1.1vw]
+                           xlarge:text-[1vw]
+                           2xlarge:text-[0.9vw]"
                         onMouseEnter={() => {
                           if (clickedIndex === null || clickedIndex === index) {
                             setHoveredIndex(index);
@@ -623,7 +780,15 @@ const NowShowingMoviesFullDetailsPage = () => {
                         onClick={() => handleIconClick(index)}
                       >
                         {clickedIndex === index || hoveredIndex === index ? (
-                          <RiStarFill className="text-[1.5vw] relative cursor-pointer text-blue-500" />
+                          <RiStarFill
+                            className="text-[1.5vw] relative cursor-pointer text-blue-500
+                                         xsmall:text-[1.4vw]
+                                         small:text-[1.3vw]
+                                         medium:text-[1.2vw]
+                                         large:text-[1.1vw]
+                                         xlarge:text-[1vw]
+                                         2xlarge:text-[0.9vw]"
+                          />
                         ) : (
                           <RiStarLine />
                         )}
@@ -631,46 +796,103 @@ const NowShowingMoviesFullDetailsPage = () => {
                     ))}
                   </div>
                 </span>
-                <button class="Rate-button relative top-[14vw] left-[16vw]">
-                  <span class="Rate-button-content">Rate </span>
+                <button
+                  className="Rate-button relative top-[14vw] left-[16vw]
+                           xsmall:top-[13vw] xsmall:left-[15vw]
+                           small:top-[12vw] small:left-[14vw]
+                           medium:top-[11vw] medium:left-[13vw]
+                           large:top-[10vw] large:left-[12vw]
+                           xlarge:top-[9vw] xlarge:left-[11vw]
+                           2xlarge:top-[8vw] 2xlarge:left-[10vw]"
+                >
+                  <span className="Rate-button-content">Rate </span>
                 </button>
               </div>
             </div>
           )}
-
-          <h1 className="font-bold relative left-[36vw] text-[2vw]">POPULARITY</h1>
-          <span className="absolute left-[40vw] top-4 text-[3vw] border-2 border-lime-400 rounded-full p-[0.1vw]">
+          <h1
+            className="font-bold relative left-[35vw] text-[2vw]
+                 xsmall:text-[2vw] xsmall:left-[39vw]
+                 small:text-[2vw] small:left-[41vw] small:-top-[6vw]
+                 medium:text-[2vw] medium:left-[45vw]
+                 large:text-[1.5vw] large:left-[48vw] large:-top-[8vw]
+                 xlarge:text-[1.5vw] xlarge:left-[53vw] xlarge:-top-[8vw]
+                 2xlarge:text-[1.5vw] 2xlarge:left-[63vw] 2xlarge:-top-[12vw]"
+          >
+            POPULARITY
+          </h1>
+          <span
+            className="absolute left-[75vw] top-4 text-[3vw] border-2 border-lime-400 rounded-full p-[0.1vw]
+                   xsmall:text-[2.7vw] xsmall:left-[73vw] xsmall:top-6
+                   small:text-[3.5vw] small:left-[75vw] small:-top-[3vw]
+                   medium:text-[2.1vw] medium:left-[78vw]
+                   large:text-[2vw] large:left-[80vw] large:-top-[5vw]
+                   xlarge:text-[2vw] xlarge:left-[77vw] xlarge:-top-[5vw]
+                   2xlarge:text-[2vw] 2xlarge:left-[87vw] 2xlarge:-top-[9vw]"
+          >
             {NowShowingMoviesDetails?.meterRanking?.currentRank > 5 ? (
-              <FaArrowTrendDown className="" />
+              <FaArrowTrendDown />
             ) : (
               <FaArrowTrendUp />
             )}
           </span>
-          <span className="absolute flex left-[45vw] top-4 text-[3vw] font-bold">
+          <span
+            className="absolute flex left-[81vw] top-4 text-[2.5vw] font-bold
+                   xsmall:text-[2.3vw] xsmall:left-[79vw] xsmall:top-6
+                   small:text-[3vw] small:left-[80vw] small:-top-[3vw]
+                   medium:text-[1.9vw] medium:left-[82vw]
+                   large:text-[1.5vw] large:left-[85vw] large:-top-[5vw]
+                   xlarge:text-[1.5vw] xlarge:left-[81vw]
+                   2xlarge:text-[1.3vw] 2xlarge:left-[91vw] 2xlarge:-top-[9vw]"
+          >
             {NowShowingMoviesDetails?.meterRanking?.currentRank}
-            <span className="absolute left-[44vw] top-9">
+            <span className="relative left-[1vw] top-1">
               {NowShowingMoviesDetails?.meterRanking?.rankChange
                 ?.changeDirection === "UP" ? (
-                <IoMdArrowDropup className=" relative text-[4vw]" />
+                <IoMdArrowDropup
+                  className="relative text-[4vw]
+                                    xsmall:text-[2.5vw]
+                                    small:text-[2.5vw]
+                                    medium:text-[2.5vw]
+                                    large:text-[2.5vw]
+                                    xlarge:text-[2.5vw]
+                                    2xlarge:text-[2.4 vw]"
+                />
               ) : (
-                <IoMdArrowDropdown />
+                <IoMdArrowDropdown
+                  className="relative text-[4vw]
+                                      xsmall:text-[2.5vw]
+                                      small:text-[2.5vw]
+                                      medium:text-[2.5vw]
+                                      large:text-[2.5vw]
+                                      xlarge:text-[2.5vw]
+                                      2xlarge:text-[2vw]"
+                />
               )}
             </span>
-            <span className="ml-3 text-[3vw]">
+            <span
+              className="ml-2 text-[2.5vw] text-yellow-400
+                     xsmall:text-[2.3vw]
+                     small:text-[2.5vw]
+                     medium:text-[2.5vw]
+                     large:text-[2.5vw]
+                     xlarge:text-[1.5vw]
+                     2xlarge:text-[1.3vw]"
+            >
               {NowShowingMoviesDetails?.meterRanking?.rankChange?.difference}
             </span>
           </span>
         </div>
-        <div className=" absolute left-[45vw] top-[40vw] ">
-          <div class="btn-donate h-[9vh] relative bottom-3">
-            <span className=" relative bottom-5 left-3">
+        <div className=" absolute left-[40vw] top-[45vw] ">
+          <div class="btn-donate  h-[7vh] relative left-[22vw]">
+            <span className=" relative bottom-5 left-3 text-[3vw]">
               {" "}
               <span className=" relative top-5 right-4 ">
                 <FaPlus className="" />
               </span>
               Add to Watchlist
             </span>
-            <h1 className=" relative bottom-4 text-black  ">
+            <h1 className=" relative bottom-5 whitespace-nowrap text-black text-[3vw]  ">
               {
                 NowShowingMoviesDetails?.engagementStatistics
                   ?.watchlistStatistics?.displayableCount?.text
@@ -678,25 +900,25 @@ const NowShowingMoviesFullDetailsPage = () => {
             </h1>
           </div>
           <div className=" flex cursor-pointer">
-            <h1 className=" font-semibold text-yellow-400">
+            <h1 className=" font-semibold text-yellow-400 text-[2vw] relative left-[22vw] mt-2">
               {NowShowingMoviesDetails?.reviews?.total}{" "}
-              <span className=" font-normal text-white mr-5 hover:underline">
+              <span className=" whitespace-nowrap font-normal text-white mr-5 hover:underline">
                 User reviews
               </span>{" "}
             </h1>{" "}
-            <h1 className=" font-semibold text-yellow-400">
+            <h1 className=" font-semibold text-yellow-400 text-[2vw] relative left-[20vw] mt-2  ">
               {NowShowingMoviesDetails?.criticReviewsTotal?.total}{" "}
-              <span className="font-normal text-white hover:underline">
+              <span className=" whitespace-nowrap font-normal text-white hover:underline">
                 Critics reviews
               </span>
             </h1>
           </div>
           <div>
-            <h1 className=" font-semibold text-yellow-400 cursor-pointer  ">
-              <span className=" mr-3 inline-block">
+            <h1 className=" font-semibold text-yellow-400 cursor-pointer text-[2vw] mt-1  ">
+              <span className=" mr-3 inline-block relative left-[31vw]">
                 {NowShowingMoviesDetails?.metacritic?.metascore?.score}{" "}
               </span>
-              <span className="font-normal text-white hover:underline">
+              <span className="font-normal text-white hover:underline relative left-[29vw]">
                 Metascore
               </span>
             </h1>

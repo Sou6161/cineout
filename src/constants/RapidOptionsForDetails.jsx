@@ -61,7 +61,7 @@ export const RapidOptionsDetailsRatingsDaimond = {
 export const RapidOptionsDetailsNowShowingMoviesDaimondTest30 ={
   method: 'GET',
 	headers: {
-		'x-rapidapi-key': 'db62453119msh5082f96e2a78affp1d0a02jsn01a59aa395b6',
+		'x-rapidapi-key': '2329f40dbbmshf03a7f3cf3cee42p1facb8jsn220558c640ad',
 		'x-rapidapi-host': 'imdb146.p.rapidapi.com'
 	} 
 }
