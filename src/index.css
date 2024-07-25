@@ -839,7 +839,7 @@ body {
   --radii: 0.5em;
   cursor: pointer;
   padding: 0.7em 1em;
-  width: 132px;
+  width: 160px;
   min-height: 44px;
   font-size: var(--size, 1rem);
   font-family: "Segoe UI", system-ui, sans-serif;
@@ -859,6 +859,57 @@ body {
     0px 5px 5px -1px rgba(58, 125, 233, 0.25),
     inset 4px 4px 8px rgba(175, 230, 255, 0.5),
     inset -4px -4px 8px rgba(19, 95, 216, 0.35);
+}
+
+@media (min-width: 480px) {
+  .btn-donate {
+    width:185px;
+    min-height: 55px;
+
+  }
+}
+
+@media (min-width: 640px) {
+  .btn-donate {
+    width:170px;
+    min-height: 58px;
+    
+
+  }
+}
+@media (min-width: 768px) {
+  .btn-donate {
+    width:192px;
+    min-height: 65px;
+    
+
+  }
+}
+
+@media (min-width: 1024px) {
+  .btn-donate {
+    width:196px;
+    min-height: 65px;
+    
+
+  }
+}
+
+@media (min-width: 1280px) {
+  .btn-donate {
+    width:238px;
+    min-height: 80px;
+    
+
+  }
+}
+@media (min-width: 1536px) {
+  .btn-donate {
+    width:300px;
+    min-height: 95px;
+    
+
+  }
 }
 
 .btn-donate:hover {

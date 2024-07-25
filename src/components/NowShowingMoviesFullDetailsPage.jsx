@@ -428,20 +428,20 @@ const NowShowingMoviesFullDetailsPage = () => {
                    xsmall:text-[4vw] xsmall:top-[2.5vw]
                    small:text-[3.5vw] small:top-[2vw]
                    medium:text-[3vw] medium:top-[1.5vw]
-                   large:text-[2.5vw] large:top-[1vw]
-                   xlarge:text-[2vw] xlarge:top-[0.5vw]
-                   2xlarge:text-[1.5vw] 2xlarge:top-[0.25vw]"
+                   large:text-[3vw] large:top-[1vw]
+                   xlarge:text-[3vw] xlarge:top-[0.5vw]
+                   2xlarge:text-[3vw] 2xlarge:top-[0.25vw]"
             >
               {NowShowingMoviesDetails?.titleText?.text}
             </h1>
             <h1
               className="flex relative text-[2vw] left-[5.2vw] top-3
-                   xsmall:text-[1.8vw] xsmall:top-2
-                   small:text-[1.6vw] small:top-1
-                   medium:text-[1.4vw] medium:top-0.5
-                   large:text-[1.2vw] large:top-0
-                   xlarge:text-[1vw] xlarge:top-[-0.5]
-                   2xlarge:text-[0.8vw] 2xlarge:top-[-1]"
+                   xsmall:text-[1.8vw] xsmall:top-3
+                   small:text-[1.6vw] small:top-3
+                   medium:text-[1.4vw] medium:top-3
+                   large:text-[1.3vw] large:top-2
+                   xlarge:text-[1.3vw] xlarge:top-1
+                   2xlarge:text-[1.4vw] 2xlarge:top-[-1]"
             >
               <span className="mr-2">
                 {NowShowingMoviesDetails?.releaseDate?.year}
@@ -461,20 +461,20 @@ const NowShowingMoviesFullDetailsPage = () => {
           </div>
           <div>
             <img
-              className="w-[25vw] h-[18vh] glow4 relative left-[5vw] top-[5vw] rounded-lg object-center
-                 xsmall:w-[23vw] xsmall:h-[20vh] xsmall:top-[4.5vw]
-                 small:w-[21vw] small:h-[22vh] small:top-[4vw]
-                 medium:w-[19vw] medium:h-[24vh] medium:top-[3.5vw]
-                 large:w-[17vw] large:h-[26vh] large:top-[3vw]
-                 xlarge:w-[15vw] xlarge:h-[28vh] xlarge:top-[2.5vw]
-                 2xlarge:w-[13vw] 2xlarge:h-[30vh] 2xlarge:top-[2vw]"
+              className="max-w-[25vw] max-h-[22vh] glow4 relative left-[5vw] top-[7vw] rounded-lg object-center
+                 xsmall:min-w-[20vw] xsmall:max-h-[22vh] xsmall:top-[5vw]
+                 small:max-w-[20vw] small:max-h-[26vh] small:top-[5vw]
+                 medium:max-w-[20vw] medium:max-h-[33vh] medium:top-[3.5vw]
+                 large:max-w-[20vw] large:max-h-[42vh] large:top-[3vw]
+                 xlarge:min-w-[17vw] xlarge:max-h-[45vh] xlarge:top-[2.5vw]
+                 2xlarge:min-w-[15vw] 2xlarge:h-[44vh] 2xlarge:top-[2vw]"
               src={NowShowingMoviesDetails?.primaryImage.url}
               alt=""
             />
           </div>
         </div>
         <div className=" relative left-[10vw] ">
-          <div className=" absolute top-[10vw] -left-[5vw] ">
+          <div className=" absolute top-[10vw] small:top-[12vw] -left-[5vw] ">
             <>
               <span className="text-white relative top-[9vw] text-[3vw]">
                 {NowShowingMoviesDetails?.directorsPageTitle &&
@@ -883,16 +883,16 @@ const NowShowingMoviesFullDetailsPage = () => {
             </span>
           </span>
         </div>
-        <div className=" absolute left-[40vw] top-[45vw] ">
-          <div class="btn-donate  h-[7vh] relative left-[22vw]">
-            <span className=" relative bottom-5 left-3 text-[3vw]">
+        <div className=" absolute left-[35vw] top-[45vw] ">
+          <div class="btn-donate  h-[7vh] relative left-[20vw] xsmall:left-[22vw] xsmall:-top-[5vw] small:left-[26vw] small:-top-[5vw] medium:left-[35vw] medium:-top-[10vw] large:-top-[13vw] large:left-[40vw] xlarge:-top-[15vw] xlarge:left-[40vw] 2xlarge:left-[40vw] 2xlarge:-top-[18vw]">
+            <span className=" relative bottom-5 left-3 text-[3vw] xsmall:text-[2.5vw] small:text-[2vw] medium:text-[1.8vw] large:text-[1.4vw] xlarge:text-[1.5vw] 2xlarge:text-[1.3vw]">
               {" "}
-              <span className=" relative top-5 right-4 ">
+              <span className=" relative top-5 right-4  medium:top-6 large:top-6 large:right-5  xlarge:top-7 xlarge:right-6 2xlarge:top-8 2xlarge:right-6 ">
                 <FaPlus className="" />
               </span>
               Add to Watchlist
             </span>
-            <h1 className=" relative bottom-5 whitespace-nowrap text-black text-[3vw]  ">
+            <h1 className=" relative bottom-5 whitespace-nowrap text-black text-[3vw] xsmall:text-[2.5vw] small:text-[2vw] medium:text-[1.8vw] large:text-[1.4vw] xlarge:text-[1.5vw] 2xlarge:text-[1.3vw]  ">
               {
                 NowShowingMoviesDetails?.engagementStatistics
                   ?.watchlistStatistics?.displayableCount?.text
@@ -900,13 +900,13 @@ const NowShowingMoviesFullDetailsPage = () => {
             </h1>
           </div>
           <div className=" flex cursor-pointer">
-            <h1 className=" font-semibold text-yellow-400 text-[2vw] relative left-[22vw] mt-2">
+            <h1 className=" font-semibold text-yellow-400 text-[2vw] relative left-[22vw] xsmall:-top-[5vw] small:left-[24vw] medium:left-[30vw] medium:-top-[10vw] medium:text-[1.6vw] large:left-[36vw] large:-top-[13vw] large:text-[1.5vw] xlarge:left-[37vw] xlarge:-top-[15vw] xlarge:text-[1.5vw] 2xlarge:left-[38vw] 2xlarge:-top-[18vw] 2xlarge:text-[1.3vw] mt-2">
               {NowShowingMoviesDetails?.reviews?.total}{" "}
               <span className=" whitespace-nowrap font-normal text-white mr-5 hover:underline">
                 User reviews
               </span>{" "}
             </h1>{" "}
-            <h1 className=" font-semibold text-yellow-400 text-[2vw] relative left-[20vw] mt-2  ">
+            <h1 className=" font-semibold text-yellow-400 text-[2vw] relative left-[20vw] xsmall:-top-[5vw] small:left-[23vw] medium:left-[30vw] medium:-top-[10vw] medium:text-[1.8vw] large:left-[36vw] large:-top-[13vw] large:text-[1.5vw] xlarge:left-[36vw] xlarge:-top-[15vw] xlarge:text-[1.5vw] mt-2 2xlarge:left-[40vw] 2xlarge:-top-[18vw] 2xlarge:text-[1.3vw]  ">
               {NowShowingMoviesDetails?.criticReviewsTotal?.total}{" "}
               <span className=" whitespace-nowrap font-normal text-white hover:underline">
                 Critics reviews
@@ -914,20 +914,22 @@ const NowShowingMoviesFullDetailsPage = () => {
             </h1>
           </div>
           <div>
-            <h1 className=" font-semibold text-yellow-400 cursor-pointer text-[2vw] mt-1  ">
-              <span className=" mr-3 inline-block relative left-[31vw]">
+            <h1 className=" font-semibold text-yellow-400 cursor-pointer text-[2vw] mt-1   ">
+              <span className=" mr-3 inline-block relative left-[30vw] xsmall:-top-[5vw] small:left-[32vw] medium:-top-[10vw] medium:left-[38vw] large:left-[42vw] large:-top-[13vw] large:text-[1.5vw] xlarge:left-[42vw] xlarge:-top-[15vw] xlarge:text-[1.5vw] 2xlarge:left-[45vw] 2xlarge:-top-[18vw] 2xlarge:text-[1.3vw] ">
                 {NowShowingMoviesDetails?.metacritic?.metascore?.score}{" "}
               </span>
-              <span className="font-normal text-white hover:underline relative left-[29vw]">
+              <span className="font-normal text-white hover:underline relative left-[28vw] xsmall:-top-[5vw] small:left-[32vw] medium:left-[38vw] medium:-top-[10vw] large:left-[42vw] large:-top-[13vw] large:text-[1.5vw] xlarge:left-[42vw] xlarge:-top-[15vw] xlarge:text-[1.5vw] 2xlarge:left-[45vw] 2xlarge:-top-[18vw] 2xlarge:text-[1.3vw]">
                 Metascore
               </span>
             </h1>
           </div>
         </div>
 
-        <div className=" bg-red-30 absolute left-[35vw] top-[17vw]">
-          <h1 className=" text-[3vw] text-red-600 font-bold">STORYLINE</h1>
-          <p className=" w-[60vw] text-[2.5vw] mt-2 text-amber-300">
+        <div className=" bg-red-30 absolute left-[35vw] xsmall:left-[32vw] top-[17vw] xsmall:top-[15vw] small:top-[13vw] medium:top-[10vw] large:top-[10vw] xlarge:top-[10vw] xlarge:left-[28vw] 2xlarge:left-[25vw]">
+          <h1 className=" text-[3vw] xsmall:text-[2.5vw] small:text-[2.5vw] medium:text-[2.5vw] large:text-[2vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-red-600 font-bold">
+            STORYLINE
+          </h1>
+          <p className=" w-[60vw] text-[2.5vw] xsmall:text-[2.2vw] small:text-[2.3vw] medium:text-[2.3vw] large:text-[2vw] xlarge:text-[2vw] 2xlarge:text-[1.6vw] mt-2 text-amber-300">
             {NowShowingMoviesDetails?.plot?.plotText?.plainText}
           </p>
         </div>
