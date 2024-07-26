@@ -103,23 +103,23 @@ const NowShowingMoviesFullDetailsPage = () => {
   const rightNames = cast.slice(16, 24);
 
   const renderNames = (namesArray) => (
-    <div className="w-[22vw]">
+    <div className="max-w-[20vw]">
       {namesArray &&
         namesArray.map((data, index) => (
           <div key={index}>
             <img
-              className="min-w-[21vw] p-1 h-[11vh] rounded-full object-cover hover:blur-0 blur-[3px] border-2 border-cyan-400 hover:border-purple-500"
+              className="  w-16 h-16 xsmall:w-24 xsmall:h-24 small:w-28 small:h-28 medium:w-32 medium:h-32 p-1 rounded-full object-cover border-2 border-cyan-400 hover:border-purple-500 transition-colors duration-300"
               src={
                 data?.node?.name?.primaryImage?.url ||
                 "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
               }
               alt="no image available"
             />
-            <div className="relative bottom-[1vw] mb-5 left-[vw]">
-              <h1 className="font-normal truncate mt-2  text-white">
+            <div className="relative left-[2vw] mb-2 xsmall:left-[2vw] xsmall:text-[2.5vw] small:left-[2vw] small:text-[2vw] medium:left-[2vw]  medium:text-[2vw] large:left-[2vw] large:text-[1.8vw] xlarge:left-[2vw] xlarge:text-[1.8vw] 2xlarge:left-[1vw] 2xlarge:text-[1.3vw]">
+              <h1 className="font-normal   truncate mt-3 text-white">
                 {data?.node?.name?.nameText?.text}
               </h1>
-              <h1 className="font-normal mt- text-lime-400 whitespace-nowrap">
+              <h1 className="font-normal  text-lime-400 whitespace-nowrap">
                 {data?.node?.characters &&
                   (() => {
                     const characterNames = data.node.characters
@@ -474,9 +474,9 @@ const NowShowingMoviesFullDetailsPage = () => {
           </div>
         </div>
         <div className=" relative left-[10vw] ">
-          <div className=" absolute top-[10vw] small:top-[12vw] -left-[5vw] ">
+          <div className=" absolute top-[10vw] -left-[5vw] xsmall:top-[16vw] small:top-[15vw] medium:top-[10vw] large:top-[5vw] large:left-[4vw] xlarge:top-[8vw]   ">
             <>
-              <span className="text-white relative top-[9vw] text-[3vw]">
+              <span className="text-white relative top-[9vw] text-[3vw] medium:text-[2.5vw] large:text-[2vw] xlarge:text-[1.6vw] 2xlarge:text-[1.4vw]  ">
                 {NowShowingMoviesDetails?.directorsPageTitle &&
                 NowShowingMoviesDetails.directorsPageTitle.length > 0
                   ? "Directors"
@@ -486,7 +486,7 @@ const NowShowingMoviesFullDetailsPage = () => {
                   : ""}
               </span>
 
-              <h1 className="relative text-emerald-400 font-semibold top-[4.4vw] text-[3vw] left-[15vw]">
+              <h1 className="relative text-emerald-400 font-semibold top-[4.4vw] text-[3vw] left-[15vw] medium:text-[2.5vw] medium:top-[5vw] large:text-[2vw] large:top-[6vw] large:left-[12vw] xlarge:text-[1.6vw] xlarge:top-[6.5vw] xlarge:left-[11vw] 2xlarge:text-[1.4vw] 2xlarge:top-[7vw] 2xlarge:left-[10vw]">
                 {NowShowingMoviesDetails && (
                   <>
                     {NowShowingMoviesDetails.directorsPageTitle &&
@@ -536,10 +536,10 @@ const NowShowingMoviesFullDetailsPage = () => {
                 (writer) => writer.credits && writer.credits.length > 0
               ) && (
                 <>
-                  <span className="text-white relative top-[9.5vw] text-[3vw]">
+                  <span className="text-white relative top-[9.5vw] text-[3vw] medium:text-[2.5vw] large:text-[2vw] xlarge:text-[1.6vw] 2xlarge:text-[1.4vw]">
                     Writers
                   </span>
-                  <h1 className="relative top-[4.5vw] text-emerald-400 text-[3vw] left-[15vw]">
+                  <h1 className="relative top-[4.5vw] text-emerald-400 text-[3vw] left-[15vw] medium:text-[2.5vw] medium:top-[5.7vw] large:text-[2vw] large:top-[6.5vw] large:left-[12vw] xlarge:text-[1.6vw] xlarge:top-[7vw] xlarge:left-[11vw] 2xlarge:text-[1.4vw] 2xlarge:top-[7.5vw] 2xlarge:left-[10vw]">
                     {NowShowingMoviesDetails.writers.map(
                       (data, index) =>
                         data.credits &&
@@ -562,10 +562,10 @@ const NowShowingMoviesFullDetailsPage = () => {
                   </h1>
                 </>
               )}
-            <span className=" text-white relative top-[10vw] text-[3vw]">
+            <span className=" text-white relative top-[10vw] text-[3vw] medium:text-[2.5vw] large:text-[2vw] xlarge:text-[1.6vw] 2xlarge:text-[1.4vw]">
               Stars
             </span>
-            <h1 className="relative top-[5vw] text-emerald-400 left-[15vw] text-[3vw]">
+            <h1 className="relative top-[5vw] text-emerald-400 left-[15vw] text-[3vw] medium:text-[2.5vw] medium:top-[6vw] large:text-[2vw] large:top-[7vw] large:left-[12vw] xlarge:text-[1.6vw] xlarge:top-[7.5vw] xlarge:left-[11vw] 2xlarge:text-[1.4vw] 2xlarge:top-[8vw] 2xlarge:left-[10vw]">
               {NowShowingMoviesDetails &&
                 NowShowingMoviesDetails?.castPageTitle?.edges.map(
                   (data, index) => (
@@ -579,10 +579,10 @@ const NowShowingMoviesFullDetailsPage = () => {
                 )}
             </h1>
 
-            <span className=" text-white relative top-[10vw] text-[3vw]">
+            <span className=" text-white relative top-[10vw] text-[3vw] medium:text-[2.5vw] large:text-[2vw] xlarge:text-[1.6vw] 2xlarge:text-[1.4vw]">
               Genre
             </span>
-            <h1 className="relative top-[5vw] text-emerald-400 left-[15vw] text-[3vw]">
+            <h1 className="relative top-[5vw] text-emerald-400 left-[15vw] text-[3vw] medium:text-[2.5vw] medium:top-[6vw] large:text-[2vw] large:top-[7vw] large:left-[12vw] xlarge:text-[1.6vw] xlarge:top-[7.5vw] xlarge:left-[11vw] 2xlarge:text-[1.4vw] 2xlarge:top-[8vw] 2xlarge:left-[10vw]">
               {NowShowingMoviesDetails &&
                 NowShowingMoviesDetails?.genres?.genres.map((data, index) => (
                   <React.Fragment key={index}>
@@ -934,59 +934,72 @@ const NowShowingMoviesFullDetailsPage = () => {
           </p>
         </div>
 
-        <div className=" absolute top-[115vw] left-[10vw] text-[4vw] font-bold">
+        <div className=" bg-red-30 relative top-[80vw] left-[10vw] text-[4vw] xsmall:text-[3vw] xsmall:top-[108vw] small:text-[3vw] small:top-[105vw] medium:text-[2.5vw] medium:top-[90vw] large:text-[2vw] large:top-[80vw] 2xlarge:top-[40vw] font-bold ">
           <h1>TOP CAST</h1>
-          <div className="flex justify-between mt-10">
+          <div className="flex justify-between mt-5">
             <div className="name-list flex justify-start">
-              <div className="-ml-[5vw]">{renderNames(leftNames)}</div>
+              <div className="-ml-[3vw] small:-ml-[2vw] medium:-ml-[1vw] 2xlarge:-ml-[0vw]">
+                {renderNames(leftNames)}
+              </div>
               {middleNames.length > 0 && (
-                <div className="ml-[8vw]">{renderNames(middleNames)}</div>
+                <div className="ml-[8vw] small:ml-[9vw] medium:ml-[10vw] 2xlarge:ml-[7vw]">
+                  {renderNames(middleNames)}
+                </div>
               )}
               {rightNames.length > 0 && (
-                <div className="ml-[2vw]">{renderNames(rightNames)}</div>
+                <div className="ml-[8vw] xsmall:ml-[8vw] small:ml-[9vw]  large:ml-[5vw] xlarge:ml-[7vw] 2xlarge:ml-[5vw]">
+                  {renderNames(rightNames)}
+                </div>
               )}
             </div>
           </div>
         </div>
-        <div className="absolute top-[465vw] bg-red-30 left-[5vw] text-[5vw]">
+        <div className="relative top-[100vw] bg-red-30 left-[5vw] text-[5vw]  xsmall:text-[4vw] xsmall:top-[120vw] small:text-[3vw] small:top-[115vw] medium:text-[2.5vw] medium:top-[100vw] large:text-[2.2vw] large:top-[90vw] xlarge:text-[2vw] xlarge:top-[88vw] 2xlarge:text-[1.5vw] 2xlarge:top-[48vw]">
           <h1 className="font-bold">More Titles Like This</h1>
-          <div className="absolute -mx-[2vw] w-[95vw] h-[60vh] mt-10 border-l-2 my-2 border-r-2 border-blue-600 flex flex-nowrap overflow-x-auto overflow-y-hidden no-scrollbar gap-10">
+          <div className="absolute -mx-[2vw] w-[95vw] h-[50vh] mt-10 border-l-2 my-2 border-r-2 border-blue-600 flex flex-nowrap overflow-x-auto overflow-y-hidden no-scrollbar gap-5">
             {NowShowingMoviesDetails &&
-              NowShowingMoviesDetails?.moreLikeThisTitles?.edges.map((data) => (
-                <div className="flex flex-col min-w-[50vw] mx-5 h-[50vh] my-5  rounded-lg bg-black glow6 ">
-                  <img
-                    className="min-w-[30vw] h-[35vh] object-center px-2 py-2 rounded-2xl"
-                    src={data?.node?.primaryImage?.url}
-                    alt="no image available"
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src =
-                        "https://www.prokerala.com/movies/assets/img/no-poster-available.jpg";
-                    }}
-                  />
-                  <h1 className="mx-5 text-[5vw] text-teal-400 overflow-hidden whitespace-nowrap truncate">
-                    {data?.node?.originalTitleText?.text}
-                  </h1>
-                  <span className=" mx-5 text-[3vw] text-rose-400">
-                    ({data?.node?.releaseYear?.year})
-                  </span>
-
-                  <span className=" mx-5 text-yellow-400 inline-block flex ">
-                    <IoMdStar className=" relative top-1 mr-" />
-                    {data?.node?.ratingsSummary?.aggregateRating}
-                  </span>
-                  <span className="mx-5 text-[2.5vw] text-violet-500 white-space-nowrap truncate">
-                    {data &&
-                      data?.node?.titleGenres?.genres.map((movie, index) => (
-                        <React.Fragment key={index}>
-                          {movie?.genre?.text}
-                          {index <
-                            data?.node?.titleGenres?.genres?.length - 1 && ", "}
-                        </React.Fragment>
-                      ))}
-                  </span>
-                </div>
-              ))}
+              NowShowingMoviesDetails?.moreLikeThisTitles?.edges.map(
+                (data, index) => (
+                  <div
+                    key={index}
+                    className="flex flex-col min-w-[46vw]  h-[44vh] xsmall:min-w-[45vw] small:min-w-[40vw] medium:min-w-[35vw] large:min-w-[30vw] xlarge:min-w-[25vw] 2xlarge:min-w-[20vw] mx-5  my-5 rounded-lg bg-black glow6"
+                  >
+                    <img
+                      className="min-w-[25vw] h-[30vh] xsmall:min-w-[28vw] small:min-w-[26vw] medium:min-w-[24vw] large:min-w-[22vw] xlarge:min-w-[20vw] 2xlarge:min-w-[18vw]  object-center px-2 py-2 rounded-2xl"
+                      src={data?.node?.primaryImage?.url}
+                      alt="no image available"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src =
+                          "https://www.prokerala.com/movies/assets/img/no-poster-available.jpg";
+                      }}
+                    />
+                    <h1 className="mx-5 text-[5vw] xsmall:text-[4vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.5vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] text-teal-400 overflow-hidden whitespace-nowrap truncate">
+                      {data?.node?.originalTitleText?.text}
+                    </h1>
+                    <span className="mx-5 text-[3vw] xsmall:text-[2.5vw] small:text-[2vw] medium:text-[1.8vw] large:text-[1.5vw] xlarge:text-[1.2vw] 2xlarge:text-[1vw] text-rose-400">
+                      ({data?.node?.releaseYear?.year})
+                    </span>
+                    <span className="mx-5 text-yellow-400 inline-block flex">
+                      <IoMdStar className="relative top-1 mr-1" />
+                      <span className="text-[3vw] xsmall:text-[2.5vw] small:text-[2vw] medium:text-[1.8vw] large:text-[1.5vw] xlarge:text-[1.2vw] 2xlarge:text-[1vw]">
+                        {data?.node?.ratingsSummary?.aggregateRating}
+                      </span>
+                    </span>
+                    <span className="mx-5 text-[2.5vw] xsmall:text-[2vw] small:text-[1.8vw] medium:text-[1.5vw] large:text-[1.2vw] xlarge:text-[1vw] 2xlarge:text-[0.8vw] text-violet-500 whitespace-nowrap truncate">
+                      {data &&
+                        data?.node?.titleGenres?.genres.map((movie, index) => (
+                          <React.Fragment key={index}>
+                            {movie?.genre?.text}
+                            {index <
+                              data?.node?.titleGenres?.genres?.length - 1 &&
+                              ", "}
+                          </React.Fragment>
+                        ))}
+                    </span>
+                  </div>
+                )
+              )}
           </div>
         </div>
 

@@ -1050,3 +1050,10 @@ export default Fourthcontainer;
           </h1>
         </div>
 
+
+
+
+
+
+        hover:blur-0 blur-[3px]
+
