@@ -371,7 +371,7 @@ const NowShowingMoviesFullDetailsPage = () => {
   }, [NowShowingRelatedNews]);
 
   return (
-    <div className="min-h-[780vh] bg-[#030C16] text-red-600">
+    <div className="min-h-[1280vh] xlarge:h-[1200vh] bg-[#030C16] text-red-600">
       <div className=" -mt-1  ">
         <Header />
       </div>
@@ -596,7 +596,7 @@ const NowShowingMoviesFullDetailsPage = () => {
           </div>
         </div>
         <div
-          className="flex gap-5 bg-red-30 absolute left-[8vw] top-2 
+          className="flex gap-5 bg-red-30  relative left-[8vw] bottom-[45vw] 
                 xsmall:left-[7vw] xsmall:gap-4
                 small:left-[6vw] small:gap-3
                 medium:left-[5vw] medium:gap-2
@@ -883,7 +883,7 @@ const NowShowingMoviesFullDetailsPage = () => {
             </span>
           </span>
         </div>
-        <div className=" absolute left-[35vw] top-[45vw] ">
+        <div className=" relative  ml-[35vw] -top-[5vw] ">
           <div class="btn-donate  h-[7vh] relative left-[20vw] xsmall:left-[22vw] xsmall:-top-[5vw] small:left-[26vw] small:-top-[5vw] medium:left-[35vw] medium:-top-[10vw] large:-top-[13vw] large:left-[40vw] xlarge:-top-[15vw] xlarge:left-[40vw] 2xlarge:left-[40vw] 2xlarge:-top-[18vw]">
             <span className=" relative bottom-5 left-3 text-[3vw] xsmall:text-[2.5vw] small:text-[2vw] medium:text-[1.8vw] large:text-[1.4vw] xlarge:text-[1.5vw] 2xlarge:text-[1.3vw]">
               {" "}
@@ -956,16 +956,23 @@ const NowShowingMoviesFullDetailsPage = () => {
         </div>
         <div className="relative top-[100vw] bg-red-30 left-[5vw] text-[5vw]  xsmall:text-[4vw] xsmall:top-[120vw] small:text-[3vw] small:top-[115vw] medium:text-[2.5vw] medium:top-[100vw] large:text-[2.2vw] large:top-[90vw] xlarge:text-[2vw] xlarge:top-[88vw] 2xlarge:text-[1.5vw] 2xlarge:top-[48vw]">
           <h1 className="font-bold">More Titles Like This</h1>
-          <div className="absolute -mx-[2vw] w-[95vw] h-[50vh] mt-10 border-l-2 my-2 border-r-2 border-blue-600 flex flex-nowrap overflow-x-auto overflow-y-hidden no-scrollbar gap-5">
+          <div className=" relative -mx-[2vw] w-[95vw] h-auto large:h-[70vh] xlarge:h-auto 2xlarge:h-[65vh] mt-10 border-l-2 my-2 border-r-2 border-blue-600 flex flex-nowrap overflow-x-auto overflow-y-hidden no-scrollbar gap-5">
             {NowShowingMoviesDetails &&
               NowShowingMoviesDetails?.moreLikeThisTitles?.edges.map(
                 (data, index) => (
                   <div
                     key={index}
-                    className="flex flex-col min-w-[46vw]  h-[44vh] xsmall:min-w-[45vw] small:min-w-[40vw] medium:min-w-[35vw] large:min-w-[30vw] xlarge:min-w-[25vw] 2xlarge:min-w-[20vw] mx-5  my-5 rounded-lg bg-black glow6"
+                    className="flex flex-col max-w-[47vw] h-auto mx-5 my-5 rounded-lg bg-black glow6 
+             xsmall:max-w-[35vw] xsmall:h-auto
+             small:max-w-[40vw] small:h-auto
+             medium:max-w-[30vw] medium:h-[57vh]
+             large:max-w-[20vw] large:h-auto  
+             xlarge:max-w-[18vw] xlarge:h-auto
+             2xlarge:max-w-[15vw] 2xlarge:h-auto"
                   >
                     <img
-                      className="min-w-[25vw] h-[30vh] xsmall:min-w-[28vw] small:min-w-[26vw] medium:min-w-[24vw] large:min-w-[22vw] xlarge:min-w-[20vw] 2xlarge:min-w-[18vw]  object-center px-2 py-2 rounded-2xl"
+                      className="w-full h-auto object-cover px-2 py-2 rounded-2xl
+               aspect-[3/4]"
                       src={data?.node?.primaryImage?.url}
                       alt="no image available"
                       onError={(e) => {
@@ -974,19 +981,51 @@ const NowShowingMoviesFullDetailsPage = () => {
                           "https://www.prokerala.com/movies/assets/img/no-poster-available.jpg";
                       }}
                     />
-                    <h1 className="mx-5 text-[5vw] xsmall:text-[4vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.5vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] text-teal-400 overflow-hidden whitespace-nowrap truncate">
+                    <h1
+                      className="mx-5 text-2xl font-bold text-teal-400 overflow-hidden whitespace-nowrap truncate
+                 xsmall:text-xl
+                 small:text-lg
+                 medium:text-xl
+                 large:text-2xl
+                 xlarge:text-3xl
+                 2xlarge:text-2xl"
+                    >
                       {data?.node?.originalTitleText?.text}
                     </h1>
-                    <span className="mx-5 text-[3vw] xsmall:text-[2.5vw] small:text-[2vw] medium:text-[1.8vw] large:text-[1.5vw] xlarge:text-[1.2vw] 2xlarge:text-[1vw] text-rose-400">
+                    <span
+                      className="mx-5 text-lg text-rose-400
+                   xsmall:text-base
+                   small:text-sm
+                   medium:text-base
+                   large:text-lg
+                   xlarge:text-xl
+                   2xlarge:text-lg"
+                    >
                       ({data?.node?.releaseYear?.year})
                     </span>
-                    <span className="mx-5 text-yellow-400 inline-block flex">
-                      <IoMdStar className="relative top-1 mr-1" />
-                      <span className="text-[3vw] xsmall:text-[2.5vw] small:text-[2vw] medium:text-[1.8vw] large:text-[1.5vw] xlarge:text-[1.2vw] 2xlarge:text-[1vw]">
+                    <span className="mx-5 text-yellow-400 inline-flex items-center">
+                      <IoMdStar className="mr-1" />
+                      <span
+                        className="text-lg
+                     xsmall:text-base
+                     small:text-sm
+                     medium:text-base
+                     large:text-lg
+                     xlarge:text-xl
+                     2xlarge:text-2xl"
+                      >
                         {data?.node?.ratingsSummary?.aggregateRating}
                       </span>
                     </span>
-                    <span className="mx-5 text-[2.5vw] xsmall:text-[2vw] small:text-[1.8vw] medium:text-[1.5vw] large:text-[1.2vw] xlarge:text-[1vw] 2xlarge:text-[0.8vw] text-violet-500 whitespace-nowrap truncate">
+                    <span
+                      className="mx-5 text-[4vw] mb-4  text-violet-500 whitespace-nowrap truncate 
+                   xsmall:text-sm
+                   small:text-xs
+                   medium:text-sm
+                   large:text-base
+                   xlarge:text-lg
+                   2xlarge:text-xl"
+                    >
                       {data &&
                         data?.node?.titleGenres?.genres.map((movie, index) => (
                           <React.Fragment key={index}>
@@ -1003,11 +1042,32 @@ const NowShowingMoviesFullDetailsPage = () => {
           </div>
         </div>
 
-        <div className=" absolute top-[615vw] left-[5vw] inline-block">
-          <h1 className=" text-[4vw] font-bold ">Details</h1>
+        <div
+          className="relative 
+                top-[120vw] left-[5vw] 
+                xsmall:top-[130vw] xsmall:left-[5vw]
+                small:top-[125vw] small:left-[5vw]
+                medium:top-[110vw] medium:left-[5vw]
+                large:top-[98vw] large:left-[5vw]
+                xlarge:top-[95vw] xlarge:left-[5vw]
+                2xlarge:top-[55vw] 2xlarge:left-[5vw]
+                inline-block"
+        >
+          <h1
+            className="text-[5vw] 
+                 xsmall:text-[3.5vw]
+                 small:text-[3vw]
+                 medium:text-[2.5vw]
+                 large:text-[2vw]
+                 xlarge:text-[1.5vw]
+                 2xlarge:text-[1.5vw]
+                 font-bold"
+          >
+            Details
+          </h1>
         </div>
-        <div className="  relative top-[585vw] left-[5vw] w-[70vw] h-[60vh] mb-[5vw]">
-          <h1 className="text-[2.5vw] text-blue-500 border-t-[1px] border-b-[1px]  border-gray-700 py-5">
+        <div className="  relative  top-[125vw] left-[5vw] xsmall:top-[135vw] small:top-[130vw] medium:top-[115vw] large:top-[100vw] xlarge:top-[98vw] 2xlarge:top-[57vw]">
+          <h1 className="text-[2.5vw] medium:text-[2vw] large:text-[1.7vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-blue-500 border-t-[1px] border-b-[1px]  border-gray-700 py-5">
             <span className="  text-yellow-400 mr-5">Release Date</span>
             {NowShowingMoviesDetails?.releaseDate?.month}
             {"/"}
@@ -1015,7 +1075,7 @@ const NowShowingMoviesFullDetailsPage = () => {
             {"/"}
             {NowShowingMoviesDetails?.releaseDate?.year}
           </h1>
-          <h1 className=" text-[2.5vw] text-blue-500 border-b-[1px] border-gray-700 py-5">
+          <h1 className=" text-[2.5vw] medium:text-[2vw] large:text-[1.7vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-blue-500 border-b-[1px] border-gray-700 py-5">
             <span className=" mr-5 text-yellow-400">Countries of Origins</span>
             {NowShowingMoviesDetails &&
               NowShowingMoviesDetails?.countriesOfOrigin?.countries.map(
@@ -1024,7 +1084,7 @@ const NowShowingMoviesFullDetailsPage = () => {
                 }
               )}
           </h1>
-          <h1 className=" text-[2.5vw] text-blue-500  border-b-[1px] border-gray-700 py-5">
+          <h1 className=" text-[2.5vw] medium:text-[2vw] large:text-[1.7vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-blue-500  border-b-[1px] border-gray-700 py-5">
             <span className=" mr-5 text-yellow-400">Language</span>
             {NowShowingMoviesDetails &&
               NowShowingMoviesDetails?.spokenLanguages?.spokenLanguages.map(
@@ -1033,14 +1093,14 @@ const NowShowingMoviesFullDetailsPage = () => {
                 }
               )}
           </h1>
-          <h1 className=" text-[2.5vw] text-emerald-500  border-b-[1px] border-gray-700 py-5">
+          <h1 className=" text-[2.5vw] medium:text-[2vw] large:text-[1.7vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-emerald-500  border-b-[1px] border-gray-700 py-5">
             <span className="mr-5 text-yellow-400">Also Known As</span>
             {NowShowingMoviesDetails &&
               NowShowingMoviesDetails?.akas?.edges.map((data) => {
                 return data?.node?.text;
               })}
           </h1>
-          <h1 className=" text-[2.5vw] text-blue-500  border-b-[1px] border-gray-700 py-5">
+          <h1 className=" text-[2.5vw] medium:text-[2vw] large:text-[1.7vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-blue-500  border-b-[1px] border-gray-700 py-5">
             <span className=" mr-5 text-yellow-400">Filming Locations</span>
             {NowShowingMoviesDetails &&
               NowShowingMoviesDetails?.filmingLocations?.edges.map((data) => {
@@ -1048,7 +1108,7 @@ const NowShowingMoviesFullDetailsPage = () => {
               })}{" "}
             <span className=" text-cyan-400">(Studio)</span>
           </h1>
-          <h1 className="text-[2.5vw] text-blue-500 border-b-[1px] border-gray-700 py-5">
+          <h1 className="text-[2.5vw] medium:text-[2vw] large:text-[1.7vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-blue-500 border-b-[1px] border-gray-700 py-5">
             <span className="mr-5 text-yellow-400">Production Companies</span>
             {NowShowingMoviesDetails &&
               NowShowingMoviesDetails?.production?.edges.map((data, index) => (
@@ -1061,14 +1121,14 @@ const NowShowingMoviesFullDetailsPage = () => {
               ))}
           </h1>
 
-          <h1 className="text-[2.5vw] flex text-blue-500 border-b-[1px] border-gray-700 py-5">
+          <h1 className="text-[2.5vw] medium:text-[2vw] large:text-[1.7vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] flex text-blue-500 border-b-[1px] border-gray-700 py-5">
             <span className="mr-5 text-yellow-400">Official Sites</span>
             {NowShowingMoviesDetails &&
               NowShowingMoviesDetails?.detailsExternalLinks?.edges.map(
                 (data, index) => (
                   <React.Fragment key={index}>
                     <Link
-                      className=" hover:underline hover:text-red-500"
+                      className=" hover:underline  hover:text-red-500"
                       to={`${data?.node?.url}`}
                     >
                       <span>{data?.node?.label}</span>
@@ -1084,18 +1144,54 @@ const NowShowingMoviesFullDetailsPage = () => {
           </h1>
         </div>
 
-        <div className=" inline-block relative top-[642vw] left-[5vw] text-[4vw] font-bold">
+        <div
+          className=" relative 
+                top-[140vw] left-[5vw]  text-[5vw]
+                xsmall:top-[150vw] xsmall:left-[5vw] xsmall:text-[4vw]
+                small:top-[140vw] small:left-[5vw] small:text-[3vw]
+                medium:top-[125vw] medium:left-[5vw] medium:text-[2.5vw]
+                large:top-[107vw] large:left-[5vw] large:text-[2vw]
+                xlarge:top-[105vw] xlarge:left-[5vw] xlarge:text-[1.8vw]
+                2xlarge:top-[63vw] 2xlarge:left-[5vw]  2xlarge:text-[1.5vw]
+                inline-block font-bold"
+        >
           <h1>User Reviews</h1>
         </div>
 
-        <div className="flex flex-col ml-[2vw] relative top-[650vw] ">
+        <div
+          className="flex flex-col ml-[2vw] relative 
+                top-[150vw]
+                xsmall:top-[160vw]
+                small:top-[145vw]
+                medium:top-[130vw]
+                large:top-[110vw]
+                xlarge:top-[108vw]
+                2xlarge:top-[65vw]"
+        >
           <div
-            className="w-[95vw] rounded-lg px-5 py-4 mb-4"
+            className="w-[95vw] h-auto
+               xsmall:w-[95vw]
+               small:w-[90vw]
+               medium:w-[85vw]
+               large:w-[80vw]
+               xlarge:w-[70vw]
+               2xlarge:w-[60vw] 2xlarge:ml-[3vw]
+               rounded-lg px-5 py-4 mb-4"
             style={{
               backgroundColor: "slategrey",
             }}
           >
-            <h1 className="review w-[45vw]">FEATURED REVIEW</h1>
+            <h1
+              className="review w-[45vw] 
+                   xsmall:w-[40vw]
+                   small:w-[35vw]
+                   medium:w-[30vw]
+                   large:w-[25vw]
+                   xlarge:w-[20vw]
+                   2xlarge:w-[15vw]"
+            >
+              FEATURED REVIEW
+            </h1>
             <div>
               {NowShowingMoviesDetails?.featuredReviews?.edges.map(
                 (data, index) => {
@@ -1108,12 +1204,30 @@ const NowShowingMoviesFullDetailsPage = () => {
                   return (
                     <div key={index}>
                       <div className="mt-5">
-                        <h1 className="text-[4vw] font-bold text-lime-500">
-                          "{data?.node?.summary?.originalText}"
+                        <h1
+                          className="text-[4vw]
+                               xsmall:text-[3.5vw]
+                               small:text-[3.5vw]
+                               medium:text-[2.7vw]
+                               large:text-[2.3vw]
+                               xlarge:text-[1.8vw]
+                               2xlarge:text-[1.6vw]
+                               font-bold text-lime-500"
+                        >
+                          {data?.node?.summary?.originalText}
                         </h1>
                       </div>
                       <div className="relative">
-                        <p className="mt-7 text-[3.5vw] overflow-ellipsis leading-6 text-amber-400 font-semibold">
+                        <p
+                          className="mt-7 text-[3vw] leading-7
+                              xsmall:text-[3vw] xsmall:leading-7
+                              small:text-[2.2vw] small:leading-7
+                              medium:text-[1.8vw] medium:leading-8
+                              large:text-[1.5vw] large:leading-8
+                              xlarge:text-[1.3vw] xlarge:leading-8
+                              2xlarge:text-[1vw] 2xlarge:leading-8
+                              overflow-ellipsis text-amber-400 font-semibold"
+                        >
                           {displayText.slice(0, 800)}
                           {"..."}
                         </p>
@@ -1138,26 +1252,45 @@ const NowShowingMoviesFullDetailsPage = () => {
           </div>
         </div>
 
-        <div className=" absolute top-[750vw] left-[5vw] inline-block  ">
-          <h1 className=" text-[4vw] font-bold ">Box Office</h1>
+        <div
+          className=" relative 
+                top-[165vw] left-[5vw]  text-[5vw]
+                xsmall:top-[170vw] xsmall:left-[5vw] xsmall:text-[4vw]
+                small:top-[155vw] small:left-[5vw] small:text-[3vw]
+                medium:top-[135vw] medium:left-[5vw] medium:text-[2.5vw]
+                large:top-[115vw] large:left-[5vw] large:text-[2vw]
+                xlarge:top-[115vw] xlarge:left-[5vw] xlarge:text-[1.8vw]
+                2xlarge:top-[70vw] 2xlarge:left-[5vw]  2xlarge:text-[1.5vw]
+                inline-block font-bold  "
+        >
+          <h1 className=" ">Box Office</h1>
         </div>
-        <div className=" absolute top-[760vw] left-[5vw]">
-          <div className=" Budget">
-            <h1 className=" text-[3vw] font-semibold text-sky-500 whitespace-nowrap mb-3">
+        <div
+          className="relative 
+                top-[170vw] left-[5vw]
+                xsmall:top-[175vw] xsmall:left-[5vw]
+                small:top-[160vw] small:left-[5vw]
+                medium:top-[140vw] medium:left-[5vw]
+                large:top-[117vw] large:left-[5vw]
+                xlarge:top-[118vw] xlarge:left-[5vw]
+                2xlarge:top-[73vw] 2xlarge:left-[5vw]"
+        >
+          <div className="Budget">
+            <h1 className="text-[4vw] xsmall:text-[4vw] small:text-[3vw] medium:text-[3vw] large:text-[2vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] font-semibold text-sky-500 whitespace-nowrap mb-3">
               Budget
             </h1>
-            <h1 className=" text-white text-[2vw] mb-5">
+            <h1 className="text-white text-[3vw] xsmall:text-[3.5vw] small:text-[3vw] medium:text-[2.3vw] large:text-[1.5vw] xlarge:text-[1.2vw] 2xlarge:text-[1vw] mb-5">
               ${NowShowingMoviesDetails?.productionBudget?.budget?.amount}
               (estimated)
             </h1>
           </div>
-          <div className=" opening Earning ">
+          <div className="opening Earning">
             {NowShowingMoviesDetails?.openingWeekendGross && (
               <>
-                <h1 className="text-sky-500 whitespace-break-spaces font-semibold mb-3 text-[3vw]">
+                <h1 className="text-sky-500 w-[40vw] font-semibold mb-3 text-[4vw] xsmall:text-[4vw] small:text-[3vw] medium:text-[3vw] large:text-[2vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw]">
                   Opening weekend US & Canada
                 </h1>
-                <h1 className="text-white text-[2vw]">
+                <h1 className="text-white text-[3vw] xsmall:text-[3.5vw] small:text-[3vw] medium:text-[2.3vw] large:text-[1.5vw] xlarge:text-[1.2vw] 2xlarge:text-[1vw]">
                   $
                   {
                     NowShowingMoviesDetails.openingWeekendGross.gross.total
@@ -1167,23 +1300,23 @@ const NowShowingMoviesFullDetailsPage = () => {
               </>
             )}
           </div>
-          <div className=" absolute left-[50vw] top-1">
+          <div className="absolute left-[50vw] top-1 xsmall:text-[4vw] small:text-[3vw] medium:text-[3vw] large:text-[2vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw]">
             {NowShowingMoviesDetails?.lifetimeGross && (
               <>
-                <h1 className="text-sky-500 whitespace-nowrap mb-3 text-[3vw]">
+                <h1 className="text-sky-500 whitespace-nowrap mb-3 text-[4vw] xsmall:text-[2.8vw] small:text-[2.6vw] medium:text-[2.4vw] large:text-[2.2vw] xlarge:text-[2vw] 2xlarge:text-[1.3vw]">
                   Gross US & Canada
                 </h1>
-                <h1 className="text-white text-[2vw] mb-4">
+                <h1 className="text-white text-[3vw] xsmall:text-[3.5vw] small:text-[3vw] medium:text-[2.3vw] large:text-[1.5vw] xlarge:text-[1.2vw] 2xlarge:text-[1vw] mb-4">
                   ${NowShowingMoviesDetails.lifetimeGross.total.amount}
                 </h1>
               </>
             )}
             {NowShowingMoviesDetails?.worldwideGross && (
               <>
-                <h1 className="mb-3 whitespace-nowrap text-sky-500 text-[3vw]">
+                <h1 className="mb-3 whitespace-nowrap text-sky-500 text-[4vw] xsmall:text-[4vw] small:text-[3vw] medium:text-[3vw] large:text-[2vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw]">
                   Gross worldwide
                 </h1>
-                <h1 className="text-white text-[2vw]">
+                <h1 className="text-white text-[3vw] xsmall:text-[3.5vw] small:text-[3vw] medium:text-[2.3vw] large:text-[1.5vw] xlarge:text-[1.2vw] 2xlarge:text-[1vw]">
                   ${NowShowingMoviesDetails.worldwideGross.total.amount}
                 </h1>
               </>
@@ -1191,9 +1324,9 @@ const NowShowingMoviesFullDetailsPage = () => {
           </div>
         </div>
 
-        <div className=" absolute top-[980vw] left-[5vw]  inline-block ">
-          <h1 className="text-[4vw] font-bold mb-5">Technical Specs</h1>
-          <h1 className=" text-[2.5vw] font-semibold mb-3 text-yellow-400">
+        <div className=" relative top-[185vw] small:top-[170vw] medium:top-[150vw] large:top-[125vw] xlarge:top-[125vw] 2xlarge:top-[80vw] left-[5vw]  inline-block ">
+          <h1 className="text-[5vw] xsmall:text-[4.5vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2vw] xlarge:text-[1.8vw] 2xlarge:text-[1.5vw] font-bold mb-5">Technical Specs</h1>
+          <h1 className=" text-[4vw] xsmall:text-[3.5vw] small:text-[3vw] medium:text-[2.3vw] large:text-[1.8vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] font-semibold mb-3 text-yellow-400">
             Runtime
             <span className=" ml-10 text-white">
               {" "}
@@ -1203,7 +1336,7 @@ const NowShowingMoviesFullDetailsPage = () => {
               }
             </span>
           </h1>
-          <h1 className="text-[2.5vw] font-semibold mb-3 text-yellow-400">
+          <h1 className="text-[4vw] xsmall:text-[3.5vw] small:text-[3vw] medium:text-[2.3vw] large:text-[1.8vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] font-semibold mb-3 text-yellow-400">
             Color
             <span className=" ml-10 text-lime-300">
               {NowShowingMoviesDetails &&
@@ -1214,7 +1347,7 @@ const NowShowingMoviesFullDetailsPage = () => {
                 )}
             </span>
           </h1>
-          <h1 className="text-[2.5vw] font-semibold mb-3 text-yellow-400">
+          <h1 className="text-[4vw] xsmall:text-[3.5vw] small:text-[3vw] medium:text-[2.3vw] large:text-[1.8vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] font-semibold mb-3 text-yellow-400">
             Sound mix
             <span className="ml-10 text-lime-300 whitespace-break-spaces">
               {NowShowingMoviesDetails &&
@@ -1233,7 +1366,7 @@ const NowShowingMoviesFullDetailsPage = () => {
             </span>
           </h1>
 
-          <h1 className=" text-[2.5vw] font-semibold text-yellow-400">
+          <h1 className=" text-[4vw] xsmall:text-[3.5vw] small:text-[3vw] medium:text-[2.3vw] large:text-[1.8vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] font-semibold text-yellow-400">
             Aspect ratio
             <span className=" ml-10 text-white">
               {NowShowingMoviesDetails &&
@@ -1245,7 +1378,7 @@ const NowShowingMoviesFullDetailsPage = () => {
             </span>
           </h1>
         </div>
-        <div className=" absolute top-[1040vw] left-[5vw]">
+        <div className=" relative top-[160vw] left-[5vw]">
           <h1 className="text-[4vw] font-bold photogallery">Photo Gallery</h1>
         </div>
         <div className="w-[95vw] bg-red-20 absolute top-[1052vw] left-[1vw]">
