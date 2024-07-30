@@ -1325,7 +1325,9 @@ const NowShowingMoviesFullDetailsPage = () => {
         </div>
 
         <div className=" relative top-[185vw] small:top-[170vw] medium:top-[150vw] large:top-[125vw] xlarge:top-[125vw] 2xlarge:top-[80vw] left-[5vw]  inline-block ">
-          <h1 className="text-[5vw] xsmall:text-[4.5vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2vw] xlarge:text-[1.8vw] 2xlarge:text-[1.5vw] font-bold mb-5">Technical Specs</h1>
+          <h1 className="text-[5vw] xsmall:text-[4.5vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2vw] xlarge:text-[1.8vw] 2xlarge:text-[1.5vw] font-bold mb-5">
+            Technical Specs
+          </h1>
           <h1 className=" text-[4vw] xsmall:text-[3.5vw] small:text-[3vw] medium:text-[2.3vw] large:text-[1.8vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] font-semibold mb-3 text-yellow-400">
             Runtime
             <span className=" ml-10 text-white">
@@ -1378,10 +1380,29 @@ const NowShowingMoviesFullDetailsPage = () => {
             </span>
           </h1>
         </div>
-        <div className=" relative top-[160vw] left-[5vw]">
-          <h1 className="text-[4vw] font-bold photogallery">Photo Gallery</h1>
+        <div
+          className=" relative 
+                top-[200vw] left-[5vw]  text-[5vw]
+                xsmall:top-[200vw] xsmall:left-[5vw] xsmall:text-[4vw]
+                small:top-[185vw] small:left-[5vw] small:text-[3vw]
+                medium:top-[160vw] medium:left-[5vw] medium:text-[2.5vw]
+                large:top-[135vw] large:left-[5vw] large:text-[2vw]
+                xlarge:top-[130vw] xlarge:left-[5vw] xlarge:text-[1.8vw]
+                2xlarge:top-[85vw] 2xlarge:left-[5vw]  2xlarge:text-[1.5vw]
+                inline-block font-bold"
+        >
+          <h1 className="  photogallery">Photo Gallery</h1>
         </div>
-        <div className="w-[95vw] bg-red-20 absolute top-[1052vw] left-[1vw]">
+        <div
+          className="w-[95vw] bg-red-20 relative 
+                top-[210vw] left-[1vw]
+                xsmall:top-[210vw] xsmall:w-[98vw] xsmall:left-[vw]
+                small:top-[190vw]
+                medium:top-[165vw]
+                large:top-[140vw]  large:w-[90vw] large:left-[5vw]
+                xlarge:top-[135vw] xlarge:w-[93vw]
+                2xlarge:top-[90vw]"
+        >
           <div className="flex">
             <Swiper
               slidesPerView={1}
@@ -1392,8 +1413,34 @@ const NowShowingMoviesFullDetailsPage = () => {
               modules={[Pagination, Navigation]}
               className="mySwiper"
               breakpoints={{
-                1536: {
+                480: {
+                  // xsmall
+                  slidesPerView: 2,
+                  spaceBetween: 20,
+                },
+                640: {
+                  // small
+                  slidesPerView: 2,
+                  spaceBetween: 20,
+                },
+                768: {
+                  // medium
                   slidesPerView: 3,
+                  spaceBetween: 20,
+                },
+                1024: {
+                  // large
+                  slidesPerView: 3,
+                  spaceBetween: 20,
+                },
+                1280: {
+                  // xlarge
+                  slidesPerView: 4,
+                  spaceBetween: 20,
+                },
+                1536: {
+                  // 2xlarge
+                  slidesPerView: 4,
                   spaceBetween: 10,
                 },
               }}
@@ -1401,9 +1448,17 @@ const NowShowingMoviesFullDetailsPage = () => {
               {NowShowingImages?.images?.edges
                 .slice(0, 12)
                 .map((data, index) => (
-                  <SwiperSlide key={index} className=" overflow-hidden">
+                  <SwiperSlide key={index} className="overflow-hidden">
                     <img
-                      className=" hover:rounded-lg  hover:border-l-[3px] hover:border-r-[3px] hover:object-cover border-yellow-400 transition duration-300 ease-in-out hover:scale-105 hover:scale-y-120 mx-8 w-[80vw]  h-[27vh] 2xlarge:w-[20vw] object-top object-cover rounded-lg"
+                      className="hover:rounded-lg hover:border-l-[3px] hover:border-r-[3px] hover:object-cover border-yellow-400 transition duration-300 ease-in-out hover:scale-105 hover:scale-y-120 mx-auto 
+                         w-[80vw] h-[27vh] 
+                         xsmall:w-[60vw] xsmall:h-[26vh]
+                         small:w-[50vw] small:h-[26vh]
+                         medium:w-[45vw] medium:h-[28vh]
+                         large:w-[45vw] large:h-[26vh]
+                         xlarge:w-[40vw] xlarge:h-[26vh]
+                         2xlarge:w-[20vw] 2xlarge:h-[27vh]
+                         object-top object-cover rounded-lg"
                       src={data?.node?.url}
                       alt=""
                     />
@@ -1412,11 +1467,31 @@ const NowShowingMoviesFullDetailsPage = () => {
             </Swiper>
           </div>
         </div>
-        <div className=" inline-block absolute top-[1130vw] left-[5vw]">
-          <h1 className="text-[4vw] font-bold videogallery">Video Gallery</h1>
+
+        <div
+          className=" relative 
+                top-[230vw] left-[5vw]  text-[5vw]
+                xsmall:top-[230vw] xsmall:left-[5vw] xsmall:text-[4vw]
+                small:top-[240vw] small:left-[5vw] small:text-[3vw]
+                medium:top-[200vw] medium:left-[5vw] medium:text-[2.5vw]
+                large:top-[170vw] large:left-[5vw] large:text-[2vw]
+                xlarge:top-[160vw] xlarge:left-[5vw] xlarge:text-[1.8vw]
+                2xlarge:top-[110vw] 2xlarge:left-[5vw]  2xlarge:text-[1.5vw]
+                inline-block font-bold"
+        >
+          <h1 className=" videogallery">Video Gallery</h1>
         </div>
-        <div className=" w-[95vw]   bg-red-30  py-2 absolute top-[1145vw] left-[1vw]">
-          <div className="flex  ">
+        <div
+          className="w-[95vw] bg-red-20 relative 
+                top-[240vw] left-[1vw] h-[42vh] p-2  bg-lime-30
+                xsmall:top-[240vw] xsmall:w-[99vw]
+                small:top-[245vw]
+                medium:top-[205vw] medium:w-[99vw]
+                large:top-[175vw] large:w-[99vw] large:left-[vw]
+                xlarge:top-[165vw] xlarge:w-[99vw]
+                2xlarge:top-[115vw] 2xlarge:w-[92vw] 2xlarge:left-[5vw]"
+        >
+          <div className="flex">
             <Swiper
               slidesPerView={1}
               pagination={{
@@ -1426,54 +1501,159 @@ const NowShowingMoviesFullDetailsPage = () => {
               modules={[Pagination, Navigation]}
               className="mySwiper"
               breakpoints={{
-                1536: {
-                  slidesPerView: 3,
+                480: {
+                  // xsmall
+                  slidesPerView: 2,
                   spaceBetween: 10,
+                },
+                640: {
+                  // small
+                  slidesPerView: 2,
+                  spaceBetween: 10,
+                },
+                768: {
+                  // medium
+                  slidesPerView: 3,
+                  spaceBetween: 20,
+                },
+                1024: {
+                  // large
+                  slidesPerView: 3,
+                  spaceBetween: 20,
+                },
+                1280: {
+                  // xlarge
+                  slidesPerView: 4,
+                  spaceBetween: 20,
+                },
+                1536: {
+                  // 2xlarge
+                  slidesPerView: 4,
+                  spaceBetween: 20,
                 },
               }}
             >
               {NowShowingVideoGallery?.videos.map((data2, index) => (
                 <SwiperSlide
                   key={index}
-                  className=" hover:underline hover:text-red-600"
+                  className="hover:underline hover:text-red-600"
                 >
-                  <div className="">
+                  <div className="relative">
                     <img
-                      className=" mx-9 w-[80vw]  h-[27vh] -mb-20   object-top object-center hover:border-cyan-400  border-[3px] border-blue-800  rounded-lg"
+                      className="mx-auto w-[80vw] h-[27vh] 
+                         xsmall:w-[80vw] xsmall:h-[27vh]
+                         small:w-[60vw] small:h-[27vh]
+                         medium:w-[65vw] medium:h-[28vh]
+                         large:w-[35vw] large:h-[28vh]
+                         xlarge:w-[30vw] xlarge:h-[28vh]
+                         2xlarge:w-[25vw] 2xlarge:h-[28vh]
+                         object-top object-center hover:border-cyan-400 border-[3px] border-blue-800 rounded-lg"
                       src={data2?.image?.url}
                       alt=""
                     />
-
-                    <BiPlayCircle className="  text-white  relative top-[12vw] left-[12vw] text-[8vw]" />
-                    <div className="  -mt-[6vw] ">
-                      <h1 className="  inline-flex text-[4vw] relative top-[10vw] font-semibold text-white mr-[30vw]">
+                    <BiPlayCircle
+                      className="text-white absolute top-[25vw] xsmall:top-[18vw] small:top-[14vw] medium:top-[10vw] large:top-[9vw] xlarge:top-[7vw] 2xlarge:top-[6.5vw] left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+                                     text-[8vw] 
+                                     xsmall:text-[5vw]
+                                     small:text-[5vw]
+                                     medium:text-[5vw]
+                                     large:text-[3.5vw]
+                                     xlarge:text-[3vw]
+                                     2xlarge:text-[2vw]"
+                    />
+                    <div className=" relative  bottom-[2vw] left-0 right-0 p-2 bg-red-30 bg-opacity-50">
+                      {/* <h1
+                        className="text-[4.2vw] relative  bottom-[1vw]  left-[vw]
+                             xsmall:text-[3.5vw] xsmall:top-[1vw]
+                             small:text-[3vw]
+                             medium:text-[2.5vw]
+                             large:text-[2vw]
+                             xlarge:text-[1.8vw]
+                             2xlarge:text-[1.5vw]
+                             font-bold text-black"
+                      >
                         Trailer {convertDuration(data2?.durationInSeconds)}
+                      </h1> */}
+                      <h1
+                        className="text-white text-[4vw] relative top-[2vw]
+                             xsmall:text-[3.5vw]
+                             small:text-[2.5vw]
+                             medium:text-[2vw]
+                             large:text-[1.5vw] large:top-[3vw]
+                             xlarge:text-[1.5vw] xlarge:top-[2vw]
+                             2xlarge:text-[1vw] 2xlarge:top-[2vw]
+                             font-semibold"
+                      >
+                        Watch {data2?.title}
                       </h1>
                     </div>
-
-                    <h1 className=" text-white relative mx-[10vw] h-[25vh] text-[4vw] top-[20vw]   font-semibold">
-                      Watch {data2?.title}
-                    </h1>
                   </div>
                 </SwiperSlide>
               ))}
             </Swiper>
           </div>
         </div>
-        <div className=" absolute top-[1260vw] left-[5vw]">
-          <h1 className=" text-[4vw] font-bold relatednews">Related News</h1>
+
+        <div
+          className=" relative 
+                top-[230vw] left-[5vw]  text-[5vw]
+                xsmall:top-[230vw] xsmall:left-[5vw] xsmall:text-[4vw]
+                small:top-[240vw] small:left-[5vw] small:text-[3vw]
+                medium:top-[200vw] medium:left-[5vw] medium:text-[2.5vw]
+                large:top-[170vw] large:left-[5vw] large:text-[2vw]
+                xlarge:top-[160vw] xlarge:left-[5vw] xlarge:text-[1.8vw]
+                2xlarge:top-[110vw] 2xlarge:left-[5vw]  2xlarge:text-[1.5vw]
+                inline-block font-bold"
+        >
+          <h1 className=" relatednews">Related News</h1>
         </div>
-        <div className=" absolute w-[100vw] top-[1275vw] bg-red-30">
-          <div className="  flex flex-row">
+        <div
+          className=" relative w-[100vw] 
+                top-[240vw]
+                xsmall:top-[240vw]
+                small:top-[245vw]
+                medium:top-[205vw]
+                large:top-[250vw]
+                xlarge:top-[300vw]
+                2xlarge:top-[350vw]
+                bg-red-30"
+        >
+          <div className="flex flex-row">
             <Swiper
               slidesPerView={1}
               navigation={true}
               modules={[Navigation]}
-              className="mySwiper "
+              className="mySwiper"
               breakpoints={{
-                1536: {
+                480: {
+                  // xsmall
+                  slidesPerView: 2,
+                  spaceBetween: 10,
+                },
+                640: {
+                  // small
+                  slidesPerView: 2,
+                  spaceBetween: 10,
+                },
+                768: {
+                  // medium
                   slidesPerView: 3,
                   spaceBetween: 10,
+                },
+                1024: {
+                  // large
+                  slidesPerView: 3,
+                  spaceBetween: 10,
+                },
+                1280: {
+                  // xlarge
+                  slidesPerView: 4,
+                  spaceBetween: 20,
+                },
+                1536: {
+                  // 2xlarge
+                  slidesPerView: 4,
+                  spaceBetween: 20,
                 },
               }}
             >
@@ -1481,24 +1661,80 @@ const NowShowingMoviesFullDetailsPage = () => {
                 NowShowingRelatedNews?.news?.edges.map((data, index) => (
                   <SwiperSlide
                     key={index}
-                    className=" overflow-hidden flex ml-[vw] hover:text-red-600 hover:bg-gray-800 rounded-lg cursor-pointer "
+                    className="overflow-hidden  flex ml-[1vw] hover:text-red-600 hover:bg-gray-800 rounded-lg cursor-pointer"
                   >
-                    <div className="   flex  h-[30vh]">
+                    <div
+                      className="flex h-[30vh] py-2 px-2  bg-slate-300
+                            xsmall:h-[30vh] xsmall:w-[60vw]
+                            small:h-[26vh]
+                            medium:h-[24vh]  medium:w-[40vw]
+                            large:h-[22vh]
+                            xlarge:h-[20vh]
+                            2xlarge:h-[18vh]"
+                    >
                       <img
-                        className=" w-[27vw] h-[20vh] object-cover rounded-lg hover:bg-gray-600"
+                        className="w-full max-w-[30vw] max-h-[20vh] 
+                                   xsmall:max-w-[20vw] xsmall:max-h-[18vh]       
+                                     small:max-w-[15vw] small:max-h-[16vh]
+                                  medium:max-w-[12vw] medium:max-h-[18vh]
+                                large:max-w-[20vw] large:max-h-[12vh]
+                                  xlarge:max-w-[18vw] xlarge:max-h-[10vh]
+                                  2xlarge:max-w-[15vw] 2xlarge:max-h-[8vh]
+                                   object-cover rounded-lg hover:bg-gray-600"
                         src={data?.node?.image?.url}
                         alt=""
                       />
-                      <h1 className=" absolute left-[30vw]  text-[4vw] w-[60vw] text-amber-500">
+                      <h1
+                        className=" relative  left-[2vw] text-[3.5vw] 
+                             xsmall:text-[2vw]  xsmall:w-[26vw]
+                             small:text-[2.5vw] small:w-[30vw]
+                             medium:text-[2vw] medium:w-[16vw]
+                             large:text-[2vw]
+                             xlarge:text-[1.8vw]
+                             2xlarge:text-[1.5vw]
+                              text-amber-500"
+                      >
                         {data?.node?.articleTitle?.plainText}
                       </h1>
-                      <h1 className="absolute top-[33vw] text-white left-[32vw]">
+                      <h1
+                        className=" absolute  top-[45vw] left-[10vw]
+                             xsmall:top-[34vw] xsmall:left-[7vw]
+                             small:top-[29vw]
+                             medium:top-[27vw]
+                             large:top-[25vw]
+                             xlarge:top-[23vw]
+                             2xlarge:top-[21vw]
+                             text-white
+                             text-[3vw]
+                             xsmall:text-[2vw]
+                             small:text-[2.6vw]
+                             medium:text-[2.4vw]
+                             large:text-[2.2vw]
+                             xlarge:text-[2vw]
+                             2xlarge:text-[1.8vw]"
+                      >
                         {new Date(data?.node?.date).toLocaleString("default", {
                           month: "short",
                         })}{" "}
                         {new Date(data?.node?.date).getDate()}
                       </h1>
-                      <h1 className=" absolute top-[42vw] left-[40vw] text-lime-400 hover:underline">
+                      <h1
+                        className=" absolute top-[44vw] left-[40vw]
+                             xsmall:top-[34vw]  xsmall:left-[16vw]
+                             small:top-[38vw]
+                             medium:top-[36vw]
+                             large:top-[34vw]
+                             xlarge:top-[32vw]
+                             2xlarge:top-[30vw]
+                              text-lime-400 hover:underline
+                             text-[3vw]
+                             xsmall:text-[2vw]
+                             small:text-[2.6vw]
+                             medium:text-[2.4vw]
+                             large:text-[2.2vw]
+                             xlarge:text-[2vw]
+                             2xlarge:text-[1.8vw]"
+                      >
                         Source : {data?.node?.source?.homepage?.label}
                       </h1>
                     </div>
