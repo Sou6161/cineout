@@ -597,12 +597,12 @@ const NowShowingMoviesFullDetailsPage = () => {
         </div>
         <div
           className="flex gap-5 bg-red-30  relative left-[8vw] bottom-[45vw] 
-                xsmall:left-[7vw] xsmall:gap-4
-                small:left-[6vw] small:gap-3
-                medium:left-[5vw] medium:gap-2
-                large:left-[4vw] large:gap-1
-                xlarge:left-[3vw]
-                2xlarge:left-[2vw]"
+                xsmall:left-[7vw] xsmall:gap-4 xsmall:bottom-[39vw]
+                small:left-[6vw] small:gap-3 small:bottom-[33vw]
+                medium:left-[5vw] medium:gap-2 medium:bottom-[33vw]
+                large:left-[4vw] large:gap-1 large:bottom-[35vw]
+                xlarge:left-[3vw] xlarge:bottom-[33vw]
+                2xlarge:-left-[5vw] 2xlarge:bottom-[28vw]"
         >
           <h1
             className="whitespace-nowrap text-[2vw] bottom-1  relative left-[34vw] font-bold text-yellow-400
@@ -611,7 +611,7 @@ const NowShowingMoviesFullDetailsPage = () => {
                  medium:text-[2vw] medium:left-[36vw] medium:bottom-[6vw]
                  large:text-[1.5vw] large:left-[36vw] large:bottom-[8vw]
                  xlarge:text-[1.5vw] xlarge:left-[36vw]
-                 2xlarge:text-[1.5vw] 2xlarge:left-[50vw] 2xlarge:bottom-[12vw]                 "
+                 2xlarge:text-[1.2vw] 2xlarge:left-[50vw] 2xlarge:bottom-[12vw]                 "
           >
             CINEOUT RATING
           </h1>
@@ -620,7 +620,7 @@ const NowShowingMoviesFullDetailsPage = () => {
                    xsmall:text-[1.3vw] xsmall:top-9
                    small:text-[1.1vw] small:top-8 small:left-[4vw]
                    medium:text-[0.9vw] medium:top-8  medium:left-[6vw]
-                   large:text-[0.7vw] large:top-6 
+                   large:text-[0.7vw] large:top-6  large:left-[5vw]
                    xlarge:text-[0.5vw] xlarge:top-5
                    2xlarge:text-[0.3vw] 2xlarge:top-4"
           >
@@ -631,7 +631,7 @@ const NowShowingMoviesFullDetailsPage = () => {
                       medium:text-[2vw] medium:bottom-[6vw]
                       large:text-[2vw] large:bottom-[6vw]
                       xlarge:text-[2vw] xlarge:bottom-[7vw] xlarge:left-[32vw]
-                      2xlarge:text-[2vw] 2xlarge:bottom-[10vw] 2xlarge:left-[46vw]          "
+                      2xlarge:text-[1.5vw] 2xlarge:bottom-[10vw] 2xlarge:left-[47vw]          "
             />
             <span
               className="inline-block relative text-[2.5vw] left-[36vw] bottom-[8vw] text-red-600
@@ -640,7 +640,7 @@ const NowShowingMoviesFullDetailsPage = () => {
                      medium:text-[2.2vw] medium:bottom-[8.5vw]
                      large:text-[2vw] large:bottom-[8.5vw]
                      xlarge:text-[2vw] xlarge:bottom-[9.5vw] xlarge:left-[35vw]
-                     2xlarge:text-[2vw] 2xlarge:bottom-[12.5vw] 2xlarge:left-[49vw] "
+                     2xlarge:text-[1.5vw] 2xlarge:bottom-[12.5vw] 2xlarge:left-[49vw] "
             >
               {NowShowingMoviesDetails?.ratingsSummary?.aggregateRating}/10
             </span>
@@ -651,7 +651,7 @@ const NowShowingMoviesFullDetailsPage = () => {
                      medium:text-[2vw] medium:bottom-[5.5vw] medium:left-[30vw]
                      large:text-[1.5vw] large:bottom-[6vw]
                      xlarge:text-[1.5vw] xlarge:bottom-[8vw]
-                     2xlarge:text-[1.5vw] 2xlarge:bottom-[11vw] 2xlarge:left-[44vw]"
+                     2xlarge:text-[1.5vw] 2xlarge:bottom-[11vw] 2xlarge:left-[45vw]"
             >
               (
               <NumberFormatter
@@ -667,7 +667,7 @@ const NowShowingMoviesFullDetailsPage = () => {
                  medium:text-[2vw] medium:left-[42vw] 
                  large:text-[1.5vw] large:left-[43vw] large:-top-[8vw]
                  xlarge:text-[1.5vw] xlarge:left-[43vw]
-                 2xlarge:text-[1.5vw] 2xlarge:left-[57vw] 2xlarge:-top-[12vw]"
+                 2xlarge:text-[1.2vw] 2xlarge:left-[57vw] 2xlarge:-top-[12vw]"
           >
             YOUR RATING
           </h1>
@@ -676,9 +676,9 @@ const NowShowingMoviesFullDetailsPage = () => {
                  xsmall:text-[2.5vw] xsmall:left-[56vw] xsmall:top-[3vw]
                    small:text-[3vw] small:left-[57vw]  small:-top-[3vw]
                    medium:text-[2.1vw] medium:left-[62vw] medium:-top-[2.5vw]
-                   large:text-[2.5vw] large:left-[60vw] large:-top-[5vw]
+                   large:text-[2.5vw] large:left-[57vw] large:-top-[5vw]
                    xlarge:text-[2.5vw] xlarge:left-[58vw] xlarge:-top-[5.5vw]
-                   2xlarge:text-[2.5vw] 2xlarge:left-[71vw] 2xlarge:-top-[9.5vw]"
+                   2xlarge:text-[2.5vw] 2xlarge:left-[68vw] 2xlarge:-top-[9.5vw]"
           >
             <IoStarOutline />
           </span>
@@ -688,9 +688,9 @@ const NowShowingMoviesFullDetailsPage = () => {
                  xsmall:text-[2.1vw] xsmall:left-[59vw] xsmall:top-[2.8vw]
                  small:text-[2.2vw] small:left-[61vw] small:-top-[3vw]
                  medium:text-[2vw] medium:left-[65vw]
-                 large:text-[1.5vw] large:left-[66vw] large:-top-[5vw]
-                 xlarge:text-[1.5vw] xlarge:left-[62vw] xlarge:-top-[5vw]
-                 2xlarge:text-[1.5vw] 2xlarge:left-[74vw] 2xlarge:-top-[9.5vw]"
+                 large:text-[1.5vw] large:left-[60vw] large:-top-[5vw]
+                 xlarge:text-[1.5vw] xlarge:left-[61vw] xlarge:-top-[5vw]
+                 2xlarge:text-[1.5vw] 2xlarge:left-[71vw] 2xlarge:-top-[9.5vw]"
           >
             RATE
           </h1>
@@ -826,9 +826,9 @@ const NowShowingMoviesFullDetailsPage = () => {
                    xsmall:text-[2.7vw] xsmall:left-[73vw] xsmall:top-6
                    small:text-[3.5vw] small:left-[75vw] small:-top-[3vw]
                    medium:text-[2.1vw] medium:left-[78vw]
-                   large:text-[2vw] large:left-[80vw] large:-top-[5vw]
-                   xlarge:text-[2vw] xlarge:left-[77vw] xlarge:-top-[5vw]
-                   2xlarge:text-[2vw] 2xlarge:left-[87vw] 2xlarge:-top-[9vw]"
+                   large:text-[2vw] large:left-[72vw] large:-top-[5vw]
+                   xlarge:text-[2vw] xlarge:left-[76vw] xlarge:-top-[5vw]
+                   2xlarge:text-[2vw] 2xlarge:left-[82vw] 2xlarge:-top-[9vw]"
           >
             {NowShowingMoviesDetails?.meterRanking?.currentRank > 5 ? (
               <FaArrowTrendDown />
@@ -841,12 +841,12 @@ const NowShowingMoviesFullDetailsPage = () => {
                    xsmall:text-[2.3vw] xsmall:left-[79vw] xsmall:top-6
                    small:text-[3vw] small:left-[80vw] small:-top-[3vw]
                    medium:text-[1.9vw] medium:left-[82vw]
-                   large:text-[1.5vw] large:left-[85vw] large:-top-[5vw]
-                   xlarge:text-[1.5vw] xlarge:left-[81vw]
-                   2xlarge:text-[1.3vw] 2xlarge:left-[91vw] 2xlarge:-top-[9vw]"
+                   large:text-[1.5vw] large:left-[76vw] large:-top-[5vw]
+                   xlarge:text-[1.5vw] xlarge:left-[80vw]
+                   2xlarge:text-[1.3vw] 2xlarge:left-[85vw] 2xlarge:-top-[9vw]"
           >
             {NowShowingMoviesDetails?.meterRanking?.currentRank}
-            <span className="relative left-[1vw] top-1">
+            <span className="relative left-[1vw] top-">
               {NowShowingMoviesDetails?.meterRanking?.rankChange
                 ?.changeDirection === "UP" ? (
                 <IoMdArrowDropup
@@ -864,7 +864,7 @@ const NowShowingMoviesFullDetailsPage = () => {
                                       xsmall:text-[2.5vw]
                                       small:text-[2.5vw]
                                       medium:text-[2.5vw]
-                                      large:text-[2.5vw]
+                                      large:text-[2vw]
                                       xlarge:text-[2.5vw]
                                       2xlarge:text-[2vw]"
                 />
@@ -875,7 +875,7 @@ const NowShowingMoviesFullDetailsPage = () => {
                      xsmall:text-[2.3vw]
                      small:text-[2.5vw]
                      medium:text-[2.5vw]
-                     large:text-[2.5vw]
+                     large:text-[1.5vw]
                      xlarge:text-[1.5vw]
                      2xlarge:text-[1.3vw]"
             >
@@ -884,7 +884,7 @@ const NowShowingMoviesFullDetailsPage = () => {
           </span>
         </div>
         <div className=" relative  ml-[35vw] -top-[5vw] ">
-          <div class="btn-donate  h-[7vh] relative left-[20vw] xsmall:left-[22vw] xsmall:-top-[5vw] small:left-[26vw] small:-top-[5vw] medium:left-[35vw] medium:-top-[10vw] large:-top-[13vw] large:left-[40vw] xlarge:-top-[15vw] xlarge:left-[40vw] 2xlarge:left-[40vw] 2xlarge:-top-[18vw]">
+          <div class="btn-donate  h-[7vh] relative left-[20vw] xsmall:left-[27vw] xsmall:top-[6vw] small:left-[26vw] small:top-[5vw] medium:left-[35vw] medium:top-[2vw] large:-top-[3vw] large:left-[40vw] xlarge:top-[2vw] xlarge:left-[40vw] 2xlarge:left-[40vw] 2xlarge:top-[4vw]">
             <span className=" relative bottom-5 left-3 text-[3vw] xsmall:text-[2.5vw] small:text-[2vw] medium:text-[1.8vw] large:text-[1.4vw] xlarge:text-[1.5vw] 2xlarge:text-[1.3vw]">
               {" "}
               <span className=" relative top-5 right-4  medium:top-6 large:top-6 large:right-5  xlarge:top-7 xlarge:right-6 2xlarge:top-8 2xlarge:right-6 ">
@@ -900,13 +900,13 @@ const NowShowingMoviesFullDetailsPage = () => {
             </h1>
           </div>
           <div className=" flex cursor-pointer">
-            <h1 className=" font-semibold text-yellow-400 text-[2vw] relative left-[22vw] xsmall:-top-[5vw] small:left-[24vw] medium:left-[30vw] medium:-top-[10vw] medium:text-[1.6vw] large:left-[36vw] large:-top-[13vw] large:text-[1.5vw] xlarge:left-[37vw] xlarge:-top-[15vw] xlarge:text-[1.5vw] 2xlarge:left-[38vw] 2xlarge:-top-[18vw] 2xlarge:text-[1.3vw] mt-2">
+            <h1 className=" font-semibold text-yellow-400 text-[2vw] relative left-[22vw] xsmall:left-[25vw] xsmall:top-[5vw] small:left-[24vw] medium:left-[30vw] medium:top-[1vw] medium:text-[1.6vw] large:left-[36vw] large:-top-[3vw] large:text-[1.5vw] xlarge:left-[37vw] xlarge:top-[2vw] xlarge:text-[1.5vw] 2xlarge:left-[38vw] 2xlarge:top-[4vw] 2xlarge:text-[1.3vw] mt-2">
               {NowShowingMoviesDetails?.reviews?.total}{" "}
               <span className=" whitespace-nowrap font-normal text-white mr-5 hover:underline">
                 User reviews
               </span>{" "}
             </h1>{" "}
-            <h1 className=" font-semibold text-yellow-400 text-[2vw] relative left-[20vw] xsmall:-top-[5vw] small:left-[23vw] medium:left-[30vw] medium:-top-[10vw] medium:text-[1.8vw] large:left-[36vw] large:-top-[13vw] large:text-[1.5vw] xlarge:left-[36vw] xlarge:-top-[15vw] xlarge:text-[1.5vw] mt-2 2xlarge:left-[40vw] 2xlarge:-top-[18vw] 2xlarge:text-[1.3vw]  ">
+            <h1 className=" font-semibold text-yellow-400 text-[2vw] relative left-[20vw] xsmall:left-[25vw] xsmall:top-[5vw] small:left-[23vw] medium:left-[30vw] medium:top-[1vw] medium:text-[1.8vw] large:left-[36vw] large:-top-[3vw] large:text-[1.5vw] xlarge:left-[36vw] xlarge:top-[2vw] xlarge:text-[1.5vw] mt-2 2xlarge:left-[40vw] 2xlarge:top-[4vw] 2xlarge:text-[1.3vw]  ">
               {NowShowingMoviesDetails?.criticReviewsTotal?.total}{" "}
               <span className=" whitespace-nowrap font-normal text-white hover:underline">
                 Critics reviews
@@ -915,10 +915,10 @@ const NowShowingMoviesFullDetailsPage = () => {
           </div>
           <div>
             <h1 className=" font-semibold text-yellow-400 cursor-pointer text-[2vw] mt-1   ">
-              <span className=" mr-3 inline-block relative left-[30vw] xsmall:-top-[5vw] small:left-[32vw] medium:-top-[10vw] medium:left-[38vw] large:left-[42vw] large:-top-[13vw] large:text-[1.5vw] xlarge:left-[42vw] xlarge:-top-[15vw] xlarge:text-[1.5vw] 2xlarge:left-[45vw] 2xlarge:-top-[18vw] 2xlarge:text-[1.3vw] ">
+              <span className=" mr-3 inline-block relative left-[30vw] xsmall:left-[33vw] xsmall:top-[5vw] small:left-[32vw] medium:top-[1vw] medium:left-[38vw] large:left-[42vw] large:-top-[3vw] large:text-[1.5vw] xlarge:left-[42vw] xlarge:top-[2vw] xlarge:text-[1.5vw] 2xlarge:left-[45vw] 2xlarge:top-[4vw] 2xlarge:text-[1.3vw] ">
                 {NowShowingMoviesDetails?.metacritic?.metascore?.score}{" "}
               </span>
-              <span className="font-normal text-white hover:underline relative left-[28vw] xsmall:-top-[5vw] small:left-[32vw] medium:left-[38vw] medium:-top-[10vw] large:left-[42vw] large:-top-[13vw] large:text-[1.5vw] xlarge:left-[42vw] xlarge:-top-[15vw] xlarge:text-[1.5vw] 2xlarge:left-[45vw] 2xlarge:-top-[18vw] 2xlarge:text-[1.3vw]">
+              <span className="font-normal text-white hover:underline relative left-[28vw] xsmall:left-[33vw] xsmall:top-[5vw] small:left-[32vw] medium:left-[38vw] medium:top-[1vw] large:left-[42vw] large:-top-[3vw] large:text-[1.5vw] xlarge:left-[42vw] xlarge:top-[2vw] xlarge:text-[1.5vw] 2xlarge:left-[45vw] 2xlarge:top-[4vw] 2xlarge:text-[1.3vw]">
                 Metascore
               </span>
             </h1>
@@ -934,7 +934,7 @@ const NowShowingMoviesFullDetailsPage = () => {
           </p>
         </div>
 
-        <div className=" bg-red-30 relative top-[80vw] left-[10vw] text-[4vw] xsmall:text-[3vw] xsmall:top-[108vw] small:text-[3vw] small:top-[105vw] medium:text-[2.5vw] medium:top-[90vw] large:text-[2vw] large:top-[80vw] 2xlarge:top-[40vw] font-bold ">
+        <div className=" bg-red-30 relative top-[50vw] left-[10vw] text-[4vw] xsmall:text-[3vw] xsmall:top-[108vw] small:text-[3vw] small:top-[105vw] medium:text-[2.5vw] medium:top-[90vw] large:text-[2vw] large:top-[80vw] 2xlarge:top-[40vw] font-bold ">
           <h1>TOP CAST</h1>
           <div className="flex justify-between mt-5">
             <div className="name-list flex justify-start">
@@ -954,7 +954,7 @@ const NowShowingMoviesFullDetailsPage = () => {
             </div>
           </div>
         </div>
-        <div className="relative top-[100vw] bg-red-30 left-[5vw] text-[5vw]  xsmall:text-[4vw] xsmall:top-[120vw] small:text-[3vw] small:top-[115vw] medium:text-[2.5vw] medium:top-[100vw] large:text-[2.2vw] large:top-[90vw] xlarge:text-[2vw] xlarge:top-[88vw] 2xlarge:text-[1.5vw] 2xlarge:top-[48vw]">
+        <div className="relative top-[65vw] bg-red-30 left-[5vw] text-[5vw]  xsmall:text-[4vw] xsmall:top-[120vw] small:text-[3vw] small:top-[115vw] medium:text-[2.5vw] medium:top-[100vw] large:text-[2.2vw] large:top-[90vw] xlarge:text-[2vw] xlarge:top-[88vw] 2xlarge:text-[1.5vw] 2xlarge:top-[48vw]">
           <h1 className="font-bold">More Titles Like This</h1>
           <div className=" relative -mx-[2vw] w-[95vw] h-auto large:h-[70vh] xlarge:h-auto 2xlarge:h-[65vh] mt-10 border-l-2 my-2 border-r-2 border-blue-600 flex flex-nowrap overflow-x-auto overflow-y-hidden no-scrollbar gap-5">
             {NowShowingMoviesDetails &&
@@ -1044,7 +1044,7 @@ const NowShowingMoviesFullDetailsPage = () => {
 
         <div
           className="relative 
-                top-[120vw] left-[5vw] 
+                top-[85vw] left-[5vw] 
                 xsmall:top-[130vw] xsmall:left-[5vw]
                 small:top-[125vw] small:left-[5vw]
                 medium:top-[110vw] medium:left-[5vw]
@@ -1066,7 +1066,7 @@ const NowShowingMoviesFullDetailsPage = () => {
             Details
           </h1>
         </div>
-        <div className="  relative  top-[125vw] left-[5vw] xsmall:top-[135vw] small:top-[130vw] medium:top-[115vw] large:top-[100vw] xlarge:top-[98vw] 2xlarge:top-[57vw]">
+        <div className="  relative  top-[90vw] left-[5vw] xsmall:top-[135vw] small:top-[130vw] medium:top-[115vw] large:top-[100vw] xlarge:top-[98vw] 2xlarge:top-[57vw]">
           <h1 className="text-[2.5vw] medium:text-[2vw] large:text-[1.7vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-blue-500 border-t-[1px] border-b-[1px]  border-gray-700 py-5">
             <span className="  text-yellow-400 mr-5">Release Date</span>
             {NowShowingMoviesDetails?.releaseDate?.month}
@@ -1146,7 +1146,7 @@ const NowShowingMoviesFullDetailsPage = () => {
 
         <div
           className=" relative 
-                top-[140vw] left-[5vw]  text-[5vw]
+                top-[108vw] left-[5vw]  text-[5vw]
                 xsmall:top-[150vw] xsmall:left-[5vw] xsmall:text-[4vw]
                 small:top-[140vw] small:left-[5vw] small:text-[3vw]
                 medium:top-[125vw] medium:left-[5vw] medium:text-[2.5vw]
@@ -1160,7 +1160,7 @@ const NowShowingMoviesFullDetailsPage = () => {
 
         <div
           className="flex flex-col ml-[2vw] relative 
-                top-[150vw]
+                top-[115vw]
                 xsmall:top-[160vw]
                 small:top-[145vw]
                 medium:top-[130vw]
@@ -1254,7 +1254,7 @@ const NowShowingMoviesFullDetailsPage = () => {
 
         <div
           className=" relative 
-                top-[165vw] left-[5vw]  text-[5vw]
+                top-[130vw] left-[5vw]  text-[5vw]
                 xsmall:top-[170vw] xsmall:left-[5vw] xsmall:text-[4vw]
                 small:top-[155vw] small:left-[5vw] small:text-[3vw]
                 medium:top-[135vw] medium:left-[5vw] medium:text-[2.5vw]
@@ -1267,7 +1267,7 @@ const NowShowingMoviesFullDetailsPage = () => {
         </div>
         <div
           className="relative 
-                top-[170vw] left-[5vw]
+                top-[135vw] left-[5vw]
                 xsmall:top-[175vw] xsmall:left-[5vw]
                 small:top-[160vw] small:left-[5vw]
                 medium:top-[140vw] medium:left-[5vw]
@@ -1324,7 +1324,7 @@ const NowShowingMoviesFullDetailsPage = () => {
           </div>
         </div>
 
-        <div className=" relative top-[185vw] small:top-[170vw] medium:top-[150vw] large:top-[125vw] xlarge:top-[125vw] 2xlarge:top-[80vw] left-[5vw]  inline-block ">
+        <div className=" relative top-[150vw] small:top-[170vw] medium:top-[150vw] large:top-[125vw] xlarge:top-[125vw] 2xlarge:top-[80vw] left-[5vw]  inline-block ">
           <h1 className="text-[5vw] xsmall:text-[4.5vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2vw] xlarge:text-[1.8vw] 2xlarge:text-[1.5vw] font-bold mb-5">
             Technical Specs
           </h1>
@@ -1382,7 +1382,7 @@ const NowShowingMoviesFullDetailsPage = () => {
         </div>
         <div
           className=" relative 
-                top-[200vw] left-[5vw]  text-[5vw]
+                top-[165vw] left-[5vw]  text-[5vw]
                 xsmall:top-[200vw] xsmall:left-[5vw] xsmall:text-[4vw]
                 small:top-[185vw] small:left-[5vw] small:text-[3vw]
                 medium:top-[160vw] medium:left-[5vw] medium:text-[2.5vw]
@@ -1596,7 +1596,7 @@ const NowShowingMoviesFullDetailsPage = () => {
 
         <div
           className=" relative 
-                top-[230vw] left-[5vw]  text-[5vw]
+                top-[220vw] left-[5vw]  text-[5vw]
                 xsmall:top-[230vw] xsmall:left-[5vw] xsmall:text-[4vw]
                 small:top-[240vw] small:left-[5vw] small:text-[3vw]
                 medium:top-[200vw] medium:left-[5vw] medium:text-[2.5vw]
@@ -1608,19 +1608,20 @@ const NowShowingMoviesFullDetailsPage = () => {
           <h1 className=" relatednews">Related News</h1>
         </div>
         <div
-          className=" relative w-[100vw] 
+          className=" relative w-[95vw] left-2 
                 top-[240vw]
                 xsmall:top-[240vw]
                 small:top-[245vw]
-                medium:top-[205vw]
-                large:top-[250vw]
-                xlarge:top-[300vw]
-                2xlarge:top-[350vw]
+                medium:top-[205vw] medium:w-[95vw] medium:left-[2vw]
+                large:top-[175vw] large:w-[98vw] large:left-[1vw]
+                xlarge:top-[160vw]
+                2xlarge:top-[113vw]
                 bg-red-30"
         >
           <div className="flex flex-row">
             <Swiper
               slidesPerView={1}
+              spaceBetween={10}
               navigation={true}
               modules={[Navigation]}
               className="mySwiper"
@@ -1637,7 +1638,7 @@ const NowShowingMoviesFullDetailsPage = () => {
                 },
                 768: {
                   // medium
-                  slidesPerView: 3,
+                  slidesPerView: 2,
                   spaceBetween: 10,
                 },
                 1024: {
@@ -1661,96 +1662,96 @@ const NowShowingMoviesFullDetailsPage = () => {
                 NowShowingRelatedNews?.news?.edges.map((data, index) => (
                   <SwiperSlide
                     key={index}
-                    className="overflow-hidden  flex ml-[1vw] hover:text-red-600 hover:bg-gray-800 rounded-lg cursor-pointer"
+                    className="overflow-hidden 2xlarge:h-[2vh] flex  hover:text-red-600  cursor-pointer"
                   >
                     <div
-                      className="flex h-[30vh] py-2 px-2  bg-slate-300
-                            xsmall:h-[30vh] xsmall:w-[60vw]
+                      className="flex h-[24vh] py-2 px-2  hover:bg-gray-600 rounded-lg
+                            xsmall:h-[26vh] xsmall:w-[60vw]
                             small:h-[26vh]
-                            medium:h-[24vh]  medium:w-[40vw]
-                            large:h-[22vh]
-                            xlarge:h-[20vh]
-                            2xlarge:h-[18vh]"
+                            medium:h-[28vh]  medium:w-[50vw]
+                            large:h-[28vh]
+                            xlarge:h-[30vh]
+                            2xlarge:h-[25vh]"
                     >
                       <img
-                        className="w-full max-w-[30vw] max-h-[20vh] 
-                                   xsmall:max-w-[20vw] xsmall:max-h-[18vh]       
-                                     small:max-w-[15vw] small:max-h-[16vh]
-                                  medium:max-w-[12vw] medium:max-h-[18vh]
-                                large:max-w-[20vw] large:max-h-[12vh]
-                                  xlarge:max-w-[18vw] xlarge:max-h-[10vh]
-                                  2xlarge:max-w-[15vw] 2xlarge:max-h-[8vh]
+                        className="w-full max-w-[25vw] max-h-[20vh] 
+                                   xsmall:max-w-[16vw] xsmall:max-h-[15vh] xsmall:object-center       
+                                     small:max-w-[14vw] small:max-h-[15vh] small:object-center
+                                  medium:max-w-[11vw] medium:max-h-[19vh]
+                                large:max-w-[9vw] large:max-h-[19vh]
+                                  xlarge:max-w-[7vw] xlarge:max-h-[17vh]
+                                  2xlarge:max-w-[7vw] 2xlarge:max-h-[19vh]
                                    object-cover rounded-lg hover:bg-gray-600"
                         src={data?.node?.image?.url}
                         alt=""
                       />
                       <h1
-                        className=" relative  left-[2vw] text-[3.5vw] 
-                             xsmall:text-[2vw]  xsmall:w-[26vw]
-                             small:text-[2.5vw] small:w-[30vw]
-                             medium:text-[2vw] medium:w-[16vw]
-                             large:text-[2vw]
-                             xlarge:text-[1.8vw]
-                             2xlarge:text-[1.5vw]
+                        className="  absolute w-[60vw]  left-[32vw] text-[3.5vw] 
+                             xsmall:text-[2.5vw]  xsmall:w-[30vw] xsmall:left-[19vw] 
+                             small:text-[2.2vw] small:w-[30vw] small:left-[17vw]
+                             medium:text-[2vw] medium:w-[30vw] medium:left-[15vw]
+                             large:text-[1.4vw] large:w-[22vw] large:left-[10vw]
+                             xlarge:text-[1.1vw] xlarge:w-[15vw] xlarge:left-[8vw]
+                             2xlarge:text-[1vw]
                               text-amber-500"
                       >
                         {data?.node?.articleTitle?.plainText}
                       </h1>
-                      <h1
-                        className=" absolute  top-[45vw] left-[10vw]
-                             xsmall:top-[34vw] xsmall:left-[7vw]
-                             small:top-[29vw]
-                             medium:top-[27vw]
-                             large:top-[25vw]
-                             xlarge:top-[23vw]
-                             2xlarge:top-[21vw]
-                             text-white
-                             text-[3vw]
-                             xsmall:text-[2vw]
-                             small:text-[2.6vw]
-                             medium:text-[2.4vw]
-                             large:text-[2.2vw]
-                             xlarge:text-[2vw]
-                             2xlarge:text-[1.8vw]"
-                      >
-                        {new Date(data?.node?.date).toLocaleString("default", {
-                          month: "short",
-                        })}{" "}
-                        {new Date(data?.node?.date).getDate()}
-                      </h1>
-                      <h1
-                        className=" absolute top-[44vw] left-[40vw]
-                             xsmall:top-[34vw]  xsmall:left-[16vw]
-                             small:top-[38vw]
-                             medium:top-[36vw]
-                             large:top-[34vw]
-                             xlarge:top-[32vw]
-                             2xlarge:top-[30vw]
-                              text-lime-400 hover:underline
-                             text-[3vw]
-                             xsmall:text-[2vw]
-                             small:text-[2.6vw]
-                             medium:text-[2.4vw]
-                             large:text-[2.2vw]
-                             xlarge:text-[2vw]
-                             2xlarge:text-[1.8vw]"
-                      >
-                        Source : {data?.node?.source?.homepage?.label}
-                      </h1>
                     </div>
+                    <h1
+                      className=" relative   top-[2vw] -left-[38vw] whitespace-nowrap
+                             xsmall:top-[1.5vw] xsmall:-left-[21vw]
+                             small:top-[1vw] 
+                             medium:top-[1vw] medium:-left-[20vw]
+                             large:top-[1vw] large:-left-[13vw]
+                             xlarge:top-[1vw] xlarge:-left-[9vw]
+                             2xlarge:top-[0vw]
+                             text-red-600
+                             text-[3.5vw]
+                             xsmall:text-[2.2vw]
+                             small:text-[2.1vw]
+                             medium:text-[1.6vw]
+                             large:text-[1.5vw]
+                             xlarge:text-[1.2vw]
+                             2xlarge:text-[1vw]"
+                    >
+                      {new Date(data?.node?.date).toLocaleString("default", {
+                        month: "short",
+                      })}{" "}
+                      {new Date(data?.node?.date).getDate()}
+                    </h1>
+                    <h1
+                      className=" relative text-[3vw] -top-[3vw] left-[10vw] whitespace-nowrap
+                             xsmall:-top-[2vw]  xsmall:left-[4vw] xsmall:whitespace-normal
+                             small:-top-[2vw] small:left-[3.5vw]
+                             medium:-top-[2vw] 
+                             large:-top-[1vw]
+                             xlarge:-top-[vw] xlarge:left-[3vw]
+                             2xlarge:-top-[1.5vw] 2xlarge:left-[2.2vw]
+                              text-lime-400 hover:underline
+                             
+                             xsmall:text-[2.2vw]
+                             small:text-[2.1vw]
+                             medium:text-[1.8vw]
+                             large:text-[1.5vw]
+                             xlarge:text-[1vw]
+                             2xlarge:text-[1vw]"
+                    >
+                      By : {data?.node?.source?.homepage?.label}
+                    </h1>
                   </SwiperSlide>
                 ))}
             </Swiper>
           </div>
         </div>
-        {/* <div className=" overflow-hidden  absolute bg-[#030C16]  w-[100vw] h-[150vw]  top-[1350vw]  ">
-          <div className="">
+        <div className=" overflow-hidden relative medium:top-[215vw] large:medium:top-[180vw] xlarge:top-[165vw]  2xlarge:top-[115vw] bg-[#030C16  w-[100vw] h-[150vw]  top-[270vw]  ">
+          <div className=" bg-red-30">
             <RecentlyViewed />
           </div>
         </div>
-        <div className=" absolute  bg-[#030C16] top-[1500vw] border-t-2 border-red-600">
+        <div className=" relative w-[100vw] xsmall:top-[215vw] small:top-[190vw]  medium:top-[130vw] large:medium:top-[85vw] xlarge:top-[60vw]  2xlarge:top-[5vw]  bg-[#030C16] top-[240vw] border-t-2 border-red-600">
           <Footer />
-        </div> */}
+        </div>
       </div>
     </div>
   );

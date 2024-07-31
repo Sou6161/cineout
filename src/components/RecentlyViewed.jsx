@@ -21,14 +21,14 @@ const RecentlyViewed = () => {
   }
   return (
     <>
-      <div className="mb-[3vw] bg-red-30 mt-[7vw] ml-[2vw] xsmall:ml-[2vw] small:ml-[2vw] medium:ml-[2vw] large:ml-[2vw] xlarge:ml-[2vw] 2xlarge:ml-[2vw] inline-block">
-        <div className=" bg-red-300 h-0 text-[6vw] xsmall:text-[4.5vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.2vw] xlarge:text-[1.9vw] 2xlarge:text-[1.7vw] text-red-600 bg-red-30 font-semibold ml-10">
+      <div className=" relative  bg-red-300  mb-[3vw] bg-red-30 mt-[7vw] ml-[2vw] xsmall:ml-[2vw] small:ml-[2vw] medium:ml-[2vw]  large:ml-[2vw] xlarge:ml-[2vw] 2xlarge:ml-[2vw] inline-block">
+        <div className="  h-0 text-[6vw] bg-lime-300 xsmall:text-[4.5vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.2vw] xlarge:text-[1.9vw] 2xlarge:text-[1.7vw] text-red-600 bg-red-30 font-semibold ml-10">
           Recently Viewed
           <span className="inline-block text-[6vw] xsmall:text-[4vw] small:text-[3vw] medium:text-[2.7vw] large:text-[2vw] xlarge:text-[1.5vw] text-yellow-400  relative top-[.5vh] right-[52vw] xsmall:right-[38vw] small:right-[30vw] medium:right-[26vw] large:right-[19vw] xlarge:right-[16.5vw] 2xlarge:right-[14.5vw]">
             {" "}
             <FaEye />
           </span>
-          <div className="  relative  left-[65vw] bottom-[7vw] 2xlarge:bottom-[1vw]">
+          <div className="  relative  left-[65vw] medium:bottom-[5vw] medium:left-[75vw]  large:bottom-[3vw] large:left-[80vw] xlarge:bottom-[3vw] xlarge:left-[80vw] 2] bottom-[7vw] 2xlarge:bottom-[3vw]">
             <button className="Deletebutton" onClick={clearRecentlyViewed}>
               <svg viewBox="0 0 448 512" className="DeletesvgIcon">
                 <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path>

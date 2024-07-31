@@ -15,12 +15,12 @@ const Footer = () => {
           onClick={() => window.location.reload()}
           class="relative w-[50vw] h-[7vh] xsmall:w-[37vw] small:w-[31vw] medium:w-[25vw] large:w-[21vw] xlarge:w-[18vw] 2xlarge:w-[16vw] mt-5 items-center justify-center inline-block p- px-2 py-3 xlarge:px-3  2xlarge:px-6 2xlarge:py-3  overflow-hidden font-medium text-indigo-600 rounded-lg shadow-2xl group"
         >
-          <span class="absolute top-0 left-0 w-40 h-40 -mt-10 -ml-3 transition-all duration-700 bg-slate-5 rounded-full blur-md ease"></span>
+          <span class="relative top-0 left-0 w-40 h-40 -mt-10 -ml-3 transition-all duration-700 bg-slate-5 rounded-full blur-md ease"></span>
           <span class="absolute inset-0 w-full h-full transition duration-700 group-hover:rotate-180 ease">
             <span class="absolute bottom-0 left-0 w-24 h-24 -ml-10 bg-red-600 rounded-full blur-md"></span>
             <span class="absolute bottom-0 right-0 w-24 h-24 -mr-10 bg-cyan-400 rounded-full blur-md"></span>
           </span>
-          <span class="relative text-[4vw] xsmall:text-[3vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.7vw] xlarge:text-[1.4vw] 2xlarge:text-[1.1vw] text-white font-bold">
+          <span class="relative ml-3 text-[4vw] xsmall:text-[3vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.7vw] xlarge:text-[1.4vw] 2xlarge:text-[1.1vw] text-white font-bold">
             Sign In For More Access
           </span>
         </Link>
