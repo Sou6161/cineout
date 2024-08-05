@@ -21,7 +21,7 @@ const RecentlyViewed = () => {
   }
   return (
     <>
-      <div className=" relative  bg-red-300  mb-[3vw] bg-red-30 mt-[7vw] ml-[2vw] xsmall:ml-[2vw] small:ml-[2vw] medium:ml-[2vw]  large:ml-[2vw] xlarge:ml-[2vw] 2xlarge:ml-[2vw] inline-block">
+      <div className=" relative  bg-red-30  mb-[3vw] bg-red-30 mt-[7vw] ml-[2vw] xsmall:ml-[2vw] small:ml-[2vw] medium:ml-[2vw]  large:ml-[2vw] xlarge:ml-[2vw] 2xlarge:ml-[2vw] inline-block">
         <div className="  h-0 text-[6vw] bg-lime-300 xsmall:text-[4.5vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.2vw] xlarge:text-[1.9vw] 2xlarge:text-[1.7vw] text-red-600 bg-red-30 font-semibold ml-10">
           Recently Viewed
           <span className="inline-block text-[6vw] xsmall:text-[4vw] small:text-[3vw] medium:text-[2.7vw] large:text-[2vw] xlarge:text-[1.5vw] text-yellow-400  relative top-[.5vh] right-[52vw] xsmall:right-[38vw] small:right-[30vw] medium:right-[26vw] large:right-[19vw] xlarge:right-[16.5vw] 2xlarge:right-[14.5vw]">

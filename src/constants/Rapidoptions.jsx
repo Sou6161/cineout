@@ -156,7 +156,7 @@ export const Rapidpostoptions = {
   url: "https://imdb188.p.rapidapi.com/api/v1/getPopularTVShows",
   headers: {
     "content-type": "application/json",
-    "X-RapidAPI-Key": "f4d8c4b0damshaaa929b9a6a3bd1p174e49jsn66d467e50843",
+    "X-RapidAPI-Key": "7f4e6e9132msha1c12f89129dcd3p1871cfjsncb8c9521549d",
     "X-RapidAPI-Host": "imdb188.p.rapidapi.com",
   },
   body: {

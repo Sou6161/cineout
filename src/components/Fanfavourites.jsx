@@ -7,14 +7,14 @@ const Fanfavourites = ({ finalfanwatch }) => {
     <div className=" w-[300vw]  scrollbar-hide overflow-auto p-5 -mt-10  bg-black ">
       <div className=" mb-10 items-center gap-[47%] overflow-y-clip  ">
         <h1 className=" text-xl small:text-[3.5vw]  medium:text-[2.5vw] large:text-[2.5vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] ml-4 font-semibold text-violet-700 flex">
-          <Link to="/fan-favourites">
+          {/* <Link to="/fan-favourites"> */}
             <button className=" group flex items-center  ">
               What To Watch
-              <span className="block relative top-1 ml-4 hover:text-emerald-500 group-hover:text-emerald-500">
+              {/* <span className="block relative top-1 ml-4 hover:text-emerald-500 group-hover:text-emerald-500">
                 <IoArrowForwardCircleSharp />
-              </span>
+              </span> */}
             </button>{" "}
-          </Link>
+          {/* </Link> */}
         </h1>
         <h2 className=" text-slate-600 text-[3vw] xsmall:text-[2.5vw] small:text-[2.5vw] medium:text-[1.5vw] large:text-[1.5vw] xlarge:text-[1.3vw] 2xlarge:text-[1vw] font-semibold px-4 py-1">
           This Week Movies And Series
@@ -26,9 +26,9 @@ const Fanfavourites = ({ finalfanwatch }) => {
         {finalfanwatch &&
           finalfanwatch.map((item, index) => (
             <div key={index} className="flex flex-col">
-              <div className="mr-4 ml-3 max-w-[52vw] max-h-[42vh] xsmall:max-w-[40vw] small:max-w-[30vw] medium:max-w-[30vw] large:max-w-[25vw] xlarge:max-w-[20vw] 2xlarge:max-w-[15vw] rounded-[10px] p-2 overflow-x-hidden scrollbar-hide cursor-pointer bg-zinc-700 hover:bg-slate-500">
+              <div className="mr-4 ml-3 max-w-[53vw] max-h-[42vh] xsmall:max-w-[40vw] small:max-w-[30vw] medium:max-w-[30vw] large:max-w-[25vw] xlarge:max-w-[20vw] 2xlarge:max-w-[15vw] rounded-[10px] p-2 overflow-x-hidden scrollbar-hide cursor-pointer bg-zinc-700 hover:bg-slate-500">
                 <img
-                  className="min-w-[48vw]  h-[40vh] xsmall:min-w-[34vw] small:min-w-[25vw]  medium:min-w-[22vw] large:min-w-[18vw] xlarge:min-w-[15vw] 2xlarge:min-w-[14vw] rounded-md drop-shadow-glow"
+                  className="min-w-[49vw]  h-[40vh] xsmall:min-w-[34vw] small:min-w-[25vw]  medium:min-w-[22vw] large:min-w-[18vw] xlarge:min-w-[15vw] 2xlarge:min-w-[14vw] rounded-md drop-shadow-glow"
                   src={item?.primaryImage?.imageUrl}
                   alt=""
                 />

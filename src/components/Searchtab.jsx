@@ -15,20 +15,21 @@ import { addUser, removeUser } from "../Reduxstore/UserSlice";
 
 const MenuSection = ({ icon, title, items, linkPrefix, handleClick }) => (
   <div className="menu-section">
-    <h2 className="section-title">
-      <span className="icon">{icon}</span>
-      {title}
-    </h2>
-    <ul className="section-items">
+    <h3 className="menu-title flex text-cyan-400 mb-4">
+      <span className="flex flex-row mr-2 mt-1">{icon}</span> {title}
+    </h3>
+    <ul className="menu-items text-white">
       {items.map((item, index) => (
-        <li key={index}>
-          <Link
-            to={`${linkPrefix}${item.toLowerCase().replace(/\s+/g, "-")}`}
-            onClick={handleClick}
-            className="menu-link"
-          >
-            {item}
-          </Link>
+        <li key={index} className="mb-4 hover:underline cursor-pointer">
+          {item === "Top 250 Movies" ? (
+            <Link to="/chart/top" onClick={handleClick}>
+              {item}
+            </Link>
+          ) : (
+            <span onClick={handleClick}>
+              {item}
+            </span>
+          )}
         </li>
       ))}
     </ul>
@@ -438,7 +439,7 @@ const Searchtab = () => {
                       "Movie News",
                       "India Movie Spotlight",
                     ]}
-                    linkPrefix="/chart/"
+                    linkPrefix="/chart/top"
                     handleClick={handleButtonClick}
                   />
 

@@ -46,7 +46,7 @@ const EightContainer = () => {
   return (
     <>
       {/* <TbMinusVertical className=" text-lime-400 text-[13vw] relative  top-10" /> */}
-      <Link to="/news/top">
+      {/* <Link to="/news/top"> */}
         <div className=" relative flex group cursor-pointer">
           <div className=" relative bg-red-30 bottom-2">
             <h1 className=" text-[5vw] xsmall:text-[4vw] small:text-[3vw] medium:text-[3vw] large:text-[2vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] bg-cyan-30 text-red-600  inline-block ml-7">
@@ -57,9 +57,9 @@ const EightContainer = () => {
               ews
             </h1>
           </div>
-          <IoArrowForwardOutline className="  relative left-3 top-[1vh] xsmall:top-[2vh] small:top-[1vh] medium:top-[1vh] large:top-[0vh] xlarge:top-[1.8vh] 2xlarge:top-[1vh] text-[7vw] xsmall:text-[5vw] medium:text-[4vw] large:text-[3vw] xlarge:text-[2.5vw] 2xlarge:text-[2vw] text-amber-400 group-hover:text-cyan-400 " />
+          {/* <IoArrowForwardOutline className="  relative left-3 top-[1vh] xsmall:top-[2vh] small:top-[1vh] medium:top-[1vh] large:top-[0vh] xlarge:top-[1.8vh] 2xlarge:top-[1vh] text-[7vw] xsmall:text-[5vw] medium:text-[4vw] large:text-[3vw] xlarge:text-[2.5vw] 2xlarge:text-[2vw] text-amber-400 group-hover:text-cyan-400 " /> */}
         </div>
-      </Link>
+      {/* </Link> */}
       <div className="w-[96vw] mt-5 bg-red-30 -z-888  static flex overflow-x-scroll mb-10 no-scrollbar ml-7 mr-10">
         {Topnews &&
           Topnews.map((article, index) => {
