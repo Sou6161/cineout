@@ -28,7 +28,7 @@ const RecentlyViewed = () => {
             {" "}
             <FaEye />
           </span>
-          <div className="  relative  left-[65vw] medium:bottom-[5vw] medium:left-[75vw]  large:bottom-[3vw] large:left-[80vw] xlarge:bottom-[3vw] xlarge:left-[80vw] 2] bottom-[7vw] 2xlarge:bottom-[3vw]">
+          <div className="  relative  left-[65vw] medium:bottom-[5vw] medium:left-[75vw]  large:bottom-[3vw] large:left-[80vw] xlarge:bottom-[3vw] xlarge:left-[80vw]   bottom-[7vw] 2xlarge:bottom-[2vw]">
             <button className="Deletebutton" onClick={clearRecentlyViewed}>
               <svg viewBox="0 0 448 512" className="DeletesvgIcon">
                 <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path>
@@ -41,7 +41,7 @@ const RecentlyViewed = () => {
         <div className="w-[92vw] h-[60vh] relative left-[vw] bg-lime-20 mb-10 overflow-x-scroll no-scrollbar">
           <div className="flex gap-">
             {uniqueRecentlyViewed.length === 0 ? (
-              <h1 className="text-[5vw] 2xlarge:text-[2vw] mt-20 relative right-[vw] text-white">
+              <h1 className="text-[4.5vw] xsmall:text-[3vw] medium:text-[2vw] medium:ml-[2vw] xlarge:text-[1.5vw] 2xlarge:text-[1.5vw] mt-[6vh] relative right-[vw] text-white">
                 You have no recently viewed pages
               </h1>
             ) : (

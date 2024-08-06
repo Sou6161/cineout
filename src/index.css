@@ -1771,4 +1771,7 @@ body {
 
 
 
+.glow-text {
+  text-shadow: 0 0 1px #ffff00, 0 0 2px #e7430c, 0 0 2px #ffff00;
+}
 

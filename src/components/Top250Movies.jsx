@@ -121,9 +121,9 @@ const Top250Movies = () => {
 
   return (
     <>
-      <div className="min-h-screen w-full bg-black overflow-x-hidden">
+      <div className="min-h-screen w-full bg-black overflow-hidden">
         <Header />
-        <div className="w-full min-h-screen pt-[8vh] bg-black overflow-y-visible">
+        <div className="w-full min-h-screen pt-[10vh] bg-black">
           <div className="w-[95vw] mx-auto h-[31vh] xsmall:h-[40vh] small:h-[50vh] medium:h-[60vh] large:h-[65vh] bg-black border-[5px] border-blue-700 relative top-[1vw]">
             <div className="w-full h-full relative">
               {Top250MoviesBanner ? (
@@ -170,31 +170,31 @@ const Top250Movies = () => {
           <div className="w-[90vw] mx-auto mt-10 bg-black relative">
             <div className="w-full border-b-2 border-gray-600 relative">
               <div className="absolute w-full  blur-[10px] bg-indigo-200"></div>
-              <h3 className="absolute text-black left-[5vw] xsmall:left-[10vw] top-4 font-bold text-[5vw] xsmall:text-[4vw] small:text-[3vw] medium:text-[2.5vw] large:text-[2vw]">
+              <h3 className="absolute text-red-600 left-[5vw] xsmall:left-[3vw] top-4 font-bold text-[5vw] xsmall:text-[4vw] small:text-[3vw] medium:text-[3vw] large:text-[2vw] 2xlarge:text-[1.7vw]">
                 CINEOUT Charts
               </h3>
-              <span className="absolute text-teal-400 left-[3vw] xsmall:left-[8vw] font-bold top-[12vw] xsmall:top-[10vw] small:top-[8vw] medium:top-[6vw] text-[4.7vw] xsmall:text-[4vw] small:text-[3vw] medium:text-[2.5vw]">
+              <span className="absolute text-teal-400 left-[3vw] xsmall:left-[.5vw] font-bold top-[12vw] xsmall:top-[10vw] small:top-[8vw] medium:top-[6vw] medium:left-[1.5vw] text-[4.7vw] xsmall:text-[4vw] small:text-[3vw] medium:text-[2.5vw] large:top-[9vh] 2xlarge:text-[1.5vw] 2xlarge:left-[2vw] 2xlarge:top-[8.5vh]">
                 <TbMinusVertical />
               </span>
-              <h4 className="absolute text-black left-[6vw] xsmall:left-[11vw] font-medium top-[12vw] xsmall:top-[10vw] small:top-[8vw] medium:top-[6vw] text-[3vw] xsmall:text-[2.5vw] small:text-[2vw] medium:text-[1.5vw]">
+              <h4 className="absolute text-yellow-400 left-[6vw] xsmall:left-[3.5vw] font-medium top-[12vw] xsmall:top-[10vw] small:top-[8vw] medium:top-[6vw] text-[3vw] xsmall:text-[2.5vw] small:text-[2vw] medium:text-[1.8vw] large:top-[5vw] 2xlarge:text-[1.2vw] 2xlarge:top-[4vw]">
                 CINEOUT Top 250 Movies
-                <h1 className="text-[2.5vw] xsmall:text-[2vw] small:text-[1.5vw] medium:text-[1vw] font-normal text-stone-500">
+                <h1 className="text-[2.5vw] xsmall:text-[2vw] small:text-[1.5vw] medium:text-[1.5vw] 2xlarge:text-[1vw] font-normal text-stone-500">
                   As rated by regular CINEOUT voters.
                 </h1>
-                <h1 className="text-[3vw] xsmall:text-[2.5vw] small:text-[2vw] medium:text-[1.5vw] font-normal text-black mt-2">
+                <h1 className="text-[3vw] xsmall:text-[2.5vw] small:text-[2vw] medium:text-[1.5vw]  font-normal text-black mt-2">
                   250 Titles
                 </h1>
               </h4>
-              <div className="w-full ml-[2.5vw] xsmall:ml-[5vw] p-2 xsmall:p-4 relative top-[35vw] xsmall:top-[30vw] small:top-[25vw] medium:top-[20vw]">
+              <div className="w-full ml-[2.5vw] xsmall:-ml-[1vw] p-2 xsmall:p-4 relative top-[30vw] xsmall:top-[30vw] small:top-[20vw] medium:top-[15vw] large:top-[14vw] xlarge:top-[5vw] 2xlarge:top-[10vw]">
                 {Full250Movies ? (
                   Full250Movies.map((item, index) => (
                     <div
                       key={index}
-                      className="w-full xsmall:w-[94vw] small:w-[90vw] medium:w-[85vw] large:w-[80vw] mb-5 h-auto xsmall:h-[27vh] small:h-[25vh] medium:h-[22vh] -mt-2 bg-purple-30 border-l-[1px] hover:bg-green-100 rounded-lg border-yellow-300"
+                      className=" w-full xsmall:w-[80vw] small:w-[70vw] medium:w-[60vw] large:w-[50vw] 2xlarge:w-[45vw] mb-5 h-auto xsmall:h-[27vh] small:h-[25vh] medium:h-[22vh] large:h-[25vh] xlarge:h-[28vh] 2xlarge:h-[31vh] -mt-2 bg-purple-30 border-l-[1px] hover:bg-cyan-200 hover:bg-opacity-50 rounded-lg border-yellow-300"
                     >
-                      <div className="w-[30vw] h-full flex  flex-row xsmall:flex-row p-2 xsmall:p-4 bg-red-3 border-b-[2px] rounded-lg border-red-300">
+                      <div className="min-w-[25vw] h-full flex  flex-row xsmall:flex-row p-2 xsmall:p-4 bg-red-3 border-b-[2px] rounded-lg border-red-300">
                         <img
-                          className="w-[30vw xsmall:w-[24vw] small:w-[20vw] medium:w-[15vw] h-[20vh] xsmall:h-[20vh] small:h-[18vh] medium:h-[16vh] rounded-lg object-cover xsmall:object-center glow5 mb-2 xsmall:mb-0"
+                          className="min-w-[25vw] xsmall:min-w-[20vw] small:min-w-[15vw] medium:min-w-[10vw] large:min-w-[9vw] 2xlarge:min-w-[8vw] h-[20vh] xsmall:h-[22vh] small:h-[20vh] medium:h-[18vh] large:h-[20vh] xlarge:h-[22vh] 2xlarge:h-[24vh] rounded-lg object-cover xsmall:object-center mb-2 xsmall:mb-0 border-2 border-cyan-400 "
                           src={item?.Poster}
                           onError={(e) => {
                             e.target.onerror = null;
@@ -207,7 +207,7 @@ const Top250Movies = () => {
                           <h1 className="font-bold w-[40vw] text-white whitespace-normal   hover:text-purple-600 cursor-pointer text-sm xsmall:text-base small:text-lg">
                             {index + 1}. {item?.Title}
                           </h1>
-                          <div className="flex flex-wrap gap-2 text-gray-500 text-xs xsmall:text-sm">
+                          <div className="flex flex-wrap gap-2 text-sky-200 text-xs xsmall:text-sm">
                             <span>{item?.Year}</span>
                             <span>
                               {item && item.Runtime
@@ -220,8 +220,8 @@ const Top250Movies = () => {
                           </div>
                           <div className="flex items-center mt-1 xsmall:mt-2">
                             <TiStarFullOutline className="text-yellow-400" />
-                            <span className="mx-1">{item?.imdbRating}</span>
-                            <span className="text-gray-500">
+                            <span className="mx-1 text-white">{item?.imdbRating}</span>
+                            <span className="text-sky-400">
                               (
                               {item?.imdbVotes
                                 ? parseInt(item?.imdbVotes.replace(/,/g, "")) /
@@ -241,7 +241,7 @@ const Top250Movies = () => {
                               )
                             </span>
                           </div>
-                          <p className="mt-1 xsmall:mt-2 text-xs xsmall:text-sm">
+                          <p className="mt-1 xsmall:mt-2 text-xs text-blue-300 xsmall:text-sm 2xlarge:relative 2xlarge:-top-[3vh]">
                             Genre:{" "}
                             <span className="whitespace-normal">
                               {item?.Genre}
@@ -256,15 +256,15 @@ const Top250Movies = () => {
                     <h1></h1>
                   </div>
                 )}
-                <div className="hidden 2xlarge:block absolute bottom-[2220vw] h-0 bg-red-300">
+                <div className="hidden large:block large:left-[10vw] xlarge:block 2xlarge:block absolute large:bottom-[5000vh] 2xlarge:bottom-[6300vh]">
                   <MoreToExplore />
                 </div>
-                <div className="hidden 2xlarge:block bg-red-400 h-0 -mt-[2265vw] mx-[52vw]">
+                <div className="hidden large:block xlarge:block 2xlarge:block bg-red-40 absolute  large:bottom-[5120vh] 2xlarge:bottom-[6400vh]  mx-[60vw]">
                   <MoreToRead />
                 </div>
               </div>
-              <div className="bg-red-30 relative -bottom-[32vw] left-[5vw] xsmall:left-[12vw] w-[90vw] xsmall:w-[80vw] small:w-[70vw] medium:w-[60vw] large:w-[50vw]">
-                <h1 className="font-normal text-sm xsmall:text-base">
+              <div className="bg-red-30 relative -bottom-[32vw] left-[5vw] xsmall:left-[3vw] w-[90vw] xsmall:w-[80vw] small:w-[90vw]  small:-bottom-[20vw] medium:w-[90vw] medium:-bottom-[15vw] large:w-[50vw] xlarge:top-[10vh] 2xlarge:top-[22vh]">
+                <h1 className="font-normal text-sm text-red-600 xsmall:text-base">
                   The Top Rated Movie list only includes feature films.
                   <ul className="list-disc pl-5 mt-2">
                     <li className="text-purple-500">
@@ -285,12 +285,12 @@ const Top250Movies = () => {
                   </h1>
                 </h1>
               </div>
-              <div className="h-auto xsmall:h-[62vh] bg-red-20">
-                <div className=" relative top-[35vw] left-[5vw] xsmall:left-[10vw]">
+              <div className="h-full xsmall:h-[90vh] bg-red-20">
+                <div className=" relative top-[35vw] -left-[7vw]  xsmall:left-[1vw] small:top-[25vw] medium:top-[20vh] xlarge:top-[10vh] 2xlarge:top-[20vh]">
                   <RecentlyViewed />
                 </div>
               </div>
-              <div className="bg-black relative">
+              <div className="bg-blac relative -left-[4vw] xsmall:top-[3vw] small:-top-[7vw] medium:-top-[7vw]">
                 <Footer />
               </div>
             </div>

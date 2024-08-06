@@ -13,21 +13,21 @@ const Footer = () => {
         <Link
           to="/login"
           onClick={() => window.location.reload()}
-          class="relative w-[50vw] h-[7vh] xsmall:w-[37vw] small:w-[31vw] medium:w-[25vw] large:w-[21vw] xlarge:w-[18vw] 2xlarge:w-[16vw] mt-[8vw] items-center justify-center inline-block p- px-2 py-3 xlarge:px-3  2xlarge:px-6 2xlarge:py-3  overflow-hidden font-medium text-indigo-600 rounded-lg shadow-2xl group"
+          class="relative w-[50vw] h-[7vh] xsmall:w-[32vw] small:w-[31vw] medium:w-[25vw] large:w-[21vw] xlarge:w-[18vw] 2xlarge:w-[16vw] mt-[8vw] items-center justify-center inline-block p- px-2 py-3 xlarge:px-3  2xlarge:px-6 2xlarge:py-3  overflow-hidden font-medium text-indigo-600 rounded-lg shadow-2xl group"
         >
           <span class="relative top-0 left-0 w-40 h-40 -mt-10 -ml-3 transition-all duration-700 bg-slate-5 rounded-full blur-md ease"></span>
           <span class="absolute inset-0 w-full h-full transition duration-700 group-hover:rotate-180 ease">
             <span class="absolute bottom-0 left-0 w-24 h-24 -ml-10 bg-red-600 rounded-full blur-md"></span>
             <span class="absolute bottom-0 right-0 w-24 h-24 -mr-10 bg-cyan-400 rounded-full blur-md"></span>
           </span>
-          <span class="relative ml-3 text-[4vw] xsmall:text-[3vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.7vw] xlarge:text-[1.4vw] 2xlarge:text-[1.1vw] text-white font-bold">
+          <span class="relative ml-3 text-[4vw] xsmall:text-[2.5vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.7vw] xlarge:text-[1.4vw] 2xlarge:text-[1.1vw] text-white font-bold">
             Sign In For More Access
           </span>
         </Link>
       </div>
       <div className="w-[95vw] h-[18vh] xsmall:w-[75vw] small:w-[55vw] medium:w-[45vw] large:w-[32vw] xlarge:w-[27vw] 2xlarge:w-[20vw] relative rounded-lg border- border-zinc-700 flex flex-col items-center justify-center mt-10 p-4">
         <h1 className="mb-5">
-          <span className=" text-yellow-400 font-bold  text-[4.5vw] xsmall:text-[3.5vw] small:text-[2.8vw] medium:text-[2vw]  large:text-[1.5vw] xlarge:text-[1.4vw] 2xlarge:text-[1vw]">
+          <span className="glow-text text-yellow-400 font-bold text-[4.5vw] xsmall:text-[3vw] small:text-[2.8vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.4vw] 2xlarge:text-[1.2vw]">
             Follow CINEOUT on Social
           </span>
         </h1>
@@ -131,61 +131,60 @@ const Footer = () => {
       </div>
       <div className="flex flex-col items-center space-y-5 mt-5">
         <div className="flex flex-wrap justify-center gap-5 w-[100vw] items-center small:flex-row small:flex-wrap xsmall:w-[90vw] small:w-[80vw] medium:w-[90vw]  large:w-[60vw] xlarge:w-[60vw]">
-          <h1 className="text-[4.5vw] xsmall:text-[3.5vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white flex items-center hover:underline hover:cursor-pointer">
+          <h1 className="text-[4vw] xsmall:text-[2.8vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white flex items-center hover:underline hover:cursor-pointer">
             Help{" "}
             <span className="ml-1">
               <MdLaunch />
             </span>
           </h1>
-          <h1 className="text-[4.5vw] xsmall:text-[3.5vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white flex items-center hover:underline hover:cursor-pointer">
+          <h1 className="text-[4vw] xsmall:text-[2.8vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white flex items-center hover:underline hover:cursor-pointer">
             Site Index{" "}
             <span className="ml-1">
               <MdLaunch />
             </span>
           </h1>
-          <h1 className="text-[4.5vw] xsmall:text-[3.5vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white flex items-center hover:underline hover:cursor-pointer">
-            CINEOUTPro{" "}
-            <span className="ml-1">
+          <h1 className="text-[4vw] xsmall:text-[2.8vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white flex items-center hover:underline hover:cursor-pointer">
+            CINEOUTPro{" "}            <span className="ml-1">
               <MdLaunch />
             </span>
           </h1>
-          <h1 className="text-[4.5vw] xsmall:text-[3.5vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white flex items-center hover:underline hover:cursor-pointer">
+          <h1 className="text-[4vw] xsmall:text-[2.8vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white flex items-center hover:underline hover:cursor-pointer">
             Box Office Mojo{" "}
             <span className="ml-1">
               <MdLaunch />
             </span>
           </h1>
-          <h1 className="text-[4.5vw] xsmall:text-[3.5vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white flex items-center hover:underline hover:cursor-pointer">
+          <h1 className="text-[4vw] xsmall:text-[2.8vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white flex items-center hover:underline hover:cursor-pointer">
             License CINEOUT Data{" "}
             <span className="ml-1">
               <MdLaunch />
             </span>
           </h1>
-          <h1 className="text-[4.5vw] xsmall:text-[3.5vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white">
+          <h1 className="text-[4vw] xsmall:text-[2.8vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white">
             Press Room
           </h1>
-          <h1 className="text-[4.5vw] xsmall:text-[3.5vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white flex items-center hover:underline hover:cursor-pointer">
+          <h1 className="text-[4vw] xsmall:text-[2.8vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white flex items-center hover:underline hover:cursor-pointer">
             Advertising{" "}
             <span className="ml-1">
               <MdLaunch />
             </span>
           </h1>
-          <h1 className="text-[4.5vw] xsmall:text-[3.5vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white flex items-center hover:underline hover:cursor-pointer">
+          <h1 className="text-[4vw] xsmall:text-[2.8vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white flex items-center hover:underline hover:cursor-pointer">
             Jobs{" "}
             <span className="ml-1">
               <MdLaunch />
             </span>
           </h1>
-          <h1 className="text-[4.5vw] xsmall:text-[3.5vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white">
+          <h1 className="text-[4vw] xsmall:text-[2.8vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white">
             Conditions of Use
           </h1>
-          <h1 className="text-[4.5vw] xsmall:text-[3.5vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white">
+          <h1 className="text-[4vw] xsmall:text-[2.8vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white">
             Privacy Policy
           </h1>
         </div>
 
         <div className="w-full text-center">
-          <h1 className="text-[4.5vw] xsmall:text-[3.5vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white">
+          <h1 className="text-[4vw] xsmall:text-[2.8vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white">
             Made By a Cinephile
           </h1>
         </div>

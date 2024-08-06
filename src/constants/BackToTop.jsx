@@ -10,8 +10,8 @@ const ScrollToTopButton = () => {
   };
 
   return (
-    <div className="scroll-to-top-button" onClick={goToTop}>
-      <FaAngleUp className="icon relative top-1 left-1  text-[2vw]" />
+    <div className="scroll-to-top-button relative items-center" onClick={goToTop}>
+      <FaAngleUp className="icon absolute items-center top-[1.3vh] left-[2vw] xsmall:left-[1.6vw] xsmall:text-[5.5vw] small:left-[1.3vw] small:text-[4.2vw] medium:left-[.8vw] medium:text-[3.5vw]  large:text-[2.5vw] xlarge:text-[2.2vw] 2xlarge:text-[1.7vw]  text-[8vw]" />
     </div>
   );
 };
