@@ -16,7 +16,8 @@ import { addUser, removeUser } from "../Reduxstore/UserSlice";
 const MenuSection = ({ icon, title, items, linkPrefix, handleClick }) => (
   <div className="menu-section">
     <h3 className="menu-title flex text-cyan-400 mb-4">
-      <span className="flex flex-row mr-2 mt-1">{icon}</span> {title}
+      <span className="flex flex-row mr-2 mt-1 text-orange-500">{icon}</span>{" "}
+      {title}
     </h3>
     <ul className="menu-items text-white">
       {items.map((item, index) => (
@@ -25,16 +26,23 @@ const MenuSection = ({ icon, title, items, linkPrefix, handleClick }) => (
             <Link to="/chart/top" onClick={handleClick}>
               {item}
             </Link>
-          ) : (
-            <span onClick={handleClick}>
+          ) : item === "Most Popular Movies" ? (
+            <Link to="/chart/moviemeter" onClick={handleClick}>
               {item}
-            </span>
+            </Link>
+          ) : item === "Top Box Office" ? (
+            <Link to="/chart/boxoffice" onClick={handleClick}>
+              {item}
+            </Link>
+          ) : (
+            <span onClick={handleClick}>{item}</span>
           )}
         </li>
       ))}
     </ul>
   </div>
 );
+
 
 const Searchtab = () => {
   const navigate = useNavigate();
