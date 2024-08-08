@@ -183,7 +183,7 @@ const Maincontainer = () => {
                 stroke-width="16"
                 stroke-dasharray="452.39 452.39"
                 stroke-dashoffset="452"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 transform="rotate(-45,80,80)"
               ></circle>
             </g>

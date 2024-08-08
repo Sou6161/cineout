@@ -17,7 +17,7 @@ const RecentlyViewed = () => {
     (item, index, self) => index === self.findIndex((t) => t.id === item.id)
   );
   {
-    console.log(uniqueRecentlyViewed);
+    // console.log(uniqueRecentlyViewed);
   }
   return (
     <>
