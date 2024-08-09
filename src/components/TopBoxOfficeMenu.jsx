@@ -149,7 +149,7 @@ const TopBoxOfficeMenu = () => {
       </div>
 
       <div className="  w-[95vw] border-[1px] xsmall:h-[37vh] small:w-[89vw] medium:h-[43vh] large:w-[86vw] large:h-[50vh] xlarge:w-[85vw] xlarge:h-[60vh] 2xlarge:h-[62vh] border-red-600   rounded-lg h-[32vh] mx-auto b-red-200 relative top-[10vh]">
-        <div className="w-[92vw] h-[31vh] ml-2 xsmall:ml-3  small:ml-3 small:w-[85vw] medium:w-[86vw] medium:h-[42vh] large:w-[84vw] large:h-[48vh] xlarge:w-[83vw] xlarge:h-[58vh] 2xlarge:w-[83.5vw] 2xlarge:h-[60vh]   rounded-lg  mt-[6px] mx-auto b-yellow-200">
+        <div className="w-[92vw] h-[31vh] xsmall:h-[35vh] ml-2 xsmall:ml-3  small:ml-3 small:w-[85vw] small:h-[36vh] medium:w-[86vw] medium:h-[42vh] large:w-[84vw] large:h-[48vh] xlarge:w-[83vw] xlarge:h-[58vh] 2xlarge:w-[83.5vw] 2xlarge:h-[60vh]   rounded-lg  mt-[6px] mx-auto b-yellow-200">
           {TopBoxOfficeBanners ? (
             <Swiper
               effect={"flip"}
@@ -213,33 +213,33 @@ const TopBoxOfficeMenu = () => {
       </div>
       <div className=" w-full min-h-screen mt-[15vh] absolute bg-black overflow-hidden ">
         <div>
-          <h3 className=" absolute text-red-600 left-[10vw] font-bold top-[vh] text-[5vw]">
+          <h3 className=" absolute text-red-600 left-[10vw] font-bold top-[vh] text-[5vw] large:text-[2.5vw] xlarge:text-[2.2vw] 2xlarge:text-[1.8vw]">
             CINEOUT Charts{" "}
           </h3>
-          <span className=" absolute text-teal-400 left-[8vw] font-bold top-[10.2vw] text-[4vw] ">
+          <span className=" absolute text-teal-400 left-[8vw] font-bold top-[10.2vw] text-[4vw] large:text-[3vw] large:top-[5vw] large:left-[8.8vw] xlarge:text-[2.5vw] 2xlarge:text-[2vw] 2xlarge:top-[10.4vh] 2xlarge:left-[9.3vw] ">
             <TbMinusVertical />
           </span>
-          <h4 className=" absolute text-white left-[11vw] font-medium  top-[10vw] text-[3vw]">
+          <h4 className=" absolute text-white left-[11vw] font-medium  top-[10vw] text-[3vw] large:text-[2vw] large:top-[5vw] xlarge:text-[1.6vw] 2xlarge:text-[1.4vw]">
             Top Box Office (US)
-            <h1 className=" text-[2.2vw] font-normal text-stone-500">
+            <h1 className=" text-[2.2vw] large:text-[1.3vw] xlarge:text-[1vw] 2xlarge:text-[.9vw] font-normal text-stone-500">
               Latest Weekend Movies
             </h1>
-            <h1 className=" text-[3vw] font-normal text-white mt-10">
+            <h1 className=" text-[3.5vw] small:text-[3vw] medium:text-[2.5vw] large:text-[2vw] xlarge:text-[1.8vw] 2xlarge:text-[1.5vw] font-normal text-white mt-10">
               10 Titles
             </h1>
           </h4>
         </div>
-        <div className="w-full ml-[2.5vw] xsmall:-ml-[1vw] p-2 xsmall:p-4 relative top-[30vh] xsmall:top-[30vw] small:top-[20vw] medium:top-[15vw] large:top-[14vw] xlarge:top-[5vw] 2xlarge:top-[10vw]">
+        <div className="w-full ml-[2.5vw] xsmall:ml-[1vw] p-2 xsmall:p-4 relative top-[30vh] xsmall:top-[40vw] small:top-[35vh] medium:top-[40vh] large:top-[45vh] xlarge:top-[45vh]  2xlarge:top-[40vh] 2 ">
           {TopBoxOfficeDetails ? (
             TopBoxOfficeDetails.map((movie, index) => {
               return (
                 <div
                   key={index}
-                  className="w-[90vw] xsmall:w-[80vw] small:w-[70vw] medium:w-[60vw] large:w-[50vw] 2xlarge:w-[45vw] mb-5 h-[25vh] xsmall:h-[27vh] small:h-[25vh] medium:h-[22vh] large:h-[25vh] xlarge:h-[28vh] 2xlarge:h-[31vh] -mt-2 bg-purple-30 border-l-[1px] hover:bg-amber-600 hover:bg-opacity-50 rounded-lg border-yellow-300"
+                  className="w-[80vw] xsmall:w-[80vw] small:w-[70vw]  medium:w-[60vw] large:w-[50vw] xlarge:w-[55vw]  2xlarge:w-[55vw] mb-5 h-[27vh] xsmall:h-[27vh] small:h-[27vh] medium:h-[28vh] large:h-[30vh] xlarge:h-[34vh] xlarge:ml-[8vw] 2xlarge:h-[32vh] 2xlarge:ml-[8vw]  bg-purple-30 border-l-[1px] hover:bg-slate-600 hover:bg-opacity-50 rounded-lg border-yellow-300"
                 >
-                  <div className="min-w-[25vw] h-[25vh] flex  flex-row xsmall:flex-row p-2 xsmall:p-4 bg-red-3 border-b-[2px] rounded-lg border-red-300">
+                  <div className="min-w-[25vw] h-[27vh] flex xsmall:flex-row p-2 xsmall:w-[80vw] small:w-[90vw] medium:h-[28vh] large:w-[55vw] large:h-[30vh] xlarge:h-[34vh] 2xlarge:h-[32vh]  xsmall:p-4 bg-red-3 border-b-[2px] rounded-lg border-red-300">
                     <img
-                      className="min-w-[25vw] xsmall:min-w-[20vw] small:min-w-[15vw] medium:min-w-[10vw] large:min-w-[9vw] 2xlarge:min-w-[8vw] h-[20vh] xsmall:h-[22vh] small:h-[20vh] medium:h-[18vh] large:h-[20vh] xlarge:h-[22vh] 2xlarge:h-[24vh] rounded-lg object-cover xsmall:object-center mb-2 xsmall:mb-0 border-2 border-cyan-400"
+                      className="w-[25vw] xsmall:w-[20vw] small:w-[15vw] medium:w-[14vw] large:w-[12vw]  2xlarge:w-[10vw] h-[22vh] xsmall:h-[22vh] small:h-[22vh] medium:h-[24vh] large:h-[25vh] xlarge:h-[30vh] 2xlarge:h-[28vh] rounded-lg object-cover xsmall:object-center mb-2 xsmall:mb-0 border-2 border-cyan-400"
                       src={movie?.primaryImage?.url}
                       onError={(e) => {
                         e.target.onerror = null;
@@ -248,35 +248,36 @@ const TopBoxOfficeMenu = () => {
                       }}
                       alt=""
                     />
-                    <h1 className="mx-2 font-bold text-white hover:text-purple-600 cursor-pointer">
+                    <h1 className="mx-2 small:ml-[3vw] large:text-[1.8vw] 2xlarge:text-[1.3vw]  font-bold text-white hover:text-purple-600 cursor-pointer text-sm xsmall:text-base">
                       {index + 1}. {movie?.titleText?.text}
                     </h1>
                   </div>
-                  <div className="flex gap-3 relative bottom-[30vw] left-[35vw] text-blue-200">
-                    <h1 className=" font-normal">{movie?.releaseDate?.year}</h1>
-                    <h1 className=" font-normal">
+                  <div className="flex flex-row  ml-[30vw] xsmall:flex-row gap-3 -mt-[16vh] xsmall:-mt-[4vh] small:-top-[9vh] small:ml-[22vw] medium:ml-[20vw] large:text-[1.5vw] large:ml-[18vw] xlarge:ml-[18vw] 2xlarge:ml-[15vw] 2xlarge:text-[1.2vw] xsmall:relative xsmall:bottom-[10vw] xsmall:ml-[28vw] text-blue-200 text-xs xsmall:text-sm">
+                    <h1 className="font-normal">{movie?.releaseDate?.year}</h1>
+                    <h1 className="font-normal">
                       {movie?.runtime?.displayableProperty?.value?.plainText ||
                         "Runtime not available"}
                     </h1>
-                    <h1 className=" font-normal">
+                    <h1 className="font-normal">
                       {movie?.certificate?.rating}
                     </h1>
                   </div>
-                  <div className="mt-5 relative flex bottom-[32vw] left-[30vw] font-normal">
-                    <TiStarFullOutline className="text-yellow-400 ml-2  " />
-                    <h1 className="relative bottom-1 mx- text-white ">
-                      {movie.ratingsSummary.aggregateRating}
-                    </h1>
-                    <h1 className="relative bottom-1 text-gray-500">
-                      ({movie.ratingsSummary.voteCount})
-                    </h1>
-                    <h1 className="absolute text-[3vw] text-sky-500 flex top-[8vw] left-[3vw] w-[65vw] font-normal">
-                      Genre:{" "}
-                      {movie.genres.genres
-                        .map((genre) => genre.text)
-                        .join(", ")}
-                    </h1>
+                  <div className="mt-5 ml-[30vw] xsmall:-ml-[2vw] small:-ml-[8vw] small:bottom-[19vh] medium:-ml-[10vw] medium:text-[2vw] large:-ml-[12vw] large:text-[1.5vw] xlarge:-ml-[12vw] 2xlarge:-ml-[15vw] 2xlarge:text-[1.3vw] xsmall:mt-5 flex flex-row xsmall:flex-row  xsmall:relative xsmall:bottom-[25vw] xsmall:left-[30vw] font-normal text-xs xsmall:text-sm">
+                    <div className="flex items-center">
+                      <TiStarFullOutline className="text-yellow-400 mr-1" />
+                      <h1 className="text-white">
+                        {movie.ratingsSummary.aggregateRating}
+                      </h1>
+                      <h1 className="text-gray-500 ml-1">
+                        ({movie.ratingsSummary.voteCount})
+                      </h1>
+                    </div>
                   </div>
+
+                  <h1 className="mt-3 text-[3vw] small:text-[2.2vw] medium:text-[2.1vw] ml-[30vw] xsmall:ml-[28vw] small:ml-[22vw] medium:ml-[20vw] large:text-[1.7vw] large:ml-[18vw] xlarge:text-[1.5vw] 2xlarge:ml-[15vw] 2xlarge:text-[1.3vw] small:-mt-[13vh] xsmall:-mt-[10vh]  xsmall:text-[2.5vw] text-sky-500  xsmall:left-[30vw] w-[60vw] xsmall:w-[60vw] large:w-[40vw] xlarge:w-[35vw] 2xlarge:w-[35vw] font-normal">
+                    Genre:{" "}
+                    {movie.genres.genres.map((genre) => genre.text).join(", ")}
+                  </h1>
                 </div>
               );
             })
@@ -285,14 +286,14 @@ const TopBoxOfficeMenu = () => {
               <h1>innoo</h1>
             </div>
           )}
-          <div className=" hidden large:block xlarge:block 2xlarge:block h-0 relative top-[30em] bg-red-300">
+          <div className="hidden large:block large:bottom-[180vh] large:left-[15vw] xlarge:block xlarge:left-[10vw] xlarge:bottom-[210vh] 2xlarge:block h-0 relative  bg-red-300">
             <MoreToExplore />
           </div>
-          <div className=" hidden large:block xlarge:block 2xlarge:block h-0 relative left-[53vw] bottom-[32rem] bg-yellow-400">
+          <div className="hidden large:block large:bottom-[320vh] large:left-[65vw] xlarge:block xlarge:left-[60vw]   xlarge:bottom-[340vh] 2xlarge:block h-0 relative left-[53vw] bottom-[32rem] bg-yellow-400">
             <MoreToRead />
           </div>
-          <div className="relative bottom-3 w-[80vw] text-emerald-400">
-            <h1 className="font-normal">
+          <div className="relative bottom-3 xlarge:bottom-10 2xlarge:left-[8vw] 2xlarge:bottom-5 w-[80vw] text-emerald-400">
+            <h1 className="font-normal  text-sm xsmall:text-base">
               Reported by{" "}
               <Link
                 className="cursor-pointer hover:text-cyan-500 font-semibold hover:underline"
@@ -305,12 +306,13 @@ const TopBoxOfficeMenu = () => {
           </div>
         </div>
 
-        <div className="  h-[100vh] relative top-[55vw]   ">
+        <div className="  h-[100vh]  small:h-[100vh] relative top-[55vw] xsmall:top-[40vh] small:top-[35vh]   ">
           <div className=" relative left-[vw] top-">
             <RecentlyViewed />
           </div>
+          n
         </div>
-        <div className="  relative">
+        <div className="  relative small:h-[75vh] medium:h-[70vh] large:h-[75vh] xlarge:h-[80vh] 2xlarge:min-h-auto  xsmall:top-[7vh] small:-top-[vh]">
           <div className="">
             <Footer />
           </div>

@@ -34,6 +34,14 @@ const MenuSection = ({ icon, title, items, linkPrefix, handleClick }) => (
             <Link to="/chart/boxoffice" onClick={handleClick}>
               {item}
             </Link>
+          ) : item === "Top 250 TV Shows" ? (
+            <Link to="/chart/toptv" onClick={handleClick}>
+              {item}
+            </Link>
+          ) : item === "Most Popular TV Shows" ? (
+            <Link to="/chart/tvmeter" onClick={handleClick}>
+              {item}
+            </Link>
           ) : (
             <span onClick={handleClick}>{item}</span>
           )}
