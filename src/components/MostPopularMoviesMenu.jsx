@@ -42,7 +42,7 @@ const MostPopularMoviesMenu = () => {
   useEffect(() => {
     const getMostPopularMovies = async () => {
       const response = await fetch(
-        "https://run.mocky.io/v3/f15f9a4a-925f-41af-90f1-239b54d080e4"
+        "https://run.mocky.io/v3/596cbc6b-fa46-42d4-a390-e76cdb4ff41e"
       );
       const data = await response.json();
       const AllPopularMoviesIDs = data.map(

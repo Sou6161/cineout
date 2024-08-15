@@ -27,7 +27,7 @@ const Top250TvShows = () => {
   useEffect(() => {
     const getTop250Shows = async () => {
       const response = await fetch(
-        "https://run.mocky.io/v3/372e6bd5-108c-4e55-88f0-367b026f848b"
+        "https://run.mocky.io/v3/860f2fc7-834a-436a-b0c7-81ef1de3b8cf"
       );
       const data = await response.json();
       const ids = data.map((movie) => {
@@ -174,11 +174,11 @@ const Top250TvShows = () => {
       </div>
 
       <div className="w-full bg-black absolute mt-5">
-        <div className="relative px-4 py-8">
+        <div className="relative px-7 py-8">
           <h3 className="text-white font-bold text-lg xsmall:text-xl small:text-2xl medium:text-3xl large:text-4xl mb-2">
             CINEOUT Charts
           </h3>
-          <span className="text-teal-400 text-4xl xsmall:text-5xl small:text-6xl absolute left-0 top-8">
+          <span className="text-teal-400 text-4xl xsmall:text-5xl small:text-6xl absolute left-0 ">
             <TbMinusVertical />
           </span>
           <h4 className="text-white font-medium text-2xl xsmall:text-3xl small:text-4xl medium:text-5xl large:text-6xl mb-2">
@@ -193,16 +193,16 @@ const Top250TvShows = () => {
         </div>
       </div>
 
-      <div className="w-[90vw] xsmall:w-[80vw] small:w-[70vw] medium:w-[60vw] large:w-[50vw] mx-auto neuro py-8 px-5 bg-zinc-600 relative top-[35vh] xsmall:top-[40vh] small:top-[45vh] medium:top-[50vh] large:top-[55vh] rounded-lg">
+      <div className="w-[90vw] xsmall:w-[80vw] small:w-[70vw] medium:w-[60vw] large:w-[50vw] mx-auto  py-8 px-5 bg-blue-200 relative top-[35vh] xsmall:top-[40vh] small:top-[45vh] medium:top-[50vh] large:top-[55vh] rounded-lg">
         {Top250ShowsDetails ? (
           Top250ShowsDetails.map((movie, index) => (
             <div
               key={index}
-              className="w-full mb-5 border-l-[1px] hover:bg-slate-700 rounded-lg border-yellow-300"
+              className="w-full  h-[30vh] mb-5 border-l-[1px] hover:bg-slate-700 rounded-lg border-yellow-300"
             >
               <div className="flex p-4 bg-red-3 border-b-[2px] rounded-lg border-red-300">
                 <img
-                  className="w-[20%] xsmall:w-[15%] small:w-[12%] medium:w-[10%] h-auto object-cover rounded-lg border-[1px] glow"
+                  className="w-[25vw] h-[18vh] xsmall:w-[15%] small:w-[12%] medium:w-[10%]  object-cover rounded-lg border-[1px] glow"
                   src={movie?.primaryImage?.url}
                   onError={(e) => {
                     e.target.onerror = null;
@@ -211,11 +211,11 @@ const Top250TvShows = () => {
                   }}
                   alt=""
                 />
-                <h1 className="mx-2 font-bold hover:text-purple-600 cursor-pointer text-sm xsmall:text-base small:text-lg medium:text-xl">
+                <h1 className="mx-2 font-bold text-white hover:text-purple-600 cursor-pointer text-sm xsmall:text-base small:text-lg medium:text-xl">
                   {index + 1}. {movie?.titleText?.text}
                 </h1>
               </div>
-              <div className="flex flex-col xsmall:flex-row gap-2 xsmall:gap-3 text-gray-500 mt-2 xsmall:mt-0">
+              <div className="flex flex-row xsmall:flex-row gap-2 xsmall:gap-3 text-gray-500 mt-2 xsmall:mt-0">
                 <h1 className="text-xs xsmall:text-sm">
                   {movie?.releaseDate?.year}
                 </h1>

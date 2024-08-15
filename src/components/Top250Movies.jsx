@@ -7,7 +7,6 @@ import MoreToExplore from "./MoreToExplore";
 import MovieNews from "./MovieNews";
 import MoreToRead from "./MoreToRead";
 import Header from "./Header";
-import Headerfordetails from "./Headerfordetails";
 import RecentlyViewed from "./RecentlyViewed";
 import Footer from "./Footer";
 
@@ -48,7 +47,7 @@ const Top250Movies = () => {
     const getTop250Movies = async () => {
       try {
         const response = await fetch(
-          "https://run.mocky.io/v3/7fdaba40-a74b-4c1f-b5eb-c7990f05f97c"
+          "https://run.mocky.io/v3/d7f42295-868d-42be-a29a-eeb841147dbe"
         );
         const data = await response.json();
         const FullData = data.movies;

@@ -45,7 +45,7 @@ const TopBoxOfficeMenu = () => {
     const getTopBoxOfficeMoviesIDs = async () => {
       try {
         const response = await fetch(
-          "https://run.mocky.io/v3/00186427-4d5b-4c16-bdaa-c2b5bb0e7c09"
+          "https://run.mocky.io/v3/e901cd99-5e29-4083-9f35-794e9b5e0b41"
         );
         if (!response.ok)
           throw new Error(`HTTP error! status: ${response.status}`);
