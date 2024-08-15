@@ -57,13 +57,13 @@ const Secondcontainer = () => {
   };
   useEffect(() => {
     // fetchData();
-    // fetchfanfavouritedata();
+    fetchfanfavouritedata();
   }, []);
 
   useEffect(() => {
     if ((moviesdata, fanwatch)) {
       // console.log(moviesdata, "Hello moviesdata");
-      // console.log(fanwatch,"hello fanfavourite data")
+      console.log(fanwatch,"hello fanfavourite data")
     }
   }, [moviesdata, fanwatch]);
 

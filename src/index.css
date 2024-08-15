@@ -211,7 +211,6 @@ select::-ms-expand {
   .menu {
     --s: 6vw; /* new size for xsmall breakpoint and above */
     top: 10px;
-
   }
 }
 
@@ -220,34 +219,32 @@ select::-ms-expand {
     --s: 5vw;
   }
 }
-@media(min-width:768px){
-  .menu{
-    --s:4vw;
-    top:10px;
-    left:10px;
-  
+@media (min-width: 768px) {
+  .menu {
+    --s: 4vw;
+    top: 10px;
+    left: 10px;
   }
 }
 
-@media(min-width:1024px){
-  .menu{
-    --s:3.5vw;
-    top:12px
+@media (min-width: 1024px) {
+  .menu {
+    --s: 3.5vw;
+    top: 12px;
   }
 }
 
-@media(min-width:1280px){
-  .menu{
-    --s:3vw;
-    top:13px;
+@media (min-width: 1280px) {
+  .menu {
+    --s: 3vw;
+    top: 13px;
   }
 }
 
-@media(min-width:1536px){
-  .menu{
-    --s:2.2vw;
-    top:11px;
-
+@media (min-width: 1536px) {
+  .menu {
+    --s: 2.2vw;
+    top: 11px;
   }
 }
 
@@ -863,52 +860,41 @@ body {
 
 @media (min-width: 480px) {
   .btn-donate {
-    width:185px;
+    width: 185px;
     min-height: 55px;
-
   }
 }
 
 @media (min-width: 640px) {
   .btn-donate {
-    width:170px;
+    width: 170px;
     min-height: 58px;
-    
-
   }
 }
 @media (min-width: 768px) {
   .btn-donate {
-    width:192px;
+    width: 192px;
     min-height: 65px;
-    
-
   }
 }
 
 @media (min-width: 1024px) {
   .btn-donate {
-    width:196px;
+    width: 196px;
     min-height: 65px;
-    
-
   }
 }
 
 @media (min-width: 1280px) {
   .btn-donate {
-    width:238px;
+    width: 238px;
     min-height: 80px;
-    
-
   }
 }
 @media (min-width: 1536px) {
   .btn-donate {
-    width:300px;
+    width: 300px;
     min-height: 95px;
-    
-
   }
 }
 
@@ -1421,8 +1407,6 @@ body {
   cursor: pointer;
 }
 
-
-
 .comic-button:hover {
   background-color: black;
   color: #ff5252;
@@ -1658,9 +1642,6 @@ body {
   }
 }
 
-
-
-
 .responsive-menu {
   position: fixed;
   top: 0;
@@ -1744,7 +1725,6 @@ body {
   }
 }
 
-
 .bgcontainer {
   width: 100%;
   height: 100%;
@@ -1769,12 +1749,100 @@ body {
   background-size: var(--gap) var(--gap);
 }
 
-
-
 .glow-text {
   text-shadow: 0 0 1px #ffff00, 0 0 2px #e7430c, 0 0 2px #ffff00;
 }
 
+/* ComingSoon page css */
 
+/* From Uiverse.io by jeremyssocial */
+@keyframes blinkCursor {
+  50% {
+    border-right-color: transparent;
+  }
+}
 
+@keyframes typeAndDelete {
+  0%,
+  10% {
+    width: 0;
+  }
+  45%,
+  55% {
+    width: 6.2em;
+  } /* adjust width based on content */
+  90%,
+  100% {
+    width: 0;
+  }
+}
 
+.terminal-loader {
+  border: 0.1em solid #333;
+  background-color: #1a1a1a;
+  color: #0f0;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1em;
+  padding: 1.5em 1em;
+  width: 12em;
+  margin: 100px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.terminal-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1.5em;
+  background-color: #333;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  padding: 0 0.4em;
+  box-sizing: border-box;
+}
+
+.terminal-controls {
+  float: right;
+}
+
+.control {
+  display: inline-block;
+  width: 0.6em;
+  height: 0.6em;
+  margin-left: 0.4em;
+  border-radius: 50%;
+  background-color: #777;
+}
+
+.control.close {
+  background-color: #e33;
+}
+
+.control.minimize {
+  background-color: #ee0;
+}
+
+.control.maximize {
+  background-color: #0b0;
+}
+
+.terminal-title {
+  float: left;
+  line-height: 1.5em;
+  color: #eee;
+}
+
+.text {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 0.2em solid green; /* Cursor */
+  animation: typeAndDelete 4s steps(14) infinite,
+    blinkCursor 0.5s step-end infinite alternate;
+  margin-top: 1.5em;
+}

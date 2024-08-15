@@ -34,6 +34,7 @@ import { useDispatch } from "react-redux";
 import { addUser, removeUser } from "../Reduxstore/UserSlice";
 import NowShowingMoviesFullDetailsPage from "./NowShowingMoviesFullDetailsPage";
 import UpcomingMoviesFullDetailsPage from "./UpcomingSeriesFullDetailsPage";
+import ComingSoonPage from "./ComingSoonPage";
 
 const AppRoutes = () => {
   const dispatch = useDispatch();
@@ -62,7 +63,10 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/home" element={<Maincontainer />} />
-      <Route path="/name/:id" element={<NowShowingMoviesFullDetailsPage />} />
+      <Route path="/name/movie/:id" element={<NowShowingMoviesFullDetailsPage />} />
+      {/* <Route path="/name/movie/:id" element={<NowShowingMoviesFullDetailsPage />} />   */}
+      <Route path="/name/tv/:id" element={<NowShowingMoviesFullDetailsPage />} />
+
       {/* <Route path="/name/:title" element={<UpcomingMoviesFullDetailsPage />} /> */}
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
@@ -92,6 +96,24 @@ const AppRoutes = () => {
       <Route path="/chart/boxoffice" element={<TopBoxOfficeMenu />} />
       <Route path="/chart/toptv" element={<Top250TvShows />} />
       <Route path="/chart/tvmeter" element={<MostPopularTvShowsMenu />} />
+      <Route path="/BrowseTV-Shows" element={<ComingSoonPage/>}/>
+      <Route path="/BrowseTop-News" element={<ComingSoonPage/>}/>
+      <Route path="/Oscars-Winners" element={<ComingSoonPage/>}/>
+      <Route path="/Emmy-Winners" element={<ComingSoonPage/>}/>
+      <Route path="/Born-Today-Persons" element={<ComingSoonPage/>}/>
+      <Route path="/Most-Popular-Celebs" element={<ComingSoonPage/>}/>
+      <Route path="/Celebrity-News" element={<ComingSoonPage/>}/>
+      <Route path="/WhatToWatch-Now" element={<ComingSoonPage/>}/>
+      <Route path="/Latest-trailers" element={<ComingSoonPage/>}/> 
+      <Route path="/Help-Center" element={<ComingSoonPage/>}/>
+      <Route path="/Contribution-Zone" element={<ComingSoonPage/>}/>
+      <Route path="/Polls" element={<ComingSoonPage/>}/>
+
+
+
+
+
+
       <Route path={`/find/`} element={<SeeAllResultsMenu />} />
       {/* <Route path="/head/:id" element={<SearchDataDetailsMenu />} /> */}
 

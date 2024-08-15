@@ -118,8 +118,8 @@ const Top250TvShows = () => {
         <Header />
       </div>
 
-      <div className="w-[95vw] border-[1px] border-blue-600  rounded-lg h-[32vh] mx-auto mt-[10vh]">
-        <div className="w-[91vw] h-[30vh] border-[1px] rounded-lg  border-blue-600 mt-[6px] mx-auto">
+      <div className="w-[95vw] h-[32vh]  xsmall:w-[95vw] xsmall:h-[40vh] small:w-[95vw] small:h-[45vh] medium:h-[52vh] large:h-[58vh] xlarge:h-[62vh]   rounded-lg  mx-auto mt-[10vh]">
+        <div className="w-[91vw]  h-[30vh] xsmall:w-[91vw] xsmall:h-[35vh] small:h-[40vh] medium:h-[45vh] large:h-[53vh] xlarge:h-[58vh] glow6  rounded-lg  mt-[6px] mx-auto">
           {Top250ShowsBanner ? (
             <Swiper
               spaceBetween={30}
@@ -134,7 +134,7 @@ const Top250TvShows = () => {
               {Top250ShowsBanner.map((movie, index) => (
                 <SwiperSlide key={index}>
                   <img
-                    className="w-full h-[30vh] object-cover object-center rounded-lg"
+                    className="w-full h-[30vh] xsmall:wfull xsmall:h-[35vh] small:h-[40vh] medium:h-[45vh]  large:h-[53vh] xlarge:h-[58vh] object-cover object-center rounded-lg"
                     src={`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`}
                     alt=""
                   />
@@ -175,34 +175,34 @@ const Top250TvShows = () => {
 
       <div className="w-full bg-black absolute mt-5">
         <div className="relative px-7 py-8">
-          <h3 className="text-white font-bold text-lg xsmall:text-xl small:text-2xl medium:text-3xl large:text-4xl mb-2">
+          <h3 className="text-white font-bold text-lg xsmall:text-xl xsmall:ml-[5vw] small:ml-[8vw] small:text-[4vw] medium:text-[3vw] large:text-[2vw] large:ml-[4vw] xlarge:text-[1.8vw] 2xlarge:text-[1.5vw] mb-2">
             CINEOUT Charts
           </h3>
-          <span className="text-teal-400 text-4xl xsmall:text-5xl small:text-6xl absolute left-0 ">
+          <span className="text-teal-400 text-[7vw] xsmall:text-[6vw] xsmall:ml-[4vw] small:text-[4vw] small:ml-[8vw] small:top-[10vh] medium:text-[4vw] medium:ml-[7vw] medium:top-[9.5vh] large:text-[2.5vw] large:ml-[3.5vw] large:top-[9.6vh] xlarge:text-[2vw] xlarge:ml-[3.6vw] 2xlarge:text-[1.8vw] 2xlarge:ml-[3.3vw] 2xlarge:top-[8.5vh]     absolute left-2 ">
             <TbMinusVertical />
           </span>
-          <h4 className="text-white font-medium text-2xl xsmall:text-3xl small:text-4xl medium:text-5xl large:text-6xl mb-2">
+          <h4 className="text-white font-medium text-[4.5vw] xsmall:text-[3.5vw] xsmall:ml-[5vw] small:text-[3vw] small:ml-[8vw] medium:text-[2.7vw] large:text-[1.8vw] large:ml-[4vw] xlarge:text-[1.5vw] 2xlarge:text-[1.3vw]  mb-2">
             Top 250 TV Shows
-            <h1 className="text-sm xsmall:text-base small:text-lg medium:text-xl font-normal text-stone-500">
+            <h1 className="text-[2.5vw] xsmall:text-base small:text-[2vw] medium:text-[2vw] large:text-[1.1vw] xlarge:text-[0.9vw] 2xlarge:text-[.8vw] font-normal text-stone-500">
               Top 250 as rated by CINEOUT Users
             </h1>
-            <h1 className="text-sm xsmall:text-base small:text-lg medium:text-xl font-normal text-white mt-4">
+            <h1 className="text-sm xsmall:text-base small:text-[3vw] medium:text-xl large:text-[1.7vw] xlarge:text-[1.4vw] 2xlarge:text-[1vw] font-normal text-white mt-10">
               250 Titles
             </h1>
           </h4>
         </div>
       </div>
 
-      <div className="w-[90vw] xsmall:w-[80vw] small:w-[70vw] medium:w-[60vw] large:w-[50vw] mx-auto  py-8 px-5 bg-blue-200 relative top-[35vh] xsmall:top-[40vh] small:top-[45vh] medium:top-[50vh] large:top-[55vh] rounded-lg">
+      <div className="w-[90vw] xsmall:w-[80vw] small:w-[70vw] medium:w-[60vw] large:w-[50vw] mx-auto  bg-blue-20 relative top-[40vh] xsmall:top-[40vh] small:top-[45vh] small:mx-[12vw] medium:top-[50vh] large:top-[40vh] large:mx-[6vw] 2xlarge:top-[35vh] rounded-lg">
         {Top250ShowsDetails ? (
           Top250ShowsDetails.map((movie, index) => (
             <div
               key={index}
-              className="w-full  h-[30vh] mb-5 border-l-[1px] hover:bg-slate-700 rounded-lg border-yellow-300"
+              className="w-full  h-[28vh] small:h-[30vh] xlarge:h-[32vh]  mb-5 border-l-[1px] hover:bg-slate-700 rounded-lg border-yellow-300"
             >
-              <div className="flex p-4 bg-red-3 border-b-[2px] rounded-lg border-red-300">
+              <div className="flex p-4 bg-red-3 h-[28vh] small:h-[30vh] medium:w-[70vw]  large:w-[50vw] xlarge:w-[55vw] xlarge:h-[32vh] 2xlarge:w-[50vw] border-b-[1px] rounded-lg border-red-300">
                 <img
-                  className="w-[25vw] h-[18vh] xsmall:w-[15%] small:w-[12%] medium:w-[10%]  object-cover rounded-lg border-[1px] glow"
+                  className="w-[26vw] h-[21vh] xsmall:max-w-[22vw] xsmall:h-[22vh] small:w-[18vw] small:h-[24vh] medium:max-w-[15vw] medium:h-[25vh] large:max-w-[12vw] large:h-[25vh] xlarge:max-w-[9.5vw] 2xlarge:max-w-[9vw] 2xlarge:h-[27vh]  object-cover rounded-lg border-[2px] border-teal-400 "
                   src={movie?.primaryImage?.url}
                   onError={(e) => {
                     e.target.onerror = null;
@@ -215,30 +215,30 @@ const Top250TvShows = () => {
                   {index + 1}. {movie?.titleText?.text}
                 </h1>
               </div>
-              <div className="flex flex-row xsmall:flex-row gap-2 xsmall:gap-3 text-gray-500 mt-2 xsmall:mt-0">
-                <h1 className="text-xs xsmall:text-sm">
+              <div className="flex flex-row   relative bottom-[17vh] left-[35vw] xsmall:flex-row xsmall:left-[30vw] small:left-[25vw] medium:left-[21vw] large:left-[16vw] xlarge:left-[13vw] 2xlarge:left-[12vw]  gap-2 xsmall:gap-3 text-teal-400 mt-2 xsmall:mt-0">
+                <h1 className="text-xs xsmall:text-sm xlarge:text-[1.3vw] 2xlarge:text-[1.2vw]">
                   {movie?.releaseDate?.year}
                 </h1>
-                <h1 className="text-xs xsmall:text-sm">
+                <h1 className="text-xs xsmall:text-sm xlarge:text-[1.3vw] 2xlarge:text-[1.2vw]">
                   {movie?.runtime?.displayableProperty?.value?.plainText ||
                     "Runtime not available"}
                 </h1>
-                <h1 className="text-xs xsmall:text-sm">
+                <h1 className="text-xs xsmall:text-sm xlarge:text-[1.3vw] 2xlarge:text-[1.2vw]">
                   {movie?.certificate?.rating}
                 </h1>
               </div>
-              <div className="flex items-center mt-2 xsmall:mt-0">
-                <TiStarFullOutline className="text-yellow-400" />
-                <h1 className="mx-1 text-xs xsmall:text-sm">
-                  {movie.ratingsSummary.aggregateRating}
+              <div className="flex items-center relative bottom-[15vh] left-[33vw] xsmall:left-[30vw] small:left-[24vw] medium:left-[20vw] large:left-[15vw] xlarge:left-[12vw] ">
+                <TiStarFullOutline className="text-yellow-400 xlarge:text-[1.3vw]" />
+                <h1 className="mx-1 text-white text-xs xsmall:text-sm xlarge:text-[1.3vw]">
+                  {movie?.ratingsSummary?.aggregateRating}
                 </h1>
-                <h1 className="text-gray-500 text-xs xsmall:text-sm">
-                  ({movie.ratingsSummary.voteCount})
+                <h1 className="text-blue-500 text-xs xsmall:text-sm xlarge:text-[1.1vw]">
+                  ({movie?.ratingsSummary?.voteCount})
                 </h1>
               </div>
-              <h1 className="mt-2 text-xs xsmall:text-sm">
+              <h1 className=" text-sky-200 w-[60vw] xsmall:w-[55vw] small:w-[50vw] medium:w-[40vw] large:w-[30vw] relative bottom-[12vh] left-[34vw] xsmall:left-[30vw] small:left-[25vw] medium:left-[21vw] large:left-[16vw] xlarge:left-[13vw] xlarge:text-[1.2vw] xlarge:bottom-[13vh] 2xlarge:left-[12vw] text-xs xsmall:text-sm">
                 Genre:{" "}
-                {movie.genres.genres.map((genre) => genre.text).join(", ")}
+                {movie?.genres?.genres.map((genre) => genre?.text).join(", ")}
               </h1>
             </div>
           ))
@@ -249,14 +249,14 @@ const Top250TvShows = () => {
         )}
       </div>
 
-      <div className="mt-8 xsmall:mt-12 small:mt-16 medium:mt-20 large:mt-24">
+      <div className=" hidden  large:block large:relative large:bottom-[7700vh] large:left-[15vw] 2xlarge:bottom-[8000vh]  mt-8 xsmall:mt-12 small:mt-16 medium:mt-20 large:mt-24">
         <MoreToExplore />
       </div>
-      <div className="mt-8 xsmall:mt-12 small:mt-16 medium:mt-20 large:mt-24">
+      <div className=" hidden  large:block  large:relative large:bottom-[7900vh] large:left-[65vw] 2xlarge:bottom-[8200vh] mt-8 xsmall:mt-12 small:mt-16 medium:mt-20 large:mt-24">
         <MoreToRead />
       </div>
 
-      <div className="mt-8 xsmall:mt-12 small:mt-16 medium:mt-20 large:mt-24 px-4">
+      <div className="mt-[45vh]  small:mt-[50vh] small:ml-[8vw] medium:ml-[10vw] medium:mt-[55vh] large:-mt-[130vh] large:w-[55vw] xlarge:-mt-[140vh] 2xlarge:-mt-[148vh] 2xlarge:w-[50vw]  large:ml-[5vw] px-4">
         <h1 className="font-normal text-sm xsmall:text-base text-red-600">
           The Top Rated Movie list only includes feature films.
           <ul className="list-disc pl-5 mt-2">
@@ -279,11 +279,14 @@ const Top250TvShows = () => {
         </h1>
       </div>
 
-      <div className="mt-8 xsmall:mt-12 small:mt-16 medium:mt-20 large:mt-24">
+      <div className="mt-8 xsmall:mt-12 small:mt-16 medium:mt-20  xlarge:-mt-2  ">
         <RecentlyViewed />
       </div>
-
-      <Footer />
+      <div className="  relative small:h-[75vh] medium:h-[70vh] large:h-[75vh] xlarge:h-[80vh] 2xlarge:min-h-auto  xsmall:top-[7vh] small:-top-[vh]">
+        <div className="">
+          <Footer />
+        </div>
+      </div>
     </div>
   );
 };

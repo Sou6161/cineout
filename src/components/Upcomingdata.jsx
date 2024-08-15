@@ -20,13 +20,13 @@ const Upcomingdata = ({
         <div className=" w-[97vw] min-h-[58vh] 2xlarge:w-[97vw]  scrollbar-hide overflow-x-auto overflow-y-hidden 2xlarge:-mt-6  bg-yellow-20">
           <div className=" ml-1 flex  gap-10  w-[100vw] h-[47vh] no-scrollbar ">
             {/* {nowupcomingmovies &&console.log(nowupcomingmovies, "now upcoming movies ID")} */}
-            {/* {console.log(nowupcomingfinal, "now upcoming final")} */}
+            {console.log(nowupcomingfinal, "now upcoming final")}
             {nowupcomingfinal &&
               nowupcomingfinal.map((movies, index) => {
                 const movie = nowupcomingfinal[index];
                 return (
                   <div key={index}>
-                    <Link to={`/name/nm${movies.id}`}>
+                    <Link to={`/name/movie/${movies.id}`}>
                       <div className="mr-4 ml-3 max-w-[52vw] max-h-[42vh] xsmall:max-w-[40vw] small:max-w-[30vw] medium:max-w-[30vw] large:max-w-[25vw] xlarge:max-w-[20vw] 2xlarge:max-w-[15vw] mt-5 glow3  rounded-[10px] p-2 overflow-x-hidden scrollbar-hide cursor-pointer bg-zinc-70 bg-slate-40 overflow-y-hidden">
                         <img
                           className="min-w-[48vw]  h-[40vh] xsmall:min-w-[34vw] small:min-w-[25vw]  medium:min-w-[22vw] large:min-w-[18vw] xlarge:min-w-[15vw] 2xlarge:min-w-[14vw] rounded-md drop-shadow-glow"
@@ -60,34 +60,38 @@ const Upcomingdata = ({
 
         <div className=" w-[97vw] mx-4  min-h-[60vh]  scrollbar-hide overflow-x-auto overflow-y-hidd">
           <div className=" ml-2 flex gap-10  w-[100vw] h-[47vh]  no-scrollbar ">
-            {/* {nowupcomingmovies && console.log(nowupcomingmovies," UpcomingMoviesIMDBID Final")} */}
-            {/* {nowupcomingmoviesdetails && console.log(nowupcomingmoviesdetails," UpcomingMoviesDetails Final")} */}
+            {nowupcomingmovies &&
+              console.log(nowupcomingmovies, " UpcomingMoviesIMDBID Final")}
+            {nowupcomingmoviesdetails &&
+              console.log(
+                nowupcomingmoviesdetails,
+                " UpcomingMoviesDetails Final"
+              )}
 
-
-            {nowupcomingmoviesdetails && 
+            {nowupcomingmoviesdetails &&
               nowupcomingmoviesdetails.map((movie2, index) => {
                 {
                   return (
                     <Link to={`/name/nm${movie2.id}`}>
-                    <div key={index}>
-                      <div className="mr-4  ml-2 mt-5 max-w-[52vw] max-h-[42vh] xsmall:max-w-[40vw] small:max-w-[30vw] medium:max-w-[30vw] large:max-w-[25vw] xlarge:max-w-[20vw] 2xlarge:max-w-[15vw] overflow-y-hidden glow3 rounded-[10px] p-2 overflow-x-hidden scrollbar-hide cursor-pointer bg-zinc-70  bg-black  hover:bg-slate-500">
-                        <img
-                          className="min-w-[48vw]  h-[40vh] xsmall:min-w-[34vw] small:min-w-[25vw]  medium:min-w-[22vw] large:min-w-[18vw] xlarge:min-w-[15vw] 2xlarge:min-w-[14vw] rounded-md "
-                          src={`https://image.tmdb.org/t/p/original/${movie2.poster_path}`}
-                          alt="no image available"
-                          onError={(e) => {
-                            e.target.onerror = null;
-                            e.target.src =
-                              "https://www.prokerala.com/movies/assets/img/no-poster-available.jpg";
-                          }}
-                        />
+                      <div key={index}>
+                        <div className="mr-4  ml-2 mt-5 max-w-[52vw] max-h-[42vh] xsmall:max-w-[40vw] small:max-w-[30vw] medium:max-w-[30vw] large:max-w-[25vw] xlarge:max-w-[20vw] 2xlarge:max-w-[15vw] overflow-y-hidden glow3 rounded-[10px] p-2 overflow-x-hidden scrollbar-hide cursor-pointer bg-zinc-70  bg-black  hover:bg-slate-500">
+                          <img
+                            className="min-w-[48vw]  h-[40vh] xsmall:min-w-[34vw] small:min-w-[25vw]  medium:min-w-[22vw] large:min-w-[18vw] xlarge:min-w-[15vw] 2xlarge:min-w-[14vw] rounded-md "
+                            src={`https://image.tmdb.org/t/p/original/${movie2.poster_path}`}
+                            alt="no image available"
+                            onError={(e) => {
+                              e.target.onerror = null;
+                              e.target.src =
+                                "https://www.prokerala.com/movies/assets/img/no-poster-available.jpg";
+                            }}
+                          />
+                        </div>
+                        <div className=" ">
+                          <h1 className=" text-[5vw] xsmall:text-[3.5vw] small:text-[3vw] medium:text-[2vw] large:text-[1.7vw] xlarge:text-[1.5vw] 2xlarge:text-[1.3vw] font-semibold text-yellow-500   ml-3 mt-5 ">
+                            {movie2.title}
+                          </h1>
+                        </div>
                       </div>
-                      <div className=" ">
-                        <h1 className=" text-[5vw] xsmall:text-[3.5vw] small:text-[3vw] medium:text-[2vw] large:text-[1.7vw] xlarge:text-[1.5vw] 2xlarge:text-[1.3vw] font-semibold text-yellow-500   ml-3 mt-5 ">
-                          {movie2.title}
-                        </h1>
-                      </div>
-                    </div>
                     </Link>
                   );
                 }

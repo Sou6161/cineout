@@ -16,15 +16,15 @@ const Upcomingseriesdata = ({ nowupcomingseries }) => {
           {/* {finalcomingsoonmoviestheaters && console.log(finalcomingsoonmoviestheaters)} */}
           {/* {console.log(nowupcomingseries)} */}
           {nowupcomingseries &&
-            nowupcomingseries.map((movie, index) => {
+            nowupcomingseries.map((movie3, index) => {
               {
                 return (
                   <div key={index}>
-                    <Link to={`/name/nm${movie.id}`}>
+                    <Link to={`/name/tv/nm${movie3.id}`}>
                       <div className="  mr-4  ml- mt-4  max-w-[52vw] max-h-[42vh] xsmall:max-w-[40vw] small:max-w-[30vw] medium:max-w-[30vw] large:max-w-[25vw] xlarge:max-w-[20vw] 2xlarge:max-w-[15vw] glow3  overflow-y-hidden rounded-[10px] p-2 overflow-x-hidden scrollbar-hide cursor-pointer bg-zinc-70  bg-black  hover:bg-slate-500 ">
                         <img
                           className=" min-w-[48vw]  h-[40vh] xsmall:min-w-[34vw] small:min-w-[25vw]  medium:min-w-[22vw] large:min-w-[18vw] xlarge:min-w-[15vw] 2xlarge:min-w-[14vw] rounded-md "
-                          src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                          src={`https://image.tmdb.org/t/p/original/${movie3?.poster_path}`}
                           alt="no image available"
                           onError={(e) => {
                             e.target.onerror = null;
@@ -35,7 +35,7 @@ const Upcomingseriesdata = ({ nowupcomingseries }) => {
                       </div>
                       <div className=" ">
                         <h1 className=" text-[5vw] xsmall:text-[4vw] small:text-[3vw] medium:text-[2vw] large:text-[1.7vw] xlarge:text-[1.5vw] 2xlarge:text-[1.3vw] font-semibold text-yellow-500   ml-2 mt-5 ">
-                          {movie.name}
+                          {movie3?.name}
                         </h1>
                       </div>
                     </Link>

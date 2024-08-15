@@ -17,7 +17,7 @@ import SeventhContainer from "./SeventhContainer";
 import EightContainer from "./EightContainer";
 import Ninthcontainer from "./Ninthcontainer";
 import Footer from "./Footer";
-import { RapidOptionsDaimondApiDojoUpcomingMoviesTest20 } from "../constants/Rapidoptions";
+import { RapidOptionsDaimondApiDojoUpcomingMoviesTest63 } from "../constants/Rapidoptions";
 
 const Maincontainer = () => {
   const nowshowingdispatch = useDispatch();
@@ -54,7 +54,7 @@ const Maincontainer = () => {
     const getUpcomingMovies = async () => {
       const response = await fetch(
         `https://imdb8.p.rapidapi.com/title/v2/get-coming-soon?comingSoonType=MOVIE&first=20&country=IN&language=en-US`,
-        RapidOptionsDaimondApiDojoUpcomingMoviesTest20
+        RapidOptionsDaimondApiDojoUpcomingMoviesTest63
       );
       const data = await response.json();
       setUpcomingMovies(

@@ -42,6 +42,54 @@ const MenuSection = ({ icon, title, items, linkPrefix, handleClick }) => (
             <Link to="/chart/tvmeter" onClick={handleClick}>
               {item}
             </Link>
+          ) : item === "Browse TV Shows by Genre" ? (
+            <Link to="/BrowseTV-Shows" onClick={handleClick}>
+              {item}
+            </Link>
+          ) : item === "TV News" ? (
+            <Link to="/BrowseTop-News" onClick={handleClick}>
+              {item}
+            </Link>
+          ) : item === "Oscars Winners" ? (
+            <Link to="/Oscars-Winners" onClick={handleClick}>
+              {item}
+            </Link>
+          ) : item === "Emmy Winners" ? (
+            <Link to="/Emmy-Winners" onClick={handleClick}>
+              {item}
+            </Link>
+          ) : item === "Born Today" ? (
+            <Link to="/Born-Today-Persons" onClick={handleClick}>
+              {item}
+            </Link>
+          ) : item === "Most Popular Celebs" ? (
+            <Link to="/Most-Popular-Celebs" onClick={handleClick}>
+              {item}
+            </Link>
+          ) : item === "Celebrity News" ? (
+            <Link to="/Celebrity-News" onClick={handleClick}>
+              {item}
+            </Link>
+          ) : item === "What To Watch" ? (
+            <Link to="/WhatToWatch-Now" onClick={handleClick}>
+              {item}
+            </Link>
+          ) : item === "Latest Trailers" ? (
+            <Link to="/Latest-trailers" onClick={handleClick}>
+              {item}
+            </Link>
+          ) : item === "Help Center" ? (
+            <Link to="/Help-Center" onClick={handleClick}>
+              {item}
+            </Link>
+          ) : item === "Contributor Zone" ? (
+            <Link to="/Contribution-Zone" onClick={handleClick}>
+              {item}
+            </Link>
+          ) : item === "Polls" ? (
+            <Link to="/Polls" onClick={handleClick}>
+              {item}
+            </Link>
           ) : (
             <span onClick={handleClick}>{item}</span>
           )}
@@ -50,7 +98,6 @@ const MenuSection = ({ icon, title, items, linkPrefix, handleClick }) => (
     </ul>
   </div>
 );
-
 
 const Searchtab = () => {
   const navigate = useNavigate();

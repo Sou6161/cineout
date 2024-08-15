@@ -6,7 +6,7 @@ const MoreToExplore = () => {
   return (
     <>
       <div className=" text-[1.7vw] inline-block font-semibold text-red-600 relative left-[55vw] bottom-[190vh]">
-        <div className=" relative top-10 right-10 text-purple-500 text-[2.2vw]">
+        <div className=" relative large:top-9 large:right-8 xlarge:top-[6vh] text-purple-500 text-[2.2vw]">
           <MdAlignVerticalCenter />
         </div>{" "}
         <span className=" relative top-[1.3vh]">More To Explore</span>
