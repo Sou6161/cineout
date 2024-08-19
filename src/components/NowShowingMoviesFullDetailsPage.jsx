@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import Headerfordetails from "./Headerfordetails";
 import { API_OPTIONS } from "../constants/Apioptions";
 import {
@@ -34,7 +34,6 @@ import { useDispatch } from "react-redux";
 import { addRecentlyVieweddata } from "../Reduxstore/RecentlyViewedSlice";
 import Header from "./Header";
 
-
 const NumberFormatter = ({ number }) => {
   const formatNumber = (num) => {
     if (num >= 1000000) {
@@ -57,8 +56,9 @@ const convertDuration = (seconds) => {
 
 const NowShowingMoviesFullDetailsPage = () => {
   const { id } = useParams();
+  const location = useLocation();
+  const isTVSeries = location.state?.isTVSeries;
   console.log(id, "TMDB ID");
-
 
   const [NowShowingTrailerYTKEY, setNowShowingTrailerYTKEY] = useState(null);
   const [NowShowingIMDBID, setNowShowingIMDBID] = useState(null);
@@ -112,7 +112,7 @@ const NowShowingMoviesFullDetailsPage = () => {
               <h1 className="font-normal   truncate mt-3 text-white">
                 {data?.node?.name?.nameText?.text}
               </h1>
-              <h1 className="font-normal  text-lime-400 whitespace-nowrap">
+              <h1 className="font-normal truncate  text-lime-400 whitespace-nowrap">
                 {data?.node?.characters &&
                   (() => {
                     const characterNames = data.node.characters
@@ -140,153 +140,137 @@ const NowShowingMoviesFullDetailsPage = () => {
     }
   }, [isShowing]);
 
-  useEffect(() => {
-    const fetchMovieTrailer = async () => {
-      try {
-        const apiUrl = `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`;
-
-        const response = await fetch(apiUrl, API_OPTIONS);
-        const data = await response.json();
-
-        if (data?.results && data.results.length > 0) {
-          console.log(data, "Movie data");
-          processTrailerData(data);
-        } else {
-          console.log("No results found for movie");
-        }
-      } catch (error) {
-        console.error("Error fetching movie trailer:", error);
-      }
-    };
-
-    const processTrailerData = (data) => {
-      const trailerVideos = data.results.filter(
-        (video) => video.type === "Trailer"
-      );
-      if (trailerVideos.length > 0) {
-        const randomTrailer =
-          trailerVideos[Math.floor(Math.random() * trailerVideos.length)];
-        setNowShowingTrailerYTKEY(randomTrailer.key);
+  
+  const processTrailerData = (data) => {
+    const trailerVideos = data.results.filter(
+      (video) => video.type === "Trailer" || video.type === "Teaser"
+    );
+    if (trailerVideos.length > 0) {
+      const randomTrailer =
+        trailerVideos[Math.floor(Math.random() * trailerVideos.length)];
+      setNowShowingTrailerYTKEY(randomTrailer.key);
+    } else {
+      console.log("No trailer or teaser videos found in the data");
+    }
+  };
+  
+  const fetchMovieTrailer = async () => {
+    try {
+      const apiUrl = `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`;
+  
+      const response = await fetch(apiUrl, API_OPTIONS);
+      const data = await response.json();
+  
+      if (data?.results && data.results.length > 0) {
+        console.log(data, "Movie data");
+        processTrailerData(data);
       } else {
-        console.log("No trailer videos found in the movie data");
+        console.log("No results found for movie");
       }
-    };
-
-    fetchMovieTrailer();
-  }, [id]);
+    } catch (error) {
+      console.error("Error fetching movie trailer:", error);
+    }
+  };
   
-  useEffect(() => {
-    const fetchTVTrailer = async () => {
-      if (window.location.pathname.startsWith('/name/nm')) {
-        try {
-          console.log("i am inside fetchtv")
-          const id = window.location.pathname.split('/').pop();
-          console.log(id,"hiuhighghgh7")
-          const apiUrl = `https://api.themoviedb.org/3/tv/${id}/videos?language=en-US`;
-          console.log(apiUrl)
+  const fetchTVTrailer = async () => {
+    try {
+      console.log("Fetching TV trailer");
+      const apiUrl = `https://api.themoviedb.org/3/tv/${id}/videos?language=en-US`;
+      console.log(apiUrl);
   
-          const response = await fetch(apiUrl, API_OPTIONS);
-          const data = await response.json();
-          
+      const response = await fetch(apiUrl, API_OPTIONS);
+      const data = await response.json();
   
-          if (data?.results && data.results.length > 1) {
-            console.log(data, "TV Series data");
-            processTrailerData(data);
-          } else {
-            console.log("No results found for TV series");
-          }
-        } catch (error) {
-          console.error("Error fetching TV trailer:", error);
-        }
-      }
-    };
-  
-    const processTrailerData = (data) => {
-      const trailerVideos = data.results.filter(
-        (video) => video.type === "Trailer"
-      );
-      if (trailerVideos.length > 0) {
-        const randomTrailer =
-          trailerVideos[Math.floor(Math.random() * trailerVideos.length)];
-        setNowShowingTrailerYTKEY(randomTrailer.key);
+      if (data?.results && data.results.length > 0) {
+        console.log(data, "TV Series data");
+        processTrailerData(data);
       } else {
-        console.log("No trailer videos found in the TV series data");
+        console.log("No results found for TV series");
       }
-    };
-  
-    fetchTVTrailer();
-  }, []);
+    } catch (error) {
+      console.error("Error fetching TV trailer:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (isTVSeries) {
+      fetchTVTrailer();
+    } else {
+      fetchMovieTrailer();
+    }
+  }, [id, isTVSeries]);
 
   useEffect(() => {
     NowShowingTrailerYTKEY &&
       console.log(NowShowingTrailerYTKEY, " MOVIE YT KEY");
   }, [NowShowingTrailerYTKEY]);
 
+
   useEffect(() => {
-  const getMovieExternalIDs = async () => {
-    if (window.location.pathname.startsWith('/name/movie')) {
-      try {
-        const id = window.location.pathname.split('/').pop();
-        const apiUrl = `https://api.themoviedb.org/3/movie/${id}/external_ids`;
+    const getMovieExternalIDs = async () => {
+      if (window.location.pathname.startsWith("/name/movie")) {
+        try {
+          const id = window.location.pathname.split("/").pop();
+          const apiUrl = `https://api.themoviedb.org/3/movie/${id}/external_ids`;
 
-        const response = await fetch(apiUrl, API_OPTIONS);
-        const data = await response.json();
+          const response = await fetch(apiUrl, API_OPTIONS);
+          const data = await response.json();
 
-        if (data) {
-          if (data.imdb_id !== null) {
-            console.log("Movie IMDB ID found:", data.imdb_id);
-            setNowShowingIMDBID(data.imdb_id);
+          if (data) {
+            if (data.imdb_id !== null) {
+              console.log("Movie IMDB ID found:", data.imdb_id);
+              setNowShowingIMDBID(data.imdb_id);
+            } else {
+              console.log("No IMDB ID found for movie");
+              setNowShowingIMDBID(null);
+            }
+            // Set other external IDs if needed
           } else {
-            console.log("No IMDB ID found for movie");
+            console.log("No external IDs found for movie");
             setNowShowingIMDBID(null);
           }
-          // Set other external IDs if needed
-        } else {
-          console.log("No external IDs found for movie");
+        } catch (error) {
+          console.error("Error fetching movie external IDs:", error);
           setNowShowingIMDBID(null);
         }
-      } catch (error) {
-        console.error("Error fetching movie external IDs:", error);
-        setNowShowingIMDBID(null);
       }
-    }
-  };
+    };
 
-  getMovieExternalIDs();
-}, []);
+    getMovieExternalIDs();
+  }, []);
 
-useEffect(() => {
-  const getTVExternalIDs = async () => {
-    if (window.location.pathname.startsWith('/name/tv')) {
-      try {
-        const id = window.location.pathname.split('/').pop();
-        const apiUrl = `https://api.themoviedb.org/3/tv/${id}/external_ids`;
+  useEffect(() => {
+    const getTVExternalIDs = async () => {
+      if (window.location.pathname.startsWith("/name/tv")) {
+        try {
+          const id = window.location.pathname.split("/").pop();
+          const apiUrl = `https://api.themoviedb.org/3/tv/${id}/external_ids`;
 
-        const response = await fetch(apiUrl, API_OPTIONS);
-        const data = await response.json();
+          const response = await fetch(apiUrl, API_OPTIONS);
+          const data = await response.json();
 
-        if (data) {
-          if (data.imdb_id !== null) {
-            console.log("TV Series IMDB ID found:", data.imdb_id);
-            setNowShowingIMDBID(data.imdb_id);
+          if (data) {
+            if (data.imdb_id !== null) {
+              console.log("TV Series IMDB ID found:", data.imdb_id);
+              setNowShowingIMDBID(data.imdb_id);
+            } else {
+              console.log("No IMDB ID found for TV series");
+              setNowShowingIMDBID(null);
+            }
+            // Set other external IDs if needed
           } else {
-            console.log("No IMDB ID found for TV series");
+            console.log("No external IDs found for TV series");
             setNowShowingIMDBID(null);
           }
-          // Set other external IDs if needed
-        } else {
-          console.log("No external IDs found for TV series");
+        } catch (error) {
+          console.error("Error fetching TV series external IDs:", error);
           setNowShowingIMDBID(null);
         }
-      } catch (error) {
-        console.error("Error fetching TV series external IDs:", error);
-        setNowShowingIMDBID(null);
       }
-    }
-  };
+    };
 
-  getTVExternalIDs();
-}, []);
+    getTVExternalIDs();
+  }, []);
 
   useEffect(() => {
     if (NowShowingIMDBID !== null) {
@@ -409,6 +393,9 @@ useEffect(() => {
     NowShowingRelatedNews && console.log(NowShowingRelatedNews, "Related News");
   }, [NowShowingRelatedNews]);
 
+
+  
+
   return (
     <div className="  min-h-[800vh] xsmall:min-h-[852vh] small:min-h-[902vh] medium:h-[1000vh] large:min-h-[1045vh] xlarge:h-[1060vh] 2xlarge:h-[1000vh] bg-[#030C16] text-red-600">
       <div className=" -mt-1  ">
@@ -442,7 +429,7 @@ useEffect(() => {
             className="flex items-center justify-center bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700 h-full"
           >
             <svg
-              className="w-full h-full text-[10vw] text-red-600 dark:text-gray-600
+              className="w-full h-[5vh] 2xlarge:h-[10vh] text-[10vw] text-red-600 dark:text-gray-600
                    xsmall:text-[9vw]
                    small:text-[8vw]
                    medium:text-[7vw]

@@ -63,14 +63,13 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/home" element={<Maincontainer />} />
-      <Route path="/name/movie/:id" element={<NowShowingMoviesFullDetailsPage />} />
-      {/* <Route path="/name/movie/:id" element={<NowShowingMoviesFullDetailsPage />} />   */}
+      <Route path="/name/movie/:id" element={<NowShowingMoviesFullDetailsPage />} />    
       <Route path="/name/tv/:id" element={<NowShowingMoviesFullDetailsPage />} />
 
       {/* <Route path="/name/:title" element={<UpcomingMoviesFullDetailsPage />} /> */}
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      <Route path="/title/:imdbId" element={<FullDetailsPage />} />
+      {/* <Route path="/title/:imdbId" element={<FullDetailsPage />} /> */}
       <Route path="/fan-favourites" element={<Whattowatch />} />
       <Route path="/Top-Box-Office" element={<BoxOffice />} />
       <Route path="/coming-soon" element={<Comingsooninside />} />

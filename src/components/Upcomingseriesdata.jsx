@@ -14,13 +14,13 @@ const Upcomingseriesdata = ({ nowupcomingseries }) => {
       <div className=" w-[97vw] mx-  h-[55vh]  scrollbar-hide overflow-x-auto overflow-y-hidden  mb-[8vh] -mt-2 bg-yellow-20">
         <div className=" ml-3 flex gap-10  w-[100vw] h-[47vh]  no-scrollbar ">
           {/* {finalcomingsoonmoviestheaters && console.log(finalcomingsoonmoviestheaters)} */}
-          {/* {console.log(nowupcomingseries)} */}
+          {console.log(nowupcomingseries,"Now UPcoming SERIES data ")}
           {nowupcomingseries &&
             nowupcomingseries.map((movie3, index) => {
               {
                 return (
                   <div key={index}>
-                    <Link to={`/name/tv/nm${movie3.id}`}>
+                    <Link to={`/name/tv/${movie3.id}`} state={{ isTVSeries: true }}>
                       <div className="  mr-4  ml- mt-4  max-w-[52vw] max-h-[42vh] xsmall:max-w-[40vw] small:max-w-[30vw] medium:max-w-[30vw] large:max-w-[25vw] xlarge:max-w-[20vw] 2xlarge:max-w-[15vw] glow3  overflow-y-hidden rounded-[10px] p-2 overflow-x-hidden scrollbar-hide cursor-pointer bg-zinc-70  bg-black  hover:bg-slate-500 ">
                         <img
                           className=" min-w-[48vw]  h-[40vh] xsmall:min-w-[34vw] small:min-w-[25vw]  medium:min-w-[22vw] large:min-w-[18vw] xlarge:min-w-[15vw] 2xlarge:min-w-[14vw] rounded-md "

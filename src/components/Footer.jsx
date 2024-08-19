@@ -25,7 +25,7 @@ const Footer = () => {
           </span>
         </Link>
       </div>
-      <div className="w-[95vw] h-[18vh] xsmall:w-[75vw] small:w-[55vw] medium:w-[45vw] large:w-[32vw] xlarge:w-[27vw] 2xlarge:w-[20vw] relative rounded-lg border- border-zinc-700 flex flex-col items-center justify-center mt-10 p-4">
+      <div className="w-[95vw] h-[18vh] xsmall:w-[75vw] small:w-[55vw] medium:w-[45vw] large:w-[32vw] xlarge:w-[27vw] 2xlarge:w-[20vw] relative rounded-lg border- border-zinc-700 flex flex-col items-center justify-center mt-10 2xlarge:mt-0 p-4">
         <h1 className="mb-5">
           <span className="glow-text text-yellow-400 font-bold text-[4.5vw] xsmall:text-[3vw] small:text-[2.8vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.4vw] 2xlarge:text-[1.2vw]">
             Follow CINEOUT on Social
@@ -129,7 +129,7 @@ const Footer = () => {
           </button>
         </div>
       </div>
-      <div className="flex flex-col items-center space-y-5 mt-5">
+      <div className="flex flex-col items-center space-y-5 mt-5 2xlarge:mt-2  ">
         <div className="flex flex-wrap justify-center gap-5 w-[100vw] items-center small:flex-row small:flex-wrap xsmall:w-[90vw] small:w-[80vw] medium:w-[90vw]  large:w-[60vw] xlarge:w-[60vw]">
           <h1 className="text-[4vw] xsmall:text-[2.8vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-white flex items-center hover:underline hover:cursor-pointer">
             Help{" "}

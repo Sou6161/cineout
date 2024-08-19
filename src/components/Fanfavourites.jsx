@@ -1,20 +1,81 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { API_OPTIONS } from "../constants/Apioptions";
+import { CgPlayListRemove } from "react-icons/cg";
 
 const Fanfavourites = ({ finalfanwatch }) => {
-  // Helper function to determine content type and create appropriate link
-  const getContentLink = (item) => {
-    // Check if the item has a titleType property
-    if (item.titleType) {
-      const titleType = item.titleType.text || item.titleType;
-      if (typeof titleType === "string") {
-        if (titleType.includes("TV Series")) {
-          return `/name/tv/${item.id}`;
-        } else if (titleType.includes("Movie")) {
-          return `/name/movie/${item.id}`;
-        }
+  const [FanFavouritesTMDBID, setFanFavouritesTMDBID] = useState([]);
+  const [fanwatchIDs, setFanwatchIDs] = useState([]); // New state for storing IDs
+
+  useEffect(() => {
+    // Extract IDs from finalfanwatch and store them in fanwatchIDs
+    if (finalfanwatch) {
+      const ids = finalfanwatch.map((item) => item.id);
+      setFanwatchIDs(ids);
+    }
+  }, [finalfanwatch]);
+
+  useEffect(() => {
+    if (fanwatchIDs.length > 0) {
+      console.log("FanwatchIDs:", fanwatchIDs);
+    }
+  }, [fanwatchIDs]);
+
+  useEffect(() => {
+    const fetchTMDBIDs = async () => {
+      try {
+        const tmdbIDs = await Promise.all(
+          fanwatchIDs.map(async (id) => {
+            const response = await fetch(
+              `https://api.themoviedb.org/3/find/${id}?external_source=imdb_id`,
+              API_OPTIONS
+            );
+            const data = await response.json();
+            if (data?.movie_results && data.movie_results.length > 0) {
+              return data.movie_results.map((item) => item.id);
+            } else if (data?.tv_results && data.tv_results.length > 0) {
+              return data.tv_results.map((item) => item.id);
+            } else {
+              console.log(`No movie or TV results found for ID: ${id}`);
+              return [];
+            }
+          })
+        );
+        // Flatten the array and filter out empty arrays
+        const flattenedIDs = tmdbIDs.flat().filter((id) => id !== undefined);
+        setFanFavouritesTMDBID(flattenedIDs);
+      } catch (error) {
+        console.error("Error fetching TMDB IDs:", error);
+        setFanFavouritesTMDBID([]); // Set to empty array in case of error
+      }
+    };
+
+    if (fanwatchIDs && fanwatchIDs.length > 0) {
+      fetchTMDBIDs();
+    } else {
+      setFanFavouritesTMDBID([]); // Set to empty array if fanwatchIDs is empty or null
+    }
+  }, [fanwatchIDs]);
+
+  useEffect(() => {
+    if (FanFavouritesTMDBID && FanFavouritesTMDBID.length > 0) {
+      console.log("FanFavouritesTMDBID:", FanFavouritesTMDBID);
+    }
+  }, [FanFavouritesTMDBID]);
+
+  const getContentLink = (item, tmdbId) => {
+    if (item?.titleType?.text) {
+      const titleType = item.titleType.text;
+      if (titleType.includes("TV Series")) {
+        return { path: `/name/tv/${tmdbId || "loading"}`, isTVSeries: true };
+      } else if (titleType.includes("Movie")) {
+        return {
+          path: `/name/movie/${tmdbId || "loading"}`,
+          isTVSeries: false,
+        };
       }
     }
+    return { path: "/", isTVSeries: false };
   };
 
   return (
@@ -29,12 +90,21 @@ const Fanfavourites = ({ finalfanwatch }) => {
       </div>
 
       <div className="flex gap-4 w-[100vw] h-[52vh] overflow-y-scroll no-scrollbar">
+        {console.log(finalfanwatch)}
         {finalfanwatch &&
+        FanFavouritesTMDBID &&
+        finalfanwatch.length > 0 &&
+        FanFavouritesTMDBID.length > 0 ? (
           finalfanwatch.map((item, index) => {
-            const contentLink = getContentLink(item);
+            const tmdbId = FanFavouritesTMDBID[index];
+            const { path, isTVSeries } = getContentLink(item, tmdbId);
 
             return (
-              <Link to={contentLink} key={index}>
+              <Link
+                to={path}
+                key={tmdbId}
+                state={{ isTVSeries: isTVSeries, tmdbId: tmdbId }}
+              >
                 <div className="flex flex-col">
                   <div className="mr-4 ml-3 max-w-[53vw] max-h-[42vh] xsmall:max-w-[40vw] small:max-w-[30vw] medium:max-w-[30vw] large:max-w-[25vw] xlarge:max-w-[20vw] 2xlarge:max-w-[15vw] rounded-[10px] p-2 overflow-x-hidden scrollbar-hide cursor-pointer bg-zinc-700 hover:bg-slate-500">
                     <img
@@ -49,7 +119,10 @@ const Fanfavourites = ({ finalfanwatch }) => {
                 </div>
               </Link>
             );
-          })}
+          })
+        ) : (
+          <p>loading</p>
+        )}
       </div>
     </div>
   );

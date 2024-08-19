@@ -30,8 +30,7 @@ const Nowshowingdata = ({ nowfinal }) => {
   const [width] = useWindowSize();
   const [backgroundStyle, setBackgroundStyle] = useState({});
   const [leftOpacity, setLeftOpacity] = useState(0.7);
-const [middleOpacity, setMiddleOpacity] = useState(0.2);
-
+  const [middleOpacity, setMiddleOpacity] = useState(0.2);
 
   const bannerUrl = `https://image.tmdb.org/t/p/original/${nowfinal.backdrop_path}`;
   const { data: dominantColor } = useColor(bannerUrl, "rgb", {
@@ -57,7 +56,6 @@ const [middleOpacity, setMiddleOpacity] = useState(0.2);
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat",
     };
-  
 
     if (width >= 1536) {
       // 2xl
@@ -106,6 +104,7 @@ const [middleOpacity, setMiddleOpacity] = useState(0.2);
           className="text-[5vw] font-bold relative top-[23vh] left-[2vh]  xsmall:top-[25vh] small:top-[30vh] medium:top-[33vh] medium:text-[3vw] large:top-[36vh] large:text-[3vw] xlarge:text-[3vw] xlarge:top-[40vh] 2xlarge:top-[42vh] 2xlarge:text-[2vw] mb-2"
           style={titleStyle}
         >
+          {/* {console.log(nowfinal.id, "NowFinal ID Now Showing Movies")} */}
           {nowfinal.name ||
             nowfinal.title ||
             nowfinal.original_name ||
@@ -143,7 +142,7 @@ const [middleOpacity, setMiddleOpacity] = useState(0.2);
             </>
           )}
           <Link
-            to={`/title/tt${nowfinal.id}`}
+            to={`/name/movie/${nowfinal.id}`}
             className="text-blue-500 hover:underline ml-1"
             style={{ textShadow: "none" }}
           >

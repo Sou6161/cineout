@@ -20,7 +20,7 @@ const Upcomingdata = ({
         <div className=" w-[97vw] min-h-[58vh] 2xlarge:w-[97vw]  scrollbar-hide overflow-x-auto overflow-y-hidden 2xlarge:-mt-6  bg-yellow-20">
           <div className=" ml-1 flex  gap-10  w-[100vw] h-[47vh] no-scrollbar ">
             {/* {nowupcomingmovies &&console.log(nowupcomingmovies, "now upcoming movies ID")} */}
-            {console.log(nowupcomingfinal, "now upcoming final")}
+            {/* {console.log(nowupcomingfinal, "now upcoming final")} */}
             {nowupcomingfinal &&
               nowupcomingfinal.map((movies, index) => {
                 const movie = nowupcomingfinal[index];
@@ -60,19 +60,19 @@ const Upcomingdata = ({
 
         <div className=" w-[97vw] mx-4  min-h-[60vh]  scrollbar-hide overflow-x-auto overflow-y-hidd">
           <div className=" ml-2 flex gap-10  w-[100vw] h-[47vh]  no-scrollbar ">
-            {nowupcomingmovies &&
-              console.log(nowupcomingmovies, " UpcomingMoviesIMDBID Final")}
-            {nowupcomingmoviesdetails &&
+            {/* {nowupcomingmovies &&
+              console.log(nowupcomingmovies, " UpcomingMoviesIMDBID Final")} */}
+            {/* {nowupcomingmoviesdetails &&
               console.log(
                 nowupcomingmoviesdetails,
                 " UpcomingMoviesDetails Final"
-              )}
+              )} */}
 
             {nowupcomingmoviesdetails &&
               nowupcomingmoviesdetails.map((movie2, index) => {
                 {
                   return (
-                    <Link to={`/name/nm${movie2.id}`}>
+                    <Link to={`/name/movie/${movie2.id}`}>
                       <div key={index}>
                         <div className="mr-4  ml-2 mt-5 max-w-[52vw] max-h-[42vh] xsmall:max-w-[40vw] small:max-w-[30vw] medium:max-w-[30vw] large:max-w-[25vw] xlarge:max-w-[20vw] 2xlarge:max-w-[15vw] overflow-y-hidden glow3 rounded-[10px] p-2 overflow-x-hidden scrollbar-hide cursor-pointer bg-zinc-70  bg-black  hover:bg-slate-500">
                           <img
