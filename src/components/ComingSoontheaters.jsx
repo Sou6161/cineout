@@ -1,65 +1,89 @@
 import React from "react";
-import { FaArrowRight } from "react-icons/fa";
-import { TbMinusVertical } from "react-icons/tb";
 import { Link } from "react-router-dom";
+import { motion } from 'framer-motion';
+import { FaArrowRight } from "react-icons/fa";
 
 const ComingSoontheaters = ({ finalcomingsoonmoviestheaters }) => {
+  if (!finalcomingsoonmoviestheaters) return null;
+
   return (
-    <>
-      <div className="w-[100vw]  scrollbar-hide overflow-auto p-5">
-        <div className=" mb-10 items-center gap-[47%] overflow-y-clip   ">
-          <h1 className=" text-xl ml-2 font-semibold text-lime-400 flex">
-            <Link to="/coming-soon">
-              <span className=" inline-block -translate-x-6 translate-y-10 text-[6vh] text-yellow-400">
-                <TbMinusVertical />
-              </span>
-              <button className=" group flex items-center -translate-y- ml-4 ">
-                Coming Soon To Theaters
-                <span className="block relative top- ml-4 hover:text-purple-900 group-hover:text-purple-900">
-                  <FaArrowRight />
-                </span>
-              </button>{" "}
-            </Link>
-          </h1>
+    <div className="h-[57vh] bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-black via-slate-900 to-black p-6 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -inset-[5px] opacity-50">
         </div>
       </div>
-      <div className=" w-[99vw] h-[55vh] ml-2  scrollbar-hide overflow-x-auto overflow-y-hidden  mb-[8vh] -mt-5 bg-yellow-20">
-        <div className=" ml-3 flex gap-10  w-[100vw] h-[47vh]  no-scrollbar ">
-          {/* {finalcomingsoonmoviestheaters && console.log(finalcomingsoonmoviestheaters)} */}
-          {finalcomingsoonmoviestheaters &&
-            finalcomingsoonmoviestheaters.map((movie, index) => {
-              if (
-                (movie.poster_path && movie.original_title) ||
-                (movie.title &&
-                  movie.poster_path !== "N/A" &&
-                  movie.original_title !== "N/A")
-              ) {
-                return (
-                  <div key={index} className=" bg-red-30">
-                    <div className=" mr-4 ml-3 max-w-[52vw] max-h-[42vh] xsmall:max-w-[40vw] small:max-w-[30vw] medium:max-w-[30vw] large:max-w-[25vw] xlarge:max-w-[20vw] 2xlarge:max-w-[15vw] mt-5 glow3  rounded-[10px] p-2 overflow-x-hidden scrollbar-hide cursor-pointer bg-zinc-70 bg-slate-40 overflow-y-hidden">
-                      <img
-                        className=" min-w-[48vw]  h-[40vh] xsmall:min-w-[34vw] small:min-w-[25vw]  medium:min-w-[22vw] large:min-w-[18vw] xlarge:min-w-[15vw] 2xlarge:min-w-[14vw] rounded-md drop-shadow-glow"
-                        src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-                        alt="no image available"
-                        onError={(e) => {
-                          e.target.onerror = null;
-                          e.target.src =
-                            "https://www.prokerala.com/movies/assets/img/no-poster-available.jpg";
-                        }}
-                      />
-                    </div>
-                    <div className=" ">
-                      <h1 className=" text-[5vw] xsmall:text-[4vw] small:text-[3vw] medium:text-[2vw] large:text-[1.7vw] xlarge:text-[1.5vw] 2xlarge:text-[1.3vw] font-semibold hover:underline hover:cursor-pointer text-yellow-500 ml-4 mt-5 ">
-                        {movie.original_title}
-                      </h1>
-                    </div>
-                  </div>
-                );
-              }
-            })}
+
+      {/* Content container with glass effect */}
+      <div className="relative z-10">
+        <div className="">
+          <div className="flex items-center justify-between mb-8">
+            <div className="relative">
+              <Link to="/coming-soon" className="group">
+                <h1 className="text-xl small:text-[3.5vw] medium:text-[3vw] large:text-[2.5vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-500 to-cyan-500 flex items-center">
+                  Coming Soon To Theaters
+                  <FaArrowRight className="ml-4 group-hover:text-purple-500 transition-colors duration-300" />
+                </h1>
+              </Link>
+              <div className="h-1 w-32 bg-gradient-to-r from-yellow-400 via-green-500 to-cyan-500 rounded-full mt-2 animate-pulse"></div>
+            </div>
+          </div>
+
+          <div className="w-full overflow-x-auto overflow-y-hidden scrollbar-hide">
+            <div className="flex px-5 gap-6 pb-4 py-4">
+              {finalcomingsoonmoviestheaters.map((movie, index) => {
+                if (movie.poster_path && movie.original_title) {
+                  return (
+                    <motion.div
+                      key={index}
+                      whileHover={{ scale: 1.05, rotateY: 5 }}
+                      transition={{ duration: 0.3 }}
+                      className="relative group"
+                    >
+                      <div className="relative w-[48vw] xsmall:w-[34vw] small:w-[25vw] medium:w-[22vw] large:w-[18vw] xlarge:w-[15vw] 2xlarge:w-[14vw]">
+                        {/* Card glass effect background */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 rounded-xl backdro-blur-sm border border-white/10 group-hover:border-white/20 transition-all duration-300"></div>
+                        
+                        {/* Hover overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+                        
+                        {/* Movie number */}
+                        {/* <div className="absolute -left-4 -top-4 w-12 h-12 bg-gradient-to-br from-yellow-400 to-red-500 rounded-full flex items-center justify-center z-20">
+                          <span className="text-white font-bold text-xl">{index + 1}</span>
+                        </div> */}
+                        
+                        {/* Image */}
+                        <img
+                          className="w-full h-[40vh] object-cover rounded-xl shadow-[0_0_15px_rgba(234,179,8,0.3)] group-hover:shadow-[0_0_25px_rgba(234,179,8,0.5)] transition-all duration-300"
+                          src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                          alt={movie.original_title}
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = "https://www.prokerala.com/movies/assets/img/no-poster-available.jpg";
+                          }}
+                        />
+
+                        {/* Title overlay */}
+                        <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                          <h2 className="text-white font-semibold text-[4vw] xsmall:text-[3vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.2vw] 2xlarge:text-[1vw] line-clamp-2 drop-shadow-lg">
+                            {movie.original_title}
+                          </h2>
+                        </div>
+                        
+                        {/* Decorative elements */}
+                        <div className="absolute top-2 right-2 w-8 h-8 bg-white/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm"></div>
+                        <div className="absolute bottom-2 left-2 w-12 h-1 bg-gradient-to-r from-yellow-400 to-green-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      </div>
+                    </motion.div>
+                  );
+                }
+                return null;
+              })}
+            </div>
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

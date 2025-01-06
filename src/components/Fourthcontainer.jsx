@@ -9,6 +9,7 @@ import {
   RapidoptionsTechView,
 } from "../constants/Rapidoptions";
 import { API_OPTIONS } from "../constants/Apioptions";
+import { Clapperboard, TrendingUp, DollarSign, Trophy } from "lucide-react";
 
 const Fourthcontainer = () => {
   const [BoxOfficeMovies, setBoxOfficeMovies] = useState(null);
@@ -137,49 +138,75 @@ const Fourthcontainer = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center min-h-[40vh]">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-purple-500"></div>
+      </div>
+    );
   }
 
   if (!BoxOfficeMovieDetails || BoxOfficeMovieDetails.length === 0) {
-    return <div>No movie details available</div>;
+    return (
+      <div className="text-gray-400 text-center py-12">
+        No movie details available
+      </div>
+    );
   }
 
+
   return (
-    <>
+    <div className="bg-gradient-to-b from-black via-blue-900/10 to-black mt-[20vh]">
+    <div className="max-w-8xl mx-5 px-4">
+      {/* Header Section */}
       <Link to="/Top-Box-Office">
-        <div className="">
-          <MdTheaters className=" text-red-600 text-[8vw] xsmall:text-[6vw] small:text-[5vw] medium:text-[4vw] large:text-[3.5vw] xlarge:text-[3vw] 2xlarge:text-[2.5vw] relative top-[10vw] ml-5" />
-          <h1 className=" text-purple-300 font-semibold text-[5vw] xsmall:text-[4vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.5vw] xlarge:text-[2.5vw] 2xlarge:text-[1.5vw] relative top-[2vw] xsmall:top-[4vw] small:top-[5vw] medium:top-[5.5vw] large:top-[6.2vw] xlarge:top-[6.4vw] 2xlarge:top-[7.5vw] ml-[14vw]   xsmall:ml-[11vw]  small:ml-[9vw] medium:ml-[7vw] large:ml-[6vw] xlarge:ml-[5vw] 2xlarge:ml-[4vw]">
-            Top Box Office(US)
-          </h1>
+        <div className="flex items-center space-x-4 mb-12">
+          <div className="relative">
+            <Clapperboard className="w-10 h-10 text-red-500" />
+            <Trophy className="w-5 h-5 text-yellow-400 absolute -top-2 -right-2" />
+          </div>
+          <div>
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-transparent bg-clip-text">
+              Top Box Office (US)
+            </h1>
+            <p className="text-gray-400 text-sm mt-1">Latest weekend earnings</p>
+          </div>
+          <TrendingUp className="w-6 h-6 text-green-400 animate-pulse ml-auto" />
         </div>
       </Link>
 
-      <div className="w-full p-4 mt-[10vw] cursor-pointer">
-        <div className="grid grid-cols-1 xsmall:grid-cols-2 small:grid-cols-3 medium:grid-cols-4 large:grid-cols-5 gap-4">
-          {BoxOfficeMovieDetails &&
-            BoxOfficeMovieDetails.map((item, index) => (
-              <div
-                key={index}
-                className="bg-[#080808] border-2 border-cyan-600 rounded-lg p-4 hover:border-red-600 hover:bg-black hover:text-white transition-all duration-300"
-              >
-                <div className="flex justify-between items-center">
-                  <div className="font-bold text-purple-600 text-md small:text-base truncate flex-1">
-                    {item?.data?.title?.originalTitleText?.text ||
-                      "Title Not Available"}
+      {/* Grid Container */}
+      <div className="grid grid-cols-1 xsmall:grid-cols-2 small:grid-cols-3 medium:grid-cols-4 large:grid-cols-5 gap-6">
+        {BoxOfficeMovieDetails &&
+          BoxOfficeMovieDetails.map((item, index) => (
+            <div
+              key={index}
+              className="relative group"
+            >
+              <div className="bg-gray-900/50 backdrop-blur-sm border border-purple-500/30 rounded-xl p-4 transition-all duration-300
+                           hover:border-purple-500 hover:bg-gray-900/80 hover:shadow-lg hover:shadow-purple-500/20
+                           transform hover:-translate-y-1">
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <h3 className="font-bold text-purple-300 text-md small:text-lg mb-2 line-clamp-2">
+                      {item?.data?.title?.originalTitleText?.text || "Title Not Available"}
+                    </h3>
+                    <div className="flex items-center text-green-400 space-x-1">
+                      <DollarSign className="w-4 h-4" />
+                      <span className="font-mono text-lg">
+                        {convertToMillions(item?.data?.title?.worldwideGross?.total?.amount)} M
+                      </span>
+                    </div>
                   </div>
-                  <div className="text-white font-semibold text-sm small:text-base ml-2">
-                    {convertToMillions(
-                      item?.data?.title?.worldwideGross?.total?.amount
-                    )}{" "}
-                    M
+                  <div className="bg-purple-500/20 rounded-full p-2 w-8 h-8 flex items-center justify-center">
+                    <span className="text-purple-300 text-sm font-bold">{index + 1}</span>
                   </div>
                 </div>
               </div>
-            ))}
-        </div>
+            </div>
+          ))}
       </div>
-    </>
+    </div>
+  </div>
   );
 };
 

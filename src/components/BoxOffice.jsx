@@ -121,7 +121,7 @@ const BoxOffice = () => {
       let data = localStorage.getItem("BOX OFFICE MOVIES CHARTS DETAILS");
       if (data) {
         data = JSON.parse(data);
-        console.log(data, " box office movie charts details");
+        console.log(data, " box officeeeeeeeeeeeeeeeeeee movie charts details");
       } else {
         data = [];
         for (let i = 0; i < BoxOfficeMChartsID.length; i++) {

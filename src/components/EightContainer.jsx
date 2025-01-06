@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { RapidoptionsDojo } from "../constants/Rapidoptions";
 import { Link } from "react-router-dom";
-import { IoArrowForwardOutline } from "react-icons/io5";
-import { TbMinusVertical } from "react-icons/tb";
+import { Newspaper, Sparkles, TrendingUp } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { addNewsSlice } from "../Reduxstore/NewsSlice";
 import { RapidOptionsDetails, RapidOptionsDetailsDaimond } from "../constants/RapidOptionsForDetails";
@@ -10,27 +9,19 @@ import { RapidOptionsDetails, RapidOptionsDetailsDaimond } from "../constants/Ra
 const EightContainer = () => {
   const [Category, setCategory] = useState("TOP");
   const [Topnews, setTopnews] = useState(null);
-  const [MovieNews, setMovieNews] = useState(null);
-  const [TvNews, setTvNews] = useState(null);
-  const [CelebrityNews, setCelebrityNews] = useState(null);
-
   const dispatchTopNews = useDispatch();
 
   useEffect(() => {
     const getNews = async () => {
-      // Check if data is in local storage
       let data = localStorage.getItem("newsData");
       if (data) {
-        // Parse stored json if it was found
         data = JSON.parse(data);
       } else {
-        // Otherwise, fetch data from API
         const response = await fetch(
           `https://imdb8.p.rapidapi.com/news/v2/get-by-category?category=${Category}&first=20`,
           RapidOptionsDetailsDaimond
         );
         data = await response.json();
-        // Save the data to local storage
         localStorage.setItem("newsData", JSON.stringify(data.data.news.edges));
       }
       setTopnews(data);
@@ -39,49 +30,61 @@ const EightContainer = () => {
     getNews();
   }, []);
 
-  useEffect(() => {
-    // Topnews && console.log(Topnews);
-  }, [Topnews]);
-
   return (
-    <>
-      {/* <TbMinusVertical className=" text-lime-400 text-[13vw] relative  top-10" /> */}
-      {/* <Link to="/news/top"> */}
-        <div className=" relative flex group cursor-pointer">
-          <div className=" relative bg-red-30 bottom-2">
-            <h1 className=" text-[5vw] xsmall:text-[4vw] small:text-[3vw] medium:text-[3vw] large:text-[2vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] bg-cyan-30 text-red-600  inline-block ml-7">
-              <span className=" text-[8vw] xsmall:text-[7vw] small:text-[5vw] medium:text-[4vw] large:text-[2.5vw] xlarge:text-[3vw] 2xlarge:text-[2vw] text-violet-600">T</span>op{" "}
-              <span className=" text-[8vw] xsmall:text-[7vw] small:text-[5vw] medium:text-[4vw] large:text-[2.5vw] xlarge:text-[3vw] 2xlarge:text-[2vw] text-sky-500 font-bg-red-600">
-                N
-              </span>
-              ews
-            </h1>
+    <div className="bg-gradient-to-b from-black via-gray-900 to-black py-10 h-[30vh]">
+      <div className="max-w-8xl mx-5 px-4">
+        {/* Header Section */}
+        <div className="flex items-center space-x-4 mb-8">
+          <div className="relative">
+            <Newspaper className="w-8 h-8 text-red-500" />
+            <Sparkles className="w-4 h-4 text-yellow-400 absolute -top-1 -right-1" />
           </div>
-          {/* <IoArrowForwardOutline className="  relative left-3 top-[1vh] xsmall:top-[2vh] small:top-[1vh] medium:top-[1vh] large:top-[0vh] xlarge:top-[1.8vh] 2xlarge:top-[1vh] text-[7vw] xsmall:text-[5vw] medium:text-[4vw] large:text-[3vw] xlarge:text-[2.5vw] 2xlarge:text-[2vw] text-amber-400 group-hover:text-cyan-400 " /> */}
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-red-500 via-purple-500 to-blue-500 text-transparent bg-clip-text">
+            Top News
+          </h1>
+          <TrendingUp className="w-6 h-6 text-blue-400 animate-pulse" />
         </div>
-      {/* </Link> */}
-      <div className="w-[96vw] mt-5 bg-red-30 -z-888  static flex overflow-x-scroll mb-10 no-scrollbar ml-7 mr-10">
-        {Topnews &&
-          Topnews.map((article, index) => {
-            return (
-              <Link>
-                <div className=" bg-red-40 flex-shrink-0 w-[70vw] xsmall:w-[50vw] small:w-[40vw] medium:w-[35vw] large:w-[28vw] xlarge:w-[22vw] 2xlarge:w-[20vw]  mr-14 relative group overflow-hidden flex">
-                  <img
-                    src={article?.node?.image?.url}
-                    alt=""
-                    className=" hover:border-2  hover:transition-all ease-out hover:border-red-600 object-cover h-[25vh] w-[70vw] xsmall:w-[50vw] small:w-[40vw] medium:w-[35vw] large:w-[28vw] xlarge:w-[22vw] 2xlarge:w-[20vw]  rounded-lg" // This line ensures all images have the same width and height
-                  />
-                  <div className="absolute top-0 right-0 bg-slate-600 rounded-lg hover:border-2  hover:transition-all ease-out hover:border-red-600 text-black  max-w-[70vw] xsmall:w-[50vw] small:w-[40vw] medium:w-[35vw] large:w-[28vw] xlarge:w-[22vw] 2xlarge:w-[20vw] h-full transition-all duration-500 transform translate-x-full group-hover:translate-x-0 p-4">
-                    <p className=" text-red-500 text-[4vw] xsmall:text-[2.5vw] small:text-[2.5vw] medium:text-[1.5vw]  large:text-[1.5vw] xlarge:text-[1.2vw] 2xlarge:text-[1vw] font-semibold">
-                      {article?.node?.articleTitle?.plainText}
-                    </p>
-                  </div>
-                </div>
-              </Link>
-            );
-          })  }
+
+        {/* News Cards Container */}
+        <div className="relative">
+          <div className="overflow-x-auto no-scrollbar">
+            <div className="flex gap-6 pb-8">
+              {Topnews &&
+                Topnews.map((article, index) => (
+                  <Link key={index}>
+                    <div className="group relative flex-shrink-0 w-[70vw] xsmall:w-[50vw] small:w-[40vw] medium:w-[35vw] large:w-[28vw] xlarge:w-[22vw] 2xlarge:w-[20vw]">
+                      <div className="relative overflow-hidden rounded-xl transition-all duration-500">
+                        {/* Image */}
+                        <img
+                          src={article?.node?.image?.url}
+                          alt=""
+                          className="w-full h-[25vh] object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                        
+                        {/* Gradient Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <div className="absolute bottom-4 left-4 right-4">
+                            <p className="text-white text-[4vw] xsmall:text-[2.5vw] small:text-[2.5vw] medium:text-[1.5vw] large:text-[1.5vw] xlarge:text-[1.2vw] 2xlarge:text-[1vw] font-semibold line-clamp-3">
+                              {article?.node?.articleTitle?.plainText}
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Glowing Border */}
+                        <div className="absolute -inset-0.5 bg-gradient-to-r from-red-600 to-purple-600 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur"></div>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+            </div>
+          </div>
+
+          {/* Gradient Edges */}
+          <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-black to-transparent pointer-events-none"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-black to-transparent pointer-events-none"></div>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

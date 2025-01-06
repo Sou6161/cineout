@@ -1,4 +1,5 @@
-import { FaEye } from "react-icons/fa";
+import React from "react";
+import { Eye, Trash2, History, ArrowRight } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearRecentlyVieweddata } from "../Reduxstore/RecentlyViewedSlice";
 
@@ -6,63 +7,83 @@ const RecentlyViewed = () => {
   const recentlyViewed = useSelector(
     (state) => state.RecentlyViewedData.recentlyviewedataa
   );
-
   const dispatch = useDispatch();
-  const clearRecentlyViewed = () => {
-    dispatch(clearRecentlyVieweddata());
-  };
 
-  // Filter unique items based on data.id
   const uniqueRecentlyViewed = recentlyViewed.filter(
     (item, index, self) => index === self.findIndex((t) => t.id === item.id)
   );
-  {
-    // console.log(uniqueRecentlyViewed);
-  }
+
   return (
-    <>
-      <div className=" relative  bg-red-30  mb-[3vw] bg-red-30 mt-[7vw] ml-[2vw] xsmall:ml-[2vw] small:ml-[2vw] medium:ml-[2vw]  large:ml-[2vw] xlarge:ml-[2vw] 2xlarge:ml-[2vw] inline-block">
-        <div className="  h-0 text-[6vw] bg-lime-300 xsmall:text-[4.5vw] small:text-[3.5vw] medium:text-[3vw] large:text-[2.2vw] xlarge:text-[1.9vw] 2xlarge:text-[1.7vw] text-red-600 bg-red-30 font-semibold ml-10">
-          Recently Viewed
-          <span className="inline-block text-[6vw] xsmall:text-[4vw] small:text-[3vw] medium:text-[2.7vw] large:text-[2vw] xlarge:text-[1.5vw] text-yellow-400  relative top-[.5vh] right-[52vw] xsmall:right-[38vw] small:right-[30vw] medium:right-[26vw] large:right-[19vw] xlarge:right-[16.5vw] 2xlarge:right-[14.5vw]">
-            {" "}
-            <FaEye />
-          </span>
-          <div className="  relative  left-[65vw] medium:bottom-[5vw] medium:left-[75vw]  large:bottom-[3vw] large:left-[80vw] xlarge:bottom-[3vw] xlarge:left-[80vw]   bottom-[9vw] 2xlarge:bottom-[2vw]">
-            <button className="Deletebutton" onClick={clearRecentlyViewed}>
-              <svg viewBox="0 0 448 512" className="DeletesvgIcon">
-                <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path>
-              </svg>
-            </button>
+    <div className="bg-gradient-to-b from-black via-blue-900/10 to-black py-12">
+      <div className="max-w-8xl mx-5 px-4">
+        {/* Header Section */}
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center space-x-4">
+            <div className="relative">
+              <History className="w-8 h-8 text-purple-500" />
+              <Eye className="w-4 h-4 text-yellow-400 absolute -top-1 -right-1" />
+            </div>
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-transparent bg-clip-text">
+              Recently Viewed
+            </h1>
           </div>
+          
+          <button
+            onClick={() => dispatch(clearRecentlyVieweddata())}
+            className="group flex items-center space-x-2 px-4 py-2 rounded-lg bg-red-500/10 hover:bg-red-500/20 transition-all duration-300"
+          >
+            <Trash2 className="w-5 h-5 text-red-400 group-hover:text-red-300" />
+            <span className="text-red-400 group-hover:text-red-300">Clear History</span>
+          </button>
         </div>
-      </div>
-      <div className="w-[80vw] h-[60vh] relative left-[3.5vw] bg-lime-20 mb-5">
-        <div className="w-[92vw] h-[60vh] relative left-[vw] bg-lime-20 mb-10 overflow-x-scroll no-scrollbar">
-          <div className="flex gap-">
-            {uniqueRecentlyViewed.length === 0 ? (
-              <h1 className="text-[4.5vw] xsmall:text-[3vw] medium:text-[2vw] medium:ml-[2vw] xlarge:text-[1.5vw] 2xlarge:text-[1.5vw] mt-[6vh] relative right-[vw] text-white">
-                You have no recently viewed pages
-              </h1>
-            ) : (
-              uniqueRecentlyViewed.map((data) => (
-                <div key={data.id} className="">
-                  <img
-                    className="max-w-[50vw] h-[40vh] mr-10 object-center rounded-lg border-2 border-sky-400"
-                    src={data?.primaryImage?.url}
-                    alt=""
-                  />
-                  <h1 className="mt-5 ml-2 text-white xsmall:text-[4vw] small:text-[3vw] medium:text-[2vw] large:text-[1.7vw] xlarge:text-[1.5vw] 2xlarge:text-[1.3vw]">
-                    {console.log(data?.titleText?.text)}
-                    {data?.titleText?.text}
-                  </h1>
+
+        {/* Content Section */}
+        <div className="relative">
+          <div className="overflow-x-auto no-scrollbar">
+            <div className="flex gap-6 pb-8">
+              {uniqueRecentlyViewed.length === 0 ? (
+                <div className="flex items-center justify-center w-full py-12 bg-gray-900/30 rounded-xl border border-gray-800">
+                  <div className="text-center">
+                    <Eye className="w-12 h-12 text-gray-600 mx-auto mb-4" />
+                    <p className="text-gray-400 text-lg">No recently viewed items</p>
+                  </div>
                 </div>
-              ))
-            )}
+              ) : (
+                uniqueRecentlyViewed.map((data) => (
+                  <div key={data.id} className="group relative flex-shrink-0">
+                    <div className="relative overflow-hidden rounded-xl transition-all duration-500">
+                      <img
+                        className="w-[50vw] h-[40vh] object-cover transition-transform duration-500 group-hover:scale-110"
+                        src={data?.primaryImage?.url}
+                        alt={data?.titleText?.text}
+                      />
+                      
+                      {/* Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div className="absolute bottom-4 left-4 right-4">
+                          <p className="text-white text-lg font-bold mb-2">{data?.titleText?.text}</p>
+                          <button className="flex items-center space-x-2 text-purple-400 hover:text-purple-300">
+                            <span>View Details</span>
+                            <ArrowRight className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Glowing Border */}
+                      <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur"></div>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
           </div>
+
+          {/* Gradient Edges */}
+          <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-black to-transparent pointer-events-none"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-black to-transparent pointer-events-none"></div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

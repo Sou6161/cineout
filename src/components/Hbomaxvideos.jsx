@@ -2,7 +2,7 @@ import React from "react";
 
 const Hbomaxvideos = ({ finalhbomaxmovies }) => {
   return (
-    <div className=" flex gap-5  w-[92vw] h-[65vh] xsmall:w-[94vw] small:w-[96vw] medium:w-[96vw] large:w-[97vw] xlarge:w-[98vw] 2xlarge:w-[97.5vw]  mt-5 overflow-y-hidden bg-lime-30  no-scrollbar ">
+    <div className=" flex gap-5  w-[92vw] h-[65vh] xsmall:w-[94vw] small:w-[96vw] medium:w-[96vw] large:w-[97vw] xlarge:w-[98vw] 2xlarge:w-[94vw]  mt-5 overflow-y-hidden bg-lime-30  no-scrollbar ">
       {finalhbomaxmovies &&
         finalhbomaxmovies.map((item, index) => (
           <>

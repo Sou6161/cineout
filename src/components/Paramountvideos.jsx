@@ -2,7 +2,7 @@ import React from "react";
 
 const Paramountvideos = ({ finalparamountmovies }) => {
   return (
-    <div className=" flex gap-5  w-[92vw] xsmall:w-[94vw] small:w-[96vw] medium:w-[96vw] large:w-[97vw] xlarge:w-[98vw] 2xlarge:w-[97.5vw] h-[65vh] mt-5 overflow-y-hidden bg-lime-30  no-scrollbar">
+    <div className=" flex gap-5  w-[92vw] xsmall:w-[94vw] small:w-[96vw] medium:w-[96vw] large:w-[97vw] xlarge:w-[98vw] 2xlarge:w-[94vw] h-[65vh] mt-5 overflow-y-hidden bg-lime-30  no-scrollbar">
       {finalparamountmovies &&
         finalparamountmovies.map((item, index) => (
           <>
