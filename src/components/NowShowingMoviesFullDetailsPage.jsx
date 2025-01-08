@@ -397,7 +397,7 @@ const NowShowingMoviesFullDetailsPage = () => {
   
 
   return (
-    <div className="  min-h-[800vh] xsmall:min-h-[852vh] small:min-h-[902vh] medium:h-[1000vh] large:min-h-[1045vh] xlarge:h-[1060vh] 2xlarge:h-[1000vh] bg-[#030C16] text-red-600">
+    <div className="  min-h-[800vh] xsmall:min-h-[852vh] small:min-h-[902vh] medium:h-[1000vh] large:min-h-[1045vh] xlarge:h-[1060vh] 2xlarge:h-[1000vh] bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-black via-slate-900 to-black text-red-600">
       <div className=" -mt-1  ">
         <Header />
       </div>

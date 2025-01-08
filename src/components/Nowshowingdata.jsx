@@ -1,10 +1,10 @@
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import { GrAnnounce } from "react-icons/gr";
 import { useColor } from "color-thief-react";
-import { FaFire } from "react-icons/fa";
+import { Calendar, Play, Star } from 'lucide-react';
 import Header from "./Header";
-import { useEffect, useState } from "react";
+import { FaFire } from "react-icons/fa";
+
 
 const useWindowSize = () => {
   const [size, setSize] = useState([window.innerWidth, window.innerHeight]);
@@ -13,12 +13,8 @@ const useWindowSize = () => {
     const handleResize = () => {
       setSize([window.innerWidth, window.innerHeight]);
     };
-
     window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return size;
@@ -29,8 +25,8 @@ const Nowshowingdata = ({ nowfinal }) => {
   const [detailsColor, setDetailsColor] = useState("white");
   const [width] = useWindowSize();
   const [backgroundStyle, setBackgroundStyle] = useState({});
-  const [leftOpacity, setLeftOpacity] = useState(0.7);
-  const [middleOpacity, setMiddleOpacity] = useState(0.2);
+  const [isHovered, setIsHovered] = useState(false);
+  const [showFullOverview, setShowFullOverview] = useState(false);
 
   const bannerUrl = `https://image.tmdb.org/t/p/original/${nowfinal.backdrop_path}`;
   const { data: dominantColor } = useColor(bannerUrl, "rgb", {
@@ -52,128 +48,114 @@ const Nowshowingdata = ({ nowfinal }) => {
 
   useEffect(() => {
     const baseStyle = {
-      backgroundImage: `linear-gradient(to right, rgba(0,0,0,${leftOpacity}) 0%, rgba(0,0,0,${middleOpacity}) 50%, rgba(0,0,0,0) 100%), url(${bannerUrl})`,
+      backgroundImage: `
+        linear-gradient(
+          to right,
+          rgba(0,0,0,0.85) 0%,
+          rgba(0,0,0,0.5) 50%,
+          rgba(0,0,0,0.3) 100%
+        ),
+        url(${bannerUrl})
+      `,
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat",
+      backgroundPosition: width < 480 ? "center" : "-0vh 0vw",
     };
 
-    if (width >= 1536) {
-      // 2xl
-      setBackgroundStyle({ ...baseStyle, backgroundPosition: "-0vh 0vw" });
-    } else if (width >= 1280) {
-      // xl
-      setBackgroundStyle({ ...baseStyle, backgroundPosition: "-0vh 0vw" });
-    } else if (width >= 1024) {
-      // lg
-      setBackgroundStyle({ ...baseStyle, backgroundPosition: "-0vh 0vw" });
-    } else if (width >= 768) {
-      // md
-      setBackgroundStyle({ ...baseStyle, backgroundPosition: "-0vh 0vw" });
-    } else if (width >= 640) {
-      // sm
-      setBackgroundStyle({ ...baseStyle, backgroundPosition: "-0vh 0vw" });
-    } else if (width >= 480) {
-      // xsmall
-      setBackgroundStyle({ ...baseStyle, backgroundPosition: "-0vh 0vw" });
-    } else {
-      // smaller than xsmall
-      setBackgroundStyle({ ...baseStyle, backgroundPosition: "center" });
-    }
-  }, [width, bannerUrl, leftOpacity, middleOpacity]);
-
-  const titleStyle = {
-    color: titleColor,
-    textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
-  };
-
-  const detailsStyle = {
-    color: detailsColor,
-    textShadow: "1px 1px 2px rgba(0,0,0,0.5)",
-  };
+    setBackgroundStyle(baseStyle);
+  }, [width, bannerUrl]);
 
   return (
-    <>
+    <div className="relative">
       <div className="pt-12 -mt-12">
         <Header />
       </div>
-      <div
-        className="w-[100vw] h-[45vh] xsmall:h-[47vh] small:h-[52vh] medium:h-[56vh] large:h-[60vh] xlarge:h-[65vh] 2xlarge:h-[70vh]  relative"
-        style={backgroundStyle}
-      >
-        <h1
-          className="text-[5vw] font-bold relative top-[23vh] left-[2vh]  xsmall:top-[25vh] small:top-[30vh] medium:top-[33vh] medium:text-[3vw] large:top-[36vh] large:text-[3vw] xlarge:text-[3vw] xlarge:top-[40vh] 2xlarge:top-[42vh] 2xlarge:text-[2vw] mb-2"
-          style={titleStyle}
+      
+      <div className="relative w-screen">
+        <div 
+          className="h-[75vh] xlarge:h-[85vh] 2xlarge:h-[80vh] relative"
+          style={backgroundStyle}
         >
-          {/* {console.log(nowfinal.id, "NowFinal ID Now Showing Movies")} */}
-          {nowfinal.name ||
-            nowfinal.title ||
-            nowfinal.original_name ||
-            nowfinal.original_title}
-        </h1>
+          {/* Content Container */}
+          <div className="absolute bottom-0 left-0 w-full pb-16 px-8 space-y-6">
+            {/* Rating Badge */}
+            <div className="inline-flex items-center gap-1 bg-yellow-500/90 text-black px-3 py-1 rounded-full">
+              <Star className="w-4 h-4 fill-current" />
+              <span className="font-semibold">{(nowfinal.vote_average || 0).toFixed(1)}</span>
+            </div>
 
-        <p
-          className="text-sm font-semibold max-w-[60vw] mb-2 relative top-[23vh] xsmall:top-[25vh] small:top-[30vh] medium:top-[33vh] medium:w-1/2 large:text-[1.5vw] large:top-[37vh] large:w-1/2 xlarge:text-[1.3vw] xlarge:top-[40vh] xlarge:w-1/2 2xlarge:top-[43vh] 2xlarge:text-[1vw] 2xlarge:w-1/3 left-[2vh]"
-          style={detailsStyle}
-        >
-          {width >= 1536 ? ( // 2xlarge
-            <>
-              {nowfinal.overview.slice(0, 180)}
-              {nowfinal.overview.length > 180 && "..."}
-            </>
-          ) : width >= 1280 ? ( // xlarge
-            <>
-              {nowfinal.overview.slice(0, 200)}
-              {nowfinal.overview.length > 200 && "..."}
-            </>
-          ) : width >= 1024 ? ( // large
-            <>
-              {nowfinal.overview.slice(0, 170)}
-              {nowfinal.overview.length > 170 && "..."}
-            </>
-          ) : width >= 768 ? ( // medium
-            <>
-              {nowfinal.overview.slice(0, 150)}
-              {nowfinal.overview.length > 150 && "..."}
-            </>
-          ) : (
-            <>
-              {nowfinal.overview.slice(0, 80)}
-              {nowfinal.overview.length > 100 && "..."}
-            </>
-          )}
-          <Link
-            to={`/name/movie/${nowfinal.id}`}
-            className="text-blue-500 hover:underline ml-1"
-            style={{ textShadow: "none" }}
-          >
-            more
-          </Link>
-        </p>
+            {/* Title */}
+            <h1 className="text-6xl font-bold tracking-tight text-white max-w-4xl leading-tight">
+              {nowfinal.name || nowfinal.title || nowfinal.original_name || nowfinal.original_title}
+            </h1>
 
-        <div className="relative top-[23vh] left-[2vh] xsmall:top-[25vh] small:top-[30vh] medium:top-[34vh] large:top-[38vh] xlarge:top-[42vh]  2xlarge:top-[44vh]">
-          <p
-            className="text-sm 2xlarge:text-[1vw] xlarge:text-[1.3vw] font-semibold flex gap-2 items-center"
-            style={detailsStyle}
-          >
-            <GrAnnounce className="text-yellow-400 text-xl 2xlarge:text-[2vw] xlarge:text-[1.6vw]" />{" "}
-            {nowfinal.first_air_date ||
-              nowfinal.release_date ||
-              "No Information"}
-            <FaFire className="text-orange-500 text-xl xlarge:text-[1.6vw] 2xlarge:text-[2vw]" />
-            {nowfinal.popularity || "No Information"}
-          </p>
-        </div>
+            {/* Overview */}
+            <div className="relative max-w-2xl">
+              <p className="text-lg text-gray-100 leading-relaxed">
+                {showFullOverview ? nowfinal.overview : 
+                  `${nowfinal.overview.slice(0, width >= 1024 ? 200 : 150)}${nowfinal.overview.length > (width >= 1024 ? 200 : 150) ? '...' : ''}`
+                }
+                {nowfinal.overview.length > (width >= 1024 ? 200 : 150) && (
+                  <button
+                    onClick={() => setShowFullOverview(!showFullOverview)}
+                    className="ml-2 text-blue-400 hover:text-blue-300 transition-colors duration-200"
+                  >
+                    {showFullOverview ? 'Show less' : 'Read more'}
+                  </button>
+                )}
+              </p>
+            </div>
 
-        <div className=" relative xsmall:top-[23vh] xsmall:left-[77vw] small:top-[27vh] small:left-[77vw] medium:top-[32vh] medium:left-[84vw] large:top-[32vh] large:left-[88vw] xlarge:top-[35vh] xlarge:left-[88vw] 2xlarge:top-[40vh] 2xlarge:left-[90vw] ">
-          <Link
-            to={`/title/tt${nowfinal.id}`}
-            className="comic-button inline-block"
-          >
-            <button>Watch Trailer</button>
-          </Link>
+            {/* Meta Information */}
+            <div className="flex flex-wrap items-center gap-6 text-gray-200">
+              <div className="flex items-center gap-2">
+                <Calendar className="w-5 h-5 text-yellow-400" />
+                <span className="text-sm font-medium">
+                  {nowfinal.first_air_date || nowfinal.release_date || "Release date unavailable"}
+                </span>
+              </div>
+              
+              <div className="flex items-center gap-2">
+                <FaFire className="w-5 h-5 text-orange-500" />
+                <span className="text-sm font-medium">
+                  {`${Math.round(nowfinal.popularity || 0)} popularity score`}
+                </span>
+              </div>
+
+              {nowfinal.genres && (
+                <div className="flex flex-wrap gap-2">
+                  {nowfinal.genres.map(genre => (
+                    <span key={genre.id} className="px-3 py-1 bg-white/10 rounded-full text-sm">
+                      {genre.name}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex items-center gap-4 pt-4">
+              <Link
+                to={`/title/tt${nowfinal.id}`}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+                className="inline-flex items-center gap-2 px-8 py-4 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-all duration-300 transform hover:scale-105 font-semibold"
+              >
+                <Play className={`w-5 h-5 transition-transform duration-300 ${isHovered ? 'translate-x-1' : ''}`} />
+                Watch Trailer
+              </Link>
+              
+              <Link
+                to={`/name/movie/${nowfinal.id}`}
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-all duration-300 font-semibold"
+              >
+                More Details
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

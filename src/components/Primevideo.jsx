@@ -4,7 +4,7 @@ const Primevideo = ({ finalprimemovies }) => {
   // console.log(finalprimemovies, "finalprimemovies");
 
   return (
-    <div className=" flex gap-5  w-[92vw] xsmall:w-[94vw] small:w-[96vw] medium:w-[96vw] large:w-[97vw] xlarge:w-[98vw] 2xlarge:w-[94vw] h-[55vh] mt-5 overflow-y-hidden bg-lime-30  no-scrollbar">
+    <div className=" flex gap-5  w-[80vw] xsmall:w-[86vw] small:w-[89vw] medium:w-[90vw] large:w-[93vw] xlarge:w-[94vw] 2xlarge:w-[94vw] h-[55vh] mt-5 overflow-y-hidden bg-lime-30  no-scrollbar">
       {finalprimemovies &&
         finalprimemovies.map((item, index) => (
           <>

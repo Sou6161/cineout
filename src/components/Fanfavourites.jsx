@@ -72,7 +72,7 @@ const Fanfavourites = ({ finalfanwatch }) => {
       {/* Content container with glass effect */}
       <div className="relative z-10">
         <div className="mb-12">
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center justify-between mb-5">
             <div className="relative">
               <h1 className="text-xl small:text-[3.5vw] medium:text-[3vw] large:text-[2.5vw] xlarge:text-[2vw] 2xlarge:text-[1.5vw] font-bold bg-clip-text text-transparent bg-gradient-to-r from-violet-400 via-purple-500 to-indigo-500">
                 What To Watch

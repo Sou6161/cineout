@@ -53,7 +53,7 @@ const SixthContainer = () => {
   }, []);
 
   return (
-    <div className="bg-gradient-to-b from-black via-gray-900 to-black h-[65vh] px-4 py-8">
+    <div className="bg-gradient-to-b from-black via-gray-900 to-black h-[55vh] px-4 py-8">
       <div className="max-w-8xl mx-5">
         {/* Header Section */}
         <div className="relative mb-12">

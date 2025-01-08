@@ -79,7 +79,7 @@ const SeventhContainer = () => {
         </div>
 
         {/* Celebrity Grid */}
-        <div className="relative">
+        <div className="relative w-[88vw] 2xlarge:w-full">
           <div className="overflow-x-auto no-scrollbar">
             <div className="flex gap-6 pb-8">
               {Borntoday && Borntoday.length > 0 ? (

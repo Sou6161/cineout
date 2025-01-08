@@ -51,20 +51,20 @@ const RecentlyViewed = () => {
               ) : (
                 uniqueRecentlyViewed.map((data) => (
                   <div key={data.id} className="group relative flex-shrink-0">
-                    <div className="relative overflow-hidden rounded-xl transition-all duration-500">
+                    <div className="relative overflow-hidden rounded-xl transition-all duration-500 px-10">
                       <img
-                        className="w-[50vw] h-[40vh] object-cover transition-transform duration-500 group-hover:scale-110"
+                        className="w-[15vw] h-[40vh] object-fill border-l-2 border-r-2 border-amber-400 rounded-lg transition-transform duration-500 group-hover:scale-110"
                         src={data?.primaryImage?.url}
                         alt={data?.titleText?.text}
                       />
                       
                       {/* Overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="absolute bottom-4 left-4 right-4">
+                        <div className="absolute bottom-4 left-8 right-4">
                           <p className="text-white text-lg font-bold mb-2">{data?.titleText?.text}</p>
                           <button className="flex items-center space-x-2 text-purple-400 hover:text-purple-300">
-                            <span>View Details</span>
-                            <ArrowRight className="w-4 h-4" />
+                            {/* <span>View Details</span> */}
+                            {/* <ArrowRight className="w-4 h-4" /> */}
                           </button>
                         </div>
                       </div>
