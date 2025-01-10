@@ -140,7 +140,6 @@ const NowShowingMoviesFullDetailsPage = () => {
     }
   }, [isShowing]);
 
-  
   const processTrailerData = (data) => {
     const trailerVideos = data.results.filter(
       (video) => video.type === "Trailer" || video.type === "Teaser"
@@ -153,14 +152,14 @@ const NowShowingMoviesFullDetailsPage = () => {
       console.log("No trailer or teaser videos found in the data");
     }
   };
-  
+
   const fetchMovieTrailer = async () => {
     try {
       const apiUrl = `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`;
-  
+
       const response = await fetch(apiUrl, API_OPTIONS);
       const data = await response.json();
-  
+
       if (data?.results && data.results.length > 0) {
         console.log(data, "Movie data");
         processTrailerData(data);
@@ -171,16 +170,16 @@ const NowShowingMoviesFullDetailsPage = () => {
       console.error("Error fetching movie trailer:", error);
     }
   };
-  
+
   const fetchTVTrailer = async () => {
     try {
       console.log("Fetching TV trailer");
       const apiUrl = `https://api.themoviedb.org/3/tv/${id}/videos?language=en-US`;
       console.log(apiUrl);
-  
+
       const response = await fetch(apiUrl, API_OPTIONS);
       const data = await response.json();
-  
+
       if (data?.results && data.results.length > 0) {
         console.log(data, "TV Series data");
         processTrailerData(data);
@@ -204,7 +203,6 @@ const NowShowingMoviesFullDetailsPage = () => {
     NowShowingTrailerYTKEY &&
       console.log(NowShowingTrailerYTKEY, " MOVIE YT KEY");
   }, [NowShowingTrailerYTKEY]);
-
 
   useEffect(() => {
     const getMovieExternalIDs = async () => {
@@ -393,11 +391,8 @@ const NowShowingMoviesFullDetailsPage = () => {
     NowShowingRelatedNews && console.log(NowShowingRelatedNews, "Related News");
   }, [NowShowingRelatedNews]);
 
-
-  
-
   return (
-    <div className="  min-h-[800vh] xsmall:min-h-[852vh] small:min-h-[902vh] medium:h-[1000vh] large:min-h-[1045vh] xlarge:h-[1060vh] 2xlarge:h-[1000vh] bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-black via-slate-900 to-black text-red-600">
+    <div className=" relative scrollbar-hide  h-[700vh] xsmall:min-h-[760vh] small:min-h-[840vh] medium:max-h-[920vh] large:h-[10vh]  xlarge:h-[1040vh] 2xlarge:h-[1100vh] bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-black via-slate-900 to-black text-red-600 overflow-x-hidden">
       <div className=" -mt-1  ">
         <Header />
       </div>
@@ -622,9 +617,9 @@ const NowShowingMoviesFullDetailsPage = () => {
             </h1>
           </div>
         </div>
-        <div
-          className="flex gap-5 bg-red-30  relative left-[8vw] bottom-[45vw] 
-                xsmall:left-[7vw] xsmall:gap-4 xsmall:bottom-[39vw]
+        {/* <div
+          className="flex gap-5 bg-red-30  relative left-[8vw] bottom-[42vw] 
+                xsmall:left-[7vw] xsmall:gap-4 xsmall:bottom-[45vw]
                 small:left-[6vw] small:gap-3 small:bottom-[33vw]
                 medium:left-[5vw] medium:gap-2 medium:bottom-[33vw]
                 large:left-[4vw] large:gap-1 large:bottom-[35vw]
@@ -632,8 +627,8 @@ const NowShowingMoviesFullDetailsPage = () => {
                 2xlarge:-left-[5vw] 2xlarge:bottom-[28vw]"
         >
           <h1
-            className="whitespace-nowrap text-[2vw] bottom-1  relative left-[34vw] font-bold text-yellow-400
-                 xsmall:text-[2vw] xsmall:left-[32vw]
+            className="whitespace-nowrap text-[2vw] bottom-  relative left-[55vw] font-bold text-yellow-400
+                 xsmall:text-[2vw] xsmall:left-[55vw]
                  small:text-[2vw] small:left-[35vw] small:bottom-[6vw]
                  medium:text-[2vw] medium:left-[36vw] medium:bottom-[6vw]
                  large:text-[1.5vw] large:left-[36vw] large:bottom-[8vw]
@@ -643,7 +638,7 @@ const NowShowingMoviesFullDetailsPage = () => {
             CINEOUT RATING
           </h1>
           <span
-            className="absolute top-8 left-3 text-[1.5vw] text-yellow-400
+            className="absolute top-10 left-[25vw] text-[1.5vw] text-yellow-400
                    xsmall:text-[1.3vw] xsmall:top-9
                    small:text-[1.1vw] small:top-8 small:left-[4vw]
                    medium:text-[0.9vw] medium:top-8  medium:left-[6vw]
@@ -688,158 +683,8 @@ const NowShowingMoviesFullDetailsPage = () => {
             </span>
           </span>
           <h1
-            className="whitespace-nowrap relative left-[34vw] font-bold text-[2vw]
-                 xsmall:text-[2vw] xsmall:left-[35vw] 
-                 small:text-[2vw] small:left-[38vw] small:-top-[6vw]
-                 medium:text-[2vw] medium:left-[42vw] 
-                 large:text-[1.5vw] large:left-[43vw] large:-top-[8vw]
-                 xlarge:text-[1.5vw] xlarge:left-[43vw]
-                 2xlarge:text-[1.2vw] 2xlarge:left-[57vw] 2xlarge:-top-[12vw]"
-          >
-            YOUR RATING
-          </h1>
-          <span
-            className="absolute top-3 left-[57vw] text-[3vw] text-yellow-400
-                 xsmall:text-[2.5vw] xsmall:left-[56vw] xsmall:top-[3vw]
-                   small:text-[3vw] small:left-[57vw]  small:-top-[3vw]
-                   medium:text-[2.1vw] medium:left-[62vw] medium:-top-[2.5vw]
-                   large:text-[2.5vw] large:left-[57vw] large:-top-[5vw]
-                   xlarge:text-[2.5vw] xlarge:left-[58vw] xlarge:-top-[5.5vw]
-                   2xlarge:text-[2.5vw] 2xlarge:left-[68vw] 2xlarge:-top-[9.5vw]"
-          >
-            <IoStarOutline />
-          </span>
-          <h1
-            onClick={toggle}
-            className="absolute top-3 hover:underline cursor-pointer left-[61vw] text-[2.3vw] font-semibold
-                 xsmall:text-[2.1vw] xsmall:left-[59vw] xsmall:top-[2.8vw]
-                 small:text-[2.2vw] small:left-[61vw] small:-top-[3vw]
-                 medium:text-[2vw] medium:left-[65vw]
-                 large:text-[1.5vw] large:left-[60vw] large:-top-[5vw]
-                 xlarge:text-[1.5vw] xlarge:left-[61vw] xlarge:-top-[5vw]
-                 2xlarge:text-[1.5vw] 2xlarge:left-[71vw] 2xlarge:-top-[9.5vw]"
-          >
-            RATE
-          </h1>
-          {isShowing && (
-            <div className="modal-wrapper">
-              <div className="modal">
-                <button
-                  className="absolute top-2 right-2 text-gray-500 hover:text-red-500
-                           xsmall:top-1 xsmall:right-1
-                           2xlarge:top-3 2xlarge:right-3"
-                  onClick={toggle}
-                >
-                  &#10006;
-                </button>
-                <TiStarFullOutline
-                  className="text-yellow-400 text-[7vw] absolute z-100 left-[18vw] -top-[0.5vw]
-                                      xsmall:text-[6.5vw] xsmall:left-[17vw]
-                                      small:text-[6vw] small:left-[16vw]
-                                      medium:text-[5.5vw] medium:left-[15vw]
-                                      large:text-[5vw] large:left-[14vw]
-                                      xlarge:text-[4.5vw] xlarge:left-[13vw]
-                                      2xlarge:text-[4vw] 2xlarge:left-[12vw]"
-                />
-                <span
-                  className="relative left-[20.2vw] text-[1.4vw] top-[1.2vw] text-black font-semibold
-                         xsmall:text-[1.3vw] xsmall:left-[19.2vw]
-                         small:text-[1.2vw] small:left-[18.2vw]
-                         medium:text-[1.1vw] medium:left-[17.2vw]
-                         large:text-[1vw] large:left-[16.2vw]
-                         xlarge:text-[0.9vw] xlarge:left-[15.2vw]
-                         2xlarge:text-[0.8vw] 2xlarge:left-[14.2vw]"
-                >
-                  ?
-                </span>
-                <h1
-                  className="absolute left-[19.5vw] top-[6vw] text-[1vw] text-white font-semibold
-                       xsmall:left-[18.5vw] xsmall:top-[5.5vw]
-                       small:left-[17.5vw] small:top-[5vw]
-                       medium:left-[16.5vw] medium:top-[4.5vw]
-                       large:left-[15.5vw] large:top-[4vw]
-                       xlarge:left-[14.5vw] xlarge:top-[3.5vw]
-                       2xlarge:left-[13.5vw] 2xlarge:top-[3vw]"
-                >
-                  Rate This
-                </h1>
-                <h1
-                  className="absolute left-[15vw] text-[1.5vw] top-[7.5vw] font-semibold
-                       xsmall:text-[1.4vw] xsmall:left-[14vw] xsmall:top-[7vw]
-                       small:text-[1.3vw] small:left-[13vw] small:top-[6.5vw]
-                       medium:text-[1.2vw] medium:left-[12vw] medium:top-[6vw]
-                       large:text-[1.1vw] large:left-[11vw] large:top-[5.5vw]
-                       xlarge:text-[1vw] xlarge:left-[10vw] xlarge:top-[5vw]
-                       2xlarge:text-[0.9vw] 2xlarge:left-[9vw] 2xlarge:top-[4.5vw]"
-                >
-                  {NowShowingMoviesDetails?.titleText?.text}
-                </h1>
-                <span
-                  className="absolute left-[12vw] text-[1.5vw] top-[11vw] font-semibold
-                         xsmall:text-[1.4vw] xsmall:left-[11vw] xsmall:top-[10.5vw]
-                         small:text-[1.3vw] small:left-[10vw] small:top-[10vw]
-                         medium:text-[1.2vw] medium:left-[9vw] medium:top-[9.5vw]
-                         large:text-[1.1vw] large:left-[8vw] large:top-[9vw]
-                         xlarge:text-[1vw] xlarge:left-[7vw] xlarge:top-[8.5vw]
-                         2xlarge:text-[0.9vw] 2xlarge:left-[6vw] 2xlarge:top-[8vw]"
-                >
-                  <div className="flex gap-2">
-                    {Array.from({ length: 10 }, (_, index) => (
-                      <span
-                        key={index}
-                        className="text-yellow-400 text-[1.5vw] relative cursor-pointer
-                           xsmall:text-[1.4vw]
-                           small:text-[1.3vw]
-                           medium:text-[1.2vw]
-                           large:text-[1.1vw]
-                           xlarge:text-[1vw]
-                           2xlarge:text-[0.9vw]"
-                        onMouseEnter={() => {
-                          if (clickedIndex === null || clickedIndex === index) {
-                            setHoveredIndex(index);
-                          }
-                        }}
-                        onMouseLeave={() => {
-                          if (clickedIndex === null || clickedIndex === index) {
-                            setHoveredIndex(null);
-                          }
-                        }}
-                        onClick={() => handleIconClick(index)}
-                      >
-                        {clickedIndex === index || hoveredIndex === index ? (
-                          <RiStarFill
-                            className="text-[1.5vw] relative cursor-pointer text-blue-500
-                                         xsmall:text-[1.4vw]
-                                         small:text-[1.3vw]
-                                         medium:text-[1.2vw]
-                                         large:text-[1.1vw]
-                                         xlarge:text-[1vw]
-                                         2xlarge:text-[0.9vw]"
-                          />
-                        ) : (
-                          <RiStarLine />
-                        )}
-                      </span>
-                    ))}
-                  </div>
-                </span>
-                <button
-                  className="Rate-button relative top-[14vw] left-[16vw]
-                           xsmall:top-[13vw] xsmall:left-[15vw]
-                           small:top-[12vw] small:left-[14vw]
-                           medium:top-[11vw] medium:left-[13vw]
-                           large:top-[10vw] large:left-[12vw]
-                           xlarge:top-[9vw] xlarge:left-[11vw]
-                           2xlarge:top-[8vw] 2xlarge:left-[10vw]"
-                >
-                  <span className="Rate-button-content">Rate </span>
-                </button>
-              </div>
-            </div>
-          )}
-          <h1
-            className="font-bold relative left-[35vw] text-[2vw]
-                 xsmall:text-[2vw] xsmall:left-[39vw]
+            className="font-bold relative left-[54vw] text-[2vw]
+                 xsmall:text-[2vw] xsmall:left-[54vw]
                  small:text-[2vw] small:left-[41vw] small:-top-[6vw]
                  medium:text-[2vw] medium:left-[45vw]
                  large:text-[1.5vw] large:left-[48vw] large:-top-[8vw]
@@ -909,9 +754,9 @@ const NowShowingMoviesFullDetailsPage = () => {
               {NowShowingMoviesDetails?.meterRanking?.rankChange?.difference}
             </span>
           </span>
-        </div>
+        </div> */}
         <div className=" relative  ml-[35vw] -top-[5vw] ">
-          <div class="btn-donate  h-[7vh] relative left-[20vw] xsmall:left-[27vw] xsmall:top-[6vw] small:left-[26vw] small:top-[5vw] medium:left-[35vw] medium:top-[2vw] large:-top-[3vw] large:left-[40vw] xlarge:top-[2vw] xlarge:left-[40vw] 2xlarge:left-[40vw] 2xlarge:top-[4vw]">
+          {/* <div class="btn-donate  h-[7vh] relative left-[20vw] xsmall:left-[27vw] xsmall:top-[6vw] small:left-[26vw] small:top-[5vw] medium:left-[35vw] medium:top-[2vw] large:-top-[3vw] large:left-[40vw] xlarge:top-[2vw] xlarge:left-[40vw] 2xlarge:left-[40vw] 2xlarge:top-[4vw]">
             <span className=" relative bottom-5 left-3 text-[3vw] xsmall:text-[2.5vw] small:text-[2vw] medium:text-[1.8vw] large:text-[1.4vw] xlarge:text-[1.5vw] 2xlarge:text-[1.3vw]">
               {" "}
               <span className=" relative top-5 right-4  medium:top-6 large:top-6 large:right-5  xlarge:top-7 xlarge:right-6 2xlarge:top-8 2xlarge:right-6 ">
@@ -925,9 +770,9 @@ const NowShowingMoviesFullDetailsPage = () => {
                   ?.watchlistStatistics?.displayableCount?.text
               }
             </h1>
-          </div>
+          </div> */}
           <div className=" flex cursor-pointer">
-            <h1 className=" font-semibold text-yellow-400 text-[2vw] relative left-[22vw] xsmall:left-[25vw] xsmall:top-[5vw] small:left-[24vw] medium:left-[30vw] medium:top-[1vw] medium:text-[1.6vw] large:left-[36vw] large:-top-[3vw] large:text-[1.5vw] xlarge:left-[37vw] xlarge:top-[2vw] xlarge:text-[1.5vw] 2xlarge:left-[38vw] 2xlarge:top-[4vw] 2xlarge:text-[1.3vw] mt-2">
+            <h1 className=" font-semibold text-yellow-400 text-[2vw] relative left-[22vw] xsmall:left-[28vw] xsmall:top-[5vw] small:left-[24vw] medium:left-[30vw] medium:top-[1vw] medium:text-[1.6vw] large:left-[36vw] large:-top-[3vw] large:text-[1.5vw] xlarge:left-[37vw] xlarge:top-[2vw] xlarge:text-[1.5vw] 2xlarge:left-[38vw] 2xlarge:top-[4vw] 2xlarge:text-[1.3vw] mt-2">
               {NowShowingMoviesDetails?.reviews?.total}{" "}
               <span className=" whitespace-nowrap font-normal text-white mr-5 hover:underline">
                 User reviews
@@ -961,8 +806,8 @@ const NowShowingMoviesFullDetailsPage = () => {
           </p>
         </div>
 
-        <div className=" bg-red-30 relative top-[50vw]  left-[10vw] text-[4vw] xsmall:text-[3vw] xsmall:top-[50vw] small:text-[3vw] small:top-[50vw] medium:text-[2.5vw] medium:top-[40vw] large:text-[2vw] large:top-[30vw] xlarge:top-[30vw] 2xlarge:top-[25vw] 2xlarge:text-[1.5vw] font-bold ">
-          <h1>TOP CAST</h1>
+        <div className=" bg-red-30 relative top-[65vw]  left-[10vw] text-[4vw] xsmall:text-[3vw] xsmall:top-[50vw] small:text-[3vw] small:top-[50vw] medium:text-[2.5vw] medium:top-[50vw] large:text-[2vw] large:top-[40vw] xlarge:top-[30vw] 2xlarge:top-[25vw] 2xlarge:text-[1.5vw] font-bold ">
+          <h1 className=" text-[5vw] medium:text-[3vw]">TOP CAST</h1>
           <div className="flex justify-between mt-5">
             <div className="name-list flex justify-start">
               <div className="-ml-[3vw] small:-ml-[2vw] medium:-ml-[1vw] 2xlarge:-ml-[0vw]">
@@ -981,7 +826,7 @@ const NowShowingMoviesFullDetailsPage = () => {
             </div>
           </div>
         </div>
-        <div className="relative top-[65vw] bg-red-30 left-[5vw] text-[5vw]  xsmall:text-[4vw] xsmall:top-[65vw] small:text-[3vw] small:top-[65vw] medium:text-[2.5vw] medium:top-[50vw] large:text-[2.2vw] large:top-[40vw] xlarge:text-[2vw] xlarge:top-[38vw] 2xlarge:text-[1.5vw] 2xlarge:top-[30`vw]">
+        <div className="relative top-[80vw] bg-red-30 left-[5vw] text-[5vw]  xsmall:text-[4vw] xsmall:top-[65vw] small:text-[3vw] small:top-[65vw] medium:text-[2.5vw] medium:top-[60vw] large:text-[2.2vw] large:top-[50vw] xlarge:text-[2vw] xlarge:top-[38vw] 2xlarge:text-[1.5vw] 2xlarge:top-[30`vw]">
           <h1 className="font-bold">More Titles Like This</h1>
           <div className=" relative -mx-[2vw] w-[95vw] h-auto large:h-[70vh] xlarge:h-auto 2xlarge:h-[65vh] mt-10 border-l-2 my-2 border-r-2 border-blue-600 flex flex-nowrap overflow-x-auto overflow-y-hidden no-scrollbar gap-5">
             {NowShowingMoviesDetails &&
@@ -1071,11 +916,11 @@ const NowShowingMoviesFullDetailsPage = () => {
 
         <div
           className="relative 
-                top-[85vw] left-[5vw] 
+                top-[90vw] left-[5vw] 
                 xsmall:top-[75vw] xsmall:left-[5vw]
                 small:top-[75vw] small:left-[5vw]
-                medium:top-[60vw] medium:left-[5vw]
-                large:top-[50vw] large:left-[5vw]
+                medium:top-[70vw] medium:left-[5vw]
+                large:top-[55vw] large:left-[5vw]
                 xlarge:top-[45vw] xlarge:left-[5vw]
                 2xlarge:top-[43vw] 2xlarge:left-[5vw]
                 inline-block"
@@ -1093,7 +938,7 @@ const NowShowingMoviesFullDetailsPage = () => {
             Details
           </h1>
         </div>
-        <div className="  relative  top-[90vw] left-[5vw] xsmall:top-[80vw] small:top-[80vw] medium:top-[65vw] large:top-[53vw] xlarge:top-[48vw] 2xlarge:top-[45vw]">
+        <div className="  relative  top-[95vw] left-[5vw] xsmall:top-[80vw] small:top-[80vw] medium:top-[75vw] large:top-[57vw] xlarge:top-[48vw] 2xlarge:top-[45vw]">
           <h1 className="text-[2.5vw] medium:text-[2vw] large:text-[1.7vw] xlarge:text-[1.5vw] 2xlarge:text-[1.2vw] text-blue-500 border-t-[1px] border-b-[1px]  border-gray-700 py-5">
             <span className="  text-yellow-400 mr-5">Release Date</span>
             {NowShowingMoviesDetails?.releaseDate?.month}
@@ -1176,8 +1021,8 @@ const NowShowingMoviesFullDetailsPage = () => {
                 top-[108vw] left-[5vw]  text-[5vw]
                 xsmall:top-[95vw] xsmall:left-[5vw] xsmall:text-[4vw]
                 small:top-[90vw] small:left-[5vw] small:text-[3vw]
-                medium:top-[75vw] medium:left-[5vw] medium:text-[2.5vw]
-                large:top-[60vw] large:left-[5vw] large:text-[2vw]
+                medium:top-[85vw] medium:left-[5vw] medium:text-[2.5vw]
+                large:top-[65vw] large:left-[5vw] large:text-[2vw]
                 xlarge:top-[55vw] xlarge:left-[5vw] xlarge:text-[1.8vw]
                 2xlarge:top-[50vw] 2xlarge:left-[5vw]  2xlarge:text-[1.5vw]
                 inline-block font-bold"
@@ -1190,9 +1035,9 @@ const NowShowingMoviesFullDetailsPage = () => {
                 top-[115vw]
                 xsmall:top-[100vw]
                 small:top-[95vw]
-                medium:top-[80vw]
-                large:top-[63vw]
-                xlarge:top-[57vw]
+                medium:top-[90vw]
+                large:top-[68vw]
+                xlarge:top-[57vw] xlarge:ml-[5vw]
                 2xlarge:top-[53vw]"
         >
           <div
@@ -1284,7 +1129,7 @@ const NowShowingMoviesFullDetailsPage = () => {
                 top-[130vw] left-[5vw]  text-[5vw]
                 xsmall:top-[110vw] xsmall:left-[5vw] xsmall:text-[4vw]
                 small:top-[105vw] small:left-[5vw] small:text-[3vw]
-                medium:top-[90vw] medium:left-[5vw] medium:text-[2.5vw]
+                medium:top-[95vw] medium:left-[5vw] medium:text-[2.5vw]
                 large:top-[70vw] large:left-[5vw] large:text-[2vw]
                 xlarge:top-[62vw] xlarge:left-[5vw] xlarge:text-[1.8vw]
                 2xlarge:top-[58vw] 2xlarge:left-[5vw]  2xlarge:text-[1.5vw]
@@ -1297,7 +1142,7 @@ const NowShowingMoviesFullDetailsPage = () => {
                 top-[135vw] left-[5vw]
                 xsmall:top-[115vw] xsmall:left-[5vw]
                 small:top-[110vw] small:left-[5vw]
-                medium:top-[95vw] medium:left-[5vw]
+                medium:top-[100vw] medium:left-[5vw]
                 large:top-[73vw] large:left-[5vw]
                 xlarge:top-[65vw] xlarge:left-[5vw]
                 2xlarge:top-[60vw] 2xlarge:left-[5vw]"
@@ -1422,13 +1267,13 @@ const NowShowingMoviesFullDetailsPage = () => {
         </div>
         <div
           className="w-[95vw] bg-red-20 relative 
-                top-[210vw] left-[1vw]
-                xsmall:top-[210vw] xsmall:w-[98vw] xsmall:left-[vw]
-                small:top-[190vw]
-                medium:top-[165vw]
-                large:top-[140vw]  large:w-[90vw] large:left-[5vw]
-                xlarge:top-[135vw] xlarge:w-[93vw]
-                2xlarge:top-[90vw]"
+                top-[170vw] left-[1vw]
+                xsmall:top-[150vw] xsmall:px-5 xsmall:w-[98vw] xsmall:left-[vw]
+                small:top-[135vw]
+                medium:top-[120vw]
+                large:top-[95vw]  large:w-[90vw] large:left-[3vw]
+                xlarge:top-[80vw] xlarge:w-[93vw]
+                2xlarge:top-[72vw]"
         >
           <div className="flex">
             <Swiper
@@ -1497,26 +1342,26 @@ const NowShowingMoviesFullDetailsPage = () => {
 
         <div
           className=" relative 
-                top-[230vw] left-[5vw]  text-[5vw]
-                xsmall:top-[190vw] xsmall:left-[5vw] xsmall:text-[4vw]
-                small:top-[180vw] small:left-[5vw] small:text-[3vw]
-                medium:top-[155vw] medium:left-[5vw] medium:text-[2.5vw]
-                large:top-[120vw] large:left-[5vw] large:text-[2vw]
-                xlarge:top-[100vw] xlarge:left-[5vw] xlarge:text-[1.8vw]
-                2xlarge:top-[90vw] 2xlarge:left-[5vw]  2xlarge:text-[1.5vw]
+                top-[190vw] left-[5vw]  text-[5vw]
+                xsmall:top-[170vw] xsmall:left-[5vw] xsmall:text-[4vw]
+                small:top-[150vw] small:left-[5vw] small:text-[3vw]
+                medium:top-[130vw] medium:left-[5vw] medium:text-[2.5vw]
+                large:top-[105vw] large:left-[5vw] large:text-[2vw]
+                xlarge:top-[85vw] xlarge:left-[5vw] xlarge:text-[1.8vw]
+                2xlarge:top-[78vw] 2xlarge:left-[5vw]  2xlarge:text-[1.5vw]
                 inline-block font-bold"
         >
           <h1 className=" videogallery">Video Gallery</h1>
         </div>
         <div
           className="w-[95vw] bg-red-20 relative 
-                top-[240vw] left-[1vw] h-[42vh] p-2  bg-lime-30
-                xsmall:top-[240vw] xsmall:w-[99vw]
-                small:top-[245vw]
-                medium:top-[205vw] medium:w-[99vw]
-                large:top-[175vw] large:w-[99vw] large:left-[vw]
-                xlarge:top-[165vw] xlarge:w-[99vw]
-                2xlarge:top-[115vw] 2xlarge:w-[92vw] 2xlarge:left-[5vw]"
+                top-[195vw] left-[1vw] h-[42vh] p-2  bg-lime-30
+                xsmall:top-[180vw] xsmall:w-[99vw]
+                small:top-[160vw]
+                medium:top-[135vw] medium:w-[99vw]
+                large:top-[110vw] large:w-[99vw] large:left-[1vw] large:px-10
+                xlarge:top-[90vw] xlarge:w-[99vw]
+                2xlarge:top-[80vw] 2xlarge:w-[92vw] 2xlarge:left-[2vw]"
         >
           <div className="flex">
             <Swiper
@@ -1623,27 +1468,27 @@ const NowShowingMoviesFullDetailsPage = () => {
 
         <div
           className=" relative 
-                top-[220vw] left-[5vw]  text-[5vw]
-                xsmall:top-[190vw] xsmall:left-[5vw] xsmall:text-[4vw]
-                small:top-[180vw] small:left-[5vw] small:text-[3vw]
-                medium:top-[155vw] medium:left-[5vw] medium:text-[2.5vw]
-                large:top-[120vw] large:left-[5vw] large:text-[2vw]
-                xlarge:top-[105vw] xlarge:left-[5vw] xlarge:text-[1.8vw]
-                2xlarge:top-[90vw] 2xlarge:left-[5vw]  2xlarge:text-[1.5vw]
+                top-[200vw] left-[5vw]  text-[5vw]
+                xsmall:top-[180vw] xsmall:left-[5vw] xsmall:text-[4vw]
+                small:top-[160vw] small:left-[5vw] small:text-[3vw]
+                medium:top-[140vw] medium:left-[5vw] medium:text-[2.5vw]
+                large:top-[115vw] large:left-[5vw] large:text-[2vw]
+                xlarge:top-[95vw] xlarge:left-[5vw] xlarge:text-[1.8vw]
+                2xlarge:top-[80vw] 2xlarge:left-[5vw]  2xlarge:text-[1.5vw]
                 inline-block font-bold"
         >
           <h1 className=" relatednews">Related News</h1>
         </div>
         <div
-          className=" relative w-[95vw] left-2 
-                top-[240vw]
-                xsmall:top-[240vw]
-                small:top-[245vw]
-                medium:top-[205vw] medium:w-[95vw] medium:left-[2vw]
-                large:top-[175vw] large:w-[98vw] large:left-[1vw]
-                xlarge:top-[160vw]
-                2xlarge:top-[113vw]
-                bg-red-30"
+          className=" relative  w-[95vw] left-5 
+                top-[205vw]
+                xsmall:top-[190vw]
+                small:top-[170vw] 
+                medium:top-[145vw] medium:w-[95vw] medium:left-[2vw]
+                large:top-[120vw] large:w-[98vw] large:left-[1vw]
+                xlarge:top-[100vw] xlarge:w-[90vw] xlarge:left-[5vw]
+                2xlarge:top-[85vw] 2xlarge:w-[90vw] 2xlarge:left-[5vw]
+                bg-gray-900 rounded-lg"
         >
           <div className="flex flex-row">
             <Swiper
@@ -1728,7 +1573,7 @@ const NowShowingMoviesFullDetailsPage = () => {
                     <h1
                       className=" relative   top-[2vw] -left-[38vw] whitespace-nowrap
                              xsmall:top-[1.5vw] xsmall:-left-[21vw]
-                             small:top-[1vw] 
+                             small:top-[1vw]  small:-left-[15vw]
                              medium:top-[1vw] medium:-left-[20vw]
                              large:top-[1vw] large:-left-[13vw]
                              xlarge:top-[1vw] xlarge:-left-[9vw]
@@ -1771,10 +1616,10 @@ const NowShowingMoviesFullDetailsPage = () => {
             </Swiper>
           </div>
         </div>
-        <div className=" bg-red-30 overflow-hidden relative xsmall:top-[240vw] small:top-[230vw]   medium:top-[180vw] large:top-[145vw] xlarge:top-[120vw]  2xlarge:top-[105vw] bg-[#030C16]  w-[100vw] h-[80vh] xsmall:h-[110vh] small:h-[130vh] medium:min-h-[175vh] large:min-h-[170vh] xlarge:min-h-[175vh]  top-[290vw]  ">
+        <div className=" bg-red-30 overflow-hidden relative xsmall:top-[200vw] small:top-[180vw]   medium:top-[150vw] large:top-[125vw] xlarge:top-[105vw]  2xlarge:top-[90vw] bg-[#030C16  w-[100vw] h-[80vh] xsmall:h-[110vh] small:h-[130vh] medium:min-h-[150vh]   top-[230vw]  ">
           <RecentlyViewed />
         </div>
-        <div className=" relative w-[100vw] xsmall:top-[185vw] small:top-[170vw]  medium:top-[105vw] large:medium:top-[90vw] xlarge:top-[83vw]  2xlarge:top-[70vw]  bg-[#030C16] top-[270vw] border-t-2 border-red-600">
+        <div className=" relative w-[100vw] xsmall:top-[150vw] small:top-[115vw]  medium:top-[85vw] large:medium:top-[75vw]  xlarge:top-[67vw]  2xlarge:top-[55vw] top-[230vw]">
           <Footer />
         </div>
       </div>

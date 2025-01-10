@@ -73,19 +73,19 @@ const Nowshowingdata = ({ nowfinal }) => {
       
       <div className="relative w-screen">
         <div 
-          className="h-[75vh] xlarge:h-[85vh] 2xlarge:h-[80vh] relative"
+          className="h-[75vh] xlarge:h-[85vh]  2xlarge:h-[80vh] relative"
           style={backgroundStyle}
         >
           {/* Content Container */}
           <div className="absolute bottom-0 left-0 w-full pb-16 px-8 space-y-6">
             {/* Rating Badge */}
-            <div className="inline-flex items-center gap-1 bg-yellow-500/90 text-black px-3 py-1 rounded-full">
+            <div className="inline-flex items-center gap-1 bg-amber-400/90 text-black px-3 py-1 rounded-full">
               <Star className="w-4 h-4 fill-current" />
               <span className="font-semibold">{(nowfinal.vote_average || 0).toFixed(1)}</span>
             </div>
 
             {/* Title */}
-            <h1 className="text-6xl font-bold tracking-tight text-white max-w-4xl leading-tight">
+            <h1 className="text-3xl 2xlarge:text-5xl font-bold tracking-tight text-white max-w-4xl leading-tight">
               {nowfinal.name || nowfinal.title || nowfinal.original_name || nowfinal.original_title}
             </h1>
 
@@ -134,12 +134,12 @@ const Nowshowingdata = ({ nowfinal }) => {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex items-center gap-4 pt-4">
+            <div className="flex items-center gap-4 pt-4 text-nowrap ">
               <Link
                 to={`/title/tt${nowfinal.id}`}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
-                className="inline-flex items-center gap-2 px-8 py-4 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-all duration-300 transform hover:scale-105 font-semibold"
+                className="inline-flex items-center gap-2 px-4 py-4 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-all duration-300 transform hover:scale-105 font-semibold"
               >
                 <Play className={`w-5 h-5 transition-transform duration-300 ${isHovered ? 'translate-x-1' : ''}`} />
                 Watch Trailer

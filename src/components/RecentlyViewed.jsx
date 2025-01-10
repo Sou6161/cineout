@@ -23,7 +23,7 @@ const RecentlyViewed = () => {
               <History className="w-8 h-8 text-purple-500" />
               <Eye className="w-4 h-4 text-yellow-400 absolute -top-1 -right-1" />
             </div>
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-transparent bg-clip-text">
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-transparent bg-clip-text">
               Recently Viewed
             </h1>
           </div>
@@ -51,26 +51,28 @@ const RecentlyViewed = () => {
               ) : (
                 uniqueRecentlyViewed.map((data) => (
                   <div key={data.id} className="group relative flex-shrink-0">
-                    <div className="relative overflow-hidden rounded-xl transition-all duration-500 px-10">
-                      <img
-                        className="w-[15vw] h-[40vh] object-fill border-l-2 border-r-2 border-amber-400 rounded-lg transition-transform duration-500 group-hover:scale-110"
-                        src={data?.primaryImage?.url}
-                        alt={data?.titleText?.text}
-                      />
-                      
-                      {/* Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="absolute bottom-4 left-8 right-4">
-                          <p className="text-white text-lg font-bold mb-2">{data?.titleText?.text}</p>
-                          <button className="flex items-center space-x-2 text-purple-400 hover:text-purple-300">
-                            {/* <span>View Details</span> */}
-                            {/* <ArrowRight className="w-4 h-4" /> */}
-                          </button>
+                    <div className="relative overflow-hidden rounded-xl transition-all duration-500 p-5">
+                      <div className="relative aspect-[2/3]">
+                        <img
+                          className="w-[200px] xsmall:w-[180px] small:w-[160px] medium:w-[180px] large:w-[200px] xlarge:w-[220px] 2xlarge:w-[240px] h-full object-cover border-l-2 border-r-2 border-amber-400 rounded-lg transition-transform duration-500 group-hover:scale-110"
+                          src={data?.primaryImage?.url}
+                          alt={data?.titleText?.text}
+                        />
+                        
+                        {/* Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <div className="absolute bottom-4 left-4 right-4">
+                            <p className="text-white text-sm small:text-base font-bold mb-2 line-clamp-2">{data?.titleText?.text}</p>
+                            <button className="flex items-center space-x-2 text-purple-400 hover:text-purple-300">
+                              <span className="text-sm">View Details</span>
+                              <ArrowRight className="w-4 h-4" />
+                            </button>
+                          </div>
                         </div>
-                      </div>
 
-                      {/* Glowing Border */}
-                      <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur"></div>
+                        {/* Glowing Border */}
+                        <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur"></div>
+                      </div>
                     </div>
                   </div>
                 ))
@@ -78,9 +80,7 @@ const RecentlyViewed = () => {
             </div>
           </div>
 
-          {/* Gradient Edges */}
-          <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-black to-transparent pointer-events-none"></div>
-          <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-black to-transparent pointer-events-none"></div>
+          
         </div>
       </div>
     </div>
