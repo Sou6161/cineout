@@ -48,6 +48,13 @@ const NumberFormatter = ({ number }) => {
   return <span>{formatNumber(number)}</span>;
 };
 
+// Function to trim text to specified word count
+const trimText = (text, wordCount = 150) => {
+  const words = text.split(' ');
+  if (words.length <= wordCount) return text;
+  return words.slice(0, wordCount).join(' ');
+};
+
 const convertDuration = (seconds) => {
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = seconds % 60;
@@ -806,8 +813,8 @@ const NowShowingMoviesFullDetailsPage = () => {
           </p>
         </div>
 
-        <div className=" bg-red-30 relative top-[65vw]  left-[10vw] text-[4vw] xsmall:text-[3vw] xsmall:top-[50vw] small:text-[3vw] small:top-[50vw] medium:text-[2.5vw] medium:top-[50vw] large:text-[2vw] large:top-[40vw] xlarge:top-[30vw] 2xlarge:top-[25vw] 2xlarge:text-[1.5vw] font-bold ">
-          <h1 className=" text-[5vw] medium:text-[3vw]">TOP CAST</h1>
+        <div className=" bg-red-30 relative top-[65vw]  left-[10vw] text-[4vw] xsmall:text-[3vw] xsmall:top-[50vw] small:text-[3vw] small:top-[50vw] medium:text-[2.5vw] medium:top-[50vw] large:text-[2vw] large:top-[40vw] xlarge:top-[30vw] 2xlarge:top-[35vw] 2xlarge:text-[1.5vw] font-bold ">
+          <h1 className=" text-[5vw] medium:text-[3vw] 2xlarge:text-[1.5vw]">TOP CAST</h1>
           <div className="flex justify-between mt-5">
             <div className="name-list flex justify-start">
               <div className="-ml-[3vw] small:-ml-[2vw] medium:-ml-[1vw] 2xlarge:-ml-[0vw]">
@@ -1016,113 +1023,95 @@ const NowShowingMoviesFullDetailsPage = () => {
           </h1>
         </div>
 
-        <div
-          className=" relative 
-                top-[108vw] left-[5vw]  text-[5vw]
-                xsmall:top-[95vw] xsmall:left-[5vw] xsmall:text-[4vw]
-                small:top-[90vw] small:left-[5vw] small:text-[3vw]
-                medium:top-[85vw] medium:left-[5vw] medium:text-[2.5vw]
-                large:top-[65vw] large:left-[5vw] large:text-[2vw]
-                xlarge:top-[55vw] xlarge:left-[5vw] xlarge:text-[1.8vw]
-                2xlarge:top-[50vw] 2xlarge:left-[5vw]  2xlarge:text-[1.5vw]
-                inline-block font-bold"
-        >
-          <h1>User Reviews</h1>
-        </div>
+        <div className="relative left-[5vw] text-[5vw] inline-block font-bold
+        top-[108vw] xsmall:top-[95vw] xsmall:text-[4vw]
+        small:top-[90vw] small:text-[3vw]
+        medium:top-[85vw] medium:text-[2.5vw]
+        large:top-[65vw] large:text-[2vw]
+        xlarge:top-[55vw] xlarge:text-[1.8vw]
+        2xlarge:top-[50vw] 2xlarge:text-[1.5vw]">
+        <h1>User Reviews</h1>
+      </div>
 
-        <div
-          className="flex flex-col ml-[2vw] relative 
-                top-[115vw]
-                xsmall:top-[100vw]
-                small:top-[95vw]
-                medium:top-[90vw]
-                large:top-[68vw]
-                xlarge:top-[57vw] xlarge:ml-[5vw]
-                2xlarge:top-[53vw]"
-        >
-          <div
-            className="w-[95vw] h-auto
-               xsmall:w-[95vw]
-               small:w-[90vw]
-               medium:w-[85vw]
-               large:w-[80vw]
-               xlarge:w-[70vw]
-               2xlarge:w-[60vw] 2xlarge:ml-[3vw]
-               rounded-lg px-5 py-4 mb-4"
-            style={{
-              backgroundColor: "slategrey",
-            }}
-          >
-            <h1
-              className="review w-[45vw] 
-                   xsmall:w-[40vw]
-                   small:w-[35vw]
-                   medium:w-[30vw]
-                   large:w-[25vw]
-                   xlarge:w-[20vw]
-                   2xlarge:w-[15vw]"
-            >
-              FEATURED REVIEW
-            </h1>
-            <div>
-              {NowShowingMoviesDetails?.featuredReviews?.edges.map(
-                (data, index) => {
-                  const fullText = data?.node?.text?.originalText?.plainText;
-                  const isLongText = fullText.split(" ").length > 150;
-                  const displayText = expandedReviews[index]
-                    ? fullText
-                    : trimTextTo130Words(fullText);
+      {/* Reviews Container */}
+      <div className="flex flex-col ml-[2vw] relative
+        top-[115vw] xsmall:top-[100vw]
+        small:top-[95vw] medium:top-[90vw]
+        large:top-[68vw] xlarge:top-[57vw] xlarge:ml-[5vw]
+        2xlarge:top-[53vw]">
+        
+        {/* Review Card */}
+        <div className="w-[90vw] h-auto rounded-lg px-5 ml-3 py-4 mb-4 bg-slate-600
+          xsmall:w-[90vw] small:w-[90vw]
+          medium:w-[85vw] medium:ml-5 large:w-[80vw] large:ml-8
+          xlarge:w-[70vw] xlarge:ml-0 2xlarge:w-[60vw] 2xlarge:ml-[0vw]">
+          
+          {/* Featured Review Header */}
+          <h1 className="review w-[45vw]
+            xsmall:w-[40vw] small:w-[35vw]
+            medium:w-[30vw] large:w-[25vw]
+            xlarge:w-[20vw] 2xlarge:w-[15vw]">
+            FEATURED REVIEW
+          </h1>
 
-                  return (
-                    <div key={index}>
-                      <div className="mt-5">
-                        <h1
-                          className="text-[4vw]
-                               xsmall:text-[3.5vw]
-                               small:text-[3.5vw]
-                               medium:text-[2.7vw]
-                               large:text-[2.3vw]
-                               xlarge:text-[1.8vw]
-                               2xlarge:text-[1.6vw]
-                               font-bold text-lime-500"
-                        >
-                          "{data?.node?.summary?.originalText}"
-                        </h1>
-                      </div>
-                      <div className="relative">
-                        <p
-                          className="mt-7 text-[3vw] leading-7
-                              xsmall:text-[3vw] xsmall:leading-7
-                              small:text-[2.2vw] small:leading-7
-                              medium:text-[1.8vw] medium:leading-8
-                              large:text-[1.5vw] large:leading-8
-                              xlarge:text-[1.3vw] xlarge:leading-8
-                              2xlarge:text-[1vw] 2xlarge:leading-8
-                              overflow-ellipsis text-amber-400 font-semibold"
-                        >
-                          {displayText.slice(0, 800)}
-                          {"..."}
-                        </p>
-                        {isLongText && (
-                          <span
-                            className="block mt-2 cursor-pointer text-white"
-                            onClick={() => toggleReview(index)}
-                          >
-                            {expandedReviews[index] ? (
-                              <IoMdArrowDropupCircle size={24} />
-                            ) : (
-                              <IoMdArrowDropdownCircle size={24} />
-                            )}
-                          </span>
+          {/* Reviews List */}
+          <div>
+            {NowShowingMoviesDetails?.featuredReviews?.edges.map((data, index) => {
+              const fullText = data?.node?.text?.originalText?.plainText || '';
+              const isLongText = fullText.split(' ').length > 150;
+              const displayText = expandedReviews[index] ? fullText : trimText(fullText);
+
+              return (
+                <div key={index} className="review-item">
+                  {/* Review Summary */}
+                  <div className="mt-5">
+                    <h1 className="font-bold text-lime-500 text-[4vw]
+                      xsmall:text-[3.5vw] small:text-[3.5vw]
+                      medium:text-[2.7vw] large:text-[2.3vw]
+                      xlarge:text-[1.8vw] 2xlarge:text-[1.6vw]">
+                      "{data?.node?.summary?.originalText}"
+                    </h1>
+                  </div>
+
+                  {/* Review Content */}
+                  <div className="relative">
+                    <p className="mt-7 font-semibold text-amber-400 text-[3vw] leading-7
+                      xsmall:text-[3vw] xsmall:leading-7
+                      small:text-[2.2vw] small:leading-7
+                      medium:text-[1.8vw] medium:leading-8
+                      large:text-[1.5vw] large:leading-8
+                      xlarge:text-[1.3vw] xlarge:leading-8
+                      2xlarge:text-[1vw] 2xlarge:leading-8">
+                      {displayText}
+                      {isLongText && !expandedReviews[index] && "..."}
+                    </p>
+
+                    {/* Read More/Less Button */}
+                    {isLongText && (
+                      <button
+                        className="flex items-center gap-2 mt-2 text-white hover:text-gray-200 transition-colors"
+                        onClick={() => toggleReview(index)}
+                      >
+                        {expandedReviews[index] ? (
+                          <>
+                            <IoMdArrowDropupCircle size={24} />
+                            <span className="text-sm">Read Less</span>
+                          </>
+                        ) : (
+                          <>
+                            <IoMdArrowDropdownCircle size={24} />
+                            <span className="text-sm">Read More</span>
+                          </>
                         )}
-                      </div>
-                    </div>
-                  );
-                }
-              )}
-            </div>
+                      </button>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
+      </div>
 
         <div
           className=" relative 
@@ -1252,19 +1241,19 @@ const NowShowingMoviesFullDetailsPage = () => {
             </span>
           </h1>
         </div>
-        <div
-          className=" relative 
-                top-[165vw] left-[5vw]  text-[5vw]
-                xsmall:top-[140vw] xsmall:left-[5vw] xsmall:text-[4vw]
-                small:top-[130vw] small:left-[5vw] small:text-[3vw]
-                medium:top-[115vw] medium:left-[5vw] medium:text-[2.5vw]
-                large:top-[90vw] large:left-[5vw] large:text-[2vw]
-                xlarge:top-[75vw] xlarge:left-[5vw] xlarge:text-[1.8vw]
-                2xlarge:top-[70vw] 2xlarge:left-[5vw]  2xlarge:text-[1.5vw]
-                inline-block font-bold"
-        >
-          <h1 className="  photogallery">Photo Gallery</h1>
-        </div>
+        <div className="relative w-full">
+      <h1 className="absolute left-[5vw] font-bold
+        text-[5vw] top-[158vw]
+        xsmall:text-[4vw] xsmall:top-[135vw]
+        small:text-[3vw] small:top-[125vw]
+        medium:text-[2.5vw] medium:top-[110vw]
+        large:text-[2vw] large:top-[85vw]
+        xlarge:text-[1.8vw] xlarge:top-[75vw]
+        2xlarge:text-[1.5vw] 2xlarge:top-[68vw]"
+      >
+        Photo Gallery
+      </h1>
+    </div>
         <div
           className="w-[95vw] bg-red-20 relative 
                 top-[170vw] left-[1vw]

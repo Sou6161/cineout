@@ -78,7 +78,7 @@ const AppRoutes = () => {
       <Route path="/news/movie" element={<MovieNews />} />
       <Route path="/tv-series-news" element={<TvNews />} />
       <Route path="/news/celebrity" element={<CelebrityNews />} />
-      <Route
+      {/* <Route
         path="/charts/top-english-movies"
         element={<TopRatedEnglishMovies />}
       />
@@ -89,7 +89,7 @@ const AppRoutes = () => {
       <Route
         path="/title/:imdbId/photo-gallery"
         element={<AllPhotosGallery />}
-      />
+      /> */}
       <Route path="/chart/top" element={<Top250Movies />} />
       <Route path="/chart/moviemeter" element={<MostPopularMoviesMenu />} />
       <Route path="/chart/boxoffice" element={<TopBoxOfficeMenu />} />
