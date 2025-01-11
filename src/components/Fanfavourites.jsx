@@ -4,72 +4,75 @@ import { motion } from 'framer-motion';
 import { API_OPTIONS } from "../constants/Apioptions";
 
 const Fanfavourites = ({ finalfanwatch }) => {
-  const [FanFavouritesTMDBID, setFanFavouritesTMDBID] = useState([]);
-  const [fanwatchIDs, setFanwatchIDs] = useState([]);
+  const [movieData, setMovieData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (finalfanwatch) {
-      const ids = finalfanwatch.map((item) => item.id);
-      setFanwatchIDs(ids);
-    }
-  }, [finalfanwatch]);
+    const fetchMovieData = async () => {
+      if (!finalfanwatch || finalfanwatch.length === 0) {
+        setIsLoading(false);
+        return;
+      }
 
-  useEffect(() => {
-    const fetchTMDBIDs = async () => {
       try {
-        const tmdbIDs = await Promise.all(
-          fanwatchIDs.map(async (id) => {
+        setIsLoading(true);
+        const moviePromises = finalfanwatch.map(async (item) => {
+          if (!item.id) return null;
+
+          try {
             const response = await fetch(
-              `https://api.themoviedb.org/3/find/${id}?external_source=imdb_id`,
+              `https://api.themoviedb.org/3/find/${item.id}?external_source=imdb_id`,
               API_OPTIONS
             );
-            const data = await response.json();
-            if (data?.movie_results && data.movie_results.length > 0) {
-              return data.movie_results.map((item) => item.id);
-            } else if (data?.tv_results && data.tv_results.length > 0) {
-              return data.tv_results.map((item) => item.id);
-            } else {
-              console.log(`No movie or TV results found for ID: ${id}`);
-              return [];
+            
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
             }
-          })
-        );
-        const flattenedIDs = tmdbIDs.flat().filter((id) => id !== undefined);
-        setFanFavouritesTMDBID(flattenedIDs);
+            
+            const data = await response.json();
+            const result = data.movie_results?.[0] || data.tv_results?.[0];
+            
+            if (result) {
+              return {
+                ...item,
+                tmdbId: result.id,
+                type: data.movie_results?.[0] ? 'movie' : 'tv'
+              };
+            }
+            return item;
+          } catch (error) {
+            console.error(`Error fetching data for ID ${item.id}:`, error);
+            return item;
+          }
+        });
+
+        const results = await Promise.all(moviePromises);
+        const filteredResults = results.filter(Boolean);
+        setMovieData(filteredResults);
       } catch (error) {
-        console.error("Error fetching TMDB IDs:", error);
-        setFanFavouritesTMDBID([]);
+        console.error("Error fetching movie data:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
-    if (fanwatchIDs?.length > 0) {
-      fetchTMDBIDs();
-    } else {
-      setFanFavouritesTMDBID([]);
-    }
-  }, [fanwatchIDs]);
+    fetchMovieData();
+  }, [finalfanwatch]);
 
-  const getContentLink = (item, tmdbId) => {
-    if (item?.titleType?.text) {
-      const titleType = item.titleType.text;
-      if (titleType.includes("TV Series")) {
-        return { path: `/name/tv/${tmdbId || "loading"}`, isTVSeries: true };
-      } else if (titleType.includes("Movie")) {
-        return { path: `/name/movie/${tmdbId || "loading"}`, isTVSeries: false };
-      }
-    }
-    return { path: "/", isTVSeries: false };
+  const getContentLink = (item) => {
+    if (!item?.titleType?.text) return { path: "/", isTVSeries: false };
+    
+    const titleType = item.titleType.text.toLowerCase();
+    const isTVSeries = titleType.includes("tv series");
+    const path = isTVSeries 
+      ? `/name/tv/${item.tmdbId || "loading"}` 
+      : `/name/movie/${item.tmdbId || "loading"}`;
+    
+    return { path, isTVSeries };
   };
 
   return (
-    <div className=" h-[65vh] bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-black via-slate-900 to-black p-6 relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -inset-[5px] opacity-50">
-        </div>
-      </div>
-
-      {/* Content container with glass effect */}
+    <div className="h-[65vh] bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-black via-slate-900 to-black p-6 relative overflow-hidden">
       <div className="relative z-10">
         <div className="mb-12">
           <div className="flex items-center justify-between mb-5">
@@ -87,50 +90,47 @@ const Fanfavourites = ({ finalfanwatch }) => {
 
           <div className="w-full overflow-x-auto overflow-y-hidden scrollbar-hide">
             <div className="flex gap-6 pb-4 py-4">
-              {finalfanwatch && FanFavouritesTMDBID?.length > 0 ? (
-                finalfanwatch.map((item, index) => {
-                  const tmdbId = FanFavouritesTMDBID[index];
-                  const { path, isTVSeries } = getContentLink(item, tmdbId);
-
+              {!isLoading && movieData.length > 0 ? (
+                movieData.map((item) => {
+                  const { path, isTVSeries } = getContentLink(item);
+                  
                   return (
                     <Link
                       to={path}
-                      key={tmdbId}
-                      state={{ isTVSeries: isTVSeries, tmdbId: tmdbId }}
+                      key={item.id}
+                      state={{ isTVSeries, tmdbId: item.tmdbId }}
                     >
                       <motion.div
                         whileHover={{ scale: 1.05, rotateY: 5 }}
                         transition={{ duration: 0.3 }}
                         className="relative group"
                       >
-                        <div className="relative w-[48vw] xsmall:w-[34vw] small:w-[25vw] medium:w-[22vw] large:w-[18vw] xlarge:w-[15vw] 2xlarge:w-[14vw]">
-                          {/* Card glass effect background */}
-                          <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 rounded-xl backdro-blur-sm border border-white/10 group-hover:border-white/20 transition-all duration-300"></div>
+                        <div className="relative w-[48vw] xsmall:w-[34vw] small:w-[25vw] medium:w-[22vw] large:w-[18vw] xlarge:w-[15vw] 2xlarge:w-[14vw] ml-5">
+                          <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 rounded-xl  border border-white/10 group-hover:border-white/20 transition-all duration-300"></div>
                           
-                          {/* Hover overlay */}
                           <div className="absolute inset-0 bg-gradient-to-t from-stone-700/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
                           
-                          {/* Image */}
-                          <img
-                            className="w-full h-[40vh] object-cover rounded-xl shadow-[0_0_15px_rgba(167,139,250,0.3)] group-hover:shadow-[0_0_25px_rgba(167,139,250,0.5)] transition-all duration-300"
-                            src={item?.primaryImage?.imageUrl}
-                            alt={item?.titleText?.text}
-                            onError={(e) => {
-                              e.target.onerror = null;
-                              e.target.src = "https://www.prokerala.com/movies/assets/img/no-poster-available.jpg";
-                            }}
-                          />
+                          {item?.primaryImage?.imageUrl ? (
+                            <img
+                              className="w-full h-[40vh] object-cover rounded-xl shadow-[0_0_15px_rgba(167,139,250,0.3)] group-hover:shadow-[0_0_25px_rgba(167,139,250,0.5)] transition-all duration-300"
+                              src={item.primaryImage.imageUrl}
+                              alt={item?.titleText?.text || 'Movie poster'}
+                              onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = "https://www.prokerala.com/movies/assets/img/no-poster-available.jpg";
+                              }}
+                            />
+                          ) : (
+                            <div className="w-full h-[40vh] bg-slate-800 rounded-xl flex items-center justify-center">
+                              <span className="text-slate-400">No Image Available</span>
+                            </div>
+                          )}
 
-                          {/* Title overlay */}
                           <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                             <h2 className="text-white font-semibold text-[4vw] xsmall:text-[3vw] small:text-[2.5vw] medium:text-[2vw] large:text-[1.5vw] xlarge:text-[1.2vw] 2xlarge:text-[1vw] line-clamp-2 drop-shadow-lg">
-                              {item?.titleText?.text}
+                              {item?.titleText?.text || 'Untitled'}
                             </h2>
                           </div>
-                          
-                          {/* Decorative elements */}
-                          <div className="absolute top-2 right-2 w-8 h-8 bg-white/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm"></div>
-                          <div className="absolute bottom-2 left-2 w-12 h-1 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </div>
                       </motion.div>
                     </Link>
@@ -138,7 +138,9 @@ const Fanfavourites = ({ finalfanwatch }) => {
                 })
               ) : (
                 <div className="flex items-center justify-center w-full h-[40vh]">
-                  <div className="text-slate-400 text-lg animate-pulse">Loading...</div>
+                  <div className="text-slate-400 text-lg">
+                    {isLoading ? "Loading..." : "No movies available"}
+                  </div>
                 </div>
               )}
             </div>
