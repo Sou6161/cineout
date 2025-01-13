@@ -1,14 +1,14 @@
-CineOut 🎬
+# CineOut 🎬
 
 
 CineOut is a modern web application that provides a seamless movie browsing experience, built with ReactJS and powered by external movie APIs. Think of IMDB, but with a fresh perspective and unique design approach.
 
-🌟 Live Demo
+# 🌟 Live Demo
 Experience CineOut live at
 
 - https://cineout.vercel.app/
 
-✨ Features
+# ✨ Features
 
 - Detailed Movie Information: Get comprehensive details about movies, including cast, ratings, and reviews
 
@@ -21,7 +21,7 @@ Experience CineOut live at
 - Real-time Updates: Dynamic content updates using external API integration
 
 
-🛠️ Technologies
+# 🛠️ Technologies
 
 - Frontend Framework: ReactJS
 
@@ -36,7 +36,7 @@ Experience CineOut live at
 - Deployment: Vercel
 
 
-🚀 Getting Started
+# 🚀 Getting Started
 
 - Clone the repository
 
@@ -59,13 +59,13 @@ Experience CineOut live at
   npm run build
 
 
-💻 Available Scripts
+# 💻 Available Scripts
 
 - npm start - Runs the app in development mode
 - npm test - Launches the test runner in interactive watch mode
 - npm run build - Builds the app for production
 
-👏 Acknowledgments
+# 👏 Acknowledgments
 
 - Create React App for the initial project setup
 
