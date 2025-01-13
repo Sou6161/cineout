@@ -56,8 +56,12 @@ npm run build - Builds the app for production
 👏 Acknowledgments
 
 Create React App for the initial project setup
+
 All the amazing contributors and the open-source community
+
 Movie API providers for making this project possible
+
+
 
 
 Made with ❤️ by Sourabh
